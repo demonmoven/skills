@@ -1,0 +1,22 @@
+{
+  "name": "Popover",
+  "description": "气泡卡片组件：用于在用户与特定元素交互时展示临时的上下文信息、提示或相关操作，支持多种触发方式。",
+  "demo": [
+    {
+      "name": "1-popover-demo",
+      "description": "最基本的用法，通过 content 属性设置显示内容，trigger 属性设置触发方式。"
+    },
+    {
+      "name": "2-popover-demo",
+      "description": "Popover 支持 12 个不同的弹出位置。"
+    },
+    {
+      "name": "3-popover-demo",
+      "description": "你可以通过 style 和 className 属性来自定义气泡卡片的样式。"
+    },
+    {
+      "name": "4-popover-demo",
+      "description": "使用 visible 和 onVisibleChange 实现受控的显示状态。"
+    }
+  ]
+}

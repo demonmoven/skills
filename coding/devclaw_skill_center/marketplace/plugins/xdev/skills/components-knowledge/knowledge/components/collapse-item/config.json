@@ -1,0 +1,8 @@
+{
+  "name": "CollapseItem",
+  "description": "简易的可折叠条目组件。",
+  "source": "widgets/base/components/src/collapse-item/",
+  "demo": [
+    { "name": "1-collapse-item-demo", "description": "基本用法" }
+  ]
+}

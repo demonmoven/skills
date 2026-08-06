@@ -1,0 +1,8 @@
+{
+  "name": "Copyable",
+  "description": "可复制文本组件。",
+  "source": "widgets/base/components/src/copyable/",
+  "demo": [
+    { "name": "1-copyable-demo", "description": "基本用法" }
+  ]
+}

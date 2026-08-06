@@ -1,0 +1,8 @@
+{
+  "name": "TooltipWithDisabled",
+  "description": "可禁用的 Tooltip 组件，disabled 时不显示 Tooltip。",
+  "source": "widgets/base/components/src/tooltip-with-disabled/",
+  "demo": [
+    { "name": "1-tooltip-with-disabled-demo", "description": "基本用法" }
+  ]
+}

@@ -1,0 +1,10 @@
+export { default as AnchorDemo1 } from './1-anchor-demo';
+export { default as AnchorDemo2 } from './2-anchor-demo';
+export { default as AnchorDemo3 } from './3-anchor-demo';
+export { default as AnchorDemo4 } from './4-anchor-demo';
+export { default as AnchorDemo5 } from './5-anchor-demo';
+export { default as AnchorDemo6 } from './6-anchor-demo';
+export { default as AnchorDemo7 } from './7-anchor-demo';
+export { default as AnchorDemo8 } from './8-anchor-demo';
+export { default as AnchorDemo9 } from './9-anchor-demo';
+export { default as AnchorDemo10 } from './10-anchor-demo';

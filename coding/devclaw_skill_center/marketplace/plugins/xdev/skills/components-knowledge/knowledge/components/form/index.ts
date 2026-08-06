@@ -1,0 +1,9 @@
+export { default as FormDemo1 } from './1-form-demo';
+export { default as FormDemo2 } from './2-form-demo';
+export { default as FormDemo3 } from './3-form-demo';
+export { default as FormDemo4 } from './4-form-demo';
+export { default as FormDemo5 } from './5-form-demo';
+export { default as FormDemo6 } from './6-form-demo';
+export { default as FormDemo7 } from './7-form-demo';
+export { default as FormDemo8 } from './8-form-demo';
+export { default as FormDemo9 } from './9-form-demo';

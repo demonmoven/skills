@@ -1,0 +1,31 @@
+{
+  "scene": "doubao",
+  "main_repo": {
+    "url": "git@code.byted.org:flow/creation_workspace.git",
+    "dir": "creation_workspace"
+  },
+  "sub_repos_dir": "repos",
+  "sub_repos": [
+    { "name": "creation_agent",                 "url": "git@code.byted.org:flow/creation_agent.git" },
+    { "name": "creation_access",                "url": "git@code.byted.org:flow/creation_access.git" },
+    { "name": "creativity",                     "url": "git@code.byted.org:flow/creativity.git" },
+    { "name": "alice_ugc_plugin",               "url": "git@code.byted.org:flow/alice_ugc_plugin.git" },
+    { "name": "creativity_asset",               "url": "git@code.byted.org:flow/creativity_asset.git" },
+    { "name": "alice_creativity_api",           "url": "git@code.byted.org:flow/alice_creativity_api.git" },
+    { "name": "alice_idl",                      "url": "git@code.byted.org:flow/alice_idl.git" },
+    { "name": "aigc_tool",                      "url": "git@code.byted.org:flow/aigc_tool.git" },
+    { "name": "aigc_dag",                       "url": "git@code.byted.org:flow/aigc_dag.git" },
+    { "name": "aigc_management",                "url": "git@code.byted.org:flow/aigc_management.git" },
+    { "name": "creation_queue_consumer",        "url": "git@code.byted.org:flow/creation_queue_consumer.git" },
+    { "name": "creativity_video_process_faas",  "url": "git@code.byted.org:flow/creativity_video_process_faas.git" },
+    { "name": "creativity_asset_faas_message",  "url": "git@code.byted.org:flow/creativity_asset_faas_message.git" },
+    { "name": "asset_auto_add_creation_faas",   "url": "git@code.byted.org:flow/asset_auto_add_creation_faas.git" }
+  ],
+  "scaffold": {
+    "agents_md": true,
+    "docs_tree": true,
+    "exec_plans": true,
+    "onboarding": true,
+    "setup_script": true
+  }
+}

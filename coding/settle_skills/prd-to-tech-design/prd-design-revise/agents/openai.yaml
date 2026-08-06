@@ -1,0 +1,4 @@
+interface:
+  display_name: "PRD 技术方案修订"
+  short_description: "根据评论原地修订已有飞书技术方案。"
+  default_prompt: "根据现有飞书技术方案文档的评论，基于原方案微调修正，不重新生成。"

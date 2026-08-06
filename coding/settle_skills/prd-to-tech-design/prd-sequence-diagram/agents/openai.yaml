@@ -1,0 +1,4 @@
+interface:
+  display_name: "PRD 时序图"
+  short_description: "生成 PRD 业务和系统时序图。"
+  default_prompt: "基于 PRD、功能点、代码证据和改动点，生成包含业务动作、参与方、判断分支与变更 diff 的 Mermaid 时序图。"

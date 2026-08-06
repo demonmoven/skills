@@ -1,0 +1,30 @@
+{
+  "name": "Select",
+  "description": "选择器组件：用于从一组选项中选择一个或多个选项，支持分组、多选、搜索等丰富功能。",
+  "demo": [
+    {
+      "name": "1-select-demo",
+      "description": "最基本的选择器用法。"
+    },
+    {
+      "name": "2-select-demo",
+      "description": "Select 支持 default 和 small 两种尺寸。"
+    },
+    {
+      "name": "3-select-demo",
+      "description": "使用 OptGroup 进行选项分组。"
+    },
+    {
+      "name": "4-select-demo",
+      "description": "使用 multiple 属性启用多选模式。"
+    },
+    {
+      "name": "5-select-demo",
+      "description": "展示选择器的不同状态。"
+    },
+    {
+      "name": "6-select-demo",
+      "description": "Select 组件支持 Chip 样式的展示模式，可以通过 chipRender 属性来控制。支持两种渲染模式："
+    }
+  ]
+}

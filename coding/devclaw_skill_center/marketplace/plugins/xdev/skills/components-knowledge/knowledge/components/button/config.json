@@ -1,0 +1,42 @@
+{
+  "name": "Button",
+  "description": "按钮组件：用于触发即时操作的交互元素，支持多种样式和状态，适用于表单提交、确认操作等场景。",
+  "demo": [
+    {
+      "name": "1-button-demo",
+      "description": "最基础的按钮用法。"
+    },
+    {
+      "name": "2-button-demo",
+      "description": "可以只显示图标的按钮。"
+    },
+    {
+      "name": "3-button-demo",
+      "description": "专门为 AI 相关功能设计的按钮，具有特殊的颜色和样式。"
+    },
+    {
+      "name": "4-button-demo",
+      "description": "带有下拉菜单的按钮。"
+    },
+    {
+      "name": "5-button-demo",
+      "description": "带有加载提示的按钮。"
+    },
+    {
+      "name": "6-button-demo",
+      "description": "按钮支持四种尺寸：大号、默认、小号和迷你。"
+    },
+    {
+      "name": "7-button-demo",
+      "description": "按钮支持多种颜色变体，包括品牌色、高亮色、主色、次要色等。"
+    },
+    {
+      "name": "8-button-demo",
+      "description": "按钮可以显示加载状态，支持自定义加载图标。"
+    },
+    {
+      "name": "9-button-demo",
+      "description": "按钮可以配置显示徽标，这是我们在 Semi Button 基础上扩展的特性。"
+    }
+  ]
+}

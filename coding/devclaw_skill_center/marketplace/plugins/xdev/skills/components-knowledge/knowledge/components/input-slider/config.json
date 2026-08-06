@@ -1,0 +1,8 @@
+{
+  "name": "InputSlider",
+  "description": "滑块+数字输入联动组件。",
+  "source": "widgets/base/components/src/input-slider/",
+  "demo": [
+    { "name": "1-input-slider-demo", "description": "基本用法" }
+  ]
+}

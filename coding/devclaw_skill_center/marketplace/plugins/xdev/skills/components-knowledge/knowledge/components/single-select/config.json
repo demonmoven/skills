@@ -1,0 +1,26 @@
+{
+  "name": "SingleSelect",
+  "description": "单选框组件：用于在一组互斥的选项中进行单选，支持自定义布局和图标展示，提供多种样式选择。",
+  "demo": [
+    {
+      "name": "1-singleselect-demo",
+      "description": "最基本的单选框用法。"
+    },
+    {
+      "name": "2-singleselect-demo",
+      "description": "提供了两种布局方式：hug（默认）和 fill。"
+    },
+    {
+      "name": "3-singleselect-demo",
+      "description": "支持 default 和 small 两种尺寸。"
+    },
+    {
+      "name": "4-singleselect-demo",
+      "description": "可以禁用整个组件或单个选项。"
+    },
+    {
+      "name": "5-singleselect-demo",
+      "description": "使用 SingleSelectLabel 组件可以创建带有图标的选项，支持默认图标和选中状态图标。"
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+# settle_skill 仓库路由 + 模块提示统一配置
+#
+# 用途:
+#   1. 把 PRD 中的关键词映射到目标代码仓库 (L1: 仓库决定词)
+#   2. 给编码原子提示 change_type 与 reference_files (L2: 模块/功能词)
+#
+# 维护:
+#   - 新增业务/PSM 时, 仅修改本文件即可, 无需改 charge-dev-router 或子流程
+#   - 由 charge-atom-repo-router 在运行时读取
+#
+# 加载方:
+#   charge-atom-repo-sync 同步本仓库到 sandbox 后, charge-atom-repo-router 直接读取
+#
+# 变更前请联系维护者评审.
+
+version: 2
+last_updated: 2026-05-16
+
+# ============================================================
+# 一、仓库元信息表
+# ============================================================
+# 每个仓库统一描述: codebase 信息 + 默认基线分支 + 构建系统 + MR 标题前缀 + 推荐子流程
+#
+# build_system 字段说明:
+#   - "scm"  : 走 SCM offline 构建 (bytedcli scm repo build)
+#   - "bits" : 走 BITS DevOps 流水线 (bytedcli bits develop create + 流水线触发)
+# ============================================================
+
+repos:
+  bytepay_charge_offline_engine:
+    repo_id: 849505
+    repo_path: bytepay/bytepay_charge_offline_engine
+    repo_url: https://code.byted.org/bytepay/bytepay_charge_offline_engine
+    default_base_branch: master
+    build_system: scm
+    scm_repo_name: caijing/bytepay/charge_offline_engine
+    scm_build_type: offline
+    mr_title_prefix: "[fee-rule]"
+    recommended_subflow: channel_charge
+    description: 渠道离线计费引擎
+
+  bytepay_charge:
+    repo_id: 588382
+    repo_path: bytepay/bytepay_charge
+    repo_url: https://code.byted.org/bytepay/bytepay_charge
+    default_base_branch: master
+    build_system: bits
+    bits_devops_space_id: 749690368002          # 抖音支付计收费结算空间
+    bits_team_flow_id: 751258043394             # 固定工作流模板; charge-atom-bits-pipeline 创建开发任务时
+    # 通过 bytedcli bits develop create --space-id 749690368002 --team-flow-id 751258043394 选用该模板
+    mr_title_prefix: "[charge]"
+    recommended_subflow: general_dev
+    description: 追光计收费平台 (在线计费 / 商户计收费 / 月付贴息 / 通用计收费)
+
+  settle_center:
+    repo_id: 579600
+    repo_path: bytepay/settle_center
+    repo_url: https://code.byted.org/bytepay/settle_center
+    default_base_branch: master
+    build_system: bits
+    bits_devops_space_id: 749690368002          # 抖音支付计收费结算空间
+    bits_team_flow_id: 751258043394             # 固定工作流模板; charge-atom-bits-pipeline 创建开发任务时
+    # 通过 bytedcli bits develop create --space-id 749690368002 --team-flow-id 751258043394 选用该模板
+    mr_title_prefix: "[settle_center]"
+    recommended_subflow: general_dev
+    description: 结算中心(结算中心/分账)
+
+  fee_operation:
+    repo_id: 760422
+    repo_path: bytepay/fee_operation
+    repo_url: https://code.byted.org/bytepay/fee_operation
+    default_base_branch: master
+    build_system: bits
+    bits_devops_space_id: 749690368002          # 抖音支付计收费结算空间
+    bits_team_flow_id: 751258043394             # 固定工作流模板; charge-atom-bits-pipeline 创建开发任务时
+    # 通过 bytedcli bits develop create --space-id 749690368002 --team-flow-id 751258043394 选用该模板
+    mr_title_prefix: "[fee_operation]"
+    description: 费用运营平台 (商户计费标准费率模板运营 / 商户签约价格模型转换 / 服务商活动计费查询、报名 / 三方渠道离线计费规则运营 / 三方渠道计费报账规则运营&&报账管理 / 三方渠道在线计费规则运营 / 聚合直连银行在线计费规则运营 / 聚合直连银行报账管理)
+
+bytepay_settle_boss:
+  repo_id: 211255
+  repo_path: bytepay/bytepay_settle_boss
+  repo_url:  https://code.byted.org/bytepay/bytepay_settle_boss
+  default_base_branch: master
+  build_system: bits
+  bits_devops_space_id: 749690368002          # 抖音支付结算空间
+  bits_team_flow_id: 751258043394             # 固定工作流模板 (--team-flow-id)
+  mr_title_prefix: "[bytepay_settle_boss]"
+  description: 老计费结算运营后台(端内商户计费配置 / 商户结算配置 / 三方渠道鉴权在线计费配置运营 / 老三方渠道计费在线计费配置运营)
+
+# ============================================================
+# 二、L1: 仓库决定词 (Repo-determining keywords)
+# ============================================================
+# 命中即锁定对应仓库. 多个 L1 命中 → 多仓库**并发**执行(分别派发子流程).
+# 关键词匹配采用子串匹配, 大小写不敏感.
+#
+# 顺序在数组内不影响判定结果(全部扫一遍, 收集全部命中的 repo).
+# ============================================================
+
+repo_determining_keywords:
+  bytepay_charge_offline_engine:
+    - 离线引擎
+    - 离线计费
+    - 渠道离线
+    - charge_offline
+    - offline_engine
+
+  bytepay_charge:
+    - 商户计收费
+    - 月付贴息
+    - 通用计收费
+    - 商户签约计收费规则查询
+    - 商户费率
+    - 在线计费
+    - 计收费平台
+  settle_center:
+    - 结算中心
+    - 分账
+    - 资金流编排
+  fee_operation:
+    - 费用运营平台
+    - 计费标准费率模板运营
+    - 商户签约价格模型转换
+    - 服务商活动计费查询
+    - 三方渠道离线计费规则运营
+    - 三方渠道计费报账规则运营
+    - 三方渠道在线规则运营
+    - 聚合直连银行报账管理
+    - 聚合直连银行在线计费规则运营
+
+# ============================================================
+# 三、L2: 模块/功能词 (Module hints)
+# ============================================================
+# 命中后只影响"在仓库内改哪些代码"的提示, 不参与仓库路由.
+# 输出给编码原子: suggested_change_type + suggested_reference_files + suggested_strategy.
+#
+# 多个 L2 命中时:
+#   - reference_files: **合并去重**
+#   - change_type:     若多个不同 → 输出列表, 由编码原子决定/询问用户
+#   - strategy:        若有任一 coco_full → 取 coco_full(从严)
+# ============================================================
+
+module_hints:
+  - keywords:
+      - 退款计算器
+      - 退款费率
+      - 退款规则
+    applies_to_repos: [bytepay_charge_offline_engine]
+    change_type: new_calculator
+    reference_files:
+      - src/main/java/caijing/bytepay/charge_offline/core/calculator/CalculatorAdapter.java
+      - src/main/java/caijing/bytepay/charge_offline/core/calculator/refund/PartRefundCalculator.java
+      - src/main/java/caijing/bytepay/charge_offline/core/calculator/refund/RefundBaseCalculator.java
+      - src/main/java/caijing/bytepay/charge_offline/core/calculator/Calculator.java
+      - src/main/java/caijing/bytepay/charge_offline/core/enums/RefundFeeModeEnum.java
+      - src/main/java/caijing/bytepay/charge_offline/model/runtime/FeeResult.java
+      - src/main/java/caijing/bytepay/charge_offline/model/runtime/CalculateContext.java
+    suggested_strategy: mira_patch
+
+  - keywords:
+      - 费率规则
+      - 计费规则
+    applies_to_repos: [bytepay_charge_offline_engine, bytepay_charge]
+    change_type: fee_rule_change
+    reference_files: []
+    suggested_strategy: coco_full
+
+  # 服务商活动费率配置(2026-05-26 新增,专项子流程)
+  # 本条目仅用于让 L2 命中并提供上下文备份;
+  # 是否走子流程、是否跳过通用 facade,由 manifest.yaml 的 subflows.triggers
+  # 与 subflows/service_merchant_activity_rate/subflow.md 头部 bypass_* 标志决定,
+  # 路由层不再依赖本配置里的 suggested_strategy / suggested_subflow 字面量。
+  - keywords:
+      - 服务商活动费率配置
+      - 服务商活动费率
+      - 服务商费率活动配置
+    applies_to_repos: [bytepay_charge]            # 仅作上下文备份,本子流程不依赖业务仓
+    change_type: service_merchant_activity_rate
+    reference_files: []
+  # —— 后续按需扩充, 例如 ——
+  # - keywords: [新增枚举值]
+  #   applies_to_repos: [...]
+  #   change_type: new_enum_value
+  #   reference_files: [...]
+  #   suggested_strategy: mira_patch
+
+# ============================================================
+# 四、兜底策略
+# ============================================================
+fallback:
+  # L1 完全无命中时的处理: ask_user(必须停下询问) | use_default(用 default_repo 兜底)
+  on_no_l1_match: ask_user
+  default_repo: null                   # 仅当 on_no_l1_match=use_default 时生效
+
+  # L1 命中多个时的处理: parallel_execute(并发) | sequential_execute(串行) | ask_user
+  on_multi_l1_match: parallel_execute
+
+  # L1 命中、但 L2 无命中时的 change_type
+  default_change_type: unknown
+  default_strategy: coco_full
+

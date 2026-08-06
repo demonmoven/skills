@@ -1,0 +1,8 @@
+{
+  "name": "InputWithCount",
+  "description": "带字符计数的输入框组件。",
+  "source": "widgets/base/components/src/input-with-count/",
+  "demo": [
+    { "name": "1-input-with-count-demo", "description": "基本用法" }
+  ]
+}

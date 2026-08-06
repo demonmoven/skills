@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "V&V verdict.json schema",
+  "type": "object",
+  "required": ["verdict", "reason", "gate_level", "subsystem_scores", "failure_taxonomy", "blocking_findings"],
+  "additionalProperties": false,
+  "properties": {
+    "verdict": {
+      "type": "string",
+      "enum": ["PASS", "FAIL", "SOFT_FAIL", "NEEDS_APPROVAL"]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gate_level": {
+      "type": "string",
+      "enum": ["pr", "nightly", "release"]
+    },
+    "subsystem_scores": {
+      "type": "object",
+      "properties": {
+        "rule_checks": { "$ref": "#/$defs/subsystem_score" },
+        "structural_tests": { "$ref": "#/$defs/subsystem_score" },
+        "task_evals": { "$ref": "#/$defs/subsystem_score" },
+        "trace_grading": { "$ref": "#/$defs/subsystem_score" },
+        "regression_gates": { "$ref": "#/$defs/subsystem_score" }
+      }
+    },
+    "failure_taxonomy": {
+      "type": "object",
+      "required": ["POLICY_VIOLATION", "STRUCTURE_DRIFT", "OUTCOME_FAIL", "TOOL_MISUSE", "THRASHING", "UNNECESSARY_COMPLEXITY"],
+      "properties": {
+        "POLICY_VIOLATION": { "type": "integer", "minimum": 0 },
+        "STRUCTURE_DRIFT": { "type": "integer", "minimum": 0 },
+        "OUTCOME_FAIL": { "type": "integer", "minimum": 0 },
+        "TOOL_MISUSE": { "type": "integer", "minimum": 0 },
+        "THRASHING": { "type": "integer", "minimum": 0 },
+        "UNNECESSARY_COMPLEXITY": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "blocking_findings": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "subsystem_score": {
+      "type": "object",
+      "required": ["score", "pass"],
+      "additionalProperties": false,
+      "properties": {
+        "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "pass": { "type": "boolean" }
+      }
+    }
+  }
+}

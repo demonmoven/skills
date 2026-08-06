@@ -1,0 +1,38 @@
+{
+  "name": "Carousel",
+  "description": "轮播图是一种媒体组件，可以在可视化应用中展示多张图片轮流播放的效果。",
+  "demo": [
+    {
+      "name": "1-carousel-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-carousel-demo",
+      "description": "主题切换"
+    },
+    {
+      "name": "3-carousel-demo",
+      "description": "指示器"
+    },
+    {
+      "name": "4-carousel-demo",
+      "description": "箭头"
+    },
+    {
+      "name": "5-carousel-demo",
+      "description": "定制箭头"
+    },
+    {
+      "name": "6-carousel-demo",
+      "description": "播放参数"
+    },
+    {
+      "name": "7-carousel-demo",
+      "description": "动画效果与切换速度"
+    },
+    {
+      "name": "8-carousel-demo",
+      "description": "受控的轮播图"
+    }
+  ]
+}

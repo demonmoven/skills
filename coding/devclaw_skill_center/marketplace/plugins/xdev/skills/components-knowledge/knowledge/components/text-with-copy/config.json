@@ -1,0 +1,8 @@
+{
+  "name": "TextWithCopy",
+  "description": "带复制功能的文本显示组件。",
+  "source": "widgets/base/components/src/text-with-copy/",
+  "demo": [
+    { "name": "1-text-with-copy-demo", "description": "基本用法" }
+  ]
+}

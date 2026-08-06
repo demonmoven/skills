@@ -1,0 +1,50 @@
+{
+  "name": "Tree",
+  "description": "树型结构列表。",
+  "demo": [
+    {
+      "name": "1-tree-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "10-tree-demo",
+      "description": "多选"
+    },
+    {
+      "name": "11-tree-demo",
+      "description": "可搜索的"
+    },
+    {
+      "name": "2-tree-demo",
+      "description": "手动触发搜索"
+    },
+    {
+      "name": "3-tree-demo",
+      "description": "简单 JSON 格式的数据"
+    },
+    {
+      "name": "4-tree-demo",
+      "description": "行显示节点"
+    },
+    {
+      "name": "5-tree-demo",
+      "description": "自定义节点内容"
+    },
+    {
+      "name": "6-tree-demo",
+      "description": "自定义图标"
+    },
+    {
+      "name": "7-tree-demo",
+      "description": "目录树模式"
+    },
+    {
+      "name": "8-tree-demo",
+      "description": "禁用"
+    },
+    {
+      "name": "9-tree-demo",
+      "description": "节点选中关系"
+    }
+  ]
+}

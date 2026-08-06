@@ -1,0 +1,8 @@
+{
+  "name": "MultipartEditor",
+  "description": "多部分内容编辑器。",
+  "source": "widgets/base/components/src/multi-part-editor/",
+  "demo": [
+    { "name": "1-multipart-editor-demo", "description": "基本用法" }
+  ]
+}

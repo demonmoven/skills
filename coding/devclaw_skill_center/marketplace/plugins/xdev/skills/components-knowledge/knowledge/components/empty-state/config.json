@@ -1,0 +1,22 @@
+{
+  "name": "EmptyState",
+  "description": "空状态组件：用于展示无数据、操作结果反馈或引导用户采取行动的占位提示。",
+  "demo": [
+    {
+      "name": "1-emptystate-demo",
+      "description": "展示不同尺寸的空状态。"
+    },
+    {
+      "name": "2-emptystate-demo",
+      "description": "适用于需要全屏展示的空状态场景，如空页面或错误页。"
+    },
+    {
+      "name": "3-emptystate-demo",
+      "description": "可以添加按钮和额外内容来引导用户操作。"
+    },
+    {
+      "name": "4-emptystate-demo",
+      "description": "通过 darkModeIcon 属性可以设置暗色模式下显示的图标。"
+    }
+  ]
+}

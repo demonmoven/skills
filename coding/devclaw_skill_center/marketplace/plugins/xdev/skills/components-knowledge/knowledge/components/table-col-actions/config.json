@@ -1,0 +1,8 @@
+{
+  "name": "TableColActions",
+  "description": "表格列操作按钮组组件。",
+  "source": "widgets/base/components/src/table-col-actions/",
+  "demo": [
+    { "name": "1-table-col-actions-demo", "description": "基本用法" }
+  ]
+}

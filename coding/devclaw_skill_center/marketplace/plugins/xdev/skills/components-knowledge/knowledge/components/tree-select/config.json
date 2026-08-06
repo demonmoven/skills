@@ -1,0 +1,18 @@
+{
+  "name": "TreeSelect",
+  "description": "树形选择器组件：用于从具有层级关系的数据结构中进行选择，支持单选和多选操作，适用于展示具有从属关系的数据。",
+  "demo": [
+    {
+      "name": "1-treeselect-demo",
+      "description": "最基础的单选用法。"
+    },
+    {
+      "name": "2-treeselect-demo",
+      "description": "支持多选和仅叶子节点可选。"
+    },
+    {
+      "name": "3-treeselect-demo",
+      "description": "单选模式下，可以设置只允许选择叶子节点。"
+    }
+  ]
+}

@@ -1,0 +1,496 @@
+# settle_skill 仓库 manifest
+# 路由层(charge-dev-router)读取本文件,获取当前可用的"原子 SKILL 列表"和"子流程列表"。
+# 新增/调整子流程或原子 SKILL 时,修改本文件即可,无需改动 Mira 端 SKILL。
+
+version: 1
+
+# ===== 配置文件 =====
+# 业务知识(关键词 → 仓库映射、模块提示、构建系统、MR 前缀)统一在 config/ 目录维护:
+#   - config/repo_routing.yaml: charge-atom-repo-router 读取, 由路由层在每次启动时透传路径
+# 新增 PSM / 新增模块功能词时, 仅修改 yaml, 不必改 SKILL 代码或子流程描述。
+configs:
+  - name: repo_routing
+    path: config/repo_routing.yaml
+    consumed_by: [charge-atom-repo-router]
+    desc: PRD 关键词到目标仓库 + 模块提示的映射规则(L1 仓库决定词 + L2 模块/功能词)
+
+# ===== 原子 SKILL 登记 =====
+# source 取值:
+#   - repo:     本仓库内的目录,路由层从 path 加载 SKILL.md 并按其中说明执行
+#   - mira:     Mira SKILL 体系内已注册的 SKILL,路由层通过 Skill 工具按 name 调用
+#   - bytedcli: 通过 Mira SKILL `bytedcli` 的子命令域调用,bytedcli_subskill 字段指明走哪个域
+#   - coco:     通过 Mira SKILL `bytedance-coco` (Codebase Copilot AI Code Agent) 调用
+#               所有"代码生成/编辑/审查/修复"类任务都走 coco,其余代码相关操作(MR/diff)走 bytedcli/codebase
+atomic_skills:
+  # ---- 仓库内已有的计费域专用原子 SKILL(无替代,保留) ----
+  - name: bytedance-jwt
+    source: repo
+    path: bytedance-jwt
+    desc: 获取 ByteDance JWT Token
+
+  - name: contract-query
+    source: repo
+    path: contract_query
+    desc: 查询端外商户合约信息
+
+  - name: ftools
+    source: repo
+    path: ftools
+    desc: 根据 settleOrderId 查询计费结算单据
+
+  - name: ftools-aime
+    source: repo
+    path: ftools-aime
+    desc: ftools AIME 版本
+
+  - name: log-check
+    source: repo
+    path: log-check
+    desc: 检查 argos-log 中的计费结算日志
+
+  - name: offline-billing-onboarding
+    source: repo
+    path: offline-billing-onboarding
+    desc: 标准离线计费接入实时答疑，回答前读取最新飞书 Wiki 和 Docx 文档
+
+  - name: streamlog-trace-query
+    source: repo
+    path: streamlog-trace-query
+    desc: 按 logid 查询 Streamlog trace 日志
+
+  # ---- PRD → 技术方案 编排 Agent 及其阶段 SKILL(prd-to-tech-design bundle) ----
+  # 入口为 prd-tech-design,串联 understand → feature-split(内含 llm-wiki-git 现状调查) →
+  # optional wiki-query(补充/重查) →
+  # sequence-diagram / funds-flow-diagram → design-generate。
+  # 可选 design-revise(按评论原地微调),settle-center-recognition 为 settle_center 前置识别门。
+  # 知识库检索强依赖仓库根目录的 llm-wiki-git skill,调用方式为 llm-wiki-git query "<问题>"。
+  - name: prd-tech-design
+    source: repo
+    path: prd-to-tech-design/prd-tech-design
+    desc: PRD→飞书技术方案编排 Agent,理解后先用 llm-wiki-git query 按 Module/System->Scenario->Capability->Application->Data/Implementation->Source->RawRef 调查现状,再拆分/绘图/生成
+  - name: prd-understand
+    source: repo
+    path: prd-to-tech-design/prd-understand
+    desc: 阶段1,读取 PRD 正文和评论/回复并归一化,正文与评论冲突时以评论为准,资金流不确定点阻塞式提问
+  - name: prd-feature-split
+    source: repo
+    path: prd-to-tech-design/prd-feature-split
+    desc: 阶段2,内含 llm-wiki-git query 现状调查,按分层路径识别已有/增强/新增能力,再拆分功能点并定位仓库/接口/链路
+  - name: prd-wiki-query
+    source: repo
+    path: prd-to-tech-design/prd-wiki-query
+    desc: 补充调查/重查,经 llm-wiki-git query 按分层路径检索知识库后再以代码核验改动点
+  - name: prd-sequence-diagram
+    source: repo
+    path: prd-to-tech-design/prd-sequence-diagram
+    desc: 绘图子 skill,生成包含核心业务动作/action、参与方/participant、判断分支与变更 diff 的业务/系统时序图
+  - name: prd-funds-flow-diagram
+    source: repo
+    path: prd-to-tech-design/prd-funds-flow-diagram
+    desc: 绘图子 skill,生成主体与待结算户/现金户/垫资户等账户级资金流图,并输出配套信息流字段链路
+  - name: prd-design-generate
+    source: repo
+    path: prd-to-tech-design/prd-design-generate
+    desc: 阶段4,整合时序图/资金流图等材料,起草技术方案并创建飞书文档
+  - name: prd-design-revise
+    source: repo
+    path: prd-to-tech-design/prd-design-revise
+    desc: 阶段5(可选),按评论原地微调技术方案,同点全文一致修改,不重生成
+  - name: settle-center-recognition
+    source: repo
+    path: prd-to-tech-design/settle-center-recognition
+    desc: settle_center 前置识别门,识别端内/端外/入口接口/conf-mapping→XML 流程,XML 改动需给出完整编排
+
+  # ---- 计费域专属(无 bytedcli 对应,仍以 Mira SKILL 形式保留) ----
+  - name: charge-atom-repo-sync
+    source: mira
+    desc: 同步 settle_skill 仓库到本地缓存
+
+  - name: charge-atom-code-gen
+    source: repo
+    path: atoms/charge-atom-code-gen
+    desc: 计费域统一编码原子,根据变更复杂度自动选择 Mira 直写(Plan A) 或 Coco 全量(Plan B)
+    notes: |
+      子流程编码步骤统一调用本原子,传入 repo_id/change_type/reference_files 等参数。
+      内部策略路由: 简单模式化变更 → Plan A(~8min); 复杂探索性变更 → Plan B(~20min)。
+      Plan A 失败自动降级 Plan B。
+
+  - name: charge-atom-bits-pipeline
+    source: repo
+    path: atoms/charge-atom-bits-pipeline
+    desc: BITS 流水线原子, 在抖音支付计收费结算 DevOps 空间(749690368002)下创建开发任务并触发自检流水线
+    notes: |
+      锁定 space_id=749690368002 + team_flow_id=751258043394(创建开发任务时固定选用该工作流模板,
+      通过 --team-flow-id 传入,不走 BITS 默认模板;调用方需要时仍可通过 --from-dev-id 指定源模板任务)。
+      命令链: bytedcli bits develop create → quick-run --wait → develop get / pipeline → check-mr / reuse-mr。
+      支持复用同一 dev_id 进行增量复跑(只产生新的 pipeline_run_seq)。
+
+  - name: charge-atom-repo-router
+    source: repo
+    path: atoms/charge-atom-repo-router
+    desc: 仓库与模块路由原子, 读取 config/repo_routing.yaml, 把 PRD 关键词映射到目标仓库列表 + 模块提示
+    notes: |
+      L1 关键词决定改哪个仓库(可多命中, 多仓库并发执行);
+      L2 关键词决定仓库内改哪些代码(suggested_change_type / reference_files / strategy)。
+      所有业务关键词、仓库元信息、构建系统、MR 标题前缀均集中在 config/repo_routing.yaml 中维护,
+      新增 PSM 时仅修改 yaml 即可, 不必改 charge-dev-router 或子流程。
+      配置加载失败时 **不降级硬编码兜底**, 直接抛错以避免业务知识漂移。
+
+
+  - name: charge-atom-llm-wiki-query
+    source: repo
+    path: atoms/charge-atom-llm-wiki-query
+    desc: 计费/结算 LLM Wiki 知识检索原子 (封装 settle_skill llm-wiki-git 的 query 操作)
+    notes: |
+      knowledge-facade 的唯一实现。在 sandbox 内落地知识库代码仓库
+      bytepay/charge_settle_llm_wiki (repo_id=1069114, 默认分支 feat_ai),
+      然后驱动 llm-wiki-git query "<问题>" workflow 做综合检索。
+
+      仓库落地双路径 (按序尝试, 任一成功即用):
+        A) git clone (整库, query 需要 rg/find 遍历 wiki/ 与 raw/):
+           JWT=$(bytedcli --json auth get-codebase-jwt-token | jq -r '.data.jwt')
+           git clone --depth 1 --branch feat_ai \
+             "https://oauth2:${JWT}@code.byted.org/bytepay/charge_settle_llm_wiki.git" <dir>
+        B) bytedcli 按需取文件 (clone 不可用时的兜底, 仅适合点读):
+           bytedcli --json codebase repo file <path> -R bytepay/charge_settle_llm_wiki --revision feat_ai
+           取 .data.file.Content (base64) 解码。
+
+      query 是 LLM 驱动的多步 workflow (无独立脚本):
+        语义路径必须遵循 Module/System → Scenario → PlatformCapability → Application
+        → Data/Implementation → Source → RawRef; 落地读取通过 REGISTRY → 本地 wiki 页面
+        → 必要时回查 raw 引用对应飞书原文 → 综合回答。
+      鉴权: 复用 bytedcli ByteCloud SSO → Codebase JWT (禁用 PAT)。
+        未授权时输出 status=unauth, 提示 `! bytedcli feishu login --force-oauth`;
+        由 knowledge-facade stop_and_ask 停流程等用户登录。
+      契约见 atoms/charge-atom-llm-wiki-query/SKILL.md。
+  - name: charge-atom-progress-render
+    source: repo
+    path: atoms/charge-atom-progress-render
+    desc: 计费域研发流程实时进展看板渲染原子, 静态文件 + 5s 轮询, 无需后端
+    notes: |
+      在每个子流程的关键 stage 节点调用一次, 把最新状态深合并进 progress.json,
+      前端 HTML 模板通过 fetch + If-None-Match 自动重渲染。
+      子命令: init / patch / upload / render。
+      调用约定见原子 SKILL.md(7-stage 默认骨架: PRD 解析 → 仓库路由 → 知识检索 →
+      Coco 编码 → Push 远端 → BITS 自检流水线 → MR 合入)。
+      失败仅 warn, 不阻塞主链路; progress.json 本身保留全部历史字段, 可作事件溯源。
+
+  # ---- tech-solution-facade 的 complex 分支默认实现 = prd-tech-design 编排 Agent ----
+  # (原 tech-solution-gen / ArchMate 原子已于 2026-07-10 下线,复杂需求技术方案统一走 prd-tech-design bundle)
+  # prd-tech-design 及其阶段 SKILL 已在本文件上方「PRD → 技术方案 编排 Agent」段落注册,
+  # 此处不再重复登记原子;tech-solution-facade 直接引用 prd-tech-design(见下方 facades 段)。
+
+  # ---- 服务商活动费率配置子流程专属原子(2026-05-26 新增) ----
+  - name: online-service-activity-sql
+    source: repo
+    path: atoms/online-service-activity-sql
+    desc: 服务商活动费率配置 SQL 生成原子,SQL 模板内置于原子目录,按 PRD 直接渲染产出 SQL 文件
+    notes: |
+      仅 service_merchant_activity_rate 子流程使用,代替通用 tech-solution-facade。
+      SQL 模板与字段映射内置于原子目录(template.sql.j2 / fields.yaml),不依赖外部业务仓库分支;契约见原子 SKILL.md。
+      产出 sql_file_path / sql_excerpt 供下游 boe-sql-ticket 原子使用。
+
+  - name: boe-sql-ticket
+    source: repo
+    path: atoms/boe-sql-ticket
+    desc: BOE SQL 工单原子,封装 data-rds-boe Mira market skill,提单+申请人自审批
+    notes: |
+      仅 service_merchant_activity_rate 子流程使用,代替通用 coding-facade。
+      硬锁定 db=caijing_bytepay_charge / env=boe / approver_mode=self。
+      底层依赖 Mira market skill skills:skills.byted.org/douyin/space/data-rds-boe:0.1.0,
+      路由层运行前必须确认已 enable。
+      本原子不执行 SQL,执行确认走子流程第 6 步人在环路。
+
+  - name: prd-testcase-workflow-trigger
+    source: repo
+    path: atoms/prd-testcase-workflow-trigger
+    desc: 根据prd生成测试用例原子,在boe-sql-ticket原子执行成功后触发prd-testcase-workflow
+    notes: |
+      仅 service_merchant_activity_rate 子流程使用。
+      失败按 warn_continue 处理,不回滚已生效 SQL。
+
+  - name: test-case-execute-agent
+    source: repo
+    path: atoms/test-case-execute-agent
+    desc: 执行测试用例原子,在prd-testcase-workflow触发后执行测试用例
+    notes: |
+      仅 service_merchant_activity_rate 子流程使用。
+      失败按 warn_continue 处理,不回滚已生效 SQL。
+
+
+  # ---- 通用能力,统一走 bytedcli / coco ----
+  # 子流程的 facade_implementations 声明引用下面的 atom name,路由层自动通过 Skill 工具调用 bytedcli/coco
+  # 编码任务统一走 Coco(Codebase Copilot)AI Code Agent
+  # Coco 能力:代码生成、代码审查、代码修复、多轮对话、任务管理
+  - name: code-write
+    source: coco
+    desc: 通过 Coco AI Code Agent 完成代码生成/编辑/审查
+    coco_command: "task send"
+    notes: |
+      调用方式:
+        bytedcli coco task send --message "<需求描述>" --repo <repo> --branch <branch>
+      然后 subscribe 或 get 拿结果。
+
+  - name: code-review
+    source: coco
+    desc: 通过 Coco 进行代码审查
+    coco_command: "task send"
+    notes: 让 Coco 对 MR diff 做审查,产出建议
+
+  - name: code-commit
+    source: bytedcli
+    bytedcli_subskill: bytedance-codebase
+    desc: 提交并创建 MR(Coco 产物 → codebase 提交)
+    fallback_subskills: [bytedance-scm, bytedance-devflow]
+
+  - name: build
+    source: bytedcli
+    bytedcli_subskill: bytedance-bits
+    desc: BITS 打包
+    fallback_subskills: [bytedance-scm]
+
+  - name: deploy
+    source: bytedcli
+    bytedcli_subskill: bytedance-tce
+    desc: TCE 部署
+    fallback_subskills: [bytedance-faas, bytedance-goofy-deploy]
+
+  - name: test
+    source: bytedcli
+    bytedcli_subskill: bytedance-aitest
+    desc: 自动化测试
+    fallback_subskills: [bytedance-api-test, bytedance-test-plan]
+
+  - name: report
+    source: bytedcli
+    bytedcli_subskill: bytedance-feishu
+    desc: 创建飞书研发流程报告文档
+
+
+# ===== Facade 层(子流程只感知 facade, 不感知 atomic_skills) =====
+# 详见: docs/facade_design.md (待补)。
+# 路由层在编排子流程时, 把 facade.name 解析成 default_atom 或按 routing_rules 切分。
+# 替换底层 atom 时, 只改本块, 子流程零改动。
+
+# 待提交到 settle_skill 仓库的 manifest 片段
+# 路径: bytepay/settle_skill : feature/ai_native : manifest.yaml
+# 操作: 在文件末尾追加(或在 atomic_skills 下方、subflows 上方插入)以下整段
+#
+# 设计要点:
+# 1. 子流程只引用 facade.name, 不引用 atomic_skills.name
+# 2. facade 通过 default_atom 指定默认实现, routing_rules 决定何时切换
+# 3. 任何 facade 失败时按 fallback_strategy 处理
+# 4. 替换底层 atom 时, 子流程零改动
+
+facades:
+  - name: prd-facade
+    desc: PRD/BRD 文档解析与不确定点提取
+    default_atom: prd-analyzer
+    inputs: [prd_url]
+    outputs: [prd_title, prd_link, prd_requirements, change_type, reference_files, uncertain_points]
+    routing_rules: []                     # 暂无;后续可按 prd_url 域名分流
+    fallback_strategy: stop_and_ask       # uncertain_points 非空 → 停止等用户
+
+  - name: tech-solution-facade
+    desc: 根据 PRD + 知识库上下文产出本期技术方案 (含改动清单 / 涉及模块 / 风险点)
+    default_atom: __inline_template__     # 简单需求: facade 内部生成模板, 不调用任何原子
+    routing_config: config/tech_solution_routing.yaml
+    routing_rules:
+      - when: complexity == "complex"
+        atom: prd-tech-design             # 复杂需求路由到 prd-tech-design 编排 Agent(原 tech-solution-gen/ArchMate 已下线)
+    inputs:
+      - prd_requirements
+      - change_type
+      - reference_files
+      - repo_meta
+      - requirement_brief
+      - knowledge_context          # 必填:简单/复杂分支都消费(由 knowledge-facade stop_and_ask 保证 status=ok 时非空)
+    outputs: [tech_solution_md, complexity, complex_reasons, decisions, open_questions]
+    fallback_strategy: stop_and_ask       # 输出 open_questions 非空 → 停止等用户
+
+  - name: repo-route-facade
+    desc: 根据 PRD 关键词匹配目标仓库与构建系统
+    default_atom: charge-atom-repo-router
+    inputs: [prd_requirements, change_type]
+    outputs: [repo_id, repo_path, repo_meta, hit_keywords, hit_count]
+    routing_rules: []
+    fallback_strategy: stop_and_ask       # hit_count == 0 或 ≥2 时停止等人
+
+  - name: knowledge-facade
+    desc: 计费/结算 LLM Wiki 知识检索 (llm-wiki-git query 唯一实现)
+    default_atom: charge-atom-llm-wiki-query
+    inputs:
+      - keywords                                  # PRD 关键词 → 拼成 query
+      - requirement_brief                         # PRD 摘要 → query 上下文
+      - scope                                     # 计费域: charge/settle/billing
+    outputs:
+      - knowledge_md                              # llm-wiki-git query 的综合回答 (Markdown, 含内联引用)
+      - sources                                   # 命中的 Source / wiki 页面引用列表 [{title, path}]
+      - raw_refs                                  # 回溯到的 raw 原始引用 (飞书 URL / token / 本地路径)
+      - used_keywords                             # 实际使用的 query 关键词
+      - repo_revision                             # 检索时使用的 charge_settle_llm_wiki 仓库分支/commit
+      - status                                    # ok | empty | unauth | error
+    fallback_strategy: stop_and_ask               # 检索失败 / 空命中即停, 等用户; 不允许 fallback 到其他原子
+    notes: |
+      唯一实现:charge-atom-llm-wiki-query, 封装 settle_skill 的 llm-wiki-git skill query 操作。
+      知识库代码仓库固定为 bytepay/charge_settle_llm_wiki (repo_id=1069114, 默认分支 feat_ai)。
+
+      调用方式:子流程透传 keywords/requirement_brief/scope, facade 拼成自然语言 query,
+      等价于执行 llm-wiki-git query "<问题>",
+      由 charge-atom-llm-wiki-query 在 sandbox 内落地 charge_settle_llm_wiki 仓库后,
+      驱动 llm-wiki-git 的 query workflow (语义路径:
+      Module/System → Scenario → PlatformCapability → Application → Data/Implementation
+      → Source → RawRef; 落地读取: REGISTRY → 本地 wiki 页面 → 必要时回查 raw 飞书原文 → 综合),
+      产出映射到 facade outputs:
+        knowledge_md   := query 综合回答 (Markdown)
+        sources        := 命中的 Source / wiki 页面引用
+        raw_refs       := 回溯到的 raw 原始资料引用
+        used_keywords  := 实际 query 关键词
+        repo_revision  := 检索使用的仓库 revision
+        status         := ok / empty / unauth / error
+
+      失败语义:status != ok (empty/unauth/error) 即触发 stop_and_ask, 停止整条流程等用户:
+        - unauth → 提示登录命令后停
+        - empty  → 知识库未覆盖, 停下来让用户补素材或确认是否继续
+        - error  → 报错停
+
+      下游注入约定(硬依赖):
+        - tech-solution-facade 简单/复杂分支都必须消费 knowledge_context (= 本 facade 全部 outputs),
+          由 knowledge-facade stop_and_ask 保证 status=ok 时 knowledge_md 非空。
+        - 子流程顺序必须为: knowledge-facade → tech-solution-facade。
+  - name: coding-facade
+    desc: 在指定分支上完成编码 + 单测 + push (含降级 Plan A/B)
+    default_atom: charge-atom-code-gen
+    inputs: [repo_id, repo_path, base_branch, new_branch, target_branch,
+             prd_title, prd_link, prd_requirements, change_type, reference_files,
+             tech_solution_md, mr_title_prefix,
+             incremental_fix, existing_coco_task_id, existing_branch, fix_instructions]
+    outputs: [strategy_used, coco_task_id, commit_id, branch, changed_files,
+              bypass_changes, compile_pass, test_pass]
+    routing_rules:
+      - when: force_strategy == "mira_native"
+        atom: code-write                  # 用 mira native 路径写代码
+      - when: force_strategy == "coco"
+        atom: charge-atom-code-gen
+    fallback_strategy: stop_and_ask       # AUTH_REQUIRED / 持续失败 → 停止
+
+  - name: delivery-facade
+    desc: 提交流水线 + 创建 MR + 反向绑定 (终态强耦合, 合并为一个 facade)
+    default_atom: charge-atom-bits-pipeline   # 默认走 BITS
+    inputs: [repo_id, repo_path, branch, commit_id, target_branch,
+             prd_title, prd_link, mr_title_prefix, mr_body, bits_service,
+             existing_dev_id, existing_mr_iid]
+    outputs: [dev_id, dev_url, pipeline_id, pipeline_run_seq, pipeline_url,
+              pipeline_status, build_log_excerpt, mr_url, mr_iid]
+    routing_rules:
+      - when: repo_meta.build_system == "bits"
+        atom: charge-atom-bits-pipeline   # 内部链路: pipeline → 等终态 → mr create → bits reuse-mr
+      - when: repo_meta.build_system == "scm"
+        atom: build                       # SCM 仓走本地打包 + code-commit
+    fallback_strategy: loop_back_to_coding  # pipeline failed → fix_instructions → 回 coding-facade
+
+  - name: progress-facade
+    desc: 实时进展看板 (init/patch/upload), 写本地 + 上传 + 维护 latest_urls.json
+    default_atom: charge-atom-progress-render
+    inputs: [session_id, stage, status, hero_update, panel_json, task_meta]
+    outputs: [html_url, json_url, updated_at]
+    routing_rules: []
+    fallback_strategy: warn_continue      # 任何 render/upload 失败仅 warn
+
+  - name: report-facade
+    desc: 飞书文档形式的最终报告
+    default_atom: report                  # 内部用 lark-docs-skill
+    inputs: [task_title, prd_link, requirement_brief, rounds_log, mr_url, dashboard_url]
+    outputs: [doc_url]
+    routing_rules: []
+    fallback_strategy: warn_continue      # 失败 → mira 上传 .md fallback
+
+# ===== 子流程登记 =====
+# triggers: 关键词数组,路由层做变更分类时按这些词命中
+# path:     仓库内子流程目录
+# mode:     执行模式
+#   - natural: subflow.md 的 YAML frontmatter 声明 facade_implementations,路由层按通用 8-facade 顺序 + 声明式调度协议执行
+#   - 不填时默认 natural
+# depends_on: 该子流程必须在哪些子流程完成后才能执行(可选)
+#
+# 子流程声明格式参考 subflows/_template_natural/subflow.md
+subflows:
+  - name: channel_charge
+    path: subflows/channel_charge
+    mode: natural
+    triggers:
+      - 三方渠道离线计费
+      - 退款计算器
+
+  - name: backend
+    path: subflows/backend
+    mode: natural
+    triggers:
+      - 后端变更
+      - 接口新增
+      - 接口修改
+      - 业务逻辑
+      - 服务变更
+
+  - name: frontend
+    path: subflows/frontend
+    mode: natural
+    triggers:
+      - 前端变更
+      - 页面调整
+      - UI 调整
+      - 组件
+      - 交互调整
+
+  - name: config
+    path: subflows/config
+    mode: natural
+    triggers:
+      - 配置变更
+      - FeatureGate
+      - 灰度配置
+      - 配置中心
+      - 开关
+
+  - name: general_dev
+    mode: natural
+    path: subflows/general_dev
+    triggers:
+      - 通用研发
+      - 兜底子流程
+      - BITS 流水线
+      - 自动化测试循环
+    desc: "通用研发子流程:全链路 facade-only。PRD → 仓库路由 → 技术方案 → 知识检索 → 编码(Coco) → 流水线 + MR → 报告。支持自动回环修复。"
+    notes: |
+      不绑定仓库, 由 charge-atom-repo-router 根据 PRD 关键词决定。
+      DevOps 空间: 抖音支付计收费结算(749690368002), 模板由 BITS 自动选用空间默认。
+      自动化测试接入方式占位中, 当前阶段在第 5 步停下让用户手动确认。
+      循环修复: 同一 MR + 同一 Coco task-id + 同一 BITS dev_id, 无循环上限。
+      触发条件: 路由层判定目标仓库 build_system=bits 时进入本子流程;
+                build_system=scm 时走 channel_charge 等专属子流程。
+
+  # 服务商活动费率配置子流程(2026-05-26 新增,专项流程)
+  - name: service_merchant_activity_rate
+    path: subflows/service_merchant_activity_rate
+    mode: natural
+    triggers:
+      - 服务商活动费率配置
+      - 服务商活动费率
+      - 服务商费率活动配置
+    desc: "服务商活动费率配置专项子流程:PRD 解析 → 调原子 online-service-activity-sql 渲染 SQL → data-rds-boe 提 BOE 工单(库 caijing_bytepay_charge,申请人自审批)→ 询问执行确认 → prd-testcase-workflow-trigger生成测试用例 → test-case-excute-agent执行测试用例 → 报告。不调 knowledge-facade / tech-solution-facade / coding-facade / delivery-facade。不修改 settle_skill 业务分支。"
+    notes: |
+      仅"服务商活动费率配置"类需求触发。
+      硬约束:
+        - 知识库无需调原子(已沉淀在 SQL 模板中)
+        - 技术方案直接调原子 online-service-activity-sql,SQL 模板内置于原子,不依赖外部业务仓库分支
+        - 编码直接调原子 boe-sql-ticket,工单库锁定 caijing_bytepay_charge,输出工单链接提示用户审批
+        - 工单审批通过后直接调原子 prd-testcase-workflow-trigger 生成测试用例
+        - 测试用例生成后直接调原子 test-case-execute-agent 执行测试用例
+       
+
+  # 自然语言子流程模板,不参与路由
+  - name: _template_natural
+    path: subflows/_template_natural
+    mode: natural
+    triggers: []
+    enabled: false

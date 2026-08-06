@@ -1,0 +1,72 @@
+[
+  {
+    "trace_id": "T1",
+    "span_id": "m0",
+    "parent_id": "",
+    "span_name": "model_call",
+    "span_type": "",
+    "type": "model",
+    "duration": "1000",
+    "started_at": "1000",
+    "status": "success",
+    "status_code": 0,
+    "input": "{\"messages\":[{\"role\":\"system\",\"content\":\"sys-prompt-v1\"},{\"role\":\"user\",\"content\":\"list files\"}]}",
+    "output": "{\"choices\":[{\"message\":{\"role\":\"assistant\",\"content\":\"running ls\",\"tool_calls\":[{\"id\":\"call_ORIGIN_A\",\"type\":\"function\",\"function\":{\"name\":\"LS\",\"arguments\":\"{\\\"path\\\":\\\"/\\\"}\"}}]}}]}",
+    "service_name": "trae",
+    "logid": "log1",
+    "custom_tags": {
+      "conversation_id": "THREAD",
+      "model_name": "doubao-pro",
+      "input_tokens": "100",
+      "output_tokens": "20"
+    },
+    "system_tags": {}
+  },
+  {
+    "trace_id": "T1",
+    "span_id": "t0",
+    "parent_id": "m0",
+    "span_name": "tool_call",
+    "span_type": "tool",
+    "type": "unknwon",
+    "duration": "50",
+    "started_at": "1500",
+    "status": "success",
+    "status_code": 0,
+    "input": "{\"path\":\"/\"}",
+    "output": "a.txt\nb.txt",
+    "service_name": "trae",
+    "logid": "log2",
+    "custom_tags": {
+      "conversation_id": "THREAD",
+      "tool_name": "LS",
+      "tool_call_id": "call_ORIGIN_A",
+      "tool_call_id_origin": "call_ORIGIN_A",
+      "tool_call_id_formatted": "call_REWRITTEN_A"
+    },
+    "system_tags": {}
+  },
+  {
+    "trace_id": "T1",
+    "span_id": "m1",
+    "parent_id": "",
+    "span_name": "model_call",
+    "span_type": "",
+    "type": "model",
+    "duration": "1000",
+    "started_at": "2000",
+    "status": "success",
+    "status_code": 0,
+    "input": "{\"messages\":[{\"role\":\"system\",\"content\":\"sys-prompt-v1\"},{\"role\":\"user\",\"content\":\"list files\"},{\"role\":\"assistant\",\"content\":\"running ls\",\"tool_calls\":[{\"id\":\"call_REWRITTEN_A\",\"type\":\"function\",\"function\":{\"name\":\"LS\",\"arguments\":\"{\\\"path\\\":\\\"/\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"call_REWRITTEN_A\",\"content\":\"\\n<toolcall_status>done</toolcall_status>\\n<toolcall_result>\\n[truncated 1 of 2 lines] a.txt\\n</toolcall_result>\\n\"},{\"role\":\"user\",\"content\":\"thanks\"}]}",
+    "output": "{\"choices\":[{\"message\":{\"role\":\"assistant\",\"content\":\"you are welcome\"}}]}",
+    "service_name": "trae",
+    "logid": "log3",
+    "custom_tags": {
+      "conversation_id": "THREAD",
+      "model_name": "doubao-pro",
+      "input_tokens": "300",
+      "output_tokens": "30"
+    },
+    "system_tags": {}
+  }
+]

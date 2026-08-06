@@ -1,0 +1,8 @@
+{
+  "name": "PageContent",
+  "description": "页面状态组件集合，包含 PageError、PageLoading、PageNoAuth、PageNotFound、FullPage。",
+  "source": "widgets/base/components/src/page-content/",
+  "demo": [
+    { "name": "1-page-content-demo", "description": "基本用法" }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Banner",
+  "description": "横幅组件：用于向用户显示常驻提示信息，支持多种类型和样式，可由用户主动关闭。",
+  "demo": [
+    {
+      "name": "1-banner-demo",
+      "description": "展示最基本的横幅提示。默认为 info 类型，居中对齐。"
+    },
+    {
+      "name": "2-banner-demo",
+      "description": "通过 `type` 属性设置不同的提示类型。每种类型都有对应的颜色和样式。"
+    },
+    {
+      "name": "3-banner-demo",
+      "description": "通过 `closeIcon` 属性设置关闭按钮。支持完全自定义关闭按钮的样式。默认使用 `IconCozCross` 图标，颜色为 `coz-fg-secondary`。"
+    },
+    {
+      "name": "4-banner-demo",
+      "description": "使用 `card` 属性展示卡片样式的横幅。注意需要同时设置 `fullMode={false}` 来实现卡片效果。卡片样式支持添加标题和自定义内容。卡片内的按钮会自动应用 `rounded-mini` 圆角样式。"
+    }
+  ]
+}

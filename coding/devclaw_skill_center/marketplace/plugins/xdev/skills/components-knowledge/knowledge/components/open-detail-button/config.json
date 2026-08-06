@@ -1,0 +1,8 @@
+{
+  "name": "OpenDetailButton",
+  "description": ""查看详情"按钮。",
+  "source": "widgets/base/components/src/open-detail-button/",
+  "demo": [
+    { "name": "1-open-detail-button-demo", "description": "基本用法" }
+  ]
+}

@@ -1,0 +1,32 @@
+# Rust 项目质量检查
+# 适用条件：检测到 Cargo.toml
+
+- repo: local
+  hooks:
+    - id: no-commit-to-main
+      name: "no direct commit to main/master"
+      language: script
+      entry: .hooks/no-commit-to-main.sh
+      pass_filenames: false
+      always_run: true
+
+    - id: cargo-fmt
+      name: "cargo fmt (format check)"
+      language: system
+      entry: bash -c 'cargo fmt --all -- --check'
+      files: '\.rs$'
+      pass_filenames: false
+
+    - id: cargo-clippy
+      name: "cargo clippy (lint)"
+      language: system
+      entry: bash -c 'cargo clippy --all-targets --all-features -- -D warnings'
+      files: '\.rs$'
+      pass_filenames: false
+
+    - id: cargo-test
+      name: "cargo test (quick check)"
+      language: system
+      entry: bash -c 'cargo test --lib'
+      files: '\.rs$'
+      pass_filenames: false

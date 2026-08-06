@@ -1,0 +1,8 @@
+{
+  "name": "LoopTable",
+  "description": "Loop 项目通用表格组件。",
+  "source": "widgets/base/components/src/table/",
+  "demo": [
+    { "name": "1-loop-table-demo", "description": "基本用法" }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Toast",
+  "description": "轻提示组件：用于向用户展示简短的操作反馈或提示信息，以非阻塞方式提醒用户，支持多种类型和自定义内容。",
+  "demo": [
+    {
+      "name": "1-toast-demo",
+      "description": "最基本的轻提示用法。"
+    },
+    {
+      "name": "2-toast-demo",
+      "description": "支持多种类型的轻提示，每种类型都有对应的图标和样式。"
+    },
+    {
+      "name": "3-toast-demo",
+      "description": "支持自定义图标、显示时长和关闭按钮等。"
+    },
+    {
+      "name": "4-toast-demo",
+      "description": "可以通过 ID 更新已存在的 Toast 内容。"
+    },
+    {
+      "name": "5-toast-demo",
+      "description": "支持手动控制 Toast 的显示和关闭。"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "Calendar",
+  "description": "日历组件，允许以日/周/月视图展示对应事件",
+  "demo": [
+    {
+      "name": "1-calendar-demo",
+      "description": "日视图"
+    },
+    {
+      "name": "2-calendar-demo",
+      "description": "周视图"
+    },
+    {
+      "name": "3-calendar-demo",
+      "description": "月视图"
+    },
+    {
+      "name": "4-calendar-demo",
+      "description": "设置周起始日"
+    },
+    {
+      "name": "5-calendar-demo",
+      "description": "多日视图"
+    },
+    {
+      "name": "6-calendar-demo",
+      "description": "事件渲染用法"
+    },
+    {
+      "name": "7-calendar-demo",
+      "description": "自定义渲染"
+    },
+    {
+      "name": "8-calendar-demo",
+      "description": "自定义渲染事件"
+    },
+    {
+      "name": "9-calendar-demo",
+      "description": "自定义渲染单元格样式"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "InputCode",
+  "description": "验证码输入框组件：用于输入验证码、密码等场景，提供分段输入的交互体验，支持密码和文本两种显示模式。",
+  "demo": [
+    {
+      "name": "1-inputcode-demo",
+      "description": "最基本的验证码输入框用法。默认为 6 位验证码输入。"
+    },
+    {
+      "name": "2-inputcode-demo",
+      "description": "使用 type=\"password\" 可以将输入框设置为密码模式，输入的字符会在短暂显示后被隐藏。"
+    },
+    {
+      "name": "3-inputcode-demo",
+      "description": "通过 length 属性可以自定义输入框的数量。"
+    },
+    {
+      "name": "4-inputcode-demo",
+      "description": "通过 disabled 属性可以禁用输入框。"
+    },
+    {
+      "name": "5-inputcode-demo",
+      "description": "通过 error 属性可以将输入框设置为错误状态。"
+    },
+    {
+      "name": "6-inputcode-demo",
+      "description": "通过 value 和 onChange 属性可以将输入框设置为受控组件。"
+    }
+  ]
+}

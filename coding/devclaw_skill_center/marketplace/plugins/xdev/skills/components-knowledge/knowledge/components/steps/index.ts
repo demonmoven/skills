@@ -1,0 +1,10 @@
+export { default as StepsDemo1 } from './1-steps-demo';
+export { default as StepsDemo2 } from './2-steps-demo';
+export { default as StepsDemo3 } from './3-steps-demo';
+export { default as StepsDemo4 } from './4-steps-demo';
+export { default as StepsDemo5 } from './5-steps-demo';
+export { default as StepsDemo6 } from './6-steps-demo';
+export { default as StepsDemo7 } from './7-steps-demo';
+export { default as StepsDemo8 } from './8-steps-demo';
+export { default as StepsDemo9 } from './9-steps-demo';
+export { default as StepsDemo10 } from './10-steps-demo';

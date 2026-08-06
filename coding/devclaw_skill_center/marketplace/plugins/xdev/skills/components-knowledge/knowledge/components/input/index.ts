@@ -1,0 +1,9 @@
+export { default as InputDemo1 } from './1-input-demo';
+export { default as InputDemo2 } from './2-input-demo';
+export { default as InputDemo3 } from './3-input-demo';
+export { default as InputDemo4 } from './4-input-demo';
+export { default as InputDemo5 } from './5-input-demo';
+export { default as InputDemo6 } from './6-input-demo';
+export { default as InputDemo7 } from './7-input-demo';
+export { default as InputDemo8 } from './8-input-demo';
+export { default as InputDemo9 } from './9-input-demo';

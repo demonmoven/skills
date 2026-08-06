@@ -1,0 +1,28 @@
+# Python 项目质量检查
+# 使用 ruff（替代 flake8 + isort + black）
+# 适用条件：检测到 pyproject.toml / setup.py / requirements.txt
+
+- repo: local
+  hooks:
+    - id: no-commit-to-main
+      name: "no direct commit to main/master"
+      language: script
+      entry: .hooks/no-commit-to-main.sh
+      pass_filenames: false
+      always_run: true
+
+# ruff — 推荐使用官方 pre-commit 集成
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.9.10
+  hooks:
+    - id: ruff
+      args: [--fix, --exit-non-zero-on-fix]
+    - id: ruff-format
+
+# mypy 类型检查（可选 — 仅当项目已有 type annotations 时启用）
+# 取消下方注释以启用：
+# - repo: https://github.com/pre-commit/mirrors-mypy
+#   rev: v1.14.1
+#   hooks:
+#     - id: mypy
+#       additional_dependencies: []  # 填入项目需要的 stub 包

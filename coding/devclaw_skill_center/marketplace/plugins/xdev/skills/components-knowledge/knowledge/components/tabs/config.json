@@ -1,0 +1,22 @@
+{
+  "name": "Tabs",
+  "description": "当内容需要分组并在不同模块页面中展示，可使用 Tabs 标签栏目对不同的组/页之间进行切换",
+  "demo": [
+    {
+      "name": "1-tabs-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-tabs-demo",
+      "description": "带图标的"
+    },
+    {
+      "name": "3-tabs-demo",
+      "description": "更多选项收入 More 展示"
+    },
+    {
+      "name": "4-tabs-demo",
+      "description": "垂直的标签栏"
+    }
+  ]
+}

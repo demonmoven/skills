@@ -1,0 +1,8 @@
+{
+  "name": "TitleWithSub",
+  "description": "主副标题组合组件。",
+  "source": "widgets/base/components/src/title-with-sub/",
+  "demo": [
+    { "name": "1-title-with-sub-demo", "description": "基本用法" }
+  ]
+}

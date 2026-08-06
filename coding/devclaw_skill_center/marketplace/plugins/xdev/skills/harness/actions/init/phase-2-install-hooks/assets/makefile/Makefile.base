@@ -1,0 +1,21 @@
+.PHONY: lint lint-all install-hooks setup
+
+# ============================================================
+# Pre-commit Hooks
+# ============================================================
+
+# 安装 git hooks
+install-hooks:
+	pre-commit install --install-hooks -f
+
+# 对暂存文件运行所有 hooks
+lint:
+	pre-commit run
+
+# 对所有文件运行所有 hooks
+lint-all:
+	pre-commit run --all-files
+
+# 初始化开发环境 (hooks + 工具链)
+setup: install-hooks
+	@echo "Development environment initialized (hooks enabled)"

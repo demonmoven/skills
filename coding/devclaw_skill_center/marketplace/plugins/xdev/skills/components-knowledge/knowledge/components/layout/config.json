@@ -1,0 +1,14 @@
+{
+  "name": "Layout",
+  "description": "布局组件：用于快速搭建页面的基本结构，提供固定的页面框架、标题管理和内容区域布局，包含 Header、Content、Footer 三个部分。",
+  "demo": [
+    {
+      "name": "1-layout-demo",
+      "description": "最基本的布局用法。"
+    },
+    {
+      "name": "2-layout-demo",
+      "description": "内容区域可以设置为滚动模式。"
+    }
+  ]
+}

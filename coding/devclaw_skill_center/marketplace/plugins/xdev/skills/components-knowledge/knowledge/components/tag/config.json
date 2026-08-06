@@ -1,0 +1,30 @@
+{
+  "name": "Tag",
+  "description": "标签组件：用于标记和分类内容，标记事物的属性和维度，支持多种颜色和尺寸，可进行简单的状态标记。",
+  "demo": [
+    {
+      "name": "1-tag-demo",
+      "description": "最基本的标签用法，展示不同尺寸。"
+    },
+    {
+      "name": "2-tag-demo",
+      "description": "支持多种预设颜色。"
+    },
+    {
+      "name": "3-tag-demo",
+      "description": "支持内置图标和自定义图标。"
+    },
+    {
+      "name": "4-tag-demo",
+      "description": "支持点击和关闭事件。"
+    },
+    {
+      "name": "5-tag-demo",
+      "description": "支持加载和禁用状态。"
+    },
+    {
+      "name": "6-tag-demo",
+      "description": "当标签内容需要额外解释或提示时，可以配合 Tooltip 使用。"
+    }
+  ]
+}

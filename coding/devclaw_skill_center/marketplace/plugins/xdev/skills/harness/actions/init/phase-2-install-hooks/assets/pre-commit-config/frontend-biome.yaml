@@ -1,0 +1,18 @@
+# 前端质量检查（Biome + TypeScript）
+# 适用条件：检测到 biome.json / biome.jsonc
+
+- repo: local
+  hooks:
+    - id: biome-check
+      name: "biome check --fix (lint + format)"
+      language: system
+      entry: bash -c 'npx biome check --fix src/'
+      files: '\.(ts|tsx|js|jsx|json)$'
+      pass_filenames: false
+
+    - id: tsc-check
+      name: "tsc --noEmit (TypeScript type check)"
+      language: system
+      entry: bash -c 'npx tsc --noEmit'
+      files: '\.(ts|tsx)$'
+      pass_filenames: false

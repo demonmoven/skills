@@ -1,0 +1,26 @@
+{
+  "name": "TimePicker",
+  "description": "时间选择器组件：用于输入或选择具体时间，支持时间范围选择和自定义时间格式，提供标准化的时间展示。",
+  "demo": [
+    {
+      "name": "1-timepicker-demo",
+      "description": "展示时间选择器的基本用法，包括单个时间选择和时间范围选择。"
+    },
+    {
+      "name": "2-timepicker-demo",
+      "description": "TimePicker 提供了两种尺寸：default 和 small。"
+    },
+    {
+      "name": "3-timepicker-demo",
+      "description": "支持自定义时间格式，可以选择是否显示单位。"
+    },
+    {
+      "name": "4-timepicker-demo",
+      "description": "可以选择是否显示前缀图标。"
+    },
+    {
+      "name": "5-timepicker-demo",
+      "description": "```tsx preview"
+    }
+  ]
+}

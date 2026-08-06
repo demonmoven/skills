@@ -1,0 +1,30 @@
+{
+  "name": "Rating",
+  "description": "展示评分的组件",
+  "demo": [
+    {
+      "name": "1-rating-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-rating-demo",
+      "description": "半星"
+    },
+    {
+      "name": "3-rating-demo",
+      "description": "只读"
+    },
+    {
+      "name": "4-rating-demo",
+      "description": "点击清除"
+    },
+    {
+      "name": "5-rating-demo",
+      "description": "文案展现"
+    },
+    {
+      "name": "6-rating-demo",
+      "description": "自定义"
+    }
+  ]
+}

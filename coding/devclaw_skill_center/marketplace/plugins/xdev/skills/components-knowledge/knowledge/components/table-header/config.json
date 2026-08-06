@@ -1,0 +1,8 @@
+{
+  "name": "TableHeader",
+  "description": "表格头部工具栏组件。",
+  "source": "widgets/base/components/src/table-header/",
+  "demo": [
+    { "name": "1-table-header-demo", "description": "基本用法" }
+  ]
+}

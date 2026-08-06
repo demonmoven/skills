@@ -1,0 +1,26 @@
+{
+  "name": "TabBar",
+  "description": "标签栏组件：用于在不同视图之间切换，支持选项卡和单选两种模式，可用于内容分类展示或导航菜单。",
+  "demo": [
+    {
+      "name": "1-tabbar-demo",
+      "description": "最基本的标签栏用法。"
+    },
+    {
+      "name": "2-tabbar-demo",
+      "description": "支持 tab 和 select 两种模式："
+    },
+    {
+      "name": "3-tabbar-demo",
+      "description": "支持 button 和 text 两种类型："
+    },
+    {
+      "name": "4-tabbar-demo",
+      "description": "支持三种对齐方式：left、center、right。"
+    },
+    {
+      "name": "5-tabbar-demo",
+      "description": "支持自定义标签内容，如添加徽标等。"
+    }
+  ]
+}

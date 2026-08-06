@@ -1,0 +1,4 @@
+interface:
+  display_name: "PRD 知识库查询"
+  short_description: "按功能点检索 Wiki 并验证代码。"
+  default_prompt: "使用 llm-wiki-git query \"<问题>\" 为每个功能点检索场景、能力、PSM 和历史方案线索，并用代码 evidence table 验证。"

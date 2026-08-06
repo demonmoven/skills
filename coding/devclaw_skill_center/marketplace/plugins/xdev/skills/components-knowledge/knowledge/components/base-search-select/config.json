@@ -1,0 +1,8 @@
+{
+  "name": "BaseSearchSelect",
+  "description": "带远程搜索和缓存能力的 Select 选择器。",
+  "source": "widgets/base/components/src/base-search-select/",
+  "demo": [
+    { "name": "1-base-search-select-demo", "description": "基本用法" }
+  ]
+}

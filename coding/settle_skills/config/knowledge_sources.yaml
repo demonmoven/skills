@@ -1,0 +1,12 @@
+# 计费域强基线知识源清单 — 每次 auto-develop 路由执行必加载
+# 设计原则:本仓库只持有"文档地址 + 元信息",不存内容;每次运行实时拉取
+version: 1
+sources:
+  - key: payment_charge_whitepaper
+    title: 抖音支付计收费-白皮书
+    url: https://bytedance.larkoffice.com/docx/PJyUdk1RSo7kaExwTlAckp8jnDe
+    cache_path: ~/files/charge-knowledge/payment_charge_whitepaper.md
+    loader: lark-docs-skill         # 拉取器:lark-docs-skill | bytedance-feishu | web-fetch
+    refresh_policy: cross_session   # cross_session=跨会话复用 | per_run=每次都拉 | manual=仅手动
+    required: true                  # true=加载失败硬阻断;false=warn
+    scope: [charge, settle, billing]

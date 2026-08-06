@@ -1,0 +1,8 @@
+{
+  "name": "IndexControllerView",
+  "description": "记录索引导航控制器。",
+  "source": "widgets/base/components/src/index-controller/",
+  "demo": [
+    { "name": "1-index-controller-demo", "description": "基本用法" }
+  ]
+}

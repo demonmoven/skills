@@ -1,0 +1,46 @@
+{
+  "name": "Anchor",
+  "description": "创建超链接导航栏。",
+  "demo": [
+    {
+      "name": "1-anchor-demo",
+      "description": "基本示例"
+    },
+    {
+      "name": "10-anchor-demo",
+      "description": "综合使用"
+    },
+    {
+      "name": "2-anchor-demo",
+      "description": "尺寸"
+    },
+    {
+      "name": "3-anchor-demo",
+      "description": "滑轨主题"
+    },
+    {
+      "name": "4-anchor-demo",
+      "description": "动态展示"
+    },
+    {
+      "name": "5-anchor-demo",
+      "description": "显示工具提示"
+    },
+    {
+      "name": "6-anchor-demo",
+      "description": "工具提示位置"
+    },
+    {
+      "name": "7-anchor-demo",
+      "description": "Anchor"
+    },
+    {
+      "name": "8-anchor-demo",
+      "description": "Anchor.Link"
+    },
+    {
+      "name": "9-anchor-demo",
+      "description": "Anchor 锚点 demo"
+    }
+  ]
+}

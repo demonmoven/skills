@@ -1,0 +1,459 @@
+{
+  "metadata": {
+    "user": "ai",
+    "retry_count": 3,
+    "read_timeout_in_ms": 5000,
+    "write_timeout_in_ms": 30000,
+    "auth_method": "jwt"
+  },
+  "component": {
+    "ByteEnv": {
+      "SearchEnvs": {
+        "BOE": {
+          "description": "搜索 BOE 环境列表",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://bits.bytedance.net/api/v5/env/envs",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "search": {
+                  "type": "string",
+                  "description": "环境名称搜索关键词"
+                },
+                "page_num": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "页码"
+                },
+                "page_size": {
+                  "type": "integer",
+                  "default": 10,
+                  "description": "每页数量"
+                },
+                "detail": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "是否返回详细信息"
+                },
+                "type": {
+                  "type": "string",
+                  "default": "boe_feature,boe_base",
+                  "description": "环境类型"
+                },
+                "service_meta": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "是否返回服务元数据"
+                },
+                "with_auth_check": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "是否检查权限"
+                },
+                "with_auth_list": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "是否返回权限列表"
+                }
+              },
+              "required": [
+                "search"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept": {
+                  "type": "string",
+                  "default": "application/json, text/plain, */*",
+                  "description": "Accept header"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "description": "环境列表",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "环境 ID"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "环境名称"
+                      },
+                      "status": {
+                        "type": "integer",
+                        "description": "状态（0=正常，2=已销毁）"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "环境类型"
+                      },
+                      "standard_env": {
+                        "type": "string",
+                        "description": "标准环境标识"
+                      },
+                      "desc": {
+                        "type": "string",
+                        "description": "环境描述"
+                      },
+                      "env_managers": {
+                        "type": "array",
+                        "description": "管理员列表",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "env_collaborators": {
+                        "type": "array",
+                        "description": "协作者列表",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "services": {
+                        "type": "array",
+                        "description": "绑定的服务列表",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "service": {
+                              "type": "string",
+                              "description": "服务标识（ID|名称）"
+                            },
+                            "service_type": {
+                              "type": "string",
+                              "description": "服务类型（web/tce/mock_tce）"
+                            },
+                            "env": {
+                              "type": "string",
+                              "description": "所属环境"
+                            },
+                            "status": {
+                              "type": "integer",
+                              "description": "服务状态"
+                            }
+                          }
+                        }
+                      },
+                      "auth_type": {
+                        "type": "integer",
+                        "description": "权限类型（0=无限制，1=需申请，2=受限）"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "description": "创建时间"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "description": "更新时间"
+                      }
+                    }
+                  }
+                },
+                "pagination": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "integer",
+                      "description": "总数"
+                    },
+                    "total_page": {
+                      "type": "integer",
+                      "description": "总页数"
+                    },
+                    "page_num": {
+                      "type": "integer",
+                      "description": "当前页码"
+                    },
+                    "page_size": {
+                      "type": "integer",
+                      "description": "每页数量"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "CN": {
+          "description": "搜索 CN 正式环境列表",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://bits.bytedance.net/api/v5/env/envs",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "search": {
+                  "type": "string",
+                  "description": "环境名称搜索关键词"
+                },
+                "page_num": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "页码"
+                },
+                "page_size": {
+                  "type": "integer",
+                  "default": 10,
+                  "description": "每页数量"
+                },
+                "detail": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "是否返回详细信息"
+                },
+                "standard_envs": {
+                  "type": "string",
+                  "default": "online_cn",
+                  "description": "标准环境标识"
+                },
+                "type": {
+                  "type": "string",
+                  "default": "ppe",
+                  "description": "环境类型"
+                },
+                "service_meta": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "是否返回服务元数据"
+                },
+                "with_auth_check": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "是否检查权限"
+                },
+                "with_auth_list": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "是否返回权限列表"
+                }
+              },
+              "required": [
+                "search"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept": {
+                  "type": "string",
+                  "default": "application/json, text/plain, */*",
+                  "description": "Accept header"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "description": "环境列表"
+                },
+                "pagination": {
+                  "type": "object",
+                  "description": "分页信息"
+                }
+              }
+            }
+          }
+        },
+        "I18N": {
+          "description": "搜索 I18N (TikTok) 环境列表",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://bits.bytedance.net/api/v5/env/envs",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "search": {
+                  "type": "string",
+                  "description": "环境名称搜索关键词"
+                },
+                "page_num": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "页码"
+                },
+                "page_size": {
+                  "type": "integer",
+                  "default": 10,
+                  "description": "每页数量"
+                },
+                "detail": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "是否返回详细信息"
+                },
+                "standard_envs": {
+                  "type": "string",
+                  "default": "online_i18n",
+                  "description": "标准环境标识"
+                },
+                "type": {
+                  "type": "string",
+                  "default": "ppe",
+                  "description": "环境类型"
+                },
+                "service_meta": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "是否返回服务元数据"
+                },
+                "with_auth_check": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "是否检查权限"
+                },
+                "with_auth_list": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "是否返回权限列表"
+                }
+              },
+              "required": [
+                "search"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept": {
+                  "type": "string",
+                  "default": "application/json, text/plain, */*",
+                  "description": "Accept header"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "description": "环境列表"
+                },
+                "pagination": {
+                  "type": "object",
+                  "description": "分页信息"
+                }
+              }
+            }
+          }
+        },
+        "I18N-BD": {
+          "description": "搜索 I18N-BD (ByteDance 国际化) 环境列表",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://bits.bytedance.net/api/v5/env/envs",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "search": {
+                  "type": "string",
+                  "description": "环境名称搜索关键词"
+                },
+                "page_num": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "页码"
+                },
+                "page_size": {
+                  "type": "integer",
+                  "default": 10,
+                  "description": "每页数量"
+                },
+                "detail": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "是否返回详细信息"
+                },
+                "standard_envs": {
+                  "type": "string",
+                  "default": "online_i18nbd",
+                  "description": "标准环境标识"
+                },
+                "type": {
+                  "type": "string",
+                  "default": "ppe",
+                  "description": "环境类型"
+                },
+                "service_meta": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "是否返回服务元数据"
+                },
+                "with_auth_check": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "是否检查权限"
+                },
+                "with_auth_list": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "是否返回权限列表"
+                }
+              },
+              "required": [
+                "search"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept": {
+                  "type": "string",
+                  "default": "application/json, text/plain, */*",
+                  "description": "Accept header"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "description": "环境列表"
+                },
+                "pagination": {
+                  "type": "object",
+                  "description": "分页信息"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

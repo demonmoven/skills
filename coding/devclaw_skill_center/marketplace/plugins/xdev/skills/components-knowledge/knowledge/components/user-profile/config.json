@@ -1,0 +1,8 @@
+{
+  "name": "UserProfile",
+  "description": "用户信息展示组件。",
+  "source": "widgets/base/components/src/user-profile/",
+  "demo": [
+    { "name": "1-user-profile-demo", "description": "基本用法" }
+  ]
+}

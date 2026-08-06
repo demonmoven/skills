@@ -1,0 +1,8 @@
+{
+  "name": "FooterActions",
+  "description": "底部操作栏组件，提供"取消"和"确认"按钮。",
+  "source": "widgets/base/components/src/footer-actions/",
+  "demo": [
+    { "name": "1-footer-actions-demo", "description": "基本用法" }
+  ]
+}

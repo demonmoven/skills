@@ -1,0 +1,22 @@
+{
+  "name": "Collapsible",
+  "description": "行为组件，是一个用于展开或折叠内容的容器。",
+  "demo": [
+    {
+      "name": "1-collapsible-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-collapsible-demo",
+      "description": "自定义动画时间"
+    },
+    {
+      "name": "3-collapsible-demo",
+      "description": "嵌套使用"
+    },
+    {
+      "name": "4-collapsible-demo",
+      "description": "自定义折叠高度"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "Modal",
+  "description": "对话框组件：临时的覆盖层，用于显示重要信息或获取用户输入，适用于需要用户处理事务而不打断工作流程的场景。",
+  "demo": [
+    {
+      "name": "1-modal-demo",
+      "description": "最基础的对话框用法，展示了 modal 和 dialog 两种类型。"
+    },
+    {
+      "name": "2-modal-demo",
+      "description": "Modal 提供多种预设尺寸选项。"
+    },
+    {
+      "name": "3-modal-demo",
+      "description": "Modal 支持多种高度设置：fit-content（默认）、fill 和具体数值。"
+    },
+    {
+      "name": "4-modal-demo",
+      "description": "支持自定义确认按钮的颜色。"
+    },
+    {
+      "name": "5-modal-demo",
+      "description": "支持显示按钮的加载状态。"
+    },
+    {
+      "name": "6-modal-demo",
+      "description": "Modal 提供了一系列静态方法，用于快速创建不同类型的对话框。"
+    },
+    {
+      "name": "7-modal-demo",
+      "description": "Modal 提供了一些辅助组件来帮助构建内容。"
+    }
+  ]
+}

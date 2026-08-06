@@ -1,0 +1,8 @@
+{
+  "name": "TableColsConfig",
+  "description": "表格列配置面板组件。",
+  "source": "widgets/base/components/src/table-cols-config/",
+  "demo": [
+    { "name": "1-table-cols-config-demo", "description": "基本用法" }
+  ]
+}

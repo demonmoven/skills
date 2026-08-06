@@ -1,0 +1,8 @@
+{
+  "name": "SchemaEditor",
+  "description": "Schema 编辑器组件。",
+  "source": "widgets/base/components/src/schema-editor/",
+  "demo": [
+    { "name": "1-schema-editor-demo", "description": "基本用法" }
+  ]
+}

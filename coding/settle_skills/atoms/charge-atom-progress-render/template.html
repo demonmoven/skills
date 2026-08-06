@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>__TITLE__ · 进度看板</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#06080f;--bg-1:#0c1020;--bg-2:#11162a;
+    --line:rgba(255,255,255,.08);--line-strong:rgba(255,255,255,.14);
+    --text:#e8ecf5;--text-2:#aab2c8;--text-3:#6e7794;
+    --brand:#6366f1;--brand-2:#22d3ee;--brand-3:#a855f7;
+    --ok:#22c55e;--warn:#f59e0b;--err:#ef4444;--pending:#64748b;--running:#38bdf8;
+    --card:rgba(255,255,255,.04);--card-strong:rgba(255,255,255,.07);
+    --shadow-lg:0 30px 80px -20px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg-0);color:var(--text);font-family:"Inter","Noto Sans SC",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.55}
+  a{color:inherit;text-decoration:none}
+  body::before{content:"";position:fixed;inset:-20% -10% auto auto;height:60vh;width:60vw;background:radial-gradient(ellipse at top right, rgba(99,102,241,.25), transparent 60%);filter:blur(40px);pointer-events:none;z-index:0}
+  body::after{content:"";position:fixed;inset:auto auto -20% -10%;height:50vh;width:50vw;background:radial-gradient(ellipse at bottom left, rgba(34,211,238,.18), transparent 60%);filter:blur(40px);pointer-events:none;z-index:0}
+  .app{position:relative;z-index:1;display:grid;grid-template-columns:340px 1fr;gap:0;min-height:100vh}
+  .side{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:28px 24px 24px;border-right:1px solid var(--line);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0))}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+  .brand-logo{width:34px;height:34px;border-radius:9px;background:conic-gradient(from 220deg at 50% 50%, #6366f1, #22d3ee, #a855f7, #6366f1);box-shadow:0 6px 18px -4px rgba(99,102,241,.55);position:relative}
+  .brand-logo::after{content:"";position:absolute;inset:3px;border-radius:6px;background:#0a0e1c}
+  .brand-logo::before{content:"⚡";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;z-index:1}
+  .brand-name{font-weight:700;letter-spacing:.2px;font-size:15px}
+  .brand-sub{font-size:11px;color:var(--text-3);margin-top:2px}
+  .meta-card{border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;background:var(--card);margin-bottom:18px}
+  .meta-card .label{font-size:11px;color:var(--text-3);letter-spacing:.5px;text-transform:uppercase}
+  .meta-card .title{font-weight:600;margin-top:6px;font-size:14px;line-height:1.45}
+  .meta-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-2);margin-top:8px}
+  .meta-row b{color:var(--text);font-weight:500;font-family:"JetBrains Mono",monospace;font-size:11px}
+  .meta-row b.plain{font-family:inherit;font-size:12px}
+
+  .tl-title{font-size:11px;color:var(--text-3);letter-spacing:.6px;text-transform:uppercase;margin:6px 0 12px 6px}
+  .step{position:relative;padding:10px 10px 10px 38px;border-radius:10px;cursor:pointer;transition:all .15s;border:1px solid transparent;margin-bottom:2px}
+  .step:hover{background:rgba(255,255,255,.03);border-color:var(--line)}
+  .step.active{background:linear-gradient(180deg, rgba(99,102,241,.16), rgba(34,211,238,.06));border-color:rgba(99,102,241,.35)}
+  .step .dot{position:absolute;left:12px;top:14px;width:14px;height:14px;border-radius:50%;border:2px solid var(--pending);background:var(--bg-1)}
+  .step.done .dot{border-color:var(--ok);background:var(--ok)}
+  .step.run .dot{border-color:var(--running);background:var(--running);animation:pulse 1.6s infinite}
+  .step.warn .dot{border-color:var(--warn);background:var(--warn)}
+  .step.err .dot{border-color:var(--err);background:var(--err)}
+  .step.pend .dot{background:transparent}
+  .step:not(:last-child)::after{content:"";position:absolute;left:18px;top:28px;bottom:-4px;width:2px;background:var(--line)}
+  .step.done:not(:last-child)::after{background:linear-gradient(180deg, var(--ok), var(--line))}
+  .step .name{font-size:13.5px;font-weight:500;color:var(--text)}
+  .step .sub{font-size:11.5px;color:var(--text-3);margin-top:3px}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(56,189,248,.55)}70%{box-shadow:0 0 0 8px rgba(56,189,248,0)}100%{box-shadow:0 0 0 0 rgba(56,189,248,0)}}
+
+  .progress-wrap{margin-top:18px}
+  .progress-bar{height:6px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+  .progress-fill{height:100%;width:0%;background:linear-gradient(90deg, var(--brand) 0%, var(--brand-2) 100%);border-radius:99px;box-shadow:0 0 16px rgba(99,102,241,.6);transition:width .6s ease}
+  .progress-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-top:8px}
+
+  .main{padding:32px 40px 64px;max-width:1280px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+  .crumbs{font-size:12px;color:var(--text-3)}
+  .crumbs span{color:var(--text-2)}
+  .session-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--line);background:var(--card);border-radius:99px;font-size:12px;color:var(--text-2);font-family:"JetBrains Mono",monospace}
+  .session-pill .live-dot{width:7px;height:7px;border-radius:50%;background:var(--running);box-shadow:0 0 8px var(--running);animation:pulse 1.6s infinite}
+  .session-pill.stale .live-dot{background:var(--text-3);box-shadow:none;animation:none}
+  .session-pill.stale{color:var(--text-3)}
+
+  h1.page-title{font-size:26px;font-weight:700;margin:0 0 8px;letter-spacing:-.3px;background:linear-gradient(90deg, #fff, #c7cad9);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .page-sub{color:var(--text-2);margin-bottom:24px;font-size:14px;max-width:920px}
+  .page-sub a{color:var(--brand-2);border-bottom:1px dashed rgba(34,211,238,.4);padding-bottom:1px}
+  .page-sub code{font-family:"JetBrains Mono",monospace;font-size:12px;background:rgba(255,255,255,.06);padding:1px 6px;border-radius:5px;color:#a5b4fc}
+
+  .hero{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+  .stat{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--card);position:relative;overflow:hidden}
+  .stat::before{content:"";position:absolute;inset:auto -20% -60% auto;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.2),transparent 60%);pointer-events:none}
+  .stat .k{font-size:11.5px;color:var(--text-3);letter-spacing:.4px;text-transform:uppercase}
+  .stat .v{font-size:22px;font-weight:700;margin-top:6px;letter-spacing:-.3px}
+  .stat .v.ok{color:#86efac}.stat .v.warn{color:#fcd34d}.stat .v.err{color:#fca5a5}.stat .v.run{color:#7dd3fc}
+  .stat .v small{font-size:12px;color:var(--text-3);font-weight:500;margin-left:6px}
+  .stat .vbar{margin-top:10px;height:4px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+  .stat .vbar i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-2));transition:width .6s ease}
+  .stat .vbar i.ok{background:linear-gradient(90deg,#22c55e,#86efac)}
+  .stat .vbar i.warn{background:linear-gradient(90deg,#f59e0b,#fcd34d)}
+  .stat .vbar i.err{background:linear-gradient(90deg,#ef4444,#fca5a5)}
+  .stat .vbar i.run{background:linear-gradient(90deg,#38bdf8,#22d3ee)}
+
+  .stage{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));padding:24px 26px;margin-bottom:20px;box-shadow:var(--shadow-lg)}
+  .stage.run{border-color:rgba(56,189,248,.4);box-shadow:0 30px 80px -20px rgba(56,189,248,.25), inset 0 0 0 1px rgba(56,189,248,.08)}
+  .stage-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+  .stage-num{flex-shrink:0;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg, rgba(99,102,241,.25), rgba(34,211,238,.15));border:1px solid rgba(99,102,241,.4);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff}
+  .stage.run .stage-num{border-color:rgba(56,189,248,.6);background:linear-gradient(135deg, rgba(56,189,248,.3), rgba(34,211,238,.2))}
+  .stage.pend .stage-num{opacity:.6}
+  .stage h2{margin:0;font-size:18px;font-weight:600;letter-spacing:-.2px}
+  .stage h2 small{display:block;font-size:12px;color:var(--text-3);font-weight:400;margin-top:3px}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:500;padding:4px 10px;border-radius:99px;border:1px solid var(--line);margin-left:auto;flex-shrink:0}
+  .badge.ok{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#86efac}
+  .badge.warn{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:#fcd34d}
+  .badge.err{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);color:#fca5a5}
+  .badge.run{background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.3);color:#7dd3fc}
+  .badge.pend{background:rgba(100,116,139,.1);border-color:rgba(100,116,139,.3);color:#cbd5e1}
+  .badge .ring{width:6px;height:6px;border-radius:50%;background:currentColor}
+  .badge.run .ring{box-shadow:0 0 8px currentColor;animation:pulse 1.6s infinite}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width:980px){.grid-2{grid-template-columns:1fr}.hero{grid-template-columns:repeat(2,1fr)}.app{grid-template-columns:1fr}.side{position:relative;height:auto}}
+
+  .panel{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:rgba(0,0,0,.18)}
+  .panel + .panel{margin-top:14px}
+  .panel h4{margin:0 0 10px;font-size:12px;color:var(--text-3);letter-spacing:.5px;text-transform:uppercase;font-weight:600}
+  .kv{display:grid;grid-template-columns:120px 1fr;gap:8px 14px;font-size:13px}
+  .kv .k{color:var(--text-3)}
+  .kv .v{color:var(--text);word-break:break-all}
+  .kv .v code,.panel code{font-family:"JetBrains Mono",monospace;font-size:12px;background:rgba(255,255,255,.06);padding:1px 6px;border-radius:5px}
+  .kv .v a,.panel a{color:var(--brand-2);border-bottom:1px dashed rgba(34,211,238,.4)}
+  .file-row{display:flex;align-items:center;gap:8px;padding:6px 0;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--text-2);border-bottom:1px dashed var(--line)}
+  .file-row:last-child{border-bottom:none}
+  .file-row .tag{font-size:10px;padding:1px 6px;border-radius:4px;font-family:"Inter",sans-serif;font-weight:600;letter-spacing:.3px}
+  .file-row .tag.new{background:rgba(34,197,94,.15);color:#86efac}
+  .file-row .tag.mod{background:rgba(245,158,11,.15);color:#fcd34d}
+  .file-row .tag.del{background:rgba(239,68,68,.15);color:#fca5a5}
+  pre.code{margin:0;background:rgba(0,0,0,.45);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.6;color:#cdd6f4;overflow-x:auto;white-space:pre}
+  ul.task-list{list-style:none;padding:0;margin:0}
+  ul.task-list li{padding:9px 0;border-bottom:1px dashed var(--line);display:flex;align-items:flex-start;gap:10px;font-size:13px}
+  ul.task-list li:last-child{border-bottom:none}
+  ul.task-list .icn{flex-shrink:0;width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:1px}
+  ul.task-list .icn.ok{background:rgba(34,197,94,.18);color:#86efac}
+  ul.task-list .icn.err{background:rgba(239,68,68,.18);color:#fca5a5}
+  ul.task-list .icn.warn{background:rgba(245,158,11,.18);color:#fcd34d}
+  ul.task-list .icn.run{background:rgba(56,189,248,.18);color:#7dd3fc}
+  ul.task-list .icn.pend{background:rgba(100,116,139,.18);color:#cbd5e1}
+
+  .footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--text-3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .empty{padding:40px;text-align:center;color:var(--text-3);font-size:14px}
+  .detail-section{display:none}
+  .detail-section.show{display:block}
+  .data-banner{display:none;margin:0 0 18px;padding:12px 16px;border-radius:12px;border:1px solid rgba(239,68,68,.45);background:rgba(239,68,68,.08);color:#fca5a5;font-size:13px;line-height:1.5;align-items:flex-start;gap:10px}
+  .data-banner.show{display:flex}
+  .data-banner .icn{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(239,68,68,.25);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fee2e2;margin-top:1px}
+  .data-banner code{font-family:"JetBrains Mono",monospace;font-size:12px;background:rgba(0,0,0,.35);padding:1px 6px;border-radius:5px;color:#fda4af;word-break:break-all}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <div>
+        <div class="brand-name">Charge Dev Router</div>
+        <div class="brand-sub">PRD → 编码 → 自检 → MR · 全流程</div>
+      </div>
+    </div>
+    <div class="meta-card" id="meta-card"></div>
+    <div class="tl-title">研发流程时间线</div>
+    <div class="timeline" id="timeline"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="bar"></div></div>
+      <div class="progress-meta"><span id="progress-text">进度 0 / 0</span><span id="pct">0%</span></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="crumbs">charge-dev-router · <span id="session-text">session —</span></div>
+      <div class="session-pill" id="live-pill"><span class="live-dot"></span> <span id="live-text">Live · 等待数据</span></div>
+    </div>
+    <h1 class="page-title" id="page-title">研发流程实时进展看板</h1>
+    <div class="page-sub" id="page-sub">等待 charge-dev-router 注入数据 …</div>
+    <div class="data-banner" id="data-banner">
+      <span class="icn">!</span>
+      <div>
+        <b>数据流断开</b> · 无法从 <code id="banner-url">progress.json</code> 拉取最新进度。
+        看板可能是用相对路径渲染后单独上传的;请让 charge-dev-router 重新调用
+        <code>render.py publish</code>,或显式传 <code>--json-url &lt;公网 URL&gt;</code>。
+        <span id="banner-detail"></span>
+      </div>
+    </div>
+    <div class="hero" id="hero"></div>
+    <div id="stages"></div>
+    <div class="footer">
+      <div>charge-dev-router · powered by Mira · settle_skill manifest</div>
+      <div>JSON 数据源 · 每 5s 自动刷新</div>
+    </div>
+  </main>
+</div>
+
+<script>
+  // ========= Config =========
+  const POLL_INTERVAL_MS = 5000;
+  // The data file lives at the SAME directory as this HTML;
+  // when uploaded to Mira, the JSON URL is replaced via __JSON_URL__ at render time.
+  const JSON_URL = "__JSON_URL__";
+  const STALE_AFTER_MS = 60000; // mark stale if no update for 60s
+
+  // ========= State =========
+  let lastEtag = null;
+  let lastData = null;
+  let activeStepId = null;
+  let lastUpdateAt = Date.now();
+  let consecutivePollFailures = 0;     // 连续 fail 计数,用于触发横幅
+  const POLL_FAIL_THRESHOLD = 2;       // ≥ 2 次失败就显示横幅
+
+  // ========= Helpers =========
+  const $ = (sel) => document.querySelector(sel);
+  const fmtTime = (ts) => {
+    if (!ts) return "—";
+    const d = new Date(ts * 1000);
+    const pad = (n) => String(n).padStart(2,'0');
+    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  };
+  const fmtDur = (sec) => {
+    if (!sec || sec < 0) return "—";
+    if (sec < 60) return sec + "s";
+    if (sec < 3600) return Math.floor(sec/60) + "min";
+    return Math.floor(sec/3600) + "h" + Math.floor((sec%3600)/60) + "min";
+  };
+  const escapeHtml = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+
+  function showDataBanner(detail) {
+    const b = $('#data-banner');
+    if (!b) return;
+    b.classList.add('show');
+    const u = $('#banner-url');
+    if (u) u.textContent = JSON_URL || 'progress.json';
+    const d = $('#banner-detail');
+    if (d) d.textContent = detail ? ` 最近一次错误:${detail}` : '';
+  }
+
+  function hideDataBanner() {
+    const b = $('#data-banner');
+    if (b) b.classList.remove('show');
+  }
+
+  // ========= Render =========
+  function renderMeta(task) {
+    const el = $('#meta-card');
+    el.innerHTML = `
+      <div class="label">当前任务</div>
+      <div class="title">${escapeHtml(task.title || "—")}</div>
+      <div class="meta-row"><span>仓库</span><b>${escapeHtml(task.repo || "—")}</b></div>
+      <div class="meta-row"><span>分支</span><b>${escapeHtml(task.branch || "—")}</b></div>
+      <div class="meta-row"><span>发起人</span><b class="plain">${escapeHtml(task.owner || "—")}</b></div>
+    `;
+    $('#session-text').textContent = `session ${task.session_id || "—"}`;
+    $('#page-title').textContent = "研发流程实时进展看板";
+    if (task.title) {
+      const prdLink = task.prd_url ? `<a href="${escapeHtml(task.prd_url)}" target="_blank">${escapeHtml(task.title)}</a>` : escapeHtml(task.title);
+      $('#page-sub').innerHTML = `自动化驱动 PRD ${prdLink} 端到端落地。整条流程由 <code>charge-dev-router</code> 统一编排,实时回写本看板。`;
+    }
+  }
+
+  function renderTimeline(steps) {
+    const el = $('#timeline');
+    if (!steps || !steps.length) { el.innerHTML = ""; return; }
+    if (!activeStepId) {
+      // pick "run" first, else last "done", else first
+      const runIdx = steps.findIndex(s => s.status === "run" || s.status === "warn" || s.status === "err");
+      const doneIdx = [...steps].reverse().findIndex(s => s.status === "done");
+      activeStepId = runIdx >= 0 ? steps[runIdx].id : (doneIdx >= 0 ? steps[steps.length - 1 - doneIdx].id : steps[0].id);
+    }
+    el.innerHTML = steps.map(s => `
+      <div class="step ${s.status} ${s.id === activeStepId ? 'active' : ''}" data-step="${escapeHtml(s.id)}">
+        <div class="dot"></div>
+        <div class="name">${escapeHtml(s.name)}</div>
+        <div class="sub">${escapeHtml(s.sub || "")}</div>
+      </div>
+    `).join("");
+    el.querySelectorAll('.step').forEach(node => {
+      node.addEventListener('click', () => {
+        activeStepId = node.dataset.step;
+        renderTimeline(lastData.steps);
+        renderStages(lastData.stages);
+        window.scrollTo({top:0, behavior:'smooth'});
+      });
+    });
+    // progress
+    const total = steps.length;
+    const done = steps.filter(s => s.status === "done").length;
+    const running = steps.some(s => s.status === "run");
+    const pct = total ? Math.round((done + (running?0.5:0)) / total * 100) : 0;
+    $('#bar').style.width = pct + "%";
+    $('#pct').textContent = pct + "%";
+    $('#progress-text').textContent = `进度 ${done} / ${total}`;
+  }
+
+  function renderHero(hero) {
+    const el = $('#hero');
+    if (!hero || !hero.length) { el.innerHTML = ""; return; }
+    el.innerHTML = hero.map(h => {
+      const tone = h.tone || "default";
+      const fillPct = Math.round((h.fill ?? 0) * 100);
+      const unit = h.unit ? `<small>${escapeHtml(h.unit)}</small>` : "";
+      const valClass = ["ok","warn","err","run"].includes(tone) ? tone : "";
+      const barClass = ["ok","warn","err","run"].includes(tone) ? tone : "";
+      return `
+        <div class="stat">
+          <div class="k">${escapeHtml(h.k)}</div>
+          <div class="v ${valClass}">${escapeHtml(h.v)}${unit}</div>
+          <div class="vbar"><i class="${barClass}" style="width:${fillPct}%"></i></div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function renderPanel(p) {
+    const title = p.title ? `<h4>${escapeHtml(p.title)}</h4>` : "";
+    if (p.type === "kv") {
+      const items = (p.items || []).map(it => {
+        const v = it.html ? it.v : escapeHtml(it.v);
+        return `<div class="k">${escapeHtml(it.k)}</div><div class="v">${v}</div>`;
+      }).join("");
+      return `<div class="panel">${title}<div class="kv">${items}</div></div>`;
+    }
+    if (p.type === "files") {
+      const rows = (p.items || []).map(f => {
+        const tag = (f.tag || "mod").toLowerCase();
+        return `<div class="file-row"><span class="tag ${tag}">${escapeHtml((f.tag||"MOD").toUpperCase())}</span>${escapeHtml(f.path)}</div>`;
+      }).join("");
+      const extra = p.footer_html ? `<div style="margin-top:10px;font-size:12px;color:var(--text-3)">${p.footer_html}</div>` : "";
+      return `<div class="panel">${title}${rows}${extra}</div>`;
+    }
+    if (p.type === "list") {
+      const items = (p.items || []).map(it => {
+        const icn = it.icn || "pend";
+        const text = it.html ? it.text : escapeHtml(it.text);
+        return `<li><span class="icn ${icn}">${escapeHtml(it.label || (icn==='ok'?'✓':icn==='err'?'✕':icn==='run'?'⌛':icn==='warn'?'!':'·'))}</span><div>${text}</div></li>`;
+      }).join("");
+      return `<div class="panel">${title}<ul class="task-list">${items}</ul></div>`;
+    }
+    if (p.type === "code") {
+      return `<div class="panel">${title}<pre class="code">${escapeHtml(p.text || "")}</pre></div>`;
+    }
+    if (p.type === "raw_html") {
+      return `<div class="panel">${title}${p.html || ""}</div>`;
+    }
+    return "";
+  }
+
+  function renderStages(stages) {
+    const el = $('#stages');
+    if (!stages || !stages.length) { el.innerHTML = `<div class="empty">暂无 stage 数据</div>`; return; }
+    el.innerHTML = stages.map((st, idx) => {
+      const show = st.id === activeStepId;
+      const status = st.status || "pend";
+      const badgeText = {done:"完成", run:"RUNNING", warn:"需人工", err:"失败", pend:"待执行"}[status] || status.toUpperCase();
+      const panelsArr = st.panels || [];
+      let panelsHtml;
+      if (panelsArr.length === 0) {
+        panelsHtml = `<div class="empty">暂无详情</div>`;
+      } else if (panelsArr.length >= 2) {
+        // first two side-by-side, rest stacked
+        const [a, b, ...rest] = panelsArr;
+        panelsHtml = `<div class="grid-2">${renderPanel(a)}${renderPanel(b)}</div>${rest.map(renderPanel).join("")}`;
+      } else {
+        panelsHtml = panelsArr.map(renderPanel).join("");
+      }
+      return `
+        <section class="stage ${status} detail-section ${show?'show':''}" data-id="${escapeHtml(st.id)}">
+          <div class="stage-head">
+            <div class="stage-num">${idx+1}</div>
+            <div><h2>${escapeHtml(st.title || "—")}<small>${escapeHtml(st.subtitle || "")}</small></h2></div>
+            <span class="badge ${status}"><span class="ring"></span>${escapeHtml(badgeText)}</span>
+          </div>
+          ${panelsHtml}
+        </section>
+      `;
+    }).join("");
+  }
+
+  function renderAll(data) {
+    if (!data) return;
+    lastData = data;
+    renderMeta(data.task || {});
+    renderTimeline(data.steps || []);
+    renderHero(data.hero || []);
+    renderStages(data.stages || []);
+    updateLive(data);
+  }
+
+  function updateLive(data) {
+    const pill = $('#live-pill');
+    const text = $('#live-text');
+    const t = data && data.task && data.task.updated_at ? data.task.updated_at * 1000 : lastUpdateAt;
+    const ago = Date.now() - t;
+    if (ago > STALE_AFTER_MS) {
+      pill.classList.add('stale');
+      text.textContent = `Stale · ${fmtTime(Math.floor(t/1000))}`;
+    } else {
+      pill.classList.remove('stale');
+      text.textContent = `Live · ${fmtTime(Math.floor(t/1000))}`;
+    }
+  }
+
+  // ========= Polling =========
+  async function poll() {
+    try {
+      const url = JSON_URL + (JSON_URL.includes('?') ? '&' : '?') + '_=' + Date.now();
+      const headers = {};
+      if (lastEtag) headers['If-None-Match'] = lastEtag;
+      const res = await fetch(url, {headers, cache:'no-store'});
+      if (res.status === 304) {
+        consecutivePollFailures = 0;
+        hideDataBanner();
+        updateLive(lastData);
+        return;
+      }
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const etag = res.headers.get('ETag');
+      if (etag) lastEtag = etag;
+      const data = await res.json();
+      consecutivePollFailures = 0;
+      hideDataBanner();
+      lastUpdateAt = Date.now();
+      renderAll(data);
+    } catch (e) {
+      consecutivePollFailures += 1;
+      console.warn('poll error', e);
+      if (consecutivePollFailures >= POLL_FAIL_THRESHOLD) {
+        showDataBanner(String(e && e.message || e));
+      }
+      updateLive(lastData);
+    }
+  }
+
+  // 如果模板替换后 JSON_URL 还是默认相对路径,且页面是从 https TOS 域托管的(URL 上含 hash),
+  // 那 5s 轮询基本必然 404,直接首屏就提示用户(无需等 2 次失败)
+  if (JSON_URL === "progress.json" && location.protocol === "https:" && /[0-9a-f]{8,}/i.test(location.pathname)) {
+    showDataBanner("HTML 嵌入的是相对路径 progress.json,但当前从签名 URL 托管,无法找到同目录 JSON。");
+  }
+
+  // initial bootstrap with embedded data (for instant first paint without network)
+  try {
+    const inline = JSON.parse(document.getElementById('initial-data').textContent);
+    renderAll(inline);
+  } catch (e) {
+    // no inline data, render empty state
+    renderAll({task:{}, steps:[], hero:[], stages:[]});
+  }
+  // start polling loop
+  poll();
+  setInterval(poll, POLL_INTERVAL_MS);
+  // refresh "Live · xx" timestamp every second so it stays fresh-looking
+  setInterval(() => updateLive(lastData), 1000);
+</script>
+
+<script type="application/json" id="initial-data">__INITIAL_DATA__</script>
+</body>
+</html>

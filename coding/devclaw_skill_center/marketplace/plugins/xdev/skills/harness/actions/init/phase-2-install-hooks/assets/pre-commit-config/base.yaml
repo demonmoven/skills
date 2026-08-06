@@ -1,0 +1,22 @@
+# 通用文件卫生检查（所有项目适用）
+# 由 harness-bootstrap 安装，合并到 .pre-commit-config.yaml
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v6.0.0
+  hooks:
+    - id: trailing-whitespace
+    - id: end-of-file-fixer
+    - id: check-yaml
+    - id: check-json
+    - id: check-toml
+    - id: check-added-large-files
+      args: ["--maxkb=500"]
+    - id: check-merge-conflict
+    - id: check-case-conflict
+    - id: mixed-line-ending
+      args: ["--fix=lf"]
+    - id: check-symlinks
+    - id: destroyed-symlinks
+    - id: check-executables-have-shebangs
+    - id: check-shebang-scripts-are-executable
+    - id: fix-byte-order-marker

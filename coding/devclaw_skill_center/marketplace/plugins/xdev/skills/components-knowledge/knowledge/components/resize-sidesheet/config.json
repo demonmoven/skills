@@ -1,0 +1,8 @@
+{
+  "name": "ResizeSidesheet",
+  "description": "可拖拽调整宽度的侧边抽屉组件。",
+  "source": "widgets/base/components/src/resize-sidesheet/",
+  "demo": [
+    { "name": "1-resize-sidesheet-demo", "description": "基本用法" }
+  ]
+}

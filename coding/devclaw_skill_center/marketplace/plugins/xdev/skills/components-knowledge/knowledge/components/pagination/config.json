@@ -1,0 +1,26 @@
+{
+  "name": "Pagination",
+  "description": "分页组件：用于在多页数据中进行导航，帮助用户快速切换到指定页面，适用于表格、列表等展示大量数据的场景。",
+  "demo": [
+    {
+      "name": "1-pagination-demo",
+      "description": "最基础的分页组件使用。"
+    },
+    {
+      "name": "2-pagination-demo",
+      "description": "提供默认和简洁两种布局模式。"
+    },
+    {
+      "name": "3-pagination-demo",
+      "description": "提供 default 和 small 两种尺寸。"
+    },
+    {
+      "name": "4-pagination-demo",
+      "description": "可以显示数据总数和切换每页显示条数。"
+    },
+    {
+      "name": "5-pagination-demo",
+      "description": "提供快速跳转到指定页码的功能。"
+    }
+  ]
+}

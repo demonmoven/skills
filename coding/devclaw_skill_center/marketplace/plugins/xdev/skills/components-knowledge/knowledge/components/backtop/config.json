@@ -1,0 +1,14 @@
+{
+  "name": "BackTop",
+  "description": "BackTop 回到顶部",
+  "demo": [
+    {
+      "name": "1-backtop-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-backtop-demo",
+      "description": "自定义样式"
+    }
+  ]
+}

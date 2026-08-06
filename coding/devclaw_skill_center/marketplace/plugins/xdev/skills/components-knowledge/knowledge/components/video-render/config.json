@@ -1,0 +1,8 @@
+{
+  "name": "VideoRender",
+  "description": "视频渲染组件，用于多模态数据集中的视频条目展示。",
+  "source": "widgets/base/components/src/multi-modal-dataset-item-render/",
+  "demo": [
+    { "name": "1-video-render-demo", "description": "基本用法" }
+  ]
+}

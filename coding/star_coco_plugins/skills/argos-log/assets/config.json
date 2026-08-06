@@ -1,0 +1,635 @@
+{
+  "metadata": {
+    "user": "ai",
+    "retry_count": 3,
+    "read_timeout_in_ms": 10000,
+    "write_timeout_in_ms": 30000,
+    "auth_method": "jwt"
+  },
+  "component": {
+    "Argos": {
+      "TraceQuery": {
+        "CN": {
+          "description": "通过 logid 查询 trace 日志（CN 环境）",
+          "output_filter": ".response_body.data",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://logservice.byted.org/streamlog/platform/microservice/v1/query/trace",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                },
+                "content-type": {
+                  "type": "string",
+                  "default": "application/json",
+                  "description": "Content-Type"
+                },
+                "origin": {
+                  "type": "string",
+                  "default": "https://cloud.bytedance.net",
+                  "description": "Origin header"
+                },
+                "referer": {
+                  "type": "string",
+                  "default": "https://cloud.bytedance.net/",
+                  "description": "Referer header"
+                }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "logid": {
+                  "type": "string",
+                  "description": "要查询的 logid"
+                },
+                "psm_list": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "default": [],
+                  "description": "PSM 列表（可选，空数组表示跨服务搜索）"
+                },
+                "scan_span_in_min": {
+                  "type": "integer",
+                  "default": 10,
+                  "description": "扫描时间范围（分钟）"
+                },
+                "vregion": {
+                  "type": "string",
+                  "default": "China-North",
+                  "description": "虚拟区域"
+                }
+              },
+              "required": ["logid"]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "description": "Trace 记录列表，每条包含 value[].kv_list[]（key-value 形式的日志字段）"
+                }
+              }
+            }
+          }
+        },
+        "I18N_BD": {
+          "description": "通过 logid 查询 trace 日志（国际环境）",
+          "output_filter": ".response_body.data",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://logservice-mya.sinf.net/streamlog/platform/microservice/v1/query/trace",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                },
+                "content-type": {
+                  "type": "string",
+                  "default": "application/json",
+                  "description": "Content-Type"
+                },
+                "origin": {
+                  "type": "string",
+                  "default": "https://cloud.byteintl.net",
+                  "description": "Origin header"
+                },
+                "referer": {
+                  "type": "string",
+                  "default": "https://cloud.byteintl.net/",
+                  "description": "Referer header"
+                }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "logid": {
+                  "type": "string",
+                  "description": "要查询的 logid"
+                },
+                "psm_list": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "default": [],
+                  "description": "PSM 列表（可选，空数组表示跨服务搜索）"
+                },
+                "scan_span_in_min": {
+                  "type": "integer",
+                  "default": 10,
+                  "description": "扫描时间范围（分钟）"
+                },
+                "vregion": {
+                  "type": "string",
+                  "default": "Africa-South,Asia-Enterprise,Asia-NorthEast,Asia-SaaS,Asia-South,Asia-SouthEast,Asia-SouthEastBD,MiddleEast-South,Singapore-Common,Singapore-SaaS,SouthAmerica-East,US-Central,US-EE",
+                  "description": "虚拟区域"
+                }
+              },
+              "required": ["logid"]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "description": "Trace 记录列表，每条包含 value[].kv_list[]（key-value 形式的日志字段）"
+                }
+              }
+            }
+          }
+        },
+        "I18N_TT": {
+          "description": "通过 logid 查询 trace 日志（国际 TikTok 环境）",
+          "output_filter": ".response_body.data",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://logservice-sg.tiktok-row.org/streamlog/platform/microservice/v1/query/trace",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-jwt-token": { "type": "string", "description": "JWT Token（用户身份认证）" },
+                "content-type": { "type": "string", "default": "application/json", "description": "Content-Type" },
+                "origin": { "type": "string", "default": "https://cloud.tiktok-row.net", "description": "Origin header" },
+                "referer": { "type": "string", "default": "https://cloud.tiktok-row.net/", "description": "Referer header" }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "logid": { "type": "string", "description": "要查询的 logid" },
+                "psm_list": { "type": "array", "items": { "type": "string" }, "default": [], "description": "PSM 列表（可选，空数组表示跨服务搜索）" },
+                "scan_span_in_min": { "type": "integer", "default": 10, "description": "扫描时间范围（分钟）" },
+                "vregion": { "type": "string", "default": "Africa-South,Asia-Enterprise,Asia-NorthEast,Asia-SaaS,Asia-South,Asia-SouthEast,EasternEuro-TT,Europe-Central,ID-Compliance,ID-Compliance2,MY-Compliance,MiddleEast-South,Singapore-Common,Singapore-SaaS,SouthAmerica-East,US-Central,US-Compliance,US-East,US-SouthWest,US-West,Singapore-Compliance,Singapore-Central,US-EE", "description": "虚拟区域" }
+              },
+              "required": ["logid"]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "items": { "type": "array", "description": "Trace 记录列表，每条包含 value[].kv_list[]（key-value 形式的日志字段）" }
+              }
+            }
+          }
+        },
+        "EU_TTP": {
+          "description": "通过 logid 查询 trace 日志（欧洲 TTP 环境）",
+          "output_filter": ".response_body.data",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://logservice-eu-ttp.tiktok-eu.org/streamlog/platform/microservice/v1/query/trace",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-jwt-token": { "type": "string", "description": "JWT Token（用户身份认证）" },
+                "content-type": { "type": "string", "default": "application/json", "description": "Content-Type" },
+                "origin": { "type": "string", "default": "https://cloud-eu.tiktok-row.net", "description": "Origin header" },
+                "referer": { "type": "string", "default": "https://cloud-eu.tiktok-row.net/", "description": "Referer header" }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "logid": { "type": "string", "description": "要查询的 logid" },
+                "psm_list": { "type": "array", "items": { "type": "string" }, "default": [], "description": "PSM 列表（可选，空数组表示跨服务搜索）" },
+                "scan_span_in_min": { "type": "integer", "default": 10, "description": "扫描时间范围（分钟）" },
+                "vregion": { "type": "string", "default": "EU-TTP", "description": "虚拟区域" }
+              },
+              "required": ["logid"]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "items": { "type": "array", "description": "Trace 记录列表，每条包含 value[].kv_list[]（key-value 形式的日志字段）" }
+              }
+            }
+          }
+        },
+        "US_TTP": {
+          "description": "通过 logid 查询 trace 日志（美国 TTP 环境）",
+          "output_filter": ".response_body.data",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://logservice-tx.tiktok-us.org/streamlog/platform/microservice/v1/query/trace",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-jwt-token": { "type": "string", "description": "JWT Token（用户身份认证）" },
+                "content-type": { "type": "string", "default": "application/json", "description": "Content-Type" },
+                "origin": { "type": "string", "default": "https://cloud-ttp-us.bytedance.net", "description": "Origin header" },
+                "referer": { "type": "string", "default": "https://cloud-ttp-us.bytedance.net/", "description": "Referer header" }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "logid": { "type": "string", "description": "要查询的 logid" },
+                "psm_list": { "type": "array", "items": { "type": "string" }, "default": [], "description": "PSM 列表（可选，空数组表示跨服务搜索）" },
+                "scan_span_in_min": { "type": "integer", "default": 10, "description": "扫描时间范围（分钟）" },
+                "vregion": { "type": "string", "default": "US-TTP", "description": "虚拟区域" }
+              },
+              "required": ["logid"]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "items": { "type": "array", "description": "Trace 记录列表，每条包含 value[].kv_list[]（key-value 形式的日志字段）" }
+              }
+            }
+          }
+        }
+      },
+      "KeywordQuery": {
+        "CN": {
+          "description": "通过关键字搜索日志（CN 环境）",
+          "output_filter": ".response_body.data",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://logservice.byted.org/streamlog/platform/microservice/v2/query/log",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                },
+                "content-type": {
+                  "type": "string",
+                  "default": "application/json",
+                  "description": "Content-Type"
+                },
+                "origin": {
+                  "type": "string",
+                  "default": "https://cloud.bytedance.net",
+                  "description": "Origin header"
+                },
+                "referer": {
+                  "type": "string",
+                  "default": "https://cloud.bytedance.net/",
+                  "description": "Referer header"
+                }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "psm_list": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "PSM 列表"
+                },
+                "start": {
+                  "type": "integer",
+                  "description": "开始时间（Unix 时间戳，秒）"
+                },
+                "end": {
+                  "type": "integer",
+                  "description": "结束时间（Unix 时间戳，秒），end - start ≤ 10800"
+                },
+                "limit": {
+                  "type": "integer",
+                  "default": 100,
+                  "description": "每页结果数量"
+                },
+                "keyword_filter": {
+                  "type": "object",
+                  "description": "关键字过滤条件",
+                  "properties": {
+                    "include": {
+                      "type": "object",
+                      "properties": {
+                        "case_sensitive": {
+                          "type": "boolean",
+                          "default": true,
+                          "description": "是否大小写敏感"
+                        },
+                        "operator": {
+                          "type": "string",
+                          "default": "AND",
+                          "description": "逻辑运算符（AND/OR）"
+                        },
+                        "word_list": {
+                          "type": "array",
+                          "description": "关键字列表",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "word": { "type": "string", "description": "关键字" },
+                              "is_term": { "type": "boolean", "default": false, "description": "是否精确匹配" }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "exclude": {
+                      "type": "object",
+                      "properties": {
+                        "words": { "type": "array", "default": [], "description": "排除关键字" },
+                        "case_sensitive": { "type": "boolean", "default": true },
+                        "operator": { "type": "string", "default": "AND" }
+                      }
+                    }
+                  }
+                },
+                "kv_filters": {
+                  "type": "array",
+                  "description": "KV 过滤条件列表",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": { "type": "string", "description": "过滤 key（如 _idc, _cluster）" },
+                      "type": { "type": "string", "default": "STRING" },
+                      "operator": { "type": "string", "default": "in" },
+                      "value": { "type": "array", "items": { "type": "string" }, "description": "过滤值列表" }
+                    }
+                  }
+                },
+                "context": {
+                  "type": "array",
+                  "default": [],
+                  "description": "分页上下文（首次查询传空数组，后续传上一次返回的 context）"
+                },
+                "data_source_uid": {
+                  "type": "string",
+                  "default": "",
+                  "description": "数据源 UID"
+                },
+                "enable_index": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "是否启用索引"
+                },
+                "timeout_in_ms": {
+                  "type": "integer",
+                  "default": 2000,
+                  "description": "查询超时（毫秒）"
+                },
+                "vregion": {
+                  "type": "string",
+                  "default": "China-North",
+                  "description": "虚拟区域"
+                }
+              },
+              "required": ["psm_list", "start", "end", "keyword_filter", "kv_filters"]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "array",
+                  "description": "日志记录列表，每条包含 messages[]（key-value 形式的日志字段）"
+                },
+                "context": {
+                  "type": "array",
+                  "description": "分页上下文（非空时可用于下一次查询）"
+                }
+              }
+            }
+          }
+        },
+        "I18N_BD": {
+          "description": "通过关键字搜索日志（国际环境）",
+          "output_filter": ".response_body.data",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://logservice-mya.sinf.net/streamlog/platform/microservice/v2/query/log",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                },
+                "content-type": {
+                  "type": "string",
+                  "default": "application/json",
+                  "description": "Content-Type"
+                },
+                "origin": {
+                  "type": "string",
+                  "default": "https://cloud.byteintl.net",
+                  "description": "Origin header"
+                },
+                "referer": {
+                  "type": "string",
+                  "default": "https://cloud.byteintl.net/",
+                  "description": "Referer header"
+                }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "psm_list": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "PSM 列表"
+                },
+                "start": {
+                  "type": "integer",
+                  "description": "开始时间（Unix 时间戳，秒）"
+                },
+                "end": {
+                  "type": "integer",
+                  "description": "结束时间（Unix 时间戳，秒），end - start ≤ 10800"
+                },
+                "limit": {
+                  "type": "integer",
+                  "default": 100,
+                  "description": "每页结果数量"
+                },
+                "keyword_filter": {
+                  "type": "object",
+                  "description": "关键字过滤条件",
+                  "properties": {
+                    "include": {
+                      "type": "object",
+                      "properties": {
+                        "case_sensitive": { "type": "boolean", "default": true },
+                        "operator": { "type": "string", "default": "AND" },
+                        "word_list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "word": { "type": "string" },
+                              "is_term": { "type": "boolean", "default": false }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "exclude": {
+                      "type": "object",
+                      "properties": {
+                        "words": { "type": "array", "default": [] },
+                        "case_sensitive": { "type": "boolean", "default": true },
+                        "operator": { "type": "string", "default": "AND" }
+                      }
+                    }
+                  }
+                },
+                "kv_filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": { "type": "string" },
+                      "type": { "type": "string", "default": "STRING" },
+                      "operator": { "type": "string", "default": "in" },
+                      "value": { "type": "array", "items": { "type": "string" } }
+                    }
+                  }
+                },
+                "context": { "type": "array", "default": [] },
+                "data_source_uid": { "type": "string", "default": "" },
+                "enable_index": { "type": "boolean", "default": false },
+                "timeout_in_ms": { "type": "integer", "default": 2000 },
+                "vregion": {
+                  "type": "string",
+                  "default": "Africa-South,Asia-Enterprise,Asia-NorthEast,Asia-SaaS,Asia-South,Asia-SouthEast,Asia-SouthEastBD,MiddleEast-South,Singapore-Common,Singapore-SaaS,SouthAmerica-East,US-Central,US-EE",
+                  "description": "虚拟区域"
+                }
+              },
+              "required": ["psm_list", "start", "end", "keyword_filter", "kv_filters"]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "array", "description": "日志记录列表" },
+                "context": { "type": "array", "description": "分页上下文" }
+              }
+            }
+          }
+        },
+        "I18N_TT": {
+          "description": "通过关键字搜索日志（国际 TikTok 环境）",
+          "output_filter": ".response_body.data",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://logservice-sg.tiktok-row.org/streamlog/platform/microservice/v2/query/log",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-jwt-token": { "type": "string", "description": "JWT Token（用户身份认证）" },
+                "content-type": { "type": "string", "default": "application/json", "description": "Content-Type" },
+                "origin": { "type": "string", "default": "https://cloud.tiktok-row.net", "description": "Origin header" },
+                "referer": { "type": "string", "default": "https://cloud.tiktok-row.net/", "description": "Referer header" }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "psm_list": { "type": "array", "items": { "type": "string" }, "description": "PSM 列表" },
+                "start": { "type": "integer", "description": "开始时间（Unix 时间戳，秒）" },
+                "end": { "type": "integer", "description": "结束时间（Unix 时间戳，秒），end - start ≤ 10800" },
+                "limit": { "type": "integer", "default": 100, "description": "每页结果数量" },
+                "keyword_filter": { "type": "object", "description": "关键字过滤条件", "properties": { "include": { "type": "object", "properties": { "case_sensitive": { "type": "boolean", "default": true }, "operator": { "type": "string", "default": "AND" }, "word_list": { "type": "array", "items": { "type": "object", "properties": { "word": { "type": "string" }, "is_term": { "type": "boolean", "default": false } } } } } }, "exclude": { "type": "object", "properties": { "words": { "type": "array", "default": [] }, "case_sensitive": { "type": "boolean", "default": true }, "operator": { "type": "string", "default": "AND" } } } } },
+                "kv_filters": { "type": "array", "items": { "type": "object", "properties": { "key": { "type": "string" }, "type": { "type": "string", "default": "STRING" }, "operator": { "type": "string", "default": "in" }, "value": { "type": "array", "items": { "type": "string" } } } } },
+                "context": { "type": "array", "default": [] },
+                "data_source_uid": { "type": "string", "default": "" },
+                "enable_index": { "type": "boolean", "default": false },
+                "timeout_in_ms": { "type": "integer", "default": 2000 },
+                "vregion": { "type": "string", "default": "Africa-South,Asia-Enterprise,Asia-NorthEast,Asia-SaaS,Asia-South,Asia-SouthEast,EasternEuro-TT,Europe-Central,ID-Compliance,ID-Compliance2,MY-Compliance,MiddleEast-South,Singapore-Common,Singapore-SaaS,SouthAmerica-East,US-Central,US-Compliance,US-East,US-SouthWest,US-West,Singapore-Compliance,Singapore-Central,US-EE", "description": "虚拟区域" }
+              },
+              "required": ["psm_list", "start", "end", "keyword_filter", "kv_filters"]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "array", "description": "日志记录列表" },
+                "context": { "type": "array", "description": "分页上下文" }
+              }
+            }
+          }
+        },
+        "EU_TTP": {
+          "description": "通过关键字搜索日志（欧洲 TTP 环境）",
+          "output_filter": ".response_body.data",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://logservice-eu-ttp.tiktok-eu.org/streamlog/platform/microservice/v2/query/log",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-jwt-token": { "type": "string", "description": "JWT Token（用户身份认证）" },
+                "content-type": { "type": "string", "default": "application/json", "description": "Content-Type" },
+                "origin": { "type": "string", "default": "https://cloud-eu.tiktok-row.net", "description": "Origin header" },
+                "referer": { "type": "string", "default": "https://cloud-eu.tiktok-row.net/", "description": "Referer header" }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "psm_list": { "type": "array", "items": { "type": "string" }, "description": "PSM 列表" },
+                "start": { "type": "integer", "description": "开始时间（Unix 时间戳，秒）" },
+                "end": { "type": "integer", "description": "结束时间（Unix 时间戳，秒），end - start ≤ 10800" },
+                "limit": { "type": "integer", "default": 100, "description": "每页结果数量" },
+                "keyword_filter": { "type": "object", "description": "关键字过滤条件", "properties": { "include": { "type": "object", "properties": { "case_sensitive": { "type": "boolean", "default": true }, "operator": { "type": "string", "default": "AND" }, "word_list": { "type": "array", "items": { "type": "object", "properties": { "word": { "type": "string" }, "is_term": { "type": "boolean", "default": false } } } } } }, "exclude": { "type": "object", "properties": { "words": { "type": "array", "default": [] }, "case_sensitive": { "type": "boolean", "default": true }, "operator": { "type": "string", "default": "AND" } } } } },
+                "kv_filters": { "type": "array", "items": { "type": "object", "properties": { "key": { "type": "string" }, "type": { "type": "string", "default": "STRING" }, "operator": { "type": "string", "default": "in" }, "value": { "type": "array", "items": { "type": "string" } } } } },
+                "context": { "type": "array", "default": [] },
+                "data_source_uid": { "type": "string", "default": "" },
+                "enable_index": { "type": "boolean", "default": false },
+                "timeout_in_ms": { "type": "integer", "default": 2000 },
+                "vregion": { "type": "string", "default": "EU-TTP", "description": "虚拟区域" }
+              },
+              "required": ["psm_list", "start", "end", "keyword_filter", "kv_filters"]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "array", "description": "日志记录列表" },
+                "context": { "type": "array", "description": "分页上下文" }
+              }
+            }
+          }
+        },
+        "US_TTP": {
+          "description": "通过关键字搜索日志（美国 TTP 环境）",
+          "output_filter": ".response_body.data",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://logservice-tx.tiktok-us.org/streamlog/platform/microservice/v2/query/log",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-jwt-token": { "type": "string", "description": "JWT Token（用户身份认证）" },
+                "content-type": { "type": "string", "default": "application/json", "description": "Content-Type" },
+                "origin": { "type": "string", "default": "https://cloud-ttp-us.bytedance.net", "description": "Origin header" },
+                "referer": { "type": "string", "default": "https://cloud-ttp-us.bytedance.net/", "description": "Referer header" }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "psm_list": { "type": "array", "items": { "type": "string" }, "description": "PSM 列表" },
+                "start": { "type": "integer", "description": "开始时间（Unix 时间戳，秒）" },
+                "end": { "type": "integer", "description": "结束时间（Unix 时间戳，秒），end - start ≤ 10800" },
+                "limit": { "type": "integer", "default": 100, "description": "每页结果数量" },
+                "keyword_filter": { "type": "object", "description": "关键字过滤条件", "properties": { "include": { "type": "object", "properties": { "case_sensitive": { "type": "boolean", "default": true }, "operator": { "type": "string", "default": "AND" }, "word_list": { "type": "array", "items": { "type": "object", "properties": { "word": { "type": "string" }, "is_term": { "type": "boolean", "default": false } } } } } }, "exclude": { "type": "object", "properties": { "words": { "type": "array", "default": [] }, "case_sensitive": { "type": "boolean", "default": true }, "operator": { "type": "string", "default": "AND" } } } } },
+                "kv_filters": { "type": "array", "items": { "type": "object", "properties": { "key": { "type": "string" }, "type": { "type": "string", "default": "STRING" }, "operator": { "type": "string", "default": "in" }, "value": { "type": "array", "items": { "type": "string" } } } } },
+                "context": { "type": "array", "default": [] },
+                "data_source_uid": { "type": "string", "default": "" },
+                "enable_index": { "type": "boolean", "default": false },
+                "timeout_in_ms": { "type": "integer", "default": 2000 },
+                "vregion": { "type": "string", "default": "US-TTP", "description": "虚拟区域" }
+              },
+              "required": ["psm_list", "start", "end", "keyword_filter", "kv_filters"]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "array", "description": "日志记录列表" },
+                "context": { "type": "array", "description": "分页上下文" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

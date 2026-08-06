@@ -1,0 +1,26 @@
+{
+  "name": "Spin",
+  "description": "加载器组件用于告知用户内容正在加载且需要一段不确定的时长。",
+  "demo": [
+    {
+      "name": "1-spin-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-spin-demo",
+      "description": "尺寸"
+    },
+    {
+      "name": "3-spin-demo",
+      "description": "带文字的"
+    },
+    {
+      "name": "4-spin-demo",
+      "description": "自定义指示符"
+    },
+    {
+      "name": "5-spin-demo",
+      "description": "延迟显示"
+    }
+  ]
+}

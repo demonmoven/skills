@@ -1,0 +1,11 @@
+{
+  "name": "gdp",
+  "displayName": "GDPA GDP",
+  "version": "1.0.0",
+  "description": "GDP 服务开发技能集",
+  "author": {
+    "name": "chenglinfeng",
+    "email": "chenglinfeng@bytedance.com"
+  },
+  "keywords": ["gdpa", "gdp", "ral"]
+}

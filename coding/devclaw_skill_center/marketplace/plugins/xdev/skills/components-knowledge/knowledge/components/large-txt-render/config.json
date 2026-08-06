@@ -1,0 +1,8 @@
+{
+  "name": "LargeTxtRender",
+  "description": "大文本渲染组件。",
+  "source": "widgets/base/components/src/large-txt-render/",
+  "demo": [
+    { "name": "1-large-txt-render-demo", "description": "基本用法" }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Slider",
+  "description": "滑动选择器，使用拖动交互快速选择数值或数值范围，与 InputNumber 相比更直观",
+  "demo": [
+    {
+      "name": "1-slider-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-slider-demo",
+      "description": "带输入框的"
+    },
+    {
+      "name": "3-slider-demo",
+      "description": "自定义提示"
+    },
+    {
+      "name": "4-slider-demo",
+      "description": "带标签的"
+    },
+    {
+      "name": "5-slider-demo",
+      "description": "分段背景"
+    },
+    {
+      "name": "6-slider-demo",
+      "description": "受控组件"
+    },
+    {
+      "name": "7-slider-demo",
+      "description": "垂直"
+    },
+    {
+      "name": "8-slider-demo",
+      "description": "滑块带圆点"
+    }
+  ]
+}

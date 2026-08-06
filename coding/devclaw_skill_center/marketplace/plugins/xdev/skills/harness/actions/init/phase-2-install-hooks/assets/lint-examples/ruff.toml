@@ -1,0 +1,56 @@
+# Ruff 配置示例（Python）
+# 针对 AI Agent 开发模式优化
+#
+# 使用说明：这是参考基线，不是直接复制的模板。
+# Agent 应根据仓库实际情况调整参数。
+# 参见 references/lint-strategy-guide.md 了解每条规则的目的。
+
+target-version = "py311"     # 根据项目实际 Python 版本调整
+line-length = 100            # 根据项目代码风格调整
+
+[lint]
+select = [
+    # --- 领域1: 错误处理不规范 ---
+    "B",        # flake8-bugbear: 常见 bug 模式
+    "E722",     # bare-except: 禁止空 except:
+
+    # --- 领域2: 函数过长 ---
+    "PLR0915",  # too-many-statements: 函数语句数限制
+
+    # --- 领域3: 圈复杂度过高 ---
+    "C901",     # mccabe complexity: 圈复杂度限制
+
+    # --- 领域4: 未使用代码 ---
+    "F401",     # unused-import
+    "F841",     # unused-variable
+
+    # --- 领域6: 魔数和硬编码 ---
+    "PLR2004",  # magic-value-comparison
+
+    # --- 基础规则 ---
+    "E",        # pycodestyle errors
+    "F",        # pyflakes
+    "I",        # isort: import 排序
+    "UP",       # pyupgrade: 使用现代 Python 语法
+    "SIM",      # flake8-simplify: 简化代码
+    "RUF",      # Ruff 特有规则
+]
+
+ignore = [
+    "E501",     # line-too-long: 交给 formatter 处理
+]
+
+[lint.mccabe]
+max-complexity = 15          # 根据项目实际调整
+
+[lint.pylint]
+max-statements = 50          # 根据项目实际调整
+
+[lint.per-file-ignores]
+# 测试文件豁免复杂度和长度检查
+"tests/**/*.py" = ["PLR0915", "C901", "PLR2004"]
+"test_*.py" = ["PLR0915", "C901", "PLR2004"]
+
+[format]
+quote-style = "double"
+indent-style = "space"

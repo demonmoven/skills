@@ -1,0 +1,8 @@
+{
+  "name": "TooltipWhenDisabled",
+  "description": "条件 Tooltip 组件，仅在 disabled 时显示 Tooltip。",
+  "source": "widgets/base/components/src/tooltip-when-disabled/",
+  "demo": [
+    { "name": "1-tooltip-when-disabled-demo", "description": "基本用法" }
+  ]
+}

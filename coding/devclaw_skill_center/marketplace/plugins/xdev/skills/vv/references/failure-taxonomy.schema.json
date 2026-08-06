@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "V&V failure-taxonomy.json schema",
+  "type": "object",
+  "required": [
+    "POLICY_VIOLATION",
+    "STRUCTURE_DRIFT",
+    "OUTCOME_FAIL",
+    "TOOL_MISUSE",
+    "THRASHING",
+    "UNNECESSARY_COMPLEXITY",
+    "details"
+  ],
+  "properties": {
+    "POLICY_VIOLATION": { "type": "integer", "minimum": 0 },
+    "STRUCTURE_DRIFT": { "type": "integer", "minimum": 0 },
+    "OUTCOME_FAIL": { "type": "integer", "minimum": 0 },
+    "TOOL_MISUSE": { "type": "integer", "minimum": 0 },
+    "THRASHING": { "type": "integer", "minimum": 0 },
+    "UNNECESSARY_COMPLEXITY": { "type": "integer", "minimum": 0 },
+    "details": {
+      "type": "object",
+      "properties": {
+        "POLICY_VIOLATION": { "type": "array", "items": { "$ref": "#/$defs/detail_entry" } },
+        "STRUCTURE_DRIFT": { "type": "array", "items": { "$ref": "#/$defs/detail_entry" } },
+        "OUTCOME_FAIL": { "type": "array", "items": { "$ref": "#/$defs/detail_entry" } },
+        "TOOL_MISUSE": { "type": "array", "items": { "$ref": "#/$defs/detail_entry" } },
+        "THRASHING": { "type": "array", "items": { "$ref": "#/$defs/detail_entry" } },
+        "UNNECESSARY_COMPLEXITY": { "type": "array", "items": { "$ref": "#/$defs/detail_entry" } }
+      }
+    }
+  },
+  "$defs": {
+    "detail_entry": {
+      "type": "object",
+      "required": ["finding_id", "subsystem", "title"],
+      "properties": {
+        "finding_id": { "type": "string", "pattern": "^(RC|ST|TE|TG|RG)-\\d{3}$" },
+        "subsystem": {
+          "type": "string",
+          "enum": ["rule_checks", "structural_tests", "task_evals", "trace_grading", "regression_gates"]
+        },
+        "title": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

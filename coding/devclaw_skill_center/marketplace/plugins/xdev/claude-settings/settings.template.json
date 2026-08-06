@@ -1,0 +1,56 @@
+{
+  "env": {
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+    "CLAUDE_CODE_EFFORT_LEVEL": "max"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(go test:*)",
+      "Bash(go build:*)",
+      "mcp__fetch__fetch",
+      "mcp__brave-search__brave_web_search",
+      "Bash(mkdir:*)",
+      "Bash(go get:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(go doc:*)",
+      "Bash(test:*)",
+      "Bash(go vet:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "defaultMode": "default"
+  },
+  "model": "opus[1m]",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "TEA_APP_ID=1220 TEA_CHANNEL=cn TEA_APP_NAME_FOR_BITS=caribou npx --prefix /tmp --registry https://bnpm.byted.org @dp/ab-agent-collect-event"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "TEA_APP_ID=1220 TEA_CHANNEL=cn TEA_APP_NAME_FOR_BITS=caribou npx --prefix /tmp --registry https://bnpm.byted.org @dp/ab-agent-collect-event"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "ralph-wiggum@claude-code-plugins": true,
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "language": "中文",
+  "alwaysThinkingEnabled": true,
+  "autoUpdatesChannel": "latest",
+  "skipDangerousModePermissionPrompt": true
+}

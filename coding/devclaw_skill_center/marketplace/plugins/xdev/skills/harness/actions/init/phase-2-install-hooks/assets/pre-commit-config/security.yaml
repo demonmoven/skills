@@ -1,0 +1,7 @@
+# 密钥 & 凭据泄露检测
+# AI 生成代码经常内嵌示例 API Key / Token
+
+- repo: https://github.com/gitleaks/gitleaks
+  rev: v8.22.1
+  hooks:
+    - id: gitleaks

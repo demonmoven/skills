@@ -1,0 +1,1023 @@
+{
+  "metadata": {
+    "user": "ai",
+    "retry_count": 3,
+    "read_timeout_in_ms": 3000,
+    "write_timeout_in_ms": 30000,
+    "auth_method": "jwt"
+  },
+  "component": {
+    "TCE": {
+      "SearchService": {
+        "BOE": {
+          "description": "搜索 TCE 服务 (BOE)",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud-boe.bytedance.net/api/v1/tce/open-apis/v1/services/",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "search": {
+                  "type": "string",
+                  "description": "搜索关键词（PSM 或服务名）"
+                },
+                "repo_name": {
+                  "type": "string",
+                  "description": "仓库名称"
+                },
+                "detail": {
+                  "type": "boolean",
+                  "description": "是否返回详细信息",
+                  "default": true
+                },
+                "is_ppe": {
+                  "type": "boolean",
+                  "description": "是否为 PPE 环境",
+                  "default": false
+                },
+                "page": {
+                  "type": "integer",
+                  "description": "页码",
+                  "default": 1
+                },
+                "page_size": {
+                  "type": "integer",
+                  "description": "每页数量",
+                  "default": 10
+                },
+                "subs_prefer": {
+                  "type": "boolean",
+                  "description": "是否优先展示订阅服务",
+                  "default": true
+                }
+              },
+              "required": []
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "page_info": {
+                  "type": "object",
+                  "description": "分页信息",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer",
+                      "description": "总数量"
+                    },
+                    "page_num": {
+                      "type": "integer",
+                      "description": "当前页码"
+                    },
+                    "page_size": {
+                      "type": "integer",
+                      "description": "每页数量"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "服务列表",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "meta": {
+                        "type": "object",
+                        "description": "服务元信息（id, psm, name, status, cluster_ids 等）"
+                      },
+                      "auth": {
+                        "type": "object",
+                        "description": "权限信息（owner, iam_info, galaxy_info 等）"
+                      },
+                      "build": {
+                        "type": "object",
+                        "description": "构建信息（language, tech_stack, scm_repo_info 等）"
+                      },
+                      "runtime": {
+                        "type": "object",
+                        "description": "运行时信息（ports, cluster_ids, latest_repo_info 等）"
+                      },
+                      "upgrade": {
+                        "type": "object",
+                        "description": "升级信息（update_rely, upgrade_url）"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "CN": {
+          "description": "搜索 TCE 服务 (CN)",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/tce/open-apis/v1/services/",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "search": {
+                  "type": "string",
+                  "description": "搜索关键词（PSM 或服务名）"
+                },
+                "repo_name": {
+                  "type": "string",
+                  "description": "仓库名称"
+                },
+                "detail": {
+                  "type": "boolean",
+                  "description": "是否返回详细信息",
+                  "default": true
+                },
+                "is_ppe": {
+                  "type": "boolean",
+                  "description": "是否为 PPE 环境",
+                  "default": false
+                },
+                "page": {
+                  "type": "integer",
+                  "description": "页码",
+                  "default": 1
+                },
+                "page_size": {
+                  "type": "integer",
+                  "description": "每页数量",
+                  "default": 10
+                },
+                "subs_prefer": {
+                  "type": "boolean",
+                  "description": "是否优先展示订阅服务",
+                  "default": true
+                }
+              },
+              "required": []
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "page_info": {
+                  "type": "object",
+                  "description": "分页信息",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer",
+                      "description": "总数量"
+                    },
+                    "page_num": {
+                      "type": "integer",
+                      "description": "当前页码"
+                    },
+                    "page_size": {
+                      "type": "integer",
+                      "description": "每页数量"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "服务列表",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "meta": {
+                        "type": "object",
+                        "description": "服务元信息（id, psm, name, status, cluster_ids 等）"
+                      },
+                      "auth": {
+                        "type": "object",
+                        "description": "权限信息（owner, iam_info, galaxy_info 等）"
+                      },
+                      "build": {
+                        "type": "object",
+                        "description": "构建信息（language, tech_stack, scm_repo_info 等）"
+                      },
+                      "runtime": {
+                        "type": "object",
+                        "description": "运行时信息（ports, cluster_ids, latest_repo_info 等）"
+                      },
+                      "upgrade": {
+                        "type": "object",
+                        "description": "升级信息（update_rely, upgrade_url）"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetService": {
+        "BOE": {
+          "description": "获取单个 TCE 服务详情 (BOE)",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud-boe.bytedance.net/api/v1/tce/open-apis/v1/services/{service_id}/",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "service_id": {
+                  "type": "string",
+                  "description": "服务 ID（用于 URL 路径）"
+                }
+              },
+              "required": [
+                "service_id"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "type": "object",
+                      "description": "服务元信息（id, psm, name, status 等）"
+                    },
+                    "auth": {
+                      "type": "object",
+                      "description": "权限信息（owner, iam_info 等）"
+                    },
+                    "build": {
+                      "type": "object",
+                      "description": "构建信息（language, tech_stack, scm_repo_info 等）"
+                    },
+                    "runtime": {
+                      "type": "object",
+                      "description": "运行时信息（ports, cluster_ids, latest_repo_info 等）"
+                    },
+                    "upgrade": {
+                      "type": "object",
+                      "description": "升级信息（update_rely, upgrade_url）"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "CN": {
+          "description": "获取单个 TCE 服务详情 (CN)",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/tce/open-apis/v1/services/{service_id}/",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "service_id": {
+                  "type": "string",
+                  "description": "服务 ID（用于 URL 路径）"
+                }
+              },
+              "required": [
+                "service_id"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "type": "object",
+                      "description": "服务元信息（id, psm, name, status 等）"
+                    },
+                    "auth": {
+                      "type": "object",
+                      "description": "权限信息（owner, iam_info 等）"
+                    },
+                    "build": {
+                      "type": "object",
+                      "description": "构建信息（language, tech_stack, scm_repo_info 等）"
+                    },
+                    "runtime": {
+                      "type": "object",
+                      "description": "运行时信息（ports, cluster_ids, latest_repo_info 等）"
+                    },
+                    "upgrade": {
+                      "type": "object",
+                      "description": "升级信息（update_rely, upgrade_url）"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetDeploymentTicket": {
+        "BOE": {
+          "description": "查询部署工单详情 (BOE)",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud-boe.bytedance.net/api/v1/tce/open-apis/v2/deployment/{ticket_id}/",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "ticket_id": {
+                  "type": "string",
+                  "description": "部署工单 ID（用于 URL 路径）"
+                },
+                "steps": {
+                  "type": "string",
+                  "description": "步骤过滤（留空返回全部）",
+                  "default": ""
+                },
+                "use_pods_list": {
+                  "type": "boolean",
+                  "description": "是否返回 Pod 列表",
+                  "default": true
+                }
+              },
+              "required": [
+                "ticket_id"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "type": "object",
+                      "description": "工单元信息（id, deployment_type, status, psm, create_time, finish_time 等）"
+                    },
+                    "pipeline": {
+                      "type": "object",
+                      "description": "流水线信息（stages, allow_actions 等）",
+                      "properties": {
+                        "stages": {
+                          "type": "array",
+                          "description": "流水线阶段列表",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "description": "阶段名称"
+                              },
+                              "status": {
+                                "type": "string",
+                                "description": "阶段状态"
+                              },
+                              "steps": {
+                                "type": "array",
+                                "description": "阶段步骤列表"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "runtime": {
+                      "type": "object",
+                      "description": "运行时信息（cluster_list, diff_info 等）"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "CN": {
+          "description": "查询部署工单详情 (CN)",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/tce/open-apis/v2/deployment/{ticket_id}/",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "ticket_id": {
+                  "type": "string",
+                  "description": "部署工单 ID（用于 URL 路径）"
+                },
+                "steps": {
+                  "type": "string",
+                  "description": "步骤过滤（留空返回全部）",
+                  "default": ""
+                },
+                "use_pods_list": {
+                  "type": "boolean",
+                  "description": "是否返回 Pod 列表",
+                  "default": true
+                }
+              },
+              "required": [
+                "ticket_id"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "type": "object",
+                      "description": "工单元信息（id, deployment_type, status, psm, create_time, finish_time 等）"
+                    },
+                    "pipeline": {
+                      "type": "object",
+                      "description": "流水线信息（stages, allow_actions 等）",
+                      "properties": {
+                        "stages": {
+                          "type": "array",
+                          "description": "流水线阶段列表",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "description": "阶段名称"
+                              },
+                              "status": {
+                                "type": "string",
+                                "description": "阶段状态"
+                              },
+                              "steps": {
+                                "type": "array",
+                                "description": "阶段步骤列表"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "runtime": {
+                      "type": "object",
+                      "description": "运行时信息（cluster_list, diff_info 等）"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ListClusters": {
+        "BOE": {
+          "description": "获取服务集群列表（升级场景）(BOE)",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud-boe.bytedance.net/api/v1/tce/open-apis/v1/services/{service_id}/clusters/",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "service_id": {
+                  "type": "string",
+                  "description": "服务 ID（用于 URL 路径）"
+                },
+                "include_upstream": {
+                  "type": "boolean",
+                  "description": "是否包含上游信息",
+                  "default": true
+                },
+                "no_dp_metrics": {
+                  "type": "boolean",
+                  "description": "是否不返回 DP 指标",
+                  "default": true
+                },
+                "no_pagination": {
+                  "type": "boolean",
+                  "description": "是否关闭分页并返回全量",
+                  "default": true
+                }
+              },
+              "required": [
+                "service_id"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "集群列表（每项包含 meta/resource/runtime/upgrade 等信息）"
+                }
+              }
+            }
+          }
+        },
+        "CN": {
+          "description": "获取服务集群列表（升级场景）(CN)",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/tce/open-apis/v1/services/{service_id}/clusters/",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "service_id": {
+                  "type": "string",
+                  "description": "服务 ID（用于 URL 路径）"
+                },
+                "include_upstream": {
+                  "type": "boolean",
+                  "description": "是否包含上游信息",
+                  "default": true
+                },
+                "no_dp_metrics": {
+                  "type": "boolean",
+                  "description": "是否不返回 DP 指标",
+                  "default": true
+                },
+                "no_pagination": {
+                  "type": "boolean",
+                  "description": "是否关闭分页并返回全量",
+                  "default": true
+                }
+              },
+              "required": [
+                "service_id"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "集群列表（每项包含 meta/resource/runtime/upgrade 等信息）"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetRepoInfoList": {
+        "BOE": {
+          "description": "获取服务仓库版本信息列表（升级场景）(BOE)",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud-boe.bytedance.net/api/v1/tce/open-apis/v1/services/{service_id}/repo_info_list/",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "service_id": {
+                  "type": "string",
+                  "description": "服务 ID（用于 URL 路径）"
+                }
+              },
+              "required": [
+                "service_id"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "仓库列表",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "repo_id": {
+                        "type": "integer",
+                        "description": "仓库 ID"
+                      },
+                      "repo_name": {
+                        "type": "string",
+                        "description": "仓库名称"
+                      },
+                      "versions": {
+                        "type": "array",
+                        "description": "版本列表"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "CN": {
+          "description": "获取服务仓库版本信息列表（升级场景）(CN)",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/tce/open-apis/v1/services/{service_id}/repo_info_list/",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "service_id": {
+                  "type": "string",
+                  "description": "服务 ID（用于 URL 路径）"
+                }
+              },
+              "required": [
+                "service_id"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "仓库列表",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "repo_id": {
+                        "type": "integer",
+                        "description": "仓库 ID"
+                      },
+                      "repo_name": {
+                        "type": "string",
+                        "description": "仓库名称"
+                      },
+                      "versions": {
+                        "type": "array",
+                        "description": "版本列表"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CreateUpgradeTicket": {
+        "BOE": {
+          "description": "创建服务升级工单 (BOE)",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://cloud-boe.bytedance.net/api/v1/tce/open-apis/v1/deployment/cluster/upgrade/",
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "cluster_info": {
+                  "type": "object",
+                  "description": "集群信息对象，需包含 runtime.repo_info",
+                  "example": {
+                    "runtime": {
+                      "repo_info": [
+                        {
+                          "name": "code_forge/pipeline/api",
+                          "version": "1.0.0.676",
+                          "description": "merge description",
+                          "scm_repo_id": "452040"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "cluster_list": {
+                  "type": "array",
+                  "description": "目标集群列表，示例: [{\"id\": 201473163, \"rollout_strategy\": \"eager\"}]"
+                },
+                "pipeline_template": {
+                  "type": "integer",
+                  "description": "流水线模板 ID",
+                  "default": 1
+                },
+                "service": {
+                  "type": "integer",
+                  "description": "服务 ID"
+                },
+                "step_built_in": {
+                  "type": "boolean",
+                  "description": "是否使用内置步骤",
+                  "default": false
+                }
+              },
+              "required": [
+                "cluster_info",
+                "cluster_list",
+                "service"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "content-type": {
+                  "type": "string",
+                  "default": "application/json",
+                  "description": "请求内容类型"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "工单 ID"
+                    },
+                    "pipeline_id": {
+                      "type": "integer",
+                      "description": "流水线 ID"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "工单状态"
+                    },
+                    "create_time": {
+                      "type": "string",
+                      "description": "创建时间"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "CN": {
+          "description": "创建服务升级工单 (CN)",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://cloud.bytedance.net/api/v1/tce/open-apis/v1/deployment/cluster/upgrade/",
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "cluster_info": {
+                  "type": "object",
+                  "description": "集群信息对象，需包含 runtime.repo_info"
+                },
+                "cluster_list": {
+                  "type": "array",
+                  "description": "目标集群列表，示例: [{\"id\": 201473163, \"rollout_strategy\": \"eager\"}]"
+                },
+                "pipeline_template": {
+                  "type": "integer",
+                  "description": "流水线模板 ID",
+                  "default": 1
+                },
+                "service": {
+                  "type": "integer",
+                  "description": "服务 ID"
+                },
+                "step_built_in": {
+                  "type": "boolean",
+                  "description": "是否使用内置步骤",
+                  "default": false
+                }
+              },
+              "required": [
+                "cluster_info",
+                "cluster_list",
+                "service"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "x-bcgw-tenant-id": {
+                  "type": "string",
+                  "default": "bytedance",
+                  "description": "租户 ID"
+                },
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "content-type": {
+                  "type": "string",
+                  "default": "application/json",
+                  "description": "请求内容类型"
+                },
+                "x-jwt-token": {
+                  "type": "string",
+                  "description": "JWT Token（用户身份认证）"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "工单 ID"
+                    },
+                    "pipeline_id": {
+                      "type": "integer",
+                      "description": "流水线 ID"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "工单状态"
+                    },
+                    "create_time": {
+                      "type": "string",
+                      "description": "创建时间"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "TableBatchOperate",
+  "description": "表格批量操作栏组件。",
+  "source": "widgets/base/components/src/table-batch-operate/",
+  "demo": [
+    { "name": "1-table-batch-operate-demo", "description": "基本用法" }
+  ]
+}

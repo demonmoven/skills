@@ -1,0 +1,26 @@
+{
+  "name": "Space",
+  "description": "设置组件之间的间距。",
+  "demo": [
+    {
+      "name": "1-space-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-space-demo",
+      "description": "对齐方式"
+    },
+    {
+      "name": "3-space-demo",
+      "description": "间距尺寸"
+    },
+    {
+      "name": "4-space-demo",
+      "description": "间距方向"
+    },
+    {
+      "name": "5-space-demo",
+      "description": "设置换行"
+    }
+  ]
+}

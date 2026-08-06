@@ -1,0 +1,43 @@
+{
+  "note": "Git-only 模式不读取、不要求本文件；本文件仅保留计费/结算知识库的可选参考元信息。",
+  "domain": "财经计费/结算",
+  "default_wiki_name": "billing-settlement-llm-wiki",
+  "storage_type": "git",
+  "default_modules": [
+    {
+      "slug": "charge",
+      "title": "计费"
+    },
+    {
+      "slug": "settlement",
+      "title": "结算"
+    }
+  ],
+  "scope": [
+    "charge",
+    "billing",
+    "settle",
+    "settlement"
+  ],
+  "bizcode": "bizcode_cj_pay",
+  "reference_sources": [
+    {
+      "title": "抖音支付计收费-白皮书",
+      "url": "https://bytedance.larkoffice.com/docx/PJyUdk1RSo7kaExwTlAckp8jnDe",
+      "scope": [
+        "charge",
+        "settle",
+        "billing"
+      ]
+    },
+    {
+      "title": "计费/结算参考文档",
+      "url": "https://bytedance.larkoffice.com/docx/IL2YdmVtbos2Y5xMLsMcEd7bnw3",
+      "scope": [
+        "charge",
+        "settle",
+        "billing"
+      ]
+    }
+  ]
+}

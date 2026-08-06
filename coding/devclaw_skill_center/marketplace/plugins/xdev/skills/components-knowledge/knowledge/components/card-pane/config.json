@@ -1,0 +1,8 @@
+{
+  "name": "CardPane",
+  "description": "卡片面板容器，支持 hover 时显示阴影效果。",
+  "source": "widgets/base/components/src/card-pane/",
+  "demo": [
+    { "name": "1-card-pane-demo", "description": "基本用法" }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "SentinelForm",
+  "description": "带监控哨兵能力的表单组件。",
+  "source": "widgets/base/components/src/sentinel-form/",
+  "demo": [
+    { "name": "1-sentinel-form-demo", "description": "基本用法" }
+  ]
+}

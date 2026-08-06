@@ -1,0 +1,49 @@
+# Example: Generic React + Vite project
+# Copy to your repo root as fixloop-profile.yaml and customize.
+
+project:
+  name: my-react-app
+  app_path: "."
+  framework: react
+  build_tool: vite
+  language: typescript
+
+setup:
+  install_command: "npm install"
+  dev_server:
+    start_command: "npm run dev"
+    port_injection: "arg:--port"
+    health_check: "http://localhost:{{port}}"
+    startup_timeout: 60
+
+auth:
+  strategy: none
+
+testing:
+  cases_dir: e2e-cases
+  case_format: auto
+  max_concurrency: 10
+
+fix_loop:
+  max_iterations: 15
+  enable_fix: true
+  enable_code_review: true
+  review:
+    enabled_agents:
+      - lint-check
+      - code-quality
+
+browser:
+  mode: system_chrome
+  viewport: "1440x900"
+
+observation:
+  enabled: true
+
+exploration:
+  enabled: false
+
+output:
+  dir: fixloop-output
+  keep_screenshots: true
+  keep_traces: true

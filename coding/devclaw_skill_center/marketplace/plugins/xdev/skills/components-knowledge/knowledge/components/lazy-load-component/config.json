@@ -1,0 +1,8 @@
+{
+  "name": "LazyLoadComponent",
+  "description": "懒加载组件。",
+  "source": "widgets/base/components/src/lazy-load-component/",
+  "demo": [
+    { "name": "1-lazy-load-component-demo", "description": "基本用法" }
+  ]
+}

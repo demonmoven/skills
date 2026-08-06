@@ -1,0 +1,123 @@
+# manifest.yaml patch — 接入 charge-atom-caijing-knowledge
+#
+# 操作:apply 到 bytepay/settle_skill : feature/ai_native : manifest.yaml
+# 改动:
+#   (1) atomic_skills 列表中新增 charge-atom-caijing-knowledge
+#   (2) facades.knowledge-facade.default_atom 切到本原子
+#   (3) 原 knowledge-search 通过 routing_rules 降级为 fallback
+#
+# 下方为完整 diff 风格的片段(可直接 git apply,但建议人工 merge 因 yaml 顺序敏感)
+
+# ============== 片段 1:atomic_skills 新增条目 ==============
+# 位置:atomic_skills 列表内, 紧邻 charge-atom-repo-router 之后
+
+  - name: charge-atom-caijing-knowledge
+    source: repo
+    path: atoms/charge-atom-caijing-knowledge
+    desc: 财经业务架构知识图谱原子 (cjadk knowledge tree/search/retrieve-doc 封装)
+    notes: |
+      封装 caijing-knowledge Skill 的三个 CLI 为单次 JSON 调用:
+        - tree:        架构层级 + PSM 列表 (8s, 高频, 必跑)
+        - search:      实体精搜 (Interface/Method/Table)
+        - retrieve-doc: ByteRAG wiki 切片召回 (依赖 A2 已导入)
+      自动:bizcode 推断 + a2_list 推断 + 失败 warn (不阻断)。
+      契约见 atoms/charge-atom-caijing-knowledge/SKILL.md。
+
+      前置:cjadk 已装。路由层 step 0 自检:
+        command -v cjadk >/dev/null 2>&1 || \
+          npm install -g @byted/cjadk@latest --registry=https://bnpm.byted.org
+
+
+# ============== 片段 2:facades.knowledge-facade 替换 ==============
+# 操作:把现有 knowledge-facade 整段替换为下方版本
+
+  - name: knowledge-facade
+    desc: 财经业务知识检索 (caijing-knowledge 唯一实现, 失败即停)
+    default_atom: charge-atom-caijing-knowledge   # ⇐ 由 knowledge-search 切换
+    inputs:
+      - keywords                                  # PRD 关键词
+      - requirement_brief                         # PRD 摘要 → 透传为 prd_text
+      - scope                                     # 计费域: charge/settle/billing
+      - mode                                      # 可选 auto/tree/search/retrieve-doc, 缺省 auto
+    outputs:
+      - hits                                      # 原 facade 契约保留 (兼容老子流程)
+      - top_links                                 # 原 facade 契约保留
+      - used_keywords                             # 原 facade 契约保留
+      # 新增字段 (本原子专属, 老子流程可不消费):
+      - biz_code_used                             # 实际命中的 bizcode
+      - a2_hits                                   # 命中的 A2 列表
+      - tree                                      # 全量架构树文本 (用于审计/降级)
+      - tree_pruned                               # 按 keywords 裁剪后的子树 (~100行, prompt 注入用)
+      - psm_hits                                  # 命中的 PSM 列表
+      - retrieve_doc                              # wiki 切片召回结果 (可能为 null)
+    routing_rules:
+      # 仅显式跨域调研走 insearch (用户在 PRD 中明确标注"跨域"/"通用知识"时)
+      # 注意: 不再有 caijing_exit == 1 的 fallback;caijing 失败即整条 auto-develop 停止
+      - when: keywords contains "跨域" or keywords contains "通用知识"
+        atom: knowledge-search
+    fallback_strategy: stop_and_ask               # ⇐ 由 warn_continue 改为 stop_and_ask
+                                                  # caijing-knowledge 召回质量已稳定, 失败必然是环境/鉴权问题
+                                                  # 必须停下来等用户处理 (装 cjadk / 重新登录 / 检查网络)
+    notes: |
+      调用方式:子流程透传 keywords/requirement_brief/scope, facade 把它们包成 JSON
+      喂给 charge-atom-caijing-knowledge/kg_query.py (stdin), 拿 stdout JSON 解析后
+      映射到 facade outputs:
+        hits          := summary.psm_hits + summary.a2_hits
+        top_links     := []  (caijing-knowledge 不返回 URL, 字段保留兼容)
+        used_keywords := input.keywords (透传)
+        biz_code_used := output.biz_code_used
+        a2_hits       := output.summary.a2_hits
+        tree          := output.tree
+        tree_pruned   := output.tree_pruned          # 新增, 优先用于 prompt 注入
+        psm_hits      := output.summary.psm_hits
+        retrieve_doc  := output.retrieve_doc
+
+      下游 prompt 注入建议:
+        - PRD 解析 / 仓库路由前:用 tree_pruned (已按 keywords 裁剪到 ~100 行) 注入 system prompt
+          fallback: tree_pruned 为 null 时退化用 tree 前 120 行
+        - tech-solution-facade complex 路径:facade 把 biz_code_used + summary + tree_pruned +
+          retrieve_doc 打包为 knowledge_context 透传给 tech-solution-gen, 由后者按 Step 2.5 增强 user_prompt
+
+
+# ============== 片段 3:knowledge-search 保留, 但降级为 fallback ==============
+# 不删,本身仍是 manifest 中的有效原子,只是不再是 knowledge-facade 的 default。
+# 现状保持原样:
+
+  - name: knowledge-search
+    source: bytedcli
+    bytedcli_subskill: bytedance-insearch
+    desc: 字节内部统一知识检索 (knowledge-facade fallback)
+    fallback_subskills: [bytedance-feishu, bytedance-cloud-docs]
+
+
+# ============== 片段 4:tech-solution-facade 强制依赖 knowledge_context =====
+# 操作:把 facades.tech-solution-facade.inputs 列表追加 knowledge_context (必填)
+# 关键变化:简单分支 (__inline_template__) 也消费 knowledge_context,不只是 complex 分支
+
+  - name: tech-solution-facade
+    desc: 根据 PRD + 知识库上下文产出本期技术方案 (含改动清单 / 涉及模块 / 风险点)
+    default_atom: __inline_template__         # 简单分支:facade 内置模板, 但仍需消费 knowledge_context
+    routing_config: config/tech_solution_routing.yaml
+    routing_rules:
+      - when: complexity == "complex"
+        atom: tech-solution-gen               # 复杂分支:ArchMate, Step 2.5 注入 knowledge_context
+    inputs:
+      - prd_requirements
+      - change_type
+      - reference_files
+      - repo_meta
+      - requirement_brief
+      - knowledge_context                     # ⇐ 新增, 必填 (简单/复杂分支都消费)
+                                              #    简单分支:内置模板把 summary.psm_hits + tree_pruned +
+                                              #             retrieve_doc.raw 拼到生成的 tech_solution_md
+                                              #    复杂分支:透传给 tech-solution-gen, Step 2.5 注入 user_prompt
+    outputs: [tech_solution_md, complexity, complex_reasons, decisions, open_questions]
+    fallback_strategy: stop_and_ask           # knowledge_context 为空 → 整条 facade 拒绝执行 (由 knowledge-facade
+                                              # 上游 fail-fast 保证, 走到这里时 knowledge_context 一定非空)
+
+
+# ============== 片段 5:knowledge-facade 与 tech-solution-facade 顺序硬约束 =
+# 操作:在子流程 steps.yaml (general_dev/channel_charge 等) 与 auto-develop SKILL.md
+#       的步骤编排中, 强制 "knowledge → tech-solution" 顺序 (不再可选)。
+#       理由:tech-solution-facade.inputs.knowledge_context 是必填字段, knowledge 必须先跑。
+#       本 manifest 文件不直接编码顺序 (由 SKILL.md 与 subflow.md 决定), 此处仅说明依赖。

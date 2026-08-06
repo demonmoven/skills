@@ -1,0 +1,14 @@
+{
+  "name": "Breadcrumb",
+  "description": "面包屑组件：用于显示当前页面在系统层级结构中的位置，帮助用户快速导航到上级页面。",
+  "demo": [
+    {
+      "name": "1-breadcrumb-demo",
+      "description": "最基础的面包屑用法。"
+    },
+    {
+      "name": "2-breadcrumb-demo",
+      "description": "面包屑支持 `default` 和 `small` 两种尺寸。"
+    }
+  ]
+}

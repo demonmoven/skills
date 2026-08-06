@@ -1,0 +1,15 @@
+# 待提交到 settle_skill 仓库的 manifest 片段
+# 路径: bytepay/settle_skill : feature/ai_native : manifest.yaml
+# 操作: 在 atomic_skills 列表里, charge-atom-repo-router 节点之后追加以下条目
+
+  - name: charge-atom-progress-render
+    source: repo
+    path: atoms/charge-atom-progress-render
+    desc: 计费域研发流程实时进展看板渲染原子, 静态文件 + 5s 轮询, 无需后端
+    notes: |
+      在每个子流程的关键 stage 节点调用一次, 把最新状态深合并进 progress.json,
+      前端 HTML 模板通过 fetch + If-None-Match 自动重渲染。
+      子命令: init / patch / upload / render。
+      调用约定见原子 SKILL.md(7-stage 默认骨架: PRD 解析 → 仓库路由 → 知识检索 →
+      Coco 编码 → Push 远端 → BITS 自检流水线 → MR 合入)。
+      失败仅 warn, 不阻塞主链路; progress.json 本身保留全部历史字段, 可作事件溯源。

@@ -1,0 +1,8 @@
+{
+  "name": "LoopRadioGroup",
+  "description": "Loop 项目风格的 RadioGroup 封装。",
+  "source": "widgets/base/components/src/loop-radio-group/",
+  "demo": [
+    { "name": "1-loop-radio-group-demo", "description": "基本用法" }
+  ]
+}

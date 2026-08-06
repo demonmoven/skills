@@ -1,0 +1,22 @@
+{
+  "name": "Search",
+  "description": "搜索框组件：用于通过输入关键词进行搜索，支持中文输入优化，避免拼音输入过程中触发搜索。",
+  "demo": [
+    {
+      "name": "1-search-demo",
+      "description": "最基本的搜索框用法。"
+    },
+    {
+      "name": "2-search-demo",
+      "description": "搜索框支持不同的尺寸。"
+    },
+    {
+      "name": "3-search-demo",
+      "description": "通过 width 属性设置搜索框宽度。"
+    },
+    {
+      "name": "4-search-demo",
+      "description": "使用 onSearch 和 onChange 处理搜索和输入事件。"
+    }
+  ]
+}

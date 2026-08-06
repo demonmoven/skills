@@ -1,0 +1,51 @@
+# auto-develop team profile —— 由 auto-develop SKILL 在步骤 0 加载
+#
+# 接入约定:
+#   - 每个接入 auto-develop 的 skill 仓库,**必须**在仓库根目录创建本文件 `config/team_profile.yaml`
+#   - auto-develop 在步骤 0(鉴权握手)前先调 repo-sync 模式 1 拉本文件,缺失/字段不全 → fail-fast
+#   - 字段全部必填,新团队接入按本文件模板复制后改值即可
+#
+# 注:本文件位于 bytepay/settle_skill 仓库,作为"财经计费域"的实例;别的团队接入时
+# 在自己 skill 仓库的 `config/team_profile.yaml` 里写自己的 profile,与本文件结构对等。
+
+display_name: "财经-计费/支付"
+skill_repo: "bytepay/settle_skill"
+skill_branch: "feature/ai_native"
+
+# Meego 配置:用于 PRD ↔ Meego 双向解析与 BITS 任务关联
+meego:
+  # 本域硬约束业务线:多 Meego 候选时**优先**匹配本字段,命中即选;
+  # 未命中再落回 business_lines 通配。各团队接入时改为自己的本域业务线即可。
+  preferred_business_line: "合众-清结算"
+
+  # 业务线候选,优先级降序;PRD 内含多个 Meego 链接且 preferred_business_line 未命中时,
+  # 按本列表挑业务线最匹配的(任一字符串 in 业务线字段值即视为命中)。
+  # 字段值取自 Meego workitem 的"业务线"字段(rich 翻译后的中文字段值)
+  business_lines:
+    - "合众-清结算"
+    - "渠道对接层"
+    - "支付"
+
+  # Meego project key(用于 URL 模式校验 + bytedcli meego 子命令的 --project-key)
+  project_keys:
+    - "zhifu"
+
+  # Meego URL 形态正则(只支持 larkoffice 域,不兼容 bytedance.net 等内部域名)
+  url_pattern: 'https?://meego\.larkoffice\.com/[\w-]+/story/detail/\d+'
+
+  # Meego workitem 中"PRD 文档"字段的候选名(rich 翻译后的中文字段名,按顺序匹配)
+  prd_field_names:
+    - "需求文档"
+    - "PRD 文档"
+    - "PRD"
+
+# BITS 任务创建配置
+bits:
+  # Meego 关联参数模式:url=直接传整链接;id=只抽尾部数字
+  # 注:bytedcli bits develop create --meego 同时接受 URL 与 ID,默认 url 即可
+  meego_param_mode: "url"
+
+  # SSO 默认值留空即可,需要覆盖时填具体 ID
+  space_id: ""
+  from_dev_id: ""
+

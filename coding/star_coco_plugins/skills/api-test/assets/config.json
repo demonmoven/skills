@@ -1,0 +1,986 @@
+{
+  "metadata": {
+    "user": "ai",
+    "retry_count": 3,
+    "read_timeout_in_ms": 5000,
+    "write_timeout_in_ms": 30000,
+    "auth_method": "jwt"
+  },
+  "component": {
+    "ApiTest": {
+      "GetIdlSetting": {
+        "CN": {
+          "description": "获取服务的 IDL 配置信息（仓库、主 IDL 文件、分支）",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/explorer/explorer/v5/service/idl_setting",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "psm": {
+                  "type": "string",
+                  "description": "服务 PSM 名称"
+                }
+              },
+              "required": [
+                "psm"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "error_code": {
+                  "type": "integer",
+                  "description": "错误码，0 表示成功"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "psm": {
+                      "type": "string",
+                      "description": "服务 PSM"
+                    },
+                    "idl_repo": {
+                      "type": "string",
+                      "description": "IDL 仓库路径"
+                    },
+                    "main_idl": {
+                      "type": "string",
+                      "description": "主 IDL 文件路径"
+                    },
+                    "idl_repo_branch": {
+                      "type": "string",
+                      "description": "IDL 仓库分支"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetApiList": {
+        "CN": {
+          "description": "获取服务的 API 接口列表（方法名、HTTP method、路径）",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/explorer/explorer/v5/service/apis",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "psm": {
+                  "type": "string",
+                  "description": "服务 PSM 名称"
+                },
+                "idl_source": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "IDL 来源（1 = 默认）"
+                },
+                "idl_version": {
+                  "type": "string",
+                  "default": "master",
+                  "description": "IDL 版本（分支名）"
+                }
+              },
+              "required": [
+                "psm"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "error_code": {
+                  "type": "integer",
+                  "description": "错误码，0 表示成功"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "API 接口列表",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "psm": {
+                        "type": "string",
+                        "description": "服务 PSM"
+                      },
+                      "func_name": {
+                        "type": "string",
+                        "description": "接口方法名"
+                      },
+                      "method": {
+                        "type": "string",
+                        "description": "HTTP 方法"
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "HTTP 路径"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetApiVersions": {
+        "CN": {
+          "description": "获取服务的 IDL 版本历史列表",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/explorer/explorer/v5/service/api_versions",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "psm": {
+                  "type": "string",
+                  "description": "服务 PSM 名称"
+                }
+              },
+              "required": [
+                "psm"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "error_code": {
+                  "type": "integer",
+                  "description": "错误码，0 表示成功"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "IDL 版本列表",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "psm": {
+                        "type": "string",
+                        "description": "服务 PSM"
+                      },
+                      "version": {
+                        "type": "string",
+                        "description": "IDL 版本号"
+                      },
+                      "idl_branch": {
+                        "type": "string",
+                        "description": "IDL 分支"
+                      },
+                      "ctime": {
+                        "type": "integer",
+                        "description": "创建时间戳"
+                      },
+                      "creator": {
+                        "type": "string",
+                        "description": "创建人"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetHttpApiSchema": {
+        "CN": {
+          "description": "获取指定 API 接口的请求/响应 Schema 定义",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/explorer/explorer/v5/service/api_schema",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "psm": {
+                  "type": "string",
+                  "description": "服务 PSM 名称"
+                },
+                "idl_source": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "IDL 来源（1 = 默认）"
+                },
+                "idl_version": {
+                  "type": "string",
+                  "default": "master",
+                  "description": "IDL 版本（分支名）"
+                },
+                "http_method": {
+                  "type": "string",
+                  "description": "目标接口的 HTTP 方法（GET/POST/PUT/DELETE 等）"
+                },
+                "http_path": {
+                  "type": "string",
+                  "description": "目标接口的 HTTP 路径"
+                },
+                "source": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "来源标识"
+                }
+              },
+              "required": [
+                "psm",
+                "http_method",
+                "http_path"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "error_code": {
+                  "type": "integer",
+                  "description": "错误码，0 表示成功"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "request": {
+                      "type": "object",
+                      "description": "请求 Schema",
+                      "properties": {
+                        "psm": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "path": {
+                          "type": "string"
+                        },
+                        "headers": {
+                          "type": "array",
+                          "description": "请求头定义"
+                        },
+                        "query_params": {
+                          "type": "array",
+                          "description": "查询参数定义"
+                        },
+                        "body": {
+                          "type": "string",
+                          "description": "请求体 Schema"
+                        }
+                      }
+                    },
+                    "response": {
+                      "type": "object",
+                      "description": "响应 Schema"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "SendHttpRequest": {
+        "CN": {
+          "description": "通过接口测试平台代理发送 HTTP 请求到目标服务",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://cloud.bytedance.net/api/v1/explorer/explorer/v5/http_request",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "psm": {
+                  "type": "string",
+                  "description": "服务 PSM 名称"
+                },
+                "http_method": {
+                  "type": "string",
+                  "description": "目标接口的 HTTP 方法（GET/POST/PUT/DELETE 等）"
+                },
+                "http_path": {
+                  "type": "string",
+                  "description": "目标接口的 HTTP 路径"
+                },
+                "http_host": {
+                  "type": "string",
+                  "description": "目标服务地址（如 https://service-boe.bytedance.net）"
+                },
+                "online": {
+                  "type": "boolean",
+                  "description": "是否发送到线上环境（true=线上，false=BOE）",
+                  "default": false
+                },
+                "preset_env_id": {
+                  "type": "integer",
+                  "description": "预设环境 ID（BOE 环境可选）"
+                },
+                "serialization": {
+                  "type": "string",
+                  "description": "序列化格式",
+                  "default": "json"
+                },
+                "idl_source": {
+                  "type": "integer",
+                  "description": "IDL 来源（1 = 默认）",
+                  "default": 1
+                },
+                "idl_version": {
+                  "type": "string",
+                  "description": "IDL 版本（分支名）",
+                  "default": "master"
+                },
+                "http_req_headers": {
+                  "type": "array",
+                  "description": "请求头列表，JSON 数组，每项含 key/value 及可选的 status/desc/example/optional",
+                  "default": [],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": { "type": "string" },
+                      "value": { "type": "string" },
+                      "status": { "type": "integer", "default": 0 },
+                      "desc": { "type": "string", "default": "" },
+                      "example": { "type": "string", "default": "" },
+                      "optional": { "type": "boolean", "default": false }
+                    }
+                  }
+                },
+                "http_cookies": {
+                  "type": "array",
+                  "description": "Cookie 列表，JSON 数组",
+                  "default": [],
+                  "items": { "type": "object" }
+                },
+                "http_query": {
+                  "type": "array",
+                  "description": "查询参数列表，JSON 数组，每项含 key/value 及可选的 desc/status",
+                  "default": [],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": { "type": "string" },
+                      "value": { "type": "string" },
+                      "desc": { "type": "string", "default": "" },
+                      "status": { "type": "integer", "default": 0 }
+                    }
+                  }
+                },
+                "req_body": {
+                  "type": "string",
+                  "description": "请求体内容（字符串格式，用于 POST/PUT 等方法）",
+                  "default": ""
+                },
+                "rpc_context": {
+                  "type": "array",
+                  "description": "RPC 上下文参数",
+                  "default": [],
+                  "items": { "type": "object" }
+                },
+                "request_timeout": {
+                  "type": "integer",
+                  "description": "请求超时时间（毫秒）",
+                  "default": 60000
+                },
+                "source": {
+                  "type": "integer",
+                  "description": "来源标识",
+                  "default": 1
+                },
+                "protocol": {
+                  "type": "string",
+                  "description": "协议类型",
+                  "default": "http"
+                },
+                "base": {
+                  "type": "object",
+                  "description": "基础配置",
+                  "default": {}
+                }
+              },
+              "required": [
+                "psm",
+                "http_method",
+                "http_path",
+                "http_host"
+              ]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "error_code": {
+                  "type": "integer",
+                  "description": "错误码，0 表示成功"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "http_status_code": {
+                      "type": "integer",
+                      "description": "目标服务返回的 HTTP 状态码"
+                    },
+                    "resp_headers": {
+                      "type": "object",
+                      "description": "目标服务的响应头"
+                    },
+                    "resp_body": {
+                      "type": "string",
+                      "description": "目标服务的响应体（JSON 字符串）"
+                    },
+                    "log_id": {
+                      "type": "string",
+                      "description": "请求日志 ID"
+                    },
+                    "req_latency": {
+                      "type": "string",
+                      "description": "请求耗时"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "错误信息"
+                    },
+                    "history_id": {
+                      "type": "integer",
+                      "description": "请求历史 ID"
+                    },
+                    "request_address": {
+                      "type": "string",
+                      "description": "实际请求地址"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetEnvs": {
+        "CN": {
+          "description": "获取 RPC 服务的可用环境列表（如 prod）",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/explorer/explorer/v5/plane/envs",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "psm": {
+                  "type": "string",
+                  "description": "服务 PSM 名称"
+                },
+                "test_plane": {
+                  "type": "integer",
+                  "description": "测试面（1=线上，2=BOE）",
+                  "default": 2
+                }
+              },
+              "required": [
+                "psm"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "error_code": {
+                  "type": "integer",
+                  "description": "错误码，0 表示成功"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "可用环境列表（如 [\"prod\"]）",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetClusters": {
+        "CN": {
+          "description": "获取 RPC 服务指定环境下的集群列表",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/explorer/explorer/v5/plane/clusters",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "psm": {
+                  "type": "string",
+                  "description": "服务 PSM 名称"
+                },
+                "env": {
+                  "type": "string",
+                  "description": "环境名称（如 prod），通过 GetEnvs 获取"
+                },
+                "test_plane": {
+                  "type": "integer",
+                  "description": "测试面（1=线上，2=BOE）",
+                  "default": 2
+                }
+              },
+              "required": [
+                "psm",
+                "env"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "error_code": {
+                  "type": "integer",
+                  "description": "错误码，0 表示成功"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "集群列表",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "psm": {
+                        "type": "string",
+                        "description": "服务 PSM"
+                      },
+                      "cluster": {
+                        "type": "string",
+                        "description": "集群名称"
+                      },
+                      "zone": {
+                        "type": "string",
+                        "description": "区域标识（如 BOE、CN）"
+                      },
+                      "zone_display_name": {
+                        "type": "string",
+                        "description": "区域显示名称"
+                      },
+                      "idc": {
+                        "type": "string",
+                        "description": "机房标识"
+                      },
+                      "online": {
+                        "type": "boolean",
+                        "description": "是否为线上集群"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetRpcApiSchema": {
+        "CN": {
+          "description": "获取 RPC 接口的请求/响应 Schema 定义（通过 func_name 查询）",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "GET",
+            "url": "https://cloud.bytedance.net/api/v1/explorer/explorer/v5/service/api_schema",
+            "querySchema": {
+              "type": "object",
+              "properties": {
+                "psm": {
+                  "type": "string",
+                  "description": "服务 PSM 名称"
+                },
+                "func_name": {
+                  "type": "string",
+                  "description": "RPC 方法名称（如 QueryClusters）"
+                },
+                "idl_source": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "IDL 来源（1 = 默认）"
+                },
+                "idl_version": {
+                  "type": "string",
+                  "default": "master",
+                  "description": "IDL 版本（分支名）"
+                },
+                "test_plane": {
+                  "type": "integer",
+                  "description": "测试面（1=线上，2=BOE）",
+                  "default": 1
+                },
+                "source": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "来源标识"
+                }
+              },
+              "required": [
+                "psm",
+                "func_name"
+              ]
+            },
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "error_code": {
+                  "type": "integer",
+                  "description": "错误码，0 表示成功"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "request": {
+                      "type": "object",
+                      "description": "请求 Schema",
+                      "properties": {
+                        "psm": {
+                          "type": "string"
+                        },
+                        "func_name": {
+                          "type": "string",
+                          "description": "RPC 方法名称"
+                        },
+                        "body": {
+                          "type": "string",
+                          "description": "请求体 Schema（JSON 字符串）"
+                        },
+                        "req_body": {
+                          "type": "string",
+                          "description": "请求体 Schema（JSON 字符串）"
+                        }
+                      }
+                    },
+                    "response": {
+                      "type": "object",
+                      "description": "响应 Schema"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetRecommendRequest": {
+        "CN": {
+          "description": "通过 AI 获取 RPC 接口的推荐请求体（基于历史流量）",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://cloud.bytedance.net/api/v1/explorer/testgpt/api/v1/api_test/ai_recommend_history_traffic",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                },
+                "content-type": {
+                  "type": "string",
+                  "default": "application/json",
+                  "description": "Content-Type"
+                },
+                "entrance": {
+                  "type": "string",
+                  "default": "3",
+                  "description": "入口标识"
+                }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "psm": {
+                  "type": "string",
+                  "description": "服务 PSM 名称"
+                },
+                "protocol": {
+                  "type": "string",
+                  "description": "协议类型（如 thrift）",
+                  "default": "thrift"
+                },
+                "function_name": {
+                  "type": "string",
+                  "description": "RPC 方法名称"
+                },
+                "api_test_ctrl_type": {
+                  "type": "integer",
+                  "description": "测试控制类型（1=首次推荐，2=基于历史）",
+                  "default": 1
+                }
+              },
+              "required": [
+                "psm",
+                "function_name"
+              ]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "description": "错误码，0 表示成功"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "返回消息"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "api_test_traffic": {
+                      "type": "object",
+                      "description": "推荐的请求流量",
+                      "properties": {
+                        "req_body": {
+                          "type": "string",
+                          "description": "推荐的请求体（JSON 字符串）"
+                        }
+                      }
+                    },
+                    "api_test_history_id": {
+                      "type": "integer",
+                      "description": "历史记录 ID"
+                    },
+                    "api_test_ctrl_type": {
+                      "type": "integer",
+                      "description": "实际使用的控制类型"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "SendRpcRequest": {
+        "CN": {
+          "description": "通过接口测试平台代理发送 RPC 请求到目标服务",
+          "output_filter": ".response_body",
+          "http_request_metadata": {
+            "method": "POST",
+            "url": "https://cloud.bytedance.net/api/v1/explorer/explorer/v5/rpc_request",
+            "headerSchema": {
+              "type": "object",
+              "properties": {
+                "accept-language": {
+                  "type": "string",
+                  "default": "zh",
+                  "description": "语言"
+                }
+              }
+            },
+            "bodySchema": {
+              "type": "object",
+              "properties": {
+                "psm": {
+                  "type": "string",
+                  "description": "服务 PSM 名称"
+                },
+                "func_name": {
+                  "type": "string",
+                  "description": "RPC 方法名称（如 QueryClusters）"
+                },
+                "req_body": {
+                  "type": "string",
+                  "description": "请求体内容（JSON 字符串）",
+                  "default": ""
+                },
+                "idl_source": {
+                  "type": "integer",
+                  "description": "IDL 来源（1 = 默认）",
+                  "default": 1
+                },
+                "idl_version": {
+                  "type": "string",
+                  "description": "IDL 版本（分支名）",
+                  "default": "master"
+                },
+                "zone": {
+                  "type": "string",
+                  "description": "区域标识（如 CN、BOE），通过 GetClusters 获取"
+                },
+                "idc": {
+                  "type": "string",
+                  "description": "机房标识（如 hl、boe），通过 GetClusters 获取"
+                },
+                "cluster": {
+                  "type": "string",
+                  "description": "集群名称（如 default），通过 GetClusters 获取",
+                  "default": "default"
+                },
+                "env": {
+                  "type": "string",
+                  "description": "环境名称（如 prod），通过 GetEnvs 获取"
+                },
+                "online": {
+                  "type": "boolean",
+                  "description": "是否发送到线上环境（true=线上，false=BOE）",
+                  "default": false
+                },
+                "rpc_context": {
+                  "type": "array",
+                  "description": "RPC 上下文参数",
+                  "default": [],
+                  "items": { "type": "object" }
+                },
+                "request_timeout": {
+                  "type": "integer",
+                  "description": "请求超时时间（毫秒）",
+                  "default": 60000
+                },
+                "connect_timeout": {
+                  "type": "integer",
+                  "description": "连接超时时间（毫秒）",
+                  "default": 60000
+                },
+                "source": {
+                  "type": "integer",
+                  "description": "来源标识",
+                  "default": 1
+                },
+                "base": {
+                  "type": "object",
+                  "description": "基础配置",
+                  "default": {}
+                }
+              },
+              "required": [
+                "psm",
+                "func_name",
+                "zone",
+                "idc",
+                "env"
+              ]
+            },
+            "outputSchema": {
+              "type": "object",
+              "properties": {
+                "error_code": {
+                  "type": "integer",
+                  "description": "错误码，0 表示成功"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "resp_body": {
+                      "type": "string",
+                      "description": "目标服务的响应体（JSON 字符串）"
+                    },
+                    "log_id": {
+                      "type": "string",
+                      "description": "请求日志 ID"
+                    },
+                    "req_latency": {
+                      "type": "string",
+                      "description": "请求耗时"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "错误信息"
+                    },
+                    "history_id": {
+                      "type": "integer",
+                      "description": "请求历史 ID"
+                    },
+                    "request_address": {
+                      "type": "string",
+                      "description": "实际请求地址"
+                    },
+                    "func_name": {
+                      "type": "string",
+                      "description": "RPC 方法名称"
+                    },
+                    "argos_link": {
+                      "type": "string",
+                      "description": "Argos 日志查询链接"
+                    },
+                    "biz_status_code": {
+                      "type": "integer",
+                      "description": "业务状态码"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

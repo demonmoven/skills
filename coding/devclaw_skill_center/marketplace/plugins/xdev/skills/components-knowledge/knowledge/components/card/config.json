@@ -1,0 +1,62 @@
+{
+  "name": "Card",
+  "description": "常规的卡片容器，可以承载标题、段落、图片、列表等内容。",
+  "demo": [
+    {
+      "name": "1-card-demo",
+      "description": "基础卡片"
+    },
+    {
+      "name": "10-card-demo",
+      "description": "简洁卡片"
+    },
+    {
+      "name": "11-card-demo",
+      "description": "封面"
+    },
+    {
+      "name": "12-card-demo",
+      "description": "边线和外边框"
+    },
+    {
+      "name": "13-card-demo",
+      "description": "阴影"
+    },
+    {
+      "name": "14-card-demo",
+      "description": "更灵活的内容展示"
+    },
+    {
+      "name": "2-card-demo",
+      "description": "内部卡片"
+    },
+    {
+      "name": "3-card-demo",
+      "description": "栅格卡片"
+    },
+    {
+      "name": "4-card-demo",
+      "description": "内置预加载"
+    },
+    {
+      "name": "5-card-demo",
+      "description": "更丰富的预加载效果"
+    },
+    {
+      "name": "6-card-demo",
+      "description": "带页签的卡片"
+    },
+    {
+      "name": "7-card-demo",
+      "description": "卡片操作区"
+    },
+    {
+      "name": "8-card-demo",
+      "description": "卡片组"
+    },
+    {
+      "name": "9-card-demo",
+      "description": "网格型卡片组"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "BasicCard",
+  "description": "基础卡片组件，包含标题栏和内容区域，带圆角边框样式。",
+  "source": "widgets/base/components/src/basic-card/",
+  "demo": [
+    { "name": "1-basic-card-demo", "description": "基本用法" }
+  ]
+}

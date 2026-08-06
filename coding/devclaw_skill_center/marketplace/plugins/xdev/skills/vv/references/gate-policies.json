@@ -1,0 +1,70 @@
+{
+  "$comment": "V&V 门禁策略配置 — 唯一机器可读配置源。gate-policies.md 为解释文档，内容需与本文件保持一致。",
+  "levels": {
+    "pr": {
+      "label": "PR 级门禁",
+      "subsystems": ["rule_checks", "regression_gates"],
+      "rule_checks_skills": ["rule-precheck", "scope-boundary", "mock-detection"],
+      "thresholds": {
+        "min_score": 70,
+        "max_critical": 0,
+        "max_high": -1,
+        "max_medium": -1,
+        "max_low": -1
+      },
+      "timeout_minutes": 5
+    },
+    "nightly": {
+      "label": "每夜全量门禁",
+      "subsystems": ["rule_checks", "structural_tests", "task_evals", "trace_grading", "regression_gates"],
+      "rule_checks_skills": ["rule-precheck", "scope-boundary", "mock-detection", "cozeloop-standards", "data-api-compliance", "code-quality"],
+      "thresholds": {
+        "min_score": 80,
+        "max_critical": 0,
+        "max_high": 0,
+        "max_medium": -1,
+        "max_low": -1
+      },
+      "timeout_minutes": 30
+    },
+    "release": {
+      "label": "发布级门禁",
+      "subsystems": ["rule_checks", "structural_tests", "task_evals", "trace_grading", "regression_gates"],
+      "rule_checks_skills": ["rule-precheck", "scope-boundary", "mock-detection", "cozeloop-standards", "data-api-compliance", "code-quality"],
+      "extra_checks": ["version_consistency", "changelog_updated", "no_todo_fixme"],
+      "thresholds": {
+        "min_score": 90,
+        "max_critical": 0,
+        "max_high": 0,
+        "max_medium": 0,
+        "max_low": -1
+      },
+      "timeout_minutes": 60
+    }
+  },
+  "verdict_rules": {
+    "PASS": "所有子系统 pass 且满足阈值",
+    "FAIL": "存在 CRITICAL finding，或部分子系统不 pass 且分数远低于阈值（差距 > 10）",
+    "SOFT_FAIL": "部分子系统不 pass 但无 CRITICAL，且分数接近阈值（差距 <= 10）",
+    "NEEDS_APPROVAL": "涉及安全类 finding 需人工确认"
+  },
+  "scoring": {
+    "gate_mode": {
+      "base": 100,
+      "weights": { "critical": -25, "high": -10, "medium": -5, "low": 0 },
+      "min_score": 0
+    },
+    "llm_mode": {
+      "base": 100,
+      "weights": { "critical": -25, "high": -10, "medium": -3, "low": 0 },
+      "min_score": 0
+    }
+  },
+  "subsystem_metadata": {
+    "rule_checks": { "id_prefix": "RC-", "output_dir": "subsystem_1_rule_checks" },
+    "structural_tests": { "id_prefix": "ST-", "output_dir": "subsystem_2_structural_tests" },
+    "task_evals": { "id_prefix": "TE-", "output_dir": "subsystem_3_task_evals" },
+    "trace_grading": { "id_prefix": "TG-", "output_dir": "subsystem_4_trace_grading" },
+    "regression_gates": { "id_prefix": "RG-", "output_dir": "subsystem_5_regression_gates" }
+  }
+}

@@ -1,0 +1,18 @@
+#!/bin/bash
+set -euo pipefail
+
+CONFIG_DIR="${HOME}/.litellm"
+CONFIG_FILE="${CONFIG_DIR}/litellm-config.yaml"
+
+if ! command -v litellm >/dev/null 2>&1; then
+  echo "litellm 未安装，请先执行 scripts/prepare.md 的第 1 步" >&2
+  exit 1
+fi
+
+if [ ! -f "${CONFIG_FILE}" ]; then
+  echo "缺少 ${CONFIG_FILE}，请先执行 scripts/prepare.md 的第 6-7 步" >&2
+  exit 1
+fi
+
+cd "${CONFIG_DIR}"
+exec litellm --config "${CONFIG_FILE}" --port 4000 "$@"

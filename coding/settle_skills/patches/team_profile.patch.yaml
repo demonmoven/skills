@@ -1,0 +1,34 @@
+# team_profile.yaml patch —— 跨 bizcode 复用 charge-atom-caijing-knowledge
+#
+# 操作:在 bytepay/settle_skill : feature/ai_native : config/team_profile.yaml
+#       末尾追加 scope_to_bizcode 节
+#
+# 设计原则:
+# - 完全可选(本字段缺失时,kg_query.py 退化使用内置 DEFAULT_SCOPE_TO_BIZCODE)
+# - 跨团队接入(消金/风控/保险/测试)只需在自己的 team_profile.yaml 写本节
+# - kg_query.py 通过环境变量 AUTO_DEVELOP_PROFILE_PATH 读取本 yaml
+# - 同 key 覆盖,新 key 追加;不影响 PyYAML 缺失时的退化解析路径
+#
+# 路由层 step 0 加载 team_profile 后:
+#   export AUTO_DEVELOP_PROFILE_PATH="$(realpath config/team_profile.yaml)"
+# kg_query.py 启动时 _load_scope_to_bizcode 即生效。
+
+# ============== 追加片段:scope → bizcode 映射 ==============
+
+# scope → cjadk bizcode 映射(charge-atom-caijing-knowledge 使用)
+# 字段语义:auto-develop 路由层传入的 scope (charge/settle/billing/...)
+#          → cjadk knowledge --biz-code 的值(bizcode_cj_pay/xj/risk/insurance/test)
+# 缺省策略:本节缺失时,kg_query.py 使用内置默认表(计费域接入零改动)
+# 跨团队接入:消金/风控/保险团队在自己 skill 仓库的 team_profile.yaml 重写本节即可
+scope_to_bizcode:
+  # 财经-计费/支付域(本仓库默认)
+  charge: bizcode_cj_pay
+  settle: bizcode_cj_pay
+  billing: bizcode_cj_pay
+  pay: bizcode_cj_pay
+  # 跨域映射(可注释掉不需要的,kg_query.py 会按需匹配)
+  xj: bizcode_cj_xj
+  credit: bizcode_cj_xj
+  risk: bizcode_cj_risk
+  insurance: bizcode_cj_insurance
+  test: bizcode_cj_test

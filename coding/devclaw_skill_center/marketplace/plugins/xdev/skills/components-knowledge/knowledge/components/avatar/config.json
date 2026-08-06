@@ -1,0 +1,30 @@
+{
+  "name": "Avatar",
+  "description": "头像组件：用于展示用户、机器人、平台等的头像图标，支持多种尺寸和类型，可显示图片、字符或图标。",
+  "demo": [
+    {
+      "name": "1-avatar-demo",
+      "description": "最简单的头像使用方式。支持 src（图片）和 color（背景色）两种形态，当同时设置时，src 会优先生效。"
+    },
+    {
+      "name": "2-avatar-demo",
+      "description": "Avatar 提供了丰富的尺寸选项，从超大到超小，满足不同场景的需求。"
+    },
+    {
+      "name": "3-avatar-demo",
+      "description": "Avatar 支持多种预设颜色，可以用来区分不同的用户或场景。"
+    },
+    {
+      "name": "4-avatar-demo",
+      "description": "通过设置 hoverMask 属性来启用编辑遮罩层，适用于需要修改头像的场景。相较于 Semi Avatar 的实现，这里的 hoverMask 改为了 boolean 类型，并预设了编辑态的图标样式，传入 true 即可启用。"
+    },
+    {
+      "name": "5-avatar-demo",
+      "description": "使用 CozAvatar.AvatarGroup 可以将多个头像组合显示，支持不同的尺寸配置和堆叠方向。通过 maxCount 属性可以限制显示的头像数量，超出部分会显示为数字。"
+    },
+    {
+      "name": "6-avatar-demo",
+      "description": "Avatar 支持多种事件处理，包括点击和鼠标悬停事件。"
+    }
+  ]
+}

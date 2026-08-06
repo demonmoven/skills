@@ -1,0 +1,27 @@
+# Clippy 配置示例（Rust）
+# 针对 AI Agent 开发模式优化
+#
+# 使用说明：这是参考基线。大部分 Clippy lint 通过
+# Cargo.toml 或代码内属性控制，此文件设置全局参数。
+# 参见 references/lint-strategy-guide.md 了解每条规则的目的。
+
+# --- 领域2: 函数过长 ---
+too-many-lines-threshold = 100   # 根据项目实际调整
+
+# --- 领域3: 复杂度 ---
+cognitive-complexity-threshold = 25   # 根据项目实际调整
+
+# 推荐在 Cargo.toml 或 lib.rs/main.rs 中添加以下属性：
+#
+# // --- 领域1: 错误处理 ---
+# #![warn(clippy::unwrap_used)]    // 鼓励用 ? 代替 unwrap
+# #![warn(clippy::expect_used)]    // 鼓励用 ? 代替 expect
+#
+# // --- 领域4: 未使用代码 ---
+# #![warn(dead_code)]
+# #![warn(unused_variables)]
+# #![warn(unused_imports)]
+#
+# // --- 领域8: 类型安全 ---
+# #![warn(clippy::cast_possible_truncation)]
+# #![warn(clippy::cast_sign_loss)]

@@ -1,0 +1,8 @@
+{
+  "name": "InfoTooltip",
+  "description": "信息提示图标组件。",
+  "source": "widgets/base/components/src/info-tooltip/",
+  "demo": [
+    { "name": "1-info-tooltip-demo", "description": "基本用法" }
+  ]
+}

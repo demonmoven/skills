@@ -1,0 +1,3 @@
+display_name: PRD 技术方案编排
+short_description: 证据驱动生成飞书技术方案。
+default_prompt: 先理解 PRD 正文和评论，再按业务动作、能力域和功能点拆分；功能点拆分前必须使用 llm-wiki-git query "<问题>" 检索系统现状，并结合代码 evidence table 生成飞书技术方案文档。

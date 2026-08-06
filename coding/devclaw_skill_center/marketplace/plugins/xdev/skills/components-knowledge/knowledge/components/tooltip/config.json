@@ -1,0 +1,22 @@
+{
+  "name": "Tooltip",
+  "description": "文字提示组件：当用户与元素交互时展示简短的提示信息，用于解释功能或操作，支持多种触发方式和展示位置。",
+  "demo": [
+    {
+      "name": "1-tooltip-demo",
+      "description": "最基础的用法，当鼠标悬停在元素上时显示提示。"
+    },
+    {
+      "name": "2-tooltip-demo",
+      "description": "Tooltip 支持亮色和暗色两种主题。"
+    },
+    {
+      "name": "3-tooltip-demo",
+      "description": "Tooltip 支持 12 个不同的展示位置。"
+    },
+    {
+      "name": "4-tooltip-demo",
+      "description": "Tooltip 支持多种触发方式：悬停、点击、右键和聚焦。"
+    }
+  ]
+}

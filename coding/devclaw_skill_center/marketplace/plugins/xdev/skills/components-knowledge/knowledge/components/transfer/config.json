@@ -1,0 +1,42 @@
+{
+  "name": "Transfer",
+  "description": "一个更直观高效的多选选择器，可以露出更多选项的信息，支持搜索功能，缺点是占据更多空间",
+  "demo": [
+    {
+      "name": "1-transfer-demo",
+      "description": "基本使用"
+    },
+    {
+      "name": "2-transfer-demo",
+      "description": "分组"
+    },
+    {
+      "name": "3-transfer-demo",
+      "description": "自定义筛选逻辑，自定义选项数据渲染"
+    },
+    {
+      "name": "4-transfer-demo",
+      "description": "禁用"
+    },
+    {
+      "name": "5-transfer-demo",
+      "description": "拖拽排序"
+    },
+    {
+      "name": "6-transfer-demo",
+      "description": "拖拽 + 自定义已选项渲染"
+    },
+    {
+      "name": "7-transfer-demo",
+      "description": "自定义渲染面板头部信息"
+    },
+    {
+      "name": "8-transfer-demo",
+      "description": "完全自定义渲染"
+    },
+    {
+      "name": "9-transfer-demo",
+      "description": "完全自定义渲染 、 拖拽排序"
+    }
+  ]
+}

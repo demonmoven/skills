@@ -1,0 +1,22 @@
+{
+  "name": "TextArea",
+  "description": "多行文本框组件：用于输入多行文本，适用于需要用户输入较长的描述、评论或反馈的场景，支持字数限制和自动调整高度。",
+  "demo": [
+    {
+      "name": "1-textarea-demo",
+      "description": "最基本的多行文本框用法。"
+    },
+    {
+      "name": "2-textarea-demo",
+      "description": "支持根据内容自动调整高度。"
+    },
+    {
+      "name": "3-textarea-demo",
+      "description": "支持禁用、加载中和错误状态。"
+    },
+    {
+      "name": "4-textarea-demo",
+      "description": "支持添加前缀和后缀图标。"
+    }
+  ]
+}

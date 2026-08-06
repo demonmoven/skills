@@ -1,0 +1,42 @@
+{
+  "name": "Input",
+  "description": "输入框组件：用于收集用户文本输入的基础表单控件，支持多种状态和格式，适用于表单、搜索等场景。",
+  "demo": [
+    {
+      "name": "1-input-demo",
+      "description": "最简单的输入框用法。"
+    },
+    {
+      "name": "2-input-demo",
+      "description": "通过 disabled 属性设置输入框为禁用状态。"
+    },
+    {
+      "name": "3-input-demo",
+      "description": "通过 loading 属性显示加载状态，此时输入框会被禁用。这是我们在 Semi Input 基础上扩展的特性。"
+    },
+    {
+      "name": "4-input-demo",
+      "description": "通过 error 属性显示错误状态。这是我们在 Semi Input 基础上扩展的特性。"
+    },
+    {
+      "name": "5-input-demo",
+      "description": "使用 prefix 和 suffix 属性设置前缀和后缀，可以是文本或图标。"
+    },
+    {
+      "name": "6-input-demo",
+      "description": "使用 maxLength 属性限制输入字符数，会在后缀位置自动显示字符计数。支持自定义字符长度计算方法。"
+    },
+    {
+      "name": "7-input-demo",
+      "description": "提供 small、default 两种尺寸。"
+    },
+    {
+      "name": "8-input-demo",
+      "description": "组件内置了对中文输入法的支持，可以通过 onCompositionStart、onCompositionEnd 和 onCompositionUpdate 事件来处理输入法编辑过程。"
+    },
+    {
+      "name": "9-input-demo",
+      "description": "在表单中使用时，推荐使用 FormInput 组件，它是 Input 组件的表单封装版本，支持表单验证等特性。"
+    }
+  ]
+}

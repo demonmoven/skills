@@ -1,0 +1,8 @@
+{
+  "name": "PrimaryTitle",
+  "description": "主标题文本组件。",
+  "source": "widgets/base/components/src/primary-title/",
+  "demo": [
+    { "name": "1-primary-title-demo", "description": "基本用法" }
+  ]
+}

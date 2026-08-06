@@ -1,0 +1,30 @@
+{
+  "name": "Descriptions",
+  "description": "描述列表用于键值对的呈现。",
+  "demo": [
+    {
+      "name": "1-descriptions-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-descriptions-demo",
+      "description": "设置对齐方式"
+    },
+    {
+      "name": "3-descriptions-demo",
+      "description": "JSX 写法"
+    },
+    {
+      "name": "4-descriptions-demo",
+      "description": "设置布局模式"
+    },
+    {
+      "name": "5-descriptions-demo",
+      "description": "双行显示"
+    },
+    {
+      "name": "6-descriptions-demo",
+      "description": "Descriptions"
+    }
+  ]
+}

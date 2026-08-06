@@ -1,0 +1,8 @@
+{
+  "name": "EditIconButton",
+  "description": "铅笔图标编辑按钮。",
+  "source": "widgets/base/components/src/edit-icon-button/",
+  "demo": [
+    { "name": "1-edit-icon-button-demo", "description": "基本用法" }
+  ]
+}

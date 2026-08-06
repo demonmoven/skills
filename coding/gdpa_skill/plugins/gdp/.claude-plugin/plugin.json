@@ -1,0 +1,9 @@
+{
+  "name": "gdp",
+  "version": "1.0.0",
+  "description": "GDP 服务开发技能集",
+  "skills": [
+    "./skills/gdp-knowledge",
+    "./skills/ral-knowledge"
+  ]
+}

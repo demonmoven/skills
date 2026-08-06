@@ -1,0 +1,30 @@
+{
+  "name": "Table",
+  "description": "表格组件：以行列形式展示结构化数据，支持排序、筛选、分页等交互功能，适用于展示大量数据记录的场景。",
+  "demo": [
+    {
+      "name": "1-table-demo",
+      "description": "最基础的表格用法。"
+    },
+    {
+      "name": "2-table-demo",
+      "description": "使用 indexRowSelection 属性可以实现序号和复选框的切换效果。"
+    },
+    {
+      "name": "3-table-demo",
+      "description": "TableMeta 组件可以用于展示表格行的元数据，包括图标、名称、描述等信息。"
+    },
+    {
+      "name": "4-table-demo",
+      "description": "TableAction 组件可以用于展示表格行的操作按钮，包括编辑、复制、删除等操作。"
+    },
+    {
+      "name": "5-table-demo",
+      "description": "通过 enableLoad 和 onLoad 属性可以实现触底加载更多数据的功能。"
+    },
+    {
+      "name": "6-table-demo",
+      "description": "通过 empty 属性可以自定义表格的空状态展示。"
+    }
+  ]
+}

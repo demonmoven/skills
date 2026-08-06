@@ -1,0 +1,249 @@
+# ============================================================
+# Fixloop Universal - Repo Profile Schema
+# ============================================================
+# This file defines all fields a repo profile can/must contain.
+# Required fields are marked with # REQUIRED
+# Optional fields have defaults noted in comments.
+# ============================================================
+
+# --- Project Metadata ---
+project:
+  name: string              # REQUIRED. Human-readable project name
+  repo_url: string          # Optional. Git remote URL
+  app_path: string          # REQUIRED. Relative path from repo root to the main app directory
+                            # Examples: "apps/web", "frontend/apps/dashboard", "."
+  framework: string         # REQUIRED. UI framework: react | vue | svelte | angular | vanilla
+  build_tool: string        # REQUIRED. Build tool: vite | webpack | rspack | rsbuild | next | nuxt
+  language: string          # Optional. Default: "typescript". Options: typescript | javascript
+  monorepo_tool: string     # Optional. Monorepo tool: pnpm-workspace | rush | nx | turborepo | lerna | none
+                            # Default: "none"
+
+# --- Environment Setup ---
+# How to install deps, start servers, and prepare the dev environment.
+setup:
+  install_command: string   # REQUIRED. e.g., "pnpm install", "rush update", "npm install"
+  build_command: string     # Optional. Pre-dev build if needed. e.g., "pnpm run build"
+
+  dev_server:
+    start_command: string   # REQUIRED. Command to start dev server.
+                            # e.g., "pnpm run dev:web", "npm run dev"
+    port: number            # Optional. Fixed port. If omitted, fixloop allocates a random port (8005-8999).
+    port_injection: string  # REQUIRED. How to inject the port into the dev server:
+                            #   "env:PORT"           -> PORT=8080 <start_command>
+                            #   "env:CUSTOM_VAR"     -> CUSTOM_VAR=8080 <start_command>
+                            #   "arg:--port"         -> <start_command> --port 8080
+                            #   "config:<file>:<key>" -> Modify config file before starting
+                            #   "none"               -> Use fixed port, don't inject
+    health_check: string    # Optional. URL to check server readiness.
+                            # Default: "http://localhost:{{port}}"
+                            # Supports {{port}} placeholder.
+    startup_timeout: number # Optional. Max seconds to wait for server. Default: 120
+    env_vars:               # Optional. Extra environment variables for dev server.
+      KEY: value
+
+  mock_server:              # Optional. Only needed if project has a mock server.
+    start_command: string   # Command to start mock server.
+    port: number            # Optional. Fixed port. If omitted, random 9005-9999.
+    port_injection: string  # Same format as dev_server.port_injection
+    health_check: string    # Optional. Default: "http://localhost:{{port}}/health"
+    startup_timeout: number # Optional. Default: 60
+
+  pre_commands:             # Optional. Commands to run before starting servers.
+    - string                # e.g., "source scripts/env.sh", "export NODE_OPTIONS=--max-old-space-size=4096"
+
+  post_commands:            # Optional. Commands to run after servers are ready.
+    - string
+
+# --- Authentication ---
+# How to authenticate in the browser for E2E tests.
+auth:
+  strategy: string          # REQUIRED. One of:
+                            #   "none"               -> No auth needed
+                            #   "form_login"         -> Fill login form
+                            #   "cookie_inject"      -> Inject cookies directly
+                            #   "local_storage"      -> Set localStorage tokens
+                            #   "custom"             -> Custom auth script
+
+  # For form_login strategy:
+  form_login:
+    url: string             # Login page URL. Supports {{port}}.
+    username_selector: string  # CSS selector or AI description for username field
+    password_selector: string  # CSS selector or AI description for password field
+    submit_selector: string    # CSS selector or AI description for submit button
+    credentials:
+      username: string
+      password: string
+    success_indicator: string  # What to wait for after login (URL pattern or element)
+
+  # For cookie_inject strategy:
+  cookie_inject:
+    cookies:                # List of cookies to inject
+      - name: string
+        value: string
+        domain: string
+        path: string        # Default: "/"
+
+  # For local_storage strategy:
+  local_storage:
+    items:
+      - key: string
+        value: string
+
+  # For custom strategy:
+  custom:
+    script: string          # Path to a script that handles auth (relative to profile)
+    description: string     # Human description for AI agent to understand what the script does
+
+# --- Testing Configuration ---
+testing:
+  cases_dir: string         # REQUIRED. Path to E2E test cases directory (relative to repo root).
+                            # e.g., "e2e-cases", "midscene-cases", "tests/e2e"
+  case_format: string       # Optional. Default: "auto". Options:
+                            #   "auto"              -> Auto-detect from file extension
+                            #   "natural_language"   -> Plain text files (.txt/.md), one test per file or per line
+                            #   "yaml"              -> Structured YAML (original fixloop format)
+                            #   "checklist"         -> Markdown checklist format
+                            #
+                            # "natural_language" supports three sub-formats:
+                            #   1. One file per test: each .txt/.md file = one test case
+                            #   2. Line-per-test: a single file where each non-empty line = one test case
+                            #   3. Section-per-test: a .md file where each ## heading = one test case
+                            #
+                            # Auto-detection rules:
+                            #   .yaml/.yml -> yaml
+                            #   .txt       -> natural_language (line-per-test)
+                            #   .md        -> natural_language (section-per-test) or checklist (if has [ ])
+  specs_dir: string         # Optional. Path to spec documents for test generation.
+                            # e.g., "specs", "docs/requirements"
+  default_port_in_yaml: number  # Optional. The port number used in YAML files to be replaced.
+                                # Default: 8090. fixloop replaces this with actual dev server port.
+  max_concurrency: number   # Optional. Max parallel Chrome instances. Default: 10
+  batch_size: number        # Optional. Tests per batch. Default: 10
+  test_timeout: number      # Optional. Per-test timeout in seconds. Default: 600
+
+  # URL discovery for test generation (optional, for gen-tests command)
+  url_discovery:
+    component_preview:
+      type: string          # "storybook" | "custom_route" | "none"
+      url: string           # e.g., "http://localhost:6006", "http://localhost:{{port}}/components-preview"
+      config_file: string   # Optional. File that maps component names to URLs.
+    page_routes:
+      type: string          # "file_routes" | "config_routes" | "manual"
+      route_dir: string     # e.g., "src/routes", "src/pages"
+      base_path: string     # e.g., "/", "/app", "/console"
+
+# --- Fix Loop Configuration ---
+fix_loop:
+  max_iterations: number    # Optional. Max fix iterations. Default: 25
+  enable_fix: boolean       # Optional. Default: true
+  enable_code_review: boolean  # Optional. Default: true
+  quick_dev: boolean        # Optional. Skip stable tests. Default: true
+  stability_threshold: number  # Optional. Consecutive passes to mark stable. Default: 3
+
+  # Code review settings
+  review:
+    enabled_agents:         # Optional. List of review agent IDs to activate.
+      - string              # Default: ["requirements-compliance", "lint-check"]
+                            # Available: requirements-compliance, data-api-compliance,
+                            # scope-boundary, code-quality, mock-detection,
+                            # error-handling, accessibility-ux, code-organization, lint-check
+    decide_by_cr: boolean   # Optional. Let CR block completion. Default: false
+    resume_cr: boolean      # Optional. Run polish iterations. Default: false
+    min_polish_iterations: number  # Optional. Default: 3
+
+  # Regression protection - guards existing code from being broken by fixes
+  regression_guard:
+    enabled: boolean        # Optional. Default: false. Set to true for existing projects.
+                            # When enabled, after each fix iteration the guard runs
+                            # BOTH unit-level and UI-level checks before proceeding.
+
+    # --- Unit / Integration level ---
+    existing_test_command: string  # Optional. The project's existing UT/integration test command.
+                                  # e.g., "pnpm run test", "jest --passWithNoTests", "vitest run"
+                                  # Skipped if not set.
+    existing_test_timeout: number  # Optional. Timeout in seconds. Default: 300
+
+    # --- UI / E2E level ---
+    existing_e2e_command: string   # Optional. Existing E2E test command (playwright/cypress).
+                                   # e.g., "npx playwright test", "npx cypress run"
+                                   # Skipped if not set.
+    existing_e2e_timeout: number   # Optional. Timeout in seconds. Default: 600
+
+    # --- Baseline E2E (when project has no existing E2E tests) ---
+    # If the project has neither playwright nor cypress, use fixloop's own
+    # test cases as a regression baseline. Place baseline tests in a
+    # dedicated directory (e.g., "e2e-cases/baseline/").
+    #
+    # How it works:
+    #   - "baseline/" tests describe EXISTING correct behavior
+    #   - "phase-N-*/" tests describe NEW features being developed
+    #   - After each fix: baseline tests are run first
+    #   - If baseline fails → Fix Agent broke existing functionality → revert
+    #   - If phase-N fails → new feature not yet working → continue fixing
+    #
+    baseline_dir: string    # Optional. Path to baseline E2E cases (relative to cases_dir).
+                            # e.g., "baseline"
+                            # These are treated as "must never break" tests.
+                            # If omitted and no existing_e2e_command, UI regression is unguarded.
+    scope_lock:             # Optional. Directories/files Fix Agent must NOT modify.
+      - string              # e.g., "src/auth/", "src/core/api-client.ts"
+                            # Fix Agent will be instructed to never touch these paths.
+                            # Use this to protect critical shared code from accidental changes.
+
+  # Fix agent context
+  fix_agent:
+    context_files:          # Optional. Extra files the fix agent should read for context.
+      - string              # e.g., "docs/architecture.md", "CONTRIBUTING.md"
+    lint_command: string    # Optional. Lint command for the project.
+                            # e.g., "pnpm run lint", "npx eslint . --ext .ts,.tsx"
+    typecheck_command: string  # Optional. Type check command.
+                               # e.g., "pnpm run typecheck", "npx tsc --noEmit"
+    test_command: string    # Optional. Unit test command.
+                            # e.g., "pnpm run test", "jest --passWithNoTests"
+
+# --- Output Configuration ---
+output:
+  dir: string               # Optional. Output directory. Default: "fixloop-output"
+  keep_screenshots: boolean  # Optional. Default: true
+  keep_iteration_details: boolean  # Optional. Default: true
+  keep_traces: boolean        # Optional. Default: true. Keep Playwright session traces.
+  timeline_format: string     # Optional. Default: "json". Options: "json" | "jsonl".
+
+# --- Browser Configuration (v2) ---
+# Controls how Playwright MCP launches and connects to the browser.
+browser:
+  mode: string               # Optional. Default: "system_chrome".
+                              #   "system_chrome" — Use system-installed Chrome (user's real browser)
+                              #   "cdp_connect"   — Connect to an already-running Chrome via CDP
+                              #   "bundled"       — Use Playwright's bundled Chromium
+                              #   "headless"      — Headless Chromium (CI environments)
+  cdp_endpoint: string        # Required when mode=cdp_connect. e.g., "ws://localhost:9222"
+  executable_path: string     # Optional. Custom browser executable path.
+  viewport: string            # Optional. Default: "1440x900". Format: "WIDTHxHEIGHT"
+  user_data_dir: string       # Optional. Browser profile directory for persistent cookies/storage.
+
+# --- Observation Configuration (v2) ---
+# Controls temporal recording of browser interactions.
+# When enabled, Playwright MCP records DOM snapshots, network, console, and timing
+# for each action, producing structured timeline data for diagnosis.
+observation:
+  enabled: boolean            # Optional. Default: true. Enable session recording.
+  trace_retention: number     # Optional. Default: 50. Max trace session directories to keep.
+  record_network: boolean     # Optional. Default: true. Include network events in timeline.
+  snapshot_mode: string       # Optional. Default: "full". Options: "full" | "none".
+                              # "full" records accessibility tree snapshots per action.
+
+# --- Exploration Configuration (v2) ---
+# Controls post-test state-space exploration.
+# When enabled, after each test case, an exploration agent interacts with
+# untested UI elements to discover edge cases and hidden bugs.
+exploration:
+  enabled: boolean            # Optional. Default: false. Enable post-test exploration.
+  budget: number              # Optional. Default: 10. Max interactions per test case.
+  strategy: string            # Optional. Default: "a11y_driven".
+                              #   "a11y_driven" — Enumerate interactive elements from accessibility tree
+                              #   "boundary"    — Boundary testing (empty input, long text, special chars)
+                              #   "chaos"       — Inject gremlins.js for random monkey testing
+  max_states: number          # Optional. Default: 50. Max unique UI states to track.
+  excluded_elements:          # Optional. Element name patterns to skip during exploration.
+    - string                  # e.g., "delete", "remove", "logout", "sign out"

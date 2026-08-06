@@ -1,0 +1,8 @@
+{
+  "name": "LogicEditor",
+  "description": "逻辑筛选编辑器组件。",
+  "source": "widgets/base/components/src/logic-editor/",
+  "demo": [
+    { "name": "1-logic-editor-demo", "description": "基本用法" }
+  ]
+}

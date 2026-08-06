@@ -1,0 +1,8 @@
+{
+  "name": "SemiSchemaForm",
+  "description": "Schema 驱动表单组件。",
+  "source": "widgets/base/components/src/semi-schema-form/",
+  "demo": [
+    { "name": "1-semi-schema-form-demo", "description": "基本用法" }
+  ]
+}

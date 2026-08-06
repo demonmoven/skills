@@ -1,0 +1,38 @@
+# AI Agent 代码质量守护
+# 防止 AI 常见问题进入代码库
+# 适用条件：团队使用 AI 编码工具
+
+- repo: local
+  hooks:
+    # 禁止占位符 / 桩代码
+    # AI 经常生成 "TODO: implement" 等未实现的占位代码
+    # 注意：正则同时覆盖 // 和 # 两种注释风格
+    - id: ai-no-placeholder-code
+      name: "no placeholder code (TODO implement / PLACEHOLDER / STUB)"
+      language: pygrep
+      entry: '(//|#)\s*(TODO:?\s*implement|PLACEHOLDER|STUB|HACK|XXX|FIXME)'
+      files: '\.(go|ts|tsx|js|jsx|py|rs|java)$'
+
+    # 禁止 AI 幻觉标记
+    - id: ai-no-hallucination-markers
+      name: "no AI hallucination markers"
+      language: pygrep
+      entry: '(<PLACEHOLDER>|<INSERT.*HERE>|<FILL.*IN>|<YOUR.*HERE>|<REPLACE.*WITH>)'
+      files: '\.(go|ts|tsx|js|jsx|py|rs|java)$'
+
+    # 文件行数上限
+    # 上限通过 HARNESS_MAX_FILE_LINES 环境变量配置，默认 600
+    - id: ai-file-length-limit
+      name: "file length limit"
+      language: script
+      entry: .hooks/check-file-length.sh
+      files: '\.(go|ts|tsx|js|jsx|py|rs|java)$'
+
+    # 活动计划完成度检查（pre-push 阶段）
+    - id: ai-active-plans-clean
+      name: "active plans must be complete before push"
+      language: script
+      entry: .hooks/check-active-plans.sh
+      pass_filenames: false
+      always_run: true
+      stages: [pre-push]

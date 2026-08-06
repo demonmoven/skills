@@ -1,0 +1,64 @@
+{
+  "name": "@byted/xdex",
+  "version": "0.0.41",
+  "description": "xdev — 统一 coding agent CLI: 5 个 agent (Trae CN / Trae / Coco / Claude Code / Codex) 切换 + plugin/skill 项目级分发 + trace 会话上报",
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./trace/opencode": "./dist/trace/plugins/opencode.js"
+  },
+  "bin": {
+    "xdev": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "marketplace",
+    "agents",
+    "web/dist",
+    "README.md"
+  ],
+  "license": "UNLICENSED",
+  "author": "stone",
+  "keywords": [
+    "devclaw",
+    "claude-code",
+    "codex",
+    "trace",
+    "xdev"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@code.byted.org:stone/devclaw_skills_center.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "node build.js",
+    "test": "vitest run",
+    "prepublishOnly": "npm test && bash pre-publish.sh",
+    "dev": "ts-node -r tsconfig-paths/register src/index.ts",
+    "lint": "eslint src/",
+    "clean": "rm -rf dist/"
+  },
+  "dependencies": {
+    "@byted-service/tos": "^4.4.3",
+    "@types/express": "^4.17.25",
+    "commander": "^12.1.0",
+    "express": "^5.2.1",
+    "smol-toml": "^1.6.1",
+    "yaml": "^2.6.0"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.30.0",
+    "@types/node": "^20.11.0",
+    "esbuild": "^0.27.1",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.8",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3",
+    "vitest": "^2.1.9"
+  }
+}

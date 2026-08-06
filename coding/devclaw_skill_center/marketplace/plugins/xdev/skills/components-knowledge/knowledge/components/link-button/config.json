@@ -1,0 +1,8 @@
+{
+  "name": "LinkButton",
+  "description": "链接样式按钮。",
+  "source": "widgets/base/components/src/link-button/",
+  "demo": [
+    { "name": "1-link-button-demo", "description": "基本用法" }
+  ]
+}

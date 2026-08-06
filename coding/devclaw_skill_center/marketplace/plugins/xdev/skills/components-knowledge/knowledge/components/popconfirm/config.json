@@ -1,0 +1,26 @@
+{
+  "name": "Popconfirm",
+  "description": "气泡确认框组件：轻量级的确认对话框，用于需要用户进行二次确认的操作场景，以气泡形式展现，不打断操作流程。",
+  "demo": [
+    {
+      "name": "1-popconfirm-demo",
+      "description": "最基础的用法，只包含确认按钮。"
+    },
+    {
+      "name": "2-popconfirm-demo",
+      "description": "添加取消按钮，给用户更多的选择。"
+    },
+    {
+      "name": "3-popconfirm-demo",
+      "description": "支持自定义确认按钮的颜色，包括品牌色、警告色和危险色。"
+    },
+    {
+      "name": "4-popconfirm-demo",
+      "description": "使用 SubTitle、Description 和 Content 组件来构建更丰富的内容结构。"
+    },
+    {
+      "name": "5-popconfirm-demo",
+      "description": "支持异步操作，可以在操作完成后自动关闭。适用于需要等待服务器响应的场景。"
+    }
+  ]
+}

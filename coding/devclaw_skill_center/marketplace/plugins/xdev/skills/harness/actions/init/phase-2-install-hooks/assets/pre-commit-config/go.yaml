@@ -1,0 +1,40 @@
+# Go 项目质量检查
+# 需要 golangci-lint 已安装
+# 适用条件：检测到 go.mod
+
+- repo: local
+  hooks:
+    - id: no-commit-to-main
+      name: "no direct commit to main/master"
+      language: script
+      entry: .hooks/no-commit-to-main.sh
+      pass_filenames: false
+      always_run: true
+
+    - id: go-fmt
+      name: "go fmt"
+      language: script
+      entry: .hooks/go-fmt.sh
+      files: '\.go$'
+      pass_filenames: false
+
+    - id: go-build
+      name: "go build (compile check)"
+      language: system
+      entry: bash -c 'go build ./...'
+      files: '\.go$'
+      pass_filenames: false
+
+    - id: go-mod-tidy
+      name: "go mod tidy (dependency consistency)"
+      language: script
+      entry: .hooks/go-mod-tidy.sh
+      files: '(\.go$|go\.mod$|go\.sum$)'
+      pass_filenames: false
+
+    - id: golangci-lint
+      name: "golangci-lint"
+      language: system
+      entry: bash -c 'export PATH="$(go env GOPATH)/bin:$PATH" && golangci-lint run ./...'
+      files: '\.go$'
+      pass_filenames: false

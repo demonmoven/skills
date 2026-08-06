@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "V&V 子系统 summary.json 统一 schema",
+  "type": "object",
+  "required": ["subsystem", "score", "pass", "findings_count", "findings"],
+  "additionalProperties": false,
+  "properties": {
+    "subsystem": {
+      "type": "string",
+      "enum": ["rule_checks", "structural_tests", "task_evals", "trace_grading", "regression_gates"]
+    },
+    "score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "pass": {
+      "type": "boolean"
+    },
+    "findings_count": {
+      "type": "object",
+      "required": ["critical", "high", "medium", "low"],
+      "additionalProperties": false,
+      "properties": {
+        "critical": { "type": "integer", "minimum": 0 },
+        "high": { "type": "integer", "minimum": 0 },
+        "medium": { "type": "integer", "minimum": 0 },
+        "low": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/finding" }
+    }
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "required": ["id", "severity", "category", "title", "description", "failure_type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(RC|ST|TE|TG|RG)-\\d{3}$"
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["critical", "high", "medium", "low"]
+        },
+        "category": {
+          "type": "string",
+          "minLength": 1
+        },
+        "file": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 0,
+          "$comment": "行号，0 表示项目级/文件级 finding 不针对特定行"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fix_hint": {
+          "type": "string"
+        },
+        "failure_type": {
+          "type": "string",
+          "enum": [
+            "POLICY_VIOLATION",
+            "STRUCTURE_DRIFT",
+            "OUTCOME_FAIL",
+            "TOOL_MISUSE",
+            "THRASHING",
+            "UNNECESSARY_COMPLEXITY"
+          ]
+        }
+      }
+    }
+  }
+}

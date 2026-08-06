@@ -1,0 +1,22 @@
+{
+  "name": "Highlight",
+  "description": "高亮特定内容",
+  "demo": [
+    {
+      "name": "1-highlight-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-highlight-demo",
+      "description": "指定高亮样式"
+    },
+    {
+      "name": "3-highlight-demo",
+      "description": "不同文本使用差异化样式"
+    },
+    {
+      "name": "4-highlight-demo",
+      "description": "指定高亮标签"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+# Example: Generic Next.js project
+# Copy to your repo root as fixloop-profile.yaml and customize.
+
+project:
+  name: my-nextjs-app
+  app_path: "."
+  framework: react
+  build_tool: next
+  language: typescript
+
+setup:
+  install_command: "npm install"
+  build_command: "npm run build"
+  dev_server:
+    start_command: "npm run dev"
+    port_injection: "arg:-p"
+    health_check: "http://localhost:{{port}}"
+    startup_timeout: 90
+
+auth:
+  strategy: none
+
+testing:
+  cases_dir: e2e-cases
+  case_format: auto
+  max_concurrency: 5
+
+fix_loop:
+  max_iterations: 15
+  enable_fix: true
+  enable_code_review: true
+
+browser:
+  mode: system_chrome
+
+observation:
+  enabled: true
+
+exploration:
+  enabled: false
+  budget: 10
+  strategy: a11y_driven
+
+output:
+  dir: fixloop-output
+  keep_screenshots: true
+  keep_traces: true

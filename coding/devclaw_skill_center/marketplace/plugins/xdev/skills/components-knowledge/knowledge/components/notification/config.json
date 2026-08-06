@@ -1,0 +1,38 @@
+{
+  "name": "Notification",
+  "description": "通知用于主动向用户发出消息通知",
+  "demo": [
+    {
+      "name": "1-notification-demo",
+      "description": "普通通知"
+    },
+    {
+      "name": "2-notification-demo",
+      "description": "不同位置弹出"
+    },
+    {
+      "name": "3-notification-demo",
+      "description": "带有图标的通知"
+    },
+    {
+      "name": "4-notification-demo",
+      "description": "多色样式"
+    },
+    {
+      "name": "5-notification-demo",
+      "description": "链接文本"
+    },
+    {
+      "name": "6-notification-demo",
+      "description": "修改延时"
+    },
+    {
+      "name": "7-notification-demo",
+      "description": "手动关闭"
+    },
+    {
+      "name": "8-notification-demo",
+      "description": "更新内容"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ResizableSideSheet",
+  "description": "可拖拽调整宽度的侧边抽屉组件。",
+  "source": "widgets/base/components/src/resizable-side-sheet/",
+  "demo": [
+    { "name": "1-resizable-side-sheet-demo", "description": "基本用法" }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "StepNav",
+  "description": "步骤导航组件。",
+  "source": "widgets/base/components/src/step-nav/",
+  "demo": [
+    { "name": "1-step-nav-demo", "description": "基本用法" }
+  ]
+}

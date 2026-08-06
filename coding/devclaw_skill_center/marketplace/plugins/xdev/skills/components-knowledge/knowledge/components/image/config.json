@@ -1,0 +1,46 @@
+{
+  "name": "Image",
+  "description": "用于展示和预览图片。",
+  "demo": [
+    {
+      "name": "1-image-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "10-image-demo",
+      "description": "加载失败的占位图"
+    },
+    {
+      "name": "2-image-demo",
+      "description": "渐进加载"
+    },
+    {
+      "name": "3-image-demo",
+      "description": "自定义预览图片"
+    },
+    {
+      "name": "4-image-demo",
+      "description": "多图预览"
+    },
+    {
+      "name": "5-image-demo",
+      "description": "单独使用预览组件"
+    },
+    {
+      "name": "6-image-demo",
+      "description": "渲染在指定容器"
+    },
+    {
+      "name": "7-image-demo",
+      "description": "自定义预览底部操作区"
+    },
+    {
+      "name": "8-image-demo",
+      "description": "自定义预览顶部展示区"
+    },
+    {
+      "name": "9-image-demo",
+      "description": "Image"
+    }
+  ]
+}

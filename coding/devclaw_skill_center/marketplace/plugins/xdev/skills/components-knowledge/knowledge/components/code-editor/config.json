@@ -1,0 +1,8 @@
+{
+  "name": "CodeEditor",
+  "description": "对 @monaco-editor/react 的封装，提供 Monaco CodeEditor 和 DiffEditor。",
+  "source": "widgets/base/components/src/code-editor/",
+  "demo": [
+    { "name": "1-code-editor-demo", "description": "基本用法" }
+  ]
+}

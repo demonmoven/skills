@@ -1,0 +1,9 @@
+export { default as TransferDemo1 } from './1-transfer-demo';
+export { default as TransferDemo2 } from './2-transfer-demo';
+export { default as TransferDemo3 } from './3-transfer-demo';
+export { default as TransferDemo4 } from './4-transfer-demo';
+export { default as TransferDemo5 } from './5-transfer-demo';
+export { default as TransferDemo6 } from './6-transfer-demo';
+export { default as TransferDemo7 } from './7-transfer-demo';
+export { default as TransferDemo8 } from './8-transfer-demo';
+export { default as TransferDemo9 } from './9-transfer-demo';

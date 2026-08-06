@@ -1,0 +1,38 @@
+{
+  "name": "Timeline",
+  "description": "时间轴是用于对一系列信息进行时间排序时，垂直展示的组件。",
+  "demo": [
+    {
+      "name": "1-timeline-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-timeline-demo",
+      "description": "节点类型"
+    },
+    {
+      "name": "3-timeline-demo",
+      "description": "自定义节点"
+    },
+    {
+      "name": "4-timeline-demo",
+      "description": "时间轴位置"
+    },
+    {
+      "name": "5-timeline-demo",
+      "description": "时间轴在左侧（默认）"
+    },
+    {
+      "name": "6-timeline-demo",
+      "description": "时间节点在左侧"
+    },
+    {
+      "name": "7-timeline-demo",
+      "description": "交替展现"
+    },
+    {
+      "name": "8-timeline-demo",
+      "description": "时间轴在右侧"
+    }
+  ]
+}

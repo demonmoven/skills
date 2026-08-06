@@ -1,0 +1,14 @@
+{
+  "name": "backend-knowledge",
+  "version": "1.0.0",
+  "description": "TikTok backend development knowledge base (auto-loaded by context). Covers three areas: framework guides (GDP/Kitex/Hertz/RAL/Overpass); SDK integration (storage, TCC/ByteConf/Confx config, Metrics/StreamLog/BytedTrace observability, KMS/ByteTIM security, Libra/Dolphin experiments, Fornax/RTC/ImageX, etc.); engineering standards (TikTok guidelines, refactor review, Monorepo, 3V architecture, integration testing). Provides context automatically to Claude when writing, refactoring, or reviewing TikTok backend code.",
+  "author": {
+    "name": "TikTok GDPA",
+    "email": "tiktok-gdpa@bytedance.com"
+  },
+  "homepage": "https://code.byted.org/tiktok/gdpa_skills",
+  "keywords": ["gdpa", "backend-knowledge"],
+  "skills": "./skills",
+  "minCliVersion": "1.5.0",
+  "skipInterceptor": true
+}

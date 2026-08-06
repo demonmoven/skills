@@ -1,0 +1,34 @@
+{
+  "name": "gdpa-skills",
+  "owner": {
+    "name": "chenglinfeng",
+    "email": "chenglinfeng@bytedance.com"
+  },
+  "metadata": {
+    "description": "GDPA SKILLS",
+    "version": "2.0.0",
+    "pluginRoot": "plugins"
+  },
+  "plugins": [
+    {
+      "name": "backend",
+      "source": "./plugins/backend",
+      "description": "后端开发全栈技能集。涵盖 GDP 框架、RAL 资源访问、Kitex RPC、Hertz HTTP、Overpass 代码生成、存储/配置/监控 SDK、TikTok 开发规范、GDPA 工具集等。"
+    },
+    {
+      "name": "backend-knowledge",
+      "source": "./plugins/backend-knowledge",
+      "description": "TikTok backend development knowledge base (auto-loaded by context). Covers three areas: framework guides (GDP/Kitex/Hertz/RAL/Overpass); SDK integration (storage, TCC/ByteConf/Confx config, Metrics/StreamLog/BytedTrace observability, KMS/ByteTIM security, Libra/Dolphin experiments, Fornax/RTC/ImageX, etc.); engineering standards (TikTok guidelines, refactor review, Monorepo, 3V architecture, integration testing). Provides context automatically to Claude when writing, refactoring, or reviewing TikTok backend code."
+    },
+    {
+      "name": "backend-tools",
+      "source": "./plugins/backend-tools",
+      "description": "后端开发工具集。涵盖 GDPA CLI、BAM API 查询与测试、Overpass 代码生成、Repotalk 代码分析、Argos 日志查询、RDS/TCC 查询、SCM 版本管理等工具。"
+    },
+    {
+      "name": "gdp",
+      "source": "./plugins/gdp",
+      "description": "GDP 服务开发技能集。涵盖 GDP 框架核心知识和 RAL 资源访问层。"
+    }
+  ]
+}

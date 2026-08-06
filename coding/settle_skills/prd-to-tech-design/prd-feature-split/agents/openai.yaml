@@ -1,0 +1,4 @@
+interface:
+  display_name: "PRD 功能点拆分"
+  short_description: "先查 Wiki/代码现状，再按能力域拆分功能点。"
+  default_prompt: "读取 prd-understand.md 后，先使用 llm-wiki-git query \"<问题>\" 检索系统现状，再从业务动作映射到能力域、功能点、调查任务和代码 evidence table。"

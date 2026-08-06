@@ -1,0 +1,64 @@
+[
+  {
+    "trace_id": "TRACE_A",
+    "span_id": "a-model",
+    "span_type": "",
+    "type": "model",
+    "started_at": 1000,
+    "duration": 500000,
+    "status": "success",
+    "status_code": 0,
+    "custom_tags": {
+      "conversation_id": "THREAD_X",
+      "model_name": "doubao-pro",
+      "input_tokens": "100",
+      "output_tokens": "50"
+    },
+    "input": "{\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}]}",
+    "output": "{\"choices\":[{\"message\":{\"role\":\"assistant\",\"content\":\"hello, running ls\",\"tool_calls\":[{\"id\":\"call_a1\",\"function\":{\"name\":\"list_dir\",\"arguments\":\"{\\\"path\\\":\\\"/\\\"}\"}}]}}]}"
+  },
+  {
+    "trace_id": "TRACE_A",
+    "span_id": "a-tool",
+    "span_type": "tool",
+    "type": "",
+    "started_at": 1600,
+    "duration": 100000,
+    "status": "success",
+    "status_code": 0,
+    "custom_tags": { "conversation_id": "THREAD_X", "tool_name": "list_dir", "tool_call_id": "call_a1", "tool_call_id_origin": "call_a1" },
+    "span_name": "list_dir",
+    "output": "a.txt\nb.txt"
+  },
+  {
+    "trace_id": "TRACE_B",
+    "span_id": "b-model",
+    "span_type": "",
+    "type": "model",
+    "started_at": 3000,
+    "duration": 700000,
+    "status": "success",
+    "status_code": 0,
+    "custom_tags": {
+      "conversation_id": "THREAD_X",
+      "model_name": "doubao-pro",
+      "input_tokens": "300",
+      "output_tokens": "80"
+    },
+    "input": "{\"messages\":[{\"role\":\"user\",\"content\":\"hi\"},{\"role\":\"assistant\",\"content\":\"hello, running ls\",\"tool_calls\":[{\"id\":\"call_a1\",\"function\":{\"name\":\"list_dir\",\"arguments\":\"{\\\"path\\\":\\\"/\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"call_a1\",\"content\":\"a.txt\\nb.txt\"},{\"role\":\"user\",\"content\":\"read a.txt\"}]}",
+    "output": "{\"choices\":[{\"message\":{\"role\":\"assistant\",\"content\":\"file contents: hello world\"}}]}"
+  },
+  {
+    "trace_id": "TRACE_B",
+    "span_id": "b-tool",
+    "span_type": "tool",
+    "type": "",
+    "started_at": 3600,
+    "duration": 100000,
+    "status": "success",
+    "status_code": 0,
+    "custom_tags": { "conversation_id": "THREAD_X", "tool_name": "read_file" },
+    "span_name": "read_file",
+    "output": "hello world"
+  }
+]

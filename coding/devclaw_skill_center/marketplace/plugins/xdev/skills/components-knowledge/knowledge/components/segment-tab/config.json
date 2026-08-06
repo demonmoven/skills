@@ -1,0 +1,22 @@
+{
+  "name": "SegmentTab",
+  "description": "分段器组件：用于在不同视图或功能之间进行切换，提供类似标签页但更紧凑和独特的视觉样式。",
+  "demo": [
+    {
+      "name": "1-segmenttab-demo",
+      "description": "最基础的分段器用法。"
+    },
+    {
+      "name": "2-segmenttab-demo",
+      "description": "SegmentTab 支持 default 和 small 两种尺寸。"
+    },
+    {
+      "name": "3-segmenttab-demo",
+      "description": "可以通过 disabled 属性禁用整个分段器。"
+    },
+    {
+      "name": "4-segmenttab-demo",
+      "description": "使用 value 和 onChange 实现受控模式。"
+    }
+  ]
+}

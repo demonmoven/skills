@@ -1,0 +1,9 @@
+export { default as BadgeDemo1 } from './1-badge-demo';
+export { default as BadgeDemo2 } from './2-badge-demo';
+export { default as BadgeDemo3 } from './3-badge-demo';
+export { default as BadgeDemo4 } from './4-badge-demo';
+export { default as BadgeDemo5 } from './5-badge-demo';
+export { default as BadgeDemo6 } from './6-badge-demo';
+export { default as BadgeDemo7 } from './7-badge-demo';
+export { default as BadgeDemo8 } from './8-badge-demo';
+export { default as BadgeDemo9 } from './9-badge-demo';

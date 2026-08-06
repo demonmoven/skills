@@ -1,0 +1,26 @@
+{
+  "name": "Checkbox",
+  "description": "复选框组件：用于在一组选项中进行多项选择，或表示两种状态之间的切换，支持单独使用和组合使用。",
+  "demo": [
+    {
+      "name": "1-checkbox-demo",
+      "description": "最基本的复选框用法。"
+    },
+    {
+      "name": "2-checkbox-demo",
+      "description": "使用 checked 和 onChange 属性实现受控组件。"
+    },
+    {
+      "name": "3-checkbox-demo",
+      "description": "使用 indeterminate 属性可以设置复选框的半选状态。"
+    },
+    {
+      "name": "4-checkbox-demo",
+      "description": "使用 disabled 属性可以禁用复选框。"
+    },
+    {
+      "name": "5-checkbox-demo",
+      "description": "使用 Checkbox.Group 可以实现一组复选框。支持水平和垂直两种排列方式。"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Radio",
+  "description": "单选框组件：用于在一组互斥的选项中选择一个选项，支持单独使用和组合使用两种方式。",
+  "demo": [
+    {
+      "name": "1-radio-demo",
+      "description": "最基本的单选框用法。"
+    },
+    {
+      "name": "2-radio-demo",
+      "description": "使用 RadioGroup 实现一组互斥的单选框。"
+    },
+    {
+      "name": "3-radio-demo",
+      "description": "使用 mode=\"advanced\" 和 type=\"pureCard\" 可以展示卡片样式的单选框。"
+    },
+    {
+      "name": "4-radio-demo",
+      "description": "使用 value 和 onChange 实现受控的选择状态。"
+    }
+  ]
+}

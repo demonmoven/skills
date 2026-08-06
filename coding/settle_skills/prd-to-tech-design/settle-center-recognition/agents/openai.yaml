@@ -1,0 +1,4 @@
+interface:
+  display_name: "settle_center 流程识别"
+  short_description: "改动分析前识别 settle_center 端内/端外接口和 XML 流程。"
+  default_prompt: "识别该 PRD 在 settle_center 中是端内还是端外商户、调用哪个接口、命中 conf/mapping 哪个条件、执行哪个 XML 流程（结论以代码与 conf/mapping 为准，禁止凭知识库断定）。"

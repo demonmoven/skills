@@ -1,0 +1,22 @@
+{
+  "name": "Menu",
+  "description": "菜单组件：为用户提供一组操作或选项列表，适用于导航菜单、下拉菜单、上下文菜单等场景，支持多种选择模式。",
+  "demo": [
+    {
+      "name": "1-menu-demo",
+      "description": "最基础的下拉菜单用法。"
+    },
+    {
+      "name": "2-menu-demo",
+      "description": "通过 `menu` 属性配置菜单项。"
+    },
+    {
+      "name": "3-menu-demo",
+      "description": "支持单选的菜单，可以通过 `selectedKeys` 和 `onSelectionChange` 控制选中状态。"
+    },
+    {
+      "name": "4-menu-demo",
+      "description": "支持多选的菜单，可以通过设置 `multiple` 属性启用多选模式。支持使用 `Title` 和 `Divider` 进行分组。"
+    }
+  ]
+}

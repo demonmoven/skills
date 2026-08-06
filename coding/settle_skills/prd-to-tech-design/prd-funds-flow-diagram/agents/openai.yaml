@@ -1,0 +1,4 @@
+interface:
+  display_name: "PRD 资金流图"
+  short_description: "生成 PRD 账户级资金流图。"
+  default_prompt: "基于 PRD、功能点和代码证据，生成明确主体、待结算户/现金户/垫资户等账户、动作与资金方向的 Mermaid 资金流图。"

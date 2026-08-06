@@ -1,0 +1,8 @@
+{
+  "name": "TableWithPagination",
+  "description": "带分页的表格组件。",
+  "source": "widgets/base/components/src/table/",
+  "demo": [
+    { "name": "1-table-with-pagination-demo", "description": "基本用法" }
+  ]
+}

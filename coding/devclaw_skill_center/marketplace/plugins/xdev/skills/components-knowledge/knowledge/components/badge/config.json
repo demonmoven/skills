@@ -1,0 +1,42 @@
+{
+  "name": "Badge",
+  "description": "徽标组件：用于展示数字、文本或状态标记，适用于消息提醒、状态标识和新功能提示等场景。",
+  "demo": [
+    {
+      "name": "1-badge-demo",
+      "description": "Badge组件可以包裹任何元素，为其添加徽标提示。徽标内容通过count属性设置，支持数字和文本。"
+    },
+    {
+      "name": "2-badge-demo",
+      "description": "Badge组件提供了三种不同的类型，适用于不同的使用场景。"
+    },
+    {
+      "name": "3-badge-demo",
+      "description": "可以通过position属性设置徽标的显示位置，包括：leftTop、leftBottom、rightTop(默认)、rightBottom。"
+    },
+    {
+      "name": "4-badge-demo",
+      "description": "Badge组件支持自定义图标作为徽标内容。当传入的count是React节点时，将直接渲染该节点。"
+    },
+    {
+      "name": "5-badge-demo",
+      "description": "Badge组件支持不传入任何子节点内容，作为独立组件使用。"
+    },
+    {
+      "name": "6-badge-demo",
+      "description": "当数字超过overflowCount设置的值时，会显示为${overflowCount}+的形式。默认的overflowCount为99。"
+    },
+    {
+      "name": "7-badge-demo",
+      "description": "通过countStyle属性，可以自定义徽标的样式，包括颜色、位置、大小等。"
+    },
+    {
+      "name": "8-badge-demo",
+      "description": "Badge组件可以与导航组件结合使用，如TabBar、SegmentTab等。"
+    },
+    {
+      "name": "9-badge-demo",
+      "description": "Badge组件可以与按钮组件结合使用，如Button、IconButton等。"
+    }
+  ]
+}

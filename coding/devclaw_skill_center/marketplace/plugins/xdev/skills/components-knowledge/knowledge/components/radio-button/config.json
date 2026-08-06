@@ -1,0 +1,8 @@
+{
+  "name": "RadioButton",
+  "description": "自定义单选按钮组组件。",
+  "source": "widgets/base/components/src/input-components/",
+  "demo": [
+    { "name": "1-radio-button-demo", "description": "基本用法" }
+  ]
+}

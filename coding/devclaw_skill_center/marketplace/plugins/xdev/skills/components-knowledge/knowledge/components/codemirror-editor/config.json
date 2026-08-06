@@ -1,0 +1,8 @@
+{
+  "name": "CodeMirrorCodeEditor",
+  "description": "基于 CodeMirror 的代码编辑器。",
+  "source": "widgets/base/components/src/codemirror-editor/",
+  "demo": [
+    { "name": "1-codemirror-editor-demo", "description": "基本用法" }
+  ]
+}

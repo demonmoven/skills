@@ -1,0 +1,8 @@
+{
+  "name": "CollapseCard",
+  "description": "可折叠卡片组件，支持受控/非受控模式。",
+  "source": "widgets/base/components/src/collapse-card/",
+  "demo": [
+    { "name": "1-collapse-card-demo", "description": "基本用法" }
+  ]
+}

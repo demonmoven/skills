@@ -1,0 +1,11 @@
+{
+  "name": "backend",
+  "displayName": "GDPA Backend",
+  "version": "1.0.0",
+  "description": "后端开发全栈技能集",
+  "author": {
+    "name": "chenglinfeng",
+    "email": "chenglinfeng@bytedance.com"
+  },
+  "keywords": ["gdpa", "backend", "gdp", "tiktok"]
+}

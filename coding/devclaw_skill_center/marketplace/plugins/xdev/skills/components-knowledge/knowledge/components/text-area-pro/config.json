@@ -1,0 +1,8 @@
+{
+  "name": "TextAreaPro",
+  "description": "增强版文本域组件。",
+  "source": "widgets/base/components/src/text-area-pro/",
+  "demo": [
+    { "name": "1-text-area-pro-demo", "description": "基本用法" }
+  ]
+}

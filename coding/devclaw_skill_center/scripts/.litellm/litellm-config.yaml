@@ -1,0 +1,37 @@
+model_list:
+
+- model_name: gpt-5.4 # Response API
+  litellm_params:
+    model: openai/gpt-5.4-2026-03-05
+    base_model: gpt-5.4-2026-03-05
+    api_base: https://aidp.bytedance.net/gpt/openapi/online/
+    api_key: __LITELLM_API_KEY__
+
+- model_name: gpt-5.3 # Response API
+  litellm_params:
+    model: openai/gpt-5.3-codex-2026-02-24
+    base_model: gpt-5.3-codex-2026-02-24
+    api_base: https://aidp.bytedance.net/gpt/openapi/online/
+    api_key: __LITELLM_API_KEY__
+
+- model_name: gpt-5.4-completion # Chat Completion API
+  litellm_params:
+    model: azure/gpt-5.4-2026-03-05
+    base_model: gpt-5.4-2026-03-05
+    api_base: https://aidp.bytedance.net/gpt/openapi/online/v2/crawl/
+    api_key: __LITELLM_API_KEY__
+
+litellm_settings:
+  drop_params: true
+  modify_params: true
+  # use_chat_completions_url_for_anthropic_messages: true
+  callbacks:
+    - litellm_custom_callbacks.session_id_header_injector_instance
+    - litellm_custom_callbacks.proxy_handler_instance
+    - litellm_custom_callbacks.tool_result_content_flattener_instance
+    - litellm_custom_callbacks.thinking_strategy_fixer_instance
+
+router_settings:
+  optional_pre_call_checks: [ "responses_api_deployment_check" ]
+  num_retries: 3
+  retry_after: 1

@@ -1,0 +1,26 @@
+{
+  "name": "Illustration",
+  "description": "插画组件：提供丰富的视觉元素，用于表达复杂概念、增强用户体验或提供视觉引导，适用于空状态、引导页等场景。",
+  "demo": [
+    {
+      "name": "1-illustration-demo",
+      "description": "最基础的插画用法。"
+    },
+    {
+      "name": "2-illustration-demo",
+      "description": "插画支持通过 width 和 height 属性自定义尺寸。"
+    },
+    {
+      "name": "3-illustration-demo",
+      "description": "为了适配暗黑模式，可以同时提供两套设计，深色插图用 Dark 区分。"
+    },
+    {
+      "name": "4-illustration-demo",
+      "description": "插画可以与 EmptyState 组件结合使用，提供更好的空状态展示。"
+    },
+    {
+      "name": "5-illustration-demo",
+      "description": "除了使用预设的尺寸，还可以通过 width 和 height 属性自定义插画的尺寸。"
+    }
+  ]
+}

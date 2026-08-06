@@ -1,0 +1,8 @@
+{
+  "name": "ChipSelect",
+  "description": "基于 Coze Design Select 的 Chip 样式选择器封装。",
+  "source": "widgets/base/components/src/chip-select/",
+  "demo": [
+    { "name": "1-chip-select-demo", "description": "基本用法" }
+  ]
+}

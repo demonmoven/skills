@@ -1,0 +1,8 @@
+{
+  "name": "LogicExpr",
+  "description": "逻辑表达式组件。",
+  "source": "widgets/base/components/src/logic-expr/",
+  "demo": [
+    { "name": "1-logic-expr-demo", "description": "基本用法" }
+  ]
+}

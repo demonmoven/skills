@@ -1,0 +1,38 @@
+{
+  "name": "Skeleton",
+  "description": "在需要等待加载内容的位置提供的占位组件。",
+  "demo": [
+    {
+      "name": "1-skeleton-demo",
+      "description": "基本使用"
+    },
+    {
+      "name": "2-skeleton-demo",
+      "description": "组合使用"
+    },
+    {
+      "name": "3-skeleton-demo",
+      "description": "加载动画"
+    },
+    {
+      "name": "4-skeleton-demo",
+      "description": "Skeleton"
+    },
+    {
+      "name": "5-skeleton-demo",
+      "description": "Skeleton.Avatar"
+    },
+    {
+      "name": "6-skeleton-demo",
+      "description": "Skeleton.Paragraph"
+    },
+    {
+      "name": "7-skeleton-demo",
+      "description": "Skeleton 骨架屏 demo"
+    },
+    {
+      "name": "8-skeleton-demo",
+      "description": "Skeleton 骨架屏 demo"
+    }
+  ]
+}

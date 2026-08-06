@@ -1,0 +1,13 @@
+{
+  "name": "xdev",
+  "version": "1.0.0",
+  "description": "XDev skills plugin for Claude Code, Codex CLI, Coco / TRAE CLI",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "XDev",
+    "category": "Productivity"
+  },
+  "author": {
+    "name": "stone"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://0.0.0.0:4000",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "gpt-5.4",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "gpt-5.4",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "gpt-5.4",
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(go test:*)",
+      "Bash(go build:*)",
+      "mcp__fetch__fetch",
+      "mcp__brave-search__brave_web_search",
+      "Bash(mkdir:*)",
+      "Bash(go get:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(go doc:*)",
+      "Bash(test:*)",
+      "Bash(go vet:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "defaultMode": "default"
+  },
+  "model": "opus[1m]",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "TEA_APP_ID=1220 TEA_CHANNEL=cn TEA_APP_NAME_FOR_BITS=caribou npx --prefix /tmp --registry https://bnpm.byted.org @dp/ab-agent-collect-event"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "TEA_APP_ID=1220 TEA_CHANNEL=cn TEA_APP_NAME_FOR_BITS=caribou npx --prefix /tmp --registry https://bnpm.byted.org @dp/ab-agent-collect-event"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "ralph-wiggum@claude-code-plugins": true,
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": false,
+  "language": "中文",
+  "autoUpdatesChannel": "latest"
+}

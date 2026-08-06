@@ -1,0 +1,46 @@
+{
+  "name": "Steps",
+  "description": "将复杂任务或存在先后关系的任务分解，使用步骤组件引导用户按规定流程操作，并让其知道其当前的进度",
+  "demo": [
+    {
+      "name": "1-steps-demo",
+      "description": "默认步骤条（旧版）"
+    },
+    {
+      "name": "10-steps-demo",
+      "description": "简单步骤条（新版）"
+    },
+    {
+      "name": "2-steps-demo",
+      "description": "导航步骤条"
+    },
+    {
+      "name": "3-steps-demo",
+      "description": "迷你尺寸步骤条"
+    },
+    {
+      "name": "4-steps-demo",
+      "description": "处理进度"
+    },
+    {
+      "name": "5-steps-demo",
+      "description": "竖直方向的步骤条"
+    },
+    {
+      "name": "6-steps-demo",
+      "description": "指定步骤状态"
+    },
+    {
+      "name": "7-steps-demo",
+      "description": "自定义图标/状态"
+    },
+    {
+      "name": "8-steps-demo",
+      "description": "onChange 回调"
+    },
+    {
+      "name": "9-steps-demo",
+      "description": "ARIA"
+    }
+  ]
+}

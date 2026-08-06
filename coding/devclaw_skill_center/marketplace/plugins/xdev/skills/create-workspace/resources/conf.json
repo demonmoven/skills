@@ -1,0 +1,11 @@
+{
+  "git@code.byted.org:flowdevops/cozeloop.git": {
+    "constitution": "cozeloop"
+  },
+  "git@code.byted.org:flowdevops/cozeloop_claw.git": {
+    "constitution": "cozeloop"
+  },
+  "git@github.com:coze-dev/coze-loop.git": {
+    "constitution": "cozeloop"
+  }
+}

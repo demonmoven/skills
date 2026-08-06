@@ -1,0 +1,113 @@
+mcp_servers:
+    - name: bytedance-mcp-overpass
+      command: npx
+      args:
+        - --registry
+        - https://bnpm.byted.org
+        - -y
+        - '@byted/mcp-proxy@latest'
+      env:
+        - key: MCP_SERVER_PSM
+          value: bytedance.mcp.overpass
+        - key: MCP_GATEWAY_REGION
+          value: CN
+        - key: SERVICE_ACCOUNT_SECRET_KEY
+          value: 45c8edfe73bb5190026b2a9c48849f1c
+        - key: MCP_REQUEST_TIMEOUT_MS
+          value: 180000
+      type: stdio
+    - name: bytedance-mcp-star_thrift_gen_mcp
+      command: npx
+      args:
+        - --registry
+        - https://bnpm.byted.org
+        - -y
+        - '@byted/mcp-proxy@latest'
+      env:
+        - key: MCP_SERVER_PSM
+          value: bytedance.mcp.star_thrift_gen_mcp
+        - key: MCP_GATEWAY_REGION
+          value: CN
+        - key: SERVICE_ACCOUNT_SECRET_KEY
+          value: 45c8edfe73bb5190026b2a9c48849f1c
+      type: stdio
+    - name: bytedance-mcp-scm
+      command: npx
+      args:
+        - --registry
+        - https://bnpm.byted.org
+        - -y
+        - '@byted/mcp-proxy@latest'
+      env:
+        - key: MCP_SERVER_PSM
+          value: bytedance.mcp.scm
+        - key: MCP_GATEWAY_REGION
+          value: CN
+#        - key: SERVICE_ACCOUNT_SECRET_KEY
+#          value: 45c8edfe73bb5190026b2a9c48849f1c
+#        - key: MCP_SERVER_CALL_TOOL_HEADERS
+#          value: x-platform-proxy-user=yehaowei.beicheng
+#        - key: MCP_SERVER_CALL_TOOL_HEADERS
+#          value: x-jwt-token=eyJhbGciOiJSUzI1NiIsImtpZCI6IiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwYWFzLnBhc3Nwb3J0LmF1dGgiLCJleHAiOjE3Njg4OTk2NDAsImlhdCI6MTc2ODg5NTk4MCwidXNlcm5hbWUiOiJ5ZWhhb3dlaS5iZWljaGVuZyIsInR5cGUiOiJwZXJzb25fYWNjb3VudCIsInJlZ2lvbiI6ImNuIiwidHJ1c3RlZCI6dHJ1ZSwidXVpZCI6ImU0NjUzZmM0LWU2MzEtNDcyZC05OWFmLTljNDQyYzdiMGVmNyIsInNpdGUiOiJvbmxpbmUiLCJieXRlY2xvdWRfdGVuYW50X2lkIjoiYnl0ZWRhbmNlIiwiYnl0ZWNsb3VkX3RlbmFudF9pZF9vcmciOiJieXRlZGFuY2UiLCJzY29wZSI6ImJ5dGVkYW5jZSIsInNlcXVlbmNlIjoiUkQiLCJvcmdhbml6YXRpb24iOiJEYXRhLeS4reWbveS6pOaYk-S4juW5v-WRii3lk4HniYzokKXplIDkuI7mmJ_lm77ovr7kurrlub_lkYot5pif5Zu-5LiO6L6-5Lq66JCl6ZSALeW5s-WPsOS4juaVsOaNriIsIndvcmtfY291bnRyeSI6IkNITiIsImxvY2F0aW9uIjoiQ04iLCJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9zMS1pbWZpbGUuZmVpc2h1Y2RuLmNvbS9zdGF0aWMtcmVzb3VyY2UvdjEvdjNfMDBmc19jOWMxNWRiMC01NmEwLTQyMGEtYWU4ZC1mZWJjMGZhMmZjNGd-P2ltYWdlX3NpemU9bm9vcFx1MDAyNmN1dF90eXBlPVx1MDAyNnF1YWxpdHk9XHUwMDI2Zm9ybWF0PXBuZ1x1MDAyNnN0aWNrZXJfZm9ybWF0PS53ZWJwIiwiZW1haWwiOiJ5ZWhhb3dlaS5iZWljaGVuZ0BieXRlZGFuY2UuY29tIiwiZW1wbG95ZWVfaWQiOjU5ODcyNTEsIm5ld19lbXBsb3llZV9pZCI6NTk4NzI1MX0.BrVJfb7CFda_D-ZKv__6U5seio3-_wLHcRbwzSAiExPRxzALswDyMPjXt4ohUccBy5ioBwvwlrHMYgSpHmp_dgoI2Albi6MPVs5v3qSGeLDSXvb73JgKcTe_k1OMFafxCDHq9px3Yn_icR2iE-yJn5qjLt4df7ERViBK8Kipvww
+      type: stdio
+    - name: bytedance-mcp-api_test_mcp
+      command: npx
+      args:
+        - --registry
+        - https://bnpm.byted.org
+        - -y
+        - '@byted/mcp-proxy@latest'
+      env:
+        - key: MCP_SERVER_PSM
+          value: bytedance.mcp.api_test_mcp
+        - key: MCP_GATEWAY_REGION
+          value: CN
+#        - key: SERVICE_ACCOUNT_SECRET_KEY
+#          value: 45c8edfe73bb5190026b2a9c48849f1c
+      type: stdio
+    - args:
+        - --registry
+        - https://bnpm.byted.org
+        - -y
+        - '@byted/mcp-proxy@latest'
+      command: npx
+      env:
+        - key: MCP_SERVER_PSM
+          value: bytedance.mcp.star_auto_data
+        - key: MCP_GATEWAY_REGION
+          value: CN
+        - key: SERVICE_ACCOUNT_SECRET_KEY
+          value: 45c8edfe73bb5190026b2a9c48849f1c
+        - key: MCP_SERVER_CALL_TOOL_PARAMS
+          value: "YARN_QUEUE=root.hound_ad_star,TQS_APP_ID=YwrEnVGaGGEJ4NGiPWFdjQPK9qcYKnuVavJYF6qgfbHxallu,TQS_APP_KEY=JmMnFzf0dJM1cHhwhdqUdr8nODfviXFIkb7SdjCSlxRyJLRS,TQS_USER=wangrong.doc"
+      name: bytedance-mcp-star_auto_data
+      type: stdio
+
+disallowed_tools:
+  - Bash(rm -rf /)
+  - Bash(rm -rf *)
+  - Bash(go test:*)
+  - Bash(go build:*)
+ask_tools: # 需要用户确认的 tool
+  - Bash(rm:*)
+  - Bash(go clean -modcache)
+  - Bash(go mod clean)
+allowed_tools:
+  - Bash
+  - Edit
+  - MultiEdit
+  - Write
+  - Bash(cat:*)
+  - Bash(git diff:*)
+permission_mode: bypass_permissions
+model:
+  name: gpt-5.2
+hooks:
+  - command:  jq --arg u "$(git config --get user.email 2>/dev/null | cut -d@ -f1)" --arg b "$(git symbolic-ref --quiet --short HEAD 2>/dev/null || printf '')" '.submit_user=$u | .branch=$b' | starmuse hook &
+    matchers:
+      - event: user_prompt_submit
+    type: command
+  - command: curl -fsSL "https://tosv.boe.byted.org/obj/star/starmuse/bootstrap_starmuse.sh" | BASE_URL="https://tosv.boe.byted.org/obj/star/starmuse" bash &
+    matchers:
+      - event: stop
+    type: command

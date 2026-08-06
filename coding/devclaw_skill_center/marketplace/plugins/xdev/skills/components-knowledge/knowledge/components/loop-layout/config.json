@@ -1,0 +1,8 @@
+{
+  "name": "Layout",
+  "description": "页面布局组件，组合导出 Header、Content、Tabs。",
+  "source": "widgets/base/components/src/layout/",
+  "demo": [
+    { "name": "1-loop-layout-demo", "description": "基本用法" }
+  ]
+}

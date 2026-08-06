@@ -1,0 +1,8 @@
+{
+  "name": "IDRender",
+  "description": "ID 渲染组件，将长 ID 截取末尾若干位显示。",
+  "source": "widgets/base/components/src/id-render/",
+  "demo": [
+    { "name": "1-id-render-demo", "description": "基本用法" }
+  ]
+}

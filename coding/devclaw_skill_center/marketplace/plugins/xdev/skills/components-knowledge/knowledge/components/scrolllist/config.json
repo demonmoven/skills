@@ -1,0 +1,10 @@
+{
+  "name": "ScrollList",
+  "description": "滚动列表。",
+  "demo": [
+    {
+      "name": "1-scrolllist-demo",
+      "description": "基本使用"
+    }
+  ]
+}

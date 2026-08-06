@@ -1,0 +1,13 @@
+{
+  "name": "fixloop-universal-scripts",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Engineering scripts for fixloop-universal v2",
+  "dependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "@metoto/playwright-trace-analyzer-mcp": "^1.0.29",
+    "gremlins.js": "^2.2.0",
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0"
+  }
+}

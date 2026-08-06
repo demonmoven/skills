@@ -1,0 +1,8 @@
+{
+  "name": "TableEmpty",
+  "description": "表格空状态组件。",
+  "source": "widgets/base/components/src/table-empty/",
+  "demo": [
+    { "name": "1-table-empty-demo", "description": "基本用法" }
+  ]
+}

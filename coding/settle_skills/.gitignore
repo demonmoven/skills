@@ -1,0 +1,16 @@
+output/
+.idea/
+.trae/
+.DS_Store
+log*
+/.tmux/
+/.tmux.conf
+/.tmux.conf.local
+/span.log
+# Added by CJADK
+.cjadk/
+# Added by CJADK
+log/app.log
+# Added by CJADK
+.claude/
+.claude-app/

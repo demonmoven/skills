@@ -1,0 +1,8 @@
+{
+  "name": "VersionList",
+  "description": "版本列表组件。",
+  "source": "widgets/base/components/src/version-list/",
+  "demo": [
+    { "name": "1-version-list-demo", "description": "基本用法" }
+  ]
+}

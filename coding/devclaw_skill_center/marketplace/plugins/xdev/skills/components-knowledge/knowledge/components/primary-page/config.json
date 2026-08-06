@@ -1,0 +1,8 @@
+{
+  "name": "PrimaryPage",
+  "description": "一级页面布局组件。",
+  "source": "widgets/base/components/src/primary-page/",
+  "demo": [
+    { "name": "1-primary-page-demo", "description": "基本用法" }
+  ]
+}

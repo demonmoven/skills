@@ -1,0 +1,8 @@
+{
+  "name": "CodeEditorWithLoading",
+  "description": "带 Loading 状态的 Monaco JSON 代码编辑器。",
+  "source": "widgets/base/components/src/code-editor-with-loading/",
+  "demo": [
+    { "name": "1-code-editor-with-loading-demo", "description": "基本用法" }
+  ]
+}

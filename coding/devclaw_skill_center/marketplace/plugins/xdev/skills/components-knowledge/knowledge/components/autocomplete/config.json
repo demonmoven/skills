@@ -1,0 +1,38 @@
+{
+  "name": "AutoComplete",
+  "description": "输入框自动填充。",
+  "demo": [
+    {
+      "name": "1-autocomplete-demo",
+      "description": "基本用法"
+    },
+    {
+      "name": "2-autocomplete-demo",
+      "description": "自定义候选项渲染"
+    },
+    {
+      "name": "3-autocomplete-demo",
+      "description": "远程搜索"
+    },
+    {
+      "name": "4-autocomplete-demo",
+      "description": "尺寸"
+    },
+    {
+      "name": "5-autocomplete-demo",
+      "description": "下拉菜单的位置"
+    },
+    {
+      "name": "6-autocomplete-demo",
+      "description": "禁用"
+    },
+    {
+      "name": "7-autocomplete-demo",
+      "description": "校验状态"
+    },
+    {
+      "name": "8-autocomplete-demo",
+      "description": "自定义空内容"
+    }
+  ]
+}

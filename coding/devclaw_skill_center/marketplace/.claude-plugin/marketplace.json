@@ -1,0 +1,15 @@
+{
+  "name": "xdev-official",
+  "owner": {
+    "name": "stone"
+  },
+  "plugins": [
+    {
+      "name": "xdev",
+      "source": "./plugins/xdev",
+      "description": "XDev skills plugin for AI coding agents",
+      "version": "1.0.0",
+      "category": "development"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "name": "Upload",
+  "description": "文件选择上传",
+  "demo": [
+    {
+      "name": "1-upload-demo",
+      "description": "基本"
+    },
+    {
+      "name": "10-upload-demo",
+      "description": "添加提示文本"
+    },
+    {
+      "name": "11-upload-demo",
+      "description": "点击头像触发上传"
+    },
+    {
+      "name": "12-upload-demo",
+      "description": "自定义上传属性"
+    },
+    {
+      "name": "13-upload-demo",
+      "description": "上传文件类型"
+    },
+    {
+      "name": "14-upload-demo",
+      "description": "上传文件夹"
+    },
+    {
+      "name": "15-upload-demo",
+      "description": "一次选中多个文件"
+    },
+    {
+      "name": "16-upload-demo",
+      "description": "限制文件总数量"
+    },
+    {
+      "name": "17-upload-demo",
+      "description": "限制上传文件大小"
+    },
+    {
+      "name": "18-upload-demo",
+      "description": "自定义列表操作区"
+    },
+    {
+      "name": "19-upload-demo",
+      "description": "自定义预览逻辑"
+    },
+    {
+      "name": "2-upload-demo",
+      "description": "默认文件列表"
+    },
+    {
+      "name": "20-upload-demo",
+      "description": "受控组件"
+    },
+    {
+      "name": "21-upload-demo",
+      "description": "图片墙"
+    },
+    {
+      "name": "22-upload-demo",
+      "description": "图片墙放大预览"
+    },
+    {
+      "name": "23-upload-demo",
+      "description": "图片墙设置宽高"
+    },
+    {
+      "name": "24-upload-demo",
+      "description": "禁用"
+    },
+    {
+      "name": "25-upload-demo",
+      "description": "手动触发上传"
+    },
+    {
+      "name": "26-upload-demo",
+      "description": "拖拽上传"
+    },
+    {
+      "name": "27-upload-demo",
+      "description": "上传前自定义校验"
+    },
+    {
+      "name": "28-upload-demo",
+      "description": "上传后更新文件信息"
+    },
+    {
+      "name": "29-upload-demo",
+      "description": "自定义请求"
+    },
+    {
+      "name": "3-upload-demo",
+      "description": "FileItem Interface"
+    },
+    {
+      "name": "30-upload-demo",
+      "description": "ARIA"
+    },
+    {
+      "name": "31-upload-demo",
+      "description": "Upload 上传 demo"
+    },
+    {
+      "name": "32-upload-demo",
+      "description": "Upload 上传 demo"
+    },
+    {
+      "name": "4-upload-demo",
+      "description": "Upload 上传 demo"
+    },
+    {
+      "name": "5-upload-demo",
+      "description": "Upload 上传 demo"
+    },
+    {
+      "name": "6-upload-demo",
+      "description": "Upload 上传 demo"
+    },
+    {
+      "name": "7-upload-demo",
+      "description": "Upload 上传 demo"
+    },
+    {
+      "name": "8-upload-demo",
+      "description": "Upload 上传 demo"
+    },
+    {
+      "name": "9-upload-demo",
+      "description": "Upload 上传 demo"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Progress",
+  "description": "进度条组件：用于展示操作的当前进度和状态，适用于显示任务完成百分比、文件上传进度等场景。",
+  "demo": [
+    {
+      "name": "1-progress-demo",
+      "description": "最基础的进度条用法。"
+    },
+    {
+      "name": "2-progress-demo",
+      "description": "支持线形（line）和圆形（circle）两种类型。"
+    },
+    {
+      "name": "3-progress-demo",
+      "description": "可以通过以下方式自定义线形进度条："
+    },
+    {
+      "name": "4-progress-demo",
+      "description": "可以通过以下方式自定义圆形进度条："
+    },
+    {
+      "name": "5-progress-demo",
+      "description": "Progress 组件支持三种预设尺寸：small、default 和 large。"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "LoopTabs",
+  "description": "Loop 项目风格的 Tabs 组件封装。",
+  "source": "widgets/base/components/src/tabs/",
+  "demo": [
+    { "name": "1-loop-tabs-demo", "description": "基本用法" }
+  ]
+}

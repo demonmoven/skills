@@ -1,0 +1,22 @@
+{
+  "name": "Collapse",
+  "description": "折叠面板组件：用于将复杂内容区域分组和隐藏，支持折叠/展开操作，适合信息分类展示。",
+  "demo": [
+    {
+      "name": "1-collapse-demo",
+      "description": "最基本的折叠面板用法。"
+    },
+    {
+      "name": "2-collapse-demo",
+      "description": "通过设置 accordion 属性开启手风琴模式，每次只能展开一个面板。"
+    },
+    {
+      "name": "3-collapse-demo",
+      "description": "使用 activeKey 和 onChange 属性实现受控组件。"
+    },
+    {
+      "name": "4-collapse-demo",
+      "description": "可以自定义面板的头部和内容样式。"
+    }
+  ]
+}

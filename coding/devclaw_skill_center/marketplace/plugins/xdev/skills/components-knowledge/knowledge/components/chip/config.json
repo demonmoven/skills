@@ -1,0 +1,30 @@
+{
+  "name": "Chip",
+  "description": "按钮标签组件：用于展示标签、状态、分类等信息，支持多种交互方式和样式选项。",
+  "demo": [
+    {
+      "name": "1-chip-demo",
+      "description": "最基本的标签用法。"
+    },
+    {
+      "name": "2-chip-demo",
+      "description": "Chip 支持 small 和 mini 两种尺寸。"
+    },
+    {
+      "name": "3-chip-demo",
+      "description": "Chip 提供了多种预设的颜色主题。"
+    },
+    {
+      "name": "4-chip-demo",
+      "description": "Chip 支持三种交互样式：readonly、remove 和 select。"
+    },
+    {
+      "name": "5-chip-demo",
+      "description": "通过 disabled 属性设置禁用状态。"
+    },
+    {
+      "name": "6-chip-demo",
+      "description": "通过 loading 属性设置加载状态。"
+    }
+  ]
+}

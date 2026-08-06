@@ -1,0 +1,26 @@
+{
+  "name": "Icon",
+  "description": "图标组件：提供丰富的视觉符号，用于表示常见操作、状态或类别，增强用户界面的直观性。",
+  "demo": [
+    {
+      "name": "1-icon-demo",
+      "description": "最基础的图标用法。"
+    },
+    {
+      "name": "2-icon-demo",
+      "description": "图标支持多种尺寸，通过 className 控制。"
+    },
+    {
+      "name": "3-icon-demo",
+      "description": "图标支持多种颜色，通过 className 控制。"
+    },
+    {
+      "name": "4-icon-demo",
+      "description": "图标可以与 IconButton 组件结合使用，提供更好的交互体验。"
+    },
+    {
+      "name": "5-icon-demo",
+      "description": "除了使用预设的尺寸和颜色类，还可以通过内联样式自定义图标的尺寸和颜色。"
+    }
+  ]
+}

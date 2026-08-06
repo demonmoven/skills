@@ -1,0 +1,8 @@
+{
+  "name": "JumpIconButton",
+  "description": "跳转图标按钮。",
+  "source": "widgets/base/components/src/jump-button/",
+  "demo": [
+    { "name": "1-jump-button-demo", "description": "基本用法" }
+  ]
+}

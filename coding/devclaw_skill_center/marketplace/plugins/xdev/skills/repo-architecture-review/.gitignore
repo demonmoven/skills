@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.architecture-review/
+*.log
+architecture-analysis-*.md
+tests/fixtures/**/.git/
+tests/fixtures/**/node_modules/
+tests/fixtures/**/__pycache__/

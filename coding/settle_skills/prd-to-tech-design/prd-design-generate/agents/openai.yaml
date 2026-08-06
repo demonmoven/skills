@@ -1,0 +1,4 @@
+interface:
+  display_name: "PRD 技术方案生成"
+  short_description: "基于证据生成飞书技术方案。"
+  default_prompt: "基于功能点能力域拆分、LLM Wiki 线索和代码 evidence table，生成可追溯的飞书技术方案文档。"

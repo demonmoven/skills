@@ -1,0 +1,8 @@
+{
+  "name": "ColumnSelector",
+  "description": "表格列选择器，支持列的勾选显示/隐藏和拖拽排序。",
+  "source": "widgets/base/components/src/columns-select/",
+  "demo": [
+    { "name": "1-column-selector-demo", "description": "基本用法" }
+  ]
+}

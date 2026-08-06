@@ -1,0 +1,30 @@
+{
+  "name": "SideSheet",
+  "description": "可从屏幕边沿滑出的浮层面板，通常用于承载二级操作页面",
+  "demo": [
+    {
+      "name": "1-sidesheet-demo",
+      "description": "基本"
+    },
+    {
+      "name": "2-sidesheet-demo",
+      "description": "自定义位置"
+    },
+    {
+      "name": "3-sidesheet-demo",
+      "description": "自定义尺寸"
+    },
+    {
+      "name": "4-sidesheet-demo",
+      "description": "可操作的外部区域"
+    },
+    {
+      "name": "5-sidesheet-demo",
+      "description": "渲染在指定容器"
+    },
+    {
+      "name": "6-sidesheet-demo",
+      "description": "自定义内容区域"
+    }
+  ]
+}

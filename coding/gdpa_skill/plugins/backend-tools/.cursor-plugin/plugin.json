@@ -1,0 +1,11 @@
+{
+  "name": "backend-tools",
+  "displayName": "GDPA Backend Tools",
+  "version": "1.0.0",
+  "description": "后端开发工具集",
+  "author": {
+    "name": "chenglinfeng",
+    "email": "chenglinfeng@bytedance.com"
+  },
+  "keywords": ["gdpa", "tools", "cli", "query"]
+}

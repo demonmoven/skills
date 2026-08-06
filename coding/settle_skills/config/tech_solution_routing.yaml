@@ -1,0 +1,142 @@
+# tech-solution-facade 复杂度判定规则
+# 路径: bytepay/settle_skill : feature/ai_native : config/tech_solution_routing.yaml
+#
+# 用法: tech-solution-facade 在执行前依次按 dimensions 评分, 命中任一 trigger 即视为 complex,
+# 否则视为 simple。complex → 路由到 prd-tech-design 编排 Agent;simple → facade 内置模板生成。
+#
+# 4 个判定维度 (按用户与 facade 设计共识):
+#   1. reference_files 数量
+#   2. change_type 类型
+#   3. repo 命中数量 (跨仓即复杂)
+#   4. PRD 关键词
+
+version: 1
+
+dimensions:
+  - id: reference_files_count
+    desc: 参考文件数量
+    type: int
+    rules:
+      - when: ">5"
+        complexity: complex
+        reason: 参考文件超过 5 个, 涉及面较广
+      - when: "<=5"
+        complexity: simple
+
+  - id: change_type
+    desc: 改动类型
+    type: enum
+    rules:
+      - when_in: ["new_module", "cross_repo", "migration", "refactor",
+                  "fee_rule_change", "new_message_type", "protocol_change"]
+        complexity: complex
+        reason: 改动类型属于新模块 / 跨仓 / 迁移 / 重构 / 费率规则 / 新消息类型 / 协议变更, 需要单独技术方案
+      - when_in: ["additive", "bugfix", "config_only", "param_tuning",
+                  "new_calculator", "new_enum_value"]
+        complexity: simple
+      - when_in: ["unknown"]
+        complexity: complex
+        reason: change_type 未识别 (L2 模块/功能词无命中), 从严走技术方案以避免漏判
+
+  - id: repo_hit_count
+    desc: 仓库路由命中数 (来自 repo-route-facade 输出)
+    type: int
+    rules:
+      - when: ">=2"
+        complexity: complex
+        reason: 涉及多个仓库, 必须显式技术方案
+      - when: "==1"
+        complexity: simple
+      - when: "==0"
+        complexity: complex     # 未命中也走复杂分支, 让方案原子辅助路由
+        reason: 未命中任何仓库, 需要技术方案重新评估归属
+
+  - id: prd_keywords
+    desc: PRD 文本中包含的高复杂度关键词
+    type: keyword_match
+    keywords: ["重构", "迁移", "架构", "链路改造", "性能优化",
+               "全链路", "拆分", "灰度", "幂等", "对账"]
+    rules:
+      - when: any_match
+        complexity: complex
+        reason: PRD 含高复杂度关键词
+
+# 综合判定: 任一维度判定为 complex 即整体 complex
+aggregation: any_complex_wins
+
+# 已验证回归 case (2026-05-16)
+# 由 tech-solution-facade simple-path 跑通, 用于后续修改 dimensions/aggregation 时回归
+verified_cases:
+  - id: case_business_scene_code_field_addition
+    prd_title: "【商户计收费】月付息费扣除场景增加字段"
+    prd_link: "https://bytedance.larkoffice.com/wiki/OAz1wBCXEi0jKLkmEl5cuT7Wnnc"
+    inputs:
+      reference_files_count: 1
+      change_type: additive
+      repo_hit_count: 1
+      prd_keywords_hit: []
+    expected:
+      complexity: simple
+      atom_used: __inline_template__
+      open_questions_count: 4
+      tech_solution_md_size_min: 2000
+
+# simple 路径的内置模板字段顺序 (facade 内部使用)
+simple_template_sections:
+  - 背景与目标
+  - 改动清单 (changed_files 推断)
+  - 涉及模块
+  - 单测策略
+  - 风险与回滚
+  - Open Questions
+
+# complex 路径的原子调用契约 (路由到 prd-tech-design 编排 Agent 时使用)
+# prd-tech-design 是编排型 Agent:串联 prd-understand → prd-feature-split(内含 llm-wiki-git 现状调查)
+#   → prd-wiki-query(可选补充) → prd-sequence-diagram / prd-funds-flow-diagram → prd-design-generate,
+#   产出有代码证据支撑的飞书技术方案文档(tech_design_feishu_url)。
+complex_atom_contract:
+  atom_name: prd-tech-design
+  invoke: skill                 # 通过 Skill 工具调用 prd-tech-design 编排 Agent(非 HTTP API)
+  inputs:
+    - prd_url                    # PRD 飞书/Lark 文档 URL(优先);无则用 prd_requirements 文本
+    - prd_requirements           # PRD 要点文本(prd_url 缺失时的兜底输入)
+    - change_type
+    - reference_files
+    - repo_meta
+    - requirement_brief
+    - knowledge_context          # 由 knowledge-facade 上游产出,注入 prd-feature-split 现状调查
+    - hit_keywords               # 触发 complex 的命中关键词列表
+    - complex_reasons            # 各维度的命中原因
+  outputs:
+    - tech_design_feishu_url     # prd-design-generate 创建的飞书技术方案文档 URL(唯一权威产物)
+    - tech_solution_md           # 本地 tech-design.md 草稿(飞书创建失败时的兜底)
+    - decisions                  # 关键技术决策列表, 用于 MR body / 报告
+    - open_questions             # 留给人工的悬挂问题(资金流阻塞点等); 非空 → 子流程停止等待
+
+# === R1: 决策点产出策略(按 facade 路由结果分流) ===
+outputs_consumption_rule:
+  simple:
+    agent_decision_points: required   # Agent 自判决策点必须列出,交用户拍板
+    pause_reply_must_list: true
+  complex:
+    agent_decision_points: forbidden  # 禁止 Agent 自产决策点
+    pause_reply_must_list: false
+    authoritative_source: prd-tech-design   # 所有方案以 prd-tech-design 产出的飞书技术方案文档为唯一来源
+
+# === R2: complex 路径恢复时的文档获取协议 ===
+recovery_protocol:
+  complex:
+    trigger_keywords: ["方案已定", "技术方案OK", "可以编程", "开始编码", "continue", "resume", "走起"]
+    # prd-tech-design 是同步编排 Agent,产出飞书技术方案文档后即返回 tech_design_feishu_url,
+    # 无需像 ArchMate 那样异步轮询 trdUrl;facade 直接用 lark-doc 读取该文档全文作为 tech_solution_md。
+    fetch_strategy: direct_from_agent_output
+    doc_url_field: tech_design_feishu_url
+    on_ready:
+      - fetch_doc_via: lark-doc          # 读取 prd-tech-design 产出的飞书技术方案文档全文
+      - inject_into: step6_coding_facade
+    # 若用户在恢复指令中直接附带了飞书文档 URL(手动改过方案),优先使用该 URL,跳过 agent 重跑。
+    on_user_supplied_url: prefer_user_url
+  simple:
+    trigger_keywords: ["方案已定", "继续", "OK", "可以编程", "开始编码"]
+    fetch_strategy: parse_user_reply   # 解析用户答复中对决策点的回填
+

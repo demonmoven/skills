@@ -1,0 +1,8 @@
+{
+  "name": "AudioRender",
+  "description": "音频渲染组件，用于多模态数据集中的音频条目展示。",
+  "source": "widgets/base/components/src/multi-modal-dataset-item-render/",
+  "demo": [
+    { "name": "1-audio-render-demo", "description": "基本用法" }
+  ]
+}
