@@ -1,0 +1,48 @@
+syntax = "proto3";
+package cleaner.msg;
+option go_package = "code.byted.org/webcast/pb_gen/gen/webcast/data";
+
+message TestAPI1Request {
+    string name = 1;
+}
+
+message TestAPI1Response {
+    string data = 1;
+}
+
+message TestAPI2Request {
+    string name = 1;
+}
+
+message TestAPI2Response {
+    string data = 1;
+}
+
+message TestAPI3Request {
+    string name = 1;
+}
+
+message TestAPI3Response {
+    string data = 1;
+}
+
+message TestAPI4Request {
+    string name = 1;
+}
+message TestAPI4Response {
+    string data = 1;
+}
+
+message TestAPI5Request {
+    string name = 1;
+}
+message TestAPI5Response {
+    string data = 1;
+}
+
+message TestAPI6Request {
+    string name = 1;
+}
+message TestAPI6Response {
+    string data = 1;
+}

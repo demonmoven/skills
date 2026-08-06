@@ -1,0 +1,58 @@
+{
+    "caijing_pay/charge_fee": {
+        "go_version": "1.22",
+        "goals": [
+            "supporting monorepo with go workspace"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "LarkDataIntelligence/bigfunnel_server": {
+        "go_version": "1.17",
+        "goals": [
+            "supporting monorepo"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "LarkDataIntelligence/ldi-solution": {
+        "go_version": "1.19",
+        "goals": [
+            "supporting monorepo"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "bits/dispatcher": {
+        "go_version": "1.20",
+        "goals": [
+            "supporting monorepo"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "sentry/meta_syncer": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "DianShang"
+    },
+    "sentry/openmind": {
+        "go_version": "1.22",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "DianShang"
+    }
+}

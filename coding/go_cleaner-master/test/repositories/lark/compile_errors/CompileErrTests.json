@@ -1,0 +1,872 @@
+{
+    "LarkDataIntelligence/c360-admin": {
+        "go_version": "1.16",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "anycross/supervisor": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "apaas/analytics": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "apaas/app": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "apaas/datatable": {
+        "go_version": "1.21",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "apaas/identity": {
+        "go_version": "1.22",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "apaas/message": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "apaas/pkgmanagement": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "apaas/spring_query_engine": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "apaas/spring_vector_data": {
+        "go_version": "1.21",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "automation/group": {
+        "go_version": "1.14",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "beops/resource_statistics": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "bits/builtin_app": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "bits/meego_facade": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "bits/migration": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "bits/user": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "bits/web": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ccm-platform/converter": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ea/c360_config": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ee/byteview_tools_rpc_gateway": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ee/lobster-session-service": {
+        "go_version": "1.15",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ee/trello_connector_service": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark-srv-infra/fxdb_cp": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark/fine_scheduling_api": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark/harbor-web": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark/ka_quality_center": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark/kahybrid": {
+        "go_version": "1.16",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark/neo": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark/resource_control_server": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_ai/llpp_core": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_ai/portal": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_app/subscriptions": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_data/assistant": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_sce/suite_svc_billing": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_sce/suite_svc_sf_sync": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_search/hera_search": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_search/query_reco": {
+        "go_version": "1.22",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_tns/suite_security_content": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_tns/user_trust": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_ug/site": {
+        "go_version": "1.22",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkadmin/collaboration": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkapigw/base_console": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkapigw/optest_pbot": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkarch/kl-scheduler_server": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkauthz/mono": {
+        "go_version": "1.16",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkbox/svc_blob": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkbox/svc_virus": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkcalendar/google_sync": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkim/http_gateway": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkim/httpsrv": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkim/steam_platform_api": {
+        "go_version": "1.21",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkintegration_data/authentication": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkintegration_svc/appservice": {
+        "go_version": "1.15",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkintegration_svc/miniprogram_console": {
+        "go_version": "1.15",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkpassport/backend": {
+        "go_version": "1.16",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkpassport/upgrade": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkvc/byteview-rtc-scheduler": {
+        "go_version": "1.13",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkvc/byteview-utils-alert": {
+        "go_version": "1.13",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "people/datamart": {
+        "go_version": "1.15",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "automation/lark_homework_etl": {
+        "go_version": "1.12",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ee/creation-sre": {
+        "go_version": "1.13",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ee/translate_bot": {
+        "go_version": "1.12",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ei/pantar": {
+        "go_version": "1.15",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark-psc/migrate": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_admin/contact": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_admin/oapi_event": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_ai/facade_composer": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_data/decision_engine": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_sce/suite_svc_finance": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_scs/automation_test": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_ug/msg_platform_task": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkapigw/message_gateway": {
+        "go_version": "1.14",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkim/edgeproxy": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkmoments/bebuddy": {
+        "go_version": "1.22",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkvc/vhost-core-proxy": {
+        "go_version": "1.16",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "clientQA/pmc": {
+        "go_version": "1.12",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ee/envoy": {
+        "go_version": "1.12",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ee/lobster-test": {
+        "go_version": "1.10",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ee/officialapp-onedrive": {
+        "go_version": "1.13",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ee/outlook_calendar": {
+        "go_version": "1.13",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ee/trello_service": {
+        "go_version": "1.12",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "LarkDataIntelligence/bitest": {
+        "go_version": "1.16",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "bits/copernicus": {
+        "go_version": "1.16",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ee/byteview_data_vqos": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkbox/svc_fileinfo": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkvc/lark-facade-voip": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "LarkQA/lark_ftf": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    }
+}

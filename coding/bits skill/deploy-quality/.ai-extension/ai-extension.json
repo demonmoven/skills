@@ -1,0 +1,7 @@
+{
+  "format": "skills",
+  "group": "skills.byted.org/default/public",
+  "identifier": "skills:skills.byted.org/default/public/deploy-quality:1.0.2",
+  "name": "deploy-quality",
+  "version": "1.0.2"
+}

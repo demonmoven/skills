@@ -1,0 +1,312 @@
+{
+    "data_edc/goldrush_data_compass": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "ecom/btm_backend": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "ecom/buyin_multistar": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "ecom/experience_brain_voice": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "ecom/funshopping_tool_center": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "ecom/governance_asset_control": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "ecom/growth_mall_api": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "ecom/marketing_decision": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "ecom/mmc_internal_ad_api": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "ecom/shop_sms": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "ecom/user_lifecycle_api": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "kunlun/edmp-tag-platform": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/aftersale_open": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/aftersale_shop_api": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/comment": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/common_op_api": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/ecom_cs": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/ecom_logistics_test_tool": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/ecom_qualification_api": {
+        "go_version": "1.16",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/ecom_smartop_admin": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/ecqc_verify_access_audit": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/marketing_tool": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/merchantgrowth_lead": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/pigeon_canal_i18n": {
+        "go_version": "1.15",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/pigeon_delay_i18n": {
+        "go_version": "1.15",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/risk-web": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/scale_openai": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/sellpoint_core": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/shop_account": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/stock_center": {
+        "go_version": "1.22",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    },
+    "temai/writeoff_consumer": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Ecom"
+    }
+}

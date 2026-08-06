@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 友好度仪表盘</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <style>
+    /* 自定义滚动条 */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+    /* 表格排序指示器 */
+    .sort-asc::after { content: ' ▲'; font-size: 10px; }
+    .sort-desc::after { content: ' ▼'; font-size: 10px; }
+
+    /* 展开行过渡 */
+    .detail-panel { overflow: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; max-height: 0; opacity: 0; }
+    .detail-panel.open { max-height: 900px; opacity: 1; }
+
+    /* 等级徽章 */
+    .badge { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; font-weight: 700; font-size: 14px; color: #fff; }
+    .badge-A { background-color: #10B981; }
+    .badge-B { background-color: #3B82F6; }
+    .badge-C { background-color: #F59E0B; }
+    .badge-D { background-color: #EF4444; }
+
+    /* 表格行悬浮 */
+    .repo-row:hover { background-color: #f0f9ff !important; cursor: pointer; }
+
+    /* 展开箭头旋转 */
+    details[open] .details-arrow { transform: rotate(90deg); }
+
+    /* 筛选控件统一样式 */
+    .filter-control { padding: 6px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; outline: none; background: #fff; }
+    .filter-control:focus { border-color: #3B82F6; box-shadow: 0 0 0 2px rgba(59,130,246,0.15); }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+<!-- ============================== 数据注入区 ============================== -->
+<script>
+// 以下占位符由 Python 脚本替换为实际 JSON 数据
+const SNAPSHOT = __SNAPSHOT_DATA__;
+const HISTORY  = __HISTORY_DATA__;
+const META     = __META_DATA__;
+</script>
+
+<!-- ============================== 主容器 ============================== -->
+<div id="app" class="max-w-screen-xl mx-auto px-4 py-6">
+
+  <!-- ==================== 1. 页头 ==================== -->
+  <header class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800">AI 友好度仪表盘</h1>
+      <p class="text-sm text-gray-500 mt-1" id="header-subtitle"></p>
+    </div>
+    <div class="mt-3 sm:mt-0">
+      <label class="text-sm text-gray-500 mr-2">扫描批次</label>
+      <select id="batch-selector" class="filter-control"></select>
+    </div>
+  </header>
+
+  <!-- ==================== 评分规则说明 ==================== -->
+  <details class="mb-6 bg-white rounded-lg shadow">
+    <summary class="px-5 py-3 cursor-pointer text-sm font-semibold text-gray-600 hover:text-gray-800 select-none list-none flex items-center gap-2">
+      <svg class="w-4 h-4 text-gray-400 transition-transform details-arrow" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/></svg>
+      评分规则说明（点击展开）
+    </summary>
+    <div class="px-5 pb-5 text-sm text-gray-600 leading-relaxed">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-2">
+        <!-- 等级说明 -->
+        <div>
+          <h4 class="font-semibold text-gray-700 mb-2">等级划分</h4>
+          <table class="w-full text-xs">
+            <tr><td class="py-1"><span class="badge badge-A text-xs w-5 h-5">A</span></td><td class="py-1">总分 &ge; 4.0</td><td class="py-1 text-gray-400">优秀</td></tr>
+            <tr><td class="py-1"><span class="badge badge-B text-xs w-5 h-5">B</span></td><td class="py-1">总分 &ge; 3.0</td><td class="py-1 text-gray-400">良好</td></tr>
+            <tr><td class="py-1"><span class="badge badge-C text-xs w-5 h-5">C</span></td><td class="py-1">总分 &ge; 2.0</td><td class="py-1 text-gray-400">待改进</td></tr>
+            <tr><td class="py-1"><span class="badge badge-D text-xs w-5 h-5">D</span></td><td class="py-1">总分 &lt; 2.0</td><td class="py-1 text-gray-400">不达标</td></tr>
+          </table>
+          <p class="mt-2 text-xs text-gray-400">无 CLAUDE.md / AGENTS.md 的仓库直接判定为 D 级（总分 0）</p>
+        </div>
+        <!-- 总分计算 -->
+        <div>
+          <h4 class="font-semibold text-gray-700 mb-2">总分计算</h4>
+          <p class="text-xs mb-2 text-indigo-600 font-mono">总分 = 代码 &times; 40% + 测试 &times; 35% + 上下文 &times; 25%</p>
+          <div class="space-y-2 text-xs">
+            <div>
+              <span class="font-medium text-gray-700">代码得分</span>（满分 5.0）<br>
+              起始 5.0 分，按以下规则扣减：<br>
+              &bull; 超 500 行文件占比 &gt;15%：-1.0；&gt;5%：-0.5<br>
+              &bull; 类型违规数 &gt;20：-1.5；&gt;10：-1.0；&gt;5：-0.5<br>
+              &bull; 平均文件行数 &gt;300：-0.5
+            </div>
+            <div>
+              <span class="font-medium text-gray-700">测试得分</span>（满分 5.0）<br>
+              起始 0.0 分，按以下规则累加：<br>
+              &bull; 有测试文件：+2.0<br>
+              &bull; 测试文件占比 &gt;10%：+1.5；&gt;5%：+0.5<br>
+              &bull; 有 CI 配置：+1.0<br>
+              &bull; 有构建脚本：+0.5
+            </div>
+          </div>
+        </div>
+        <!-- 上下文得分 -->
+        <div>
+          <h4 class="font-semibold text-gray-700 mb-2">上下文得分</h4>
+          <p class="text-xs mb-2">（满分 5.0，无 CLAUDE.md 则整体 0 分）</p>
+          <div class="text-xs space-y-1">
+            <p>&bull; CLAUDE.md / AGENTS.md 存在：+2.0</p>
+            <p>&bull; 架构文档存在：+1.5</p>
+            <p>&bull; 子目录有 CLAUDE.md：+0.5</p>
+            <p>&bull; CLAUDE.md 质量 A 级：+1.0</p>
+            <p>&bull; CLAUDE.md 质量 B 级：+0.5</p>
+          </div>
+          <div class="mt-3 text-xs">
+            <span class="font-medium text-gray-700">质量评估维度（7 项）</span><br>
+            构建命令、架构说明、编码规范、错误处理、测试约定、生成代码标注、关键依赖
+          </div>
+        </div>
+        <!-- 腐化指数 -->
+        <div>
+          <h4 class="font-semibold text-gray-700 mb-2">腐化指数</h4>
+          <p class="text-xs mb-2 text-indigo-600 font-mono">腐化 = 侵蚀 &times; 40% + 冗余 &times; 30% + 克隆 &times; 30%</p>
+          <div class="text-xs space-y-1">
+            <p><span class="font-medium text-gray-700">结构侵蚀度</span>：高复杂度函数的代码质量占总体的比例</p>
+            <p><span class="font-medium text-gray-700">冗余度</span>：（反模式行 + 克隆行）/ 总代码行数</p>
+            <p><span class="font-medium text-gray-700">代码克隆率</span>：跨文件重复代码占比</p>
+          </div>
+          <div class="mt-3 text-xs">
+            <span class="font-medium text-gray-700">健康度分档</span><br>
+            <span style="color:#10B981">&bull; 健康 &lt;10</span> &nbsp;
+            <span style="color:#3B82F6">&bull; 轻度 10-25</span> &nbsp;
+            <span style="color:#F59E0B">&bull; 中度 25-45</span> &nbsp;
+            <span style="color:#EF4444">&bull; 重度 &gt;45</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- ==================== 2. KPI 卡片行 ==================== -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-6" id="kpi-row"></div>
+
+  <!-- ==================== 3. 图表区 (1×3) ==================== -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="bg-white rounded-lg shadow p-4">
+      <h3 class="text-sm font-semibold text-gray-600 mb-2">等级分布</h3>
+      <div id="chart-grade" style="width:100%;height:300px;"></div>
+    </div>
+    <div class="bg-white rounded-lg shadow p-4">
+      <h3 class="text-sm font-semibold text-gray-600 mb-2">覆盖率趋势</h3>
+      <div id="chart-trend" style="width:100%;height:300px;"></div>
+    </div>
+    <div class="bg-white rounded-lg shadow p-4">
+      <h3 class="text-sm font-semibold text-gray-600 mb-2">团队能力雷达</h3>
+      <div id="chart-radar" style="width:100%;height:300px;"></div>
+    </div>
+  </div>
+
+  <!-- ==================== 3.5 全仓库得分全景 ==================== -->
+  <div class="mb-6">
+    <div class="bg-white rounded-lg shadow p-4">
+      <h3 class="text-sm font-semibold text-gray-600 mb-2">全仓库得分分布</h3>
+      <div id="chart-beeswarm" style="width:100%;height:320px;"></div>
+    </div>
+  </div>
+
+
+  <!-- ==================== 5. 仓库详情表格 ==================== -->
+  <div class="bg-white rounded-lg shadow">
+    <!-- 筛选控件栏 -->
+    <div class="flex flex-wrap items-center gap-3 p-4 border-b border-gray-100">
+      <input type="text" id="filter-search" class="filter-control flex-1 min-w-[200px]" placeholder="搜索仓库名称...">
+      <select id="filter-grade" class="filter-control">
+        <option value="">全部等级</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+      </select>
+      <select id="filter-lang" class="filter-control">
+        <option value="">全部语言</option>
+      </select>
+      <select id="filter-claude" class="filter-control">
+        <option value="">CLAUDE.md</option>
+        <option value="1">有</option>
+        <option value="0">无</option>
+      </select>
+    </div>
+    <!-- 表格 -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="text-left text-gray-500 border-b border-gray-200">
+            <th class="px-4 py-3 sortable cursor-pointer select-none" data-key="repo_name">仓库名称</th>
+            <th class="px-4 py-3 sortable cursor-pointer select-none" data-key="grade">等级</th>
+            <th class="px-4 py-3 sortable cursor-pointer select-none" data-key="total_score">总分</th>
+            <th class="px-4 py-3 sortable cursor-pointer select-none" data-key="code_score">代码得分</th>
+            <th class="px-4 py-3 sortable cursor-pointer select-none" data-key="test_score">测试得分</th>
+            <th class="px-4 py-3 sortable cursor-pointer select-none" data-key="context_score">上下文得分</th>
+            <th class="px-4 py-3">CLAUDE.md</th>
+            <th class="px-4 py-3">架构文档</th>
+            <th class="px-4 py-3">语言</th>
+            <th class="px-4 py-3 sortable cursor-pointer select-none" data-key="_change">变化</th>
+          </tr>
+        </thead>
+        <tbody id="repo-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ==================== 页脚 ==================== -->
+  <footer class="mt-8 text-center text-xs text-gray-400 pb-4" id="footer"></footer>
+</div>
+
+<!-- ============================== 核心逻辑 ============================== -->
+<script>
+(function () {
+  'use strict';
+
+  // -------------------- 颜色常量 --------------------
+  const GRADE_COLORS = { A: '#10B981', B: '#3B82F6', C: '#F59E0B', D: '#EF4444' };
+
+  // -------------------- 工具函数 --------------------
+
+  /** 安全取数值，缺失时返回 0 */
+  function num(v) { return typeof v === 'number' && isFinite(v) ? v : 0; }
+
+  /** 格式化数字，保留 n 位小数 */
+  function fmt(v, n) { return num(v).toFixed(n); }
+
+  /** 百分比格式 */
+  function pct(v) { return (num(v) * 100).toFixed(1) + '%'; }
+
+  /** 计算数组平均值 */
+  function avg(arr, key) {
+    if (!arr || arr.length === 0) return 0;
+    const vals = arr.map(r => num(r[key]));
+    return vals.reduce((a, b) => a + b, 0) / vals.length;
+  }
+
+  /** 计算覆盖率 */
+  function coverage(arr, key) {
+    if (!arr || arr.length === 0) return 0;
+    return arr.filter(r => r[key]).length / arr.length;
+  }
+
+  /** 获取上一批次 ID */
+  function getPrevScanId() {
+    const ids = (META.scan_ids || []).slice().sort();
+    const idx = ids.indexOf(META.scan_id);
+    return idx > 0 ? ids[idx - 1] : null;
+  }
+
+  /** 从 HISTORY 获取某批次的记录 */
+  function getHistoryBatch(scanId) {
+    if (!scanId) return [];
+    return HISTORY.filter(r => r.scan_id === scanId);
+  }
+
+  /** 从 repo_name 生成 code.byted.org 链接 */
+  function repoLink(name) {
+    return 'https://code.byted.org/' + (name || '');
+  }
+
+  /** 计算每个仓库相比上一批次的分数变化 */
+  function computeChanges() {
+    const prevId = getPrevScanId();
+    const prevBatch = getHistoryBatch(prevId);
+    const prevMap = {};
+    prevBatch.forEach(r => { prevMap[r.repo_name] = num(r.total_score); });
+    const changes = {};
+    SNAPSHOT.forEach(r => {
+      const prev = prevMap[r.repo_name];
+      if (prev !== undefined) {
+        changes[r.repo_name] = num(r.total_score) - prev;
+      } else {
+        changes[r.repo_name] = null; // 无历史数据
+      }
+    });
+    return changes;
+  }
+
+  const repoChanges = computeChanges();
+
+  // -------------------- 页头 --------------------
+  document.getElementById('header-subtitle').textContent = '扫描日期: ' + (META.scan_time || META.scan_id || '—');
+  document.title = 'AI 友好度仪表盘 — ' + (META.scan_id || '');
+
+  // 批次选择器
+  const batchSel = document.getElementById('batch-selector');
+  (META.scan_ids || []).slice().sort().reverse().forEach(function (id) {
+    const opt = document.createElement('option');
+    opt.value = id;
+    opt.textContent = id;
+    if (id === META.scan_id) opt.selected = true;
+    batchSel.appendChild(opt);
+  });
+
+  // -------------------- KPI 卡片 --------------------
+  function renderKPI() {
+    const prevId = getPrevScanId();
+    const prevBatch = getHistoryBatch(prevId);
+
+    const curAvg = avg(SNAPSHOT, 'total_score');
+    const prevAvg = prevBatch.length ? avg(prevBatch, 'total_score') : null;
+
+    const curARate = SNAPSHOT.length ? SNAPSHOT.filter(r => r.grade === 'A').length / SNAPSHOT.length : 0;
+    const prevARate = prevBatch.length ? prevBatch.filter(r => r.grade === 'A').length / prevBatch.length : null;
+
+    const curClaudeCount = SNAPSHOT.filter(r => r.claude_md_exists).length;
+    const curClaudeCov = SNAPSHOT.length ? curClaudeCount / SNAPSHOT.length : 0;
+    const prevClaudeCov = prevBatch.length ? coverage(prevBatch, 'claude_md_exists') : null;
+
+    const curArchCount = SNAPSHOT.filter(r => r.architecture_doc_exists).length;
+    const curArchCov = SNAPSHOT.length ? curArchCount / SNAPSHOT.length : 0;
+    const prevArchCov = prevBatch.length ? coverage(prevBatch, 'architecture_doc_exists') : null;
+
+    const curCodeAvg = avg(SNAPSHOT, 'code_score');
+    const prevCodeAvg = prevBatch.length ? avg(prevBatch, 'code_score') : null;
+
+    const curTestAvg = avg(SNAPSHOT, 'test_score');
+    const prevTestAvg = prevBatch.length ? avg(prevBatch, 'test_score') : null;
+
+    const curCtxAvg = avg(SNAPSHOT, 'context_score');
+    const prevCtxAvg = prevBatch.length ? avg(prevBatch, 'context_score') : null;
+
+    const cards = [
+      { label: 'A 级占比',     value: (curARate * 100).toFixed(1) + '%', prev: prevARate,     format: 'pct' },
+      { label: 'CLAUDE.md 覆盖率', value: (curClaudeCov * 100).toFixed(1) + '%', prev: prevClaudeCov, format: 'pct', sub: curClaudeCount + '/' + SNAPSHOT.length },
+      { label: '架构文档覆盖率',  value: (curArchCov * 100).toFixed(1) + '%',  prev: prevArchCov,   format: 'pct', sub: curArchCount + '/' + SNAPSHOT.length },
+      { label: '代码均分',      value: fmt(curCodeAvg, 2),        prev: prevCodeAvg,   format: 'num' },
+      { label: '测试均分',      value: fmt(curTestAvg, 2),        prev: prevTestAvg,   format: 'num' },
+      { label: '上下文均分',    value: fmt(curCtxAvg, 2),         prev: prevCtxAvg,    format: 'num' },
+    ];
+
+    const row = document.getElementById('kpi-row');
+    row.innerHTML = '';
+    cards.forEach(function (c) {
+      let changeHtml = '';
+      if (c.prev !== null && c.prev !== undefined) {
+        let curNum, prevNum;
+        if (c.format === 'pct') {
+          curNum = parseFloat(c.value);
+          prevNum = c.prev * 100;
+        } else {
+          curNum = parseFloat(c.value);
+          prevNum = c.prev;
+        }
+        const diff = curNum - prevNum;
+        if (Math.abs(diff) >= 0.01) {
+          const arrow = diff > 0 ? '↑' : '↓';
+          const color = diff > 0 ? 'text-green-500' : 'text-red-500';
+          const val = c.format === 'pct' ? Math.abs(diff).toFixed(1) + '%' : Math.abs(diff).toFixed(2);
+          changeHtml = '<span class="text-xs ' + color + ' ml-1">' + arrow + val + '</span>';
+        }
+      }
+      const card = document.createElement('div');
+      card.className = 'bg-white rounded-lg shadow p-4';
+      let subHtml = c.sub ? '<div class="text-xs text-gray-400 mt-1">' + c.sub + '</div>' : '';
+      card.innerHTML =
+        '<div class="text-xs text-gray-400 mb-1">' + c.label + '</div>' +
+        '<div class="text-2xl font-bold text-gray-800">' + c.value + changeHtml + '</div>' + subHtml;
+      row.appendChild(card);
+    });
+  }
+  renderKPI();
+
+  // -------------------- 图表管理 --------------------
+  const charts = {};  // 存储所有 ECharts 实例
+  const detailCharts = {}; // 存储展开行的图表实例
+
+  function initChart(domId) {
+    const dom = document.getElementById(domId);
+    if (!dom) return null;
+    const c = echarts.init(dom);
+    charts[domId] = c;
+    return c;
+  }
+
+  // ---- 等级分布饼图 ----
+  function renderGradeDonut() {
+    const c = initChart('chart-grade');
+    if (!c) return;
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    SNAPSHOT.forEach(r => { if (counts.hasOwnProperty(r.grade)) counts[r.grade]++; });
+    const data = Object.keys(counts).map(g => ({
+      name: g + ' 级',
+      value: counts[g],
+      itemStyle: { color: GRADE_COLORS[g] }
+    }));
+    c.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: function (p) { return p.name + ': ' + p.value + ' (' + p.percent + '%)'; }
+      },
+      legend: { bottom: 0, data: data.map(d => d.name) },
+      graphic: [{
+        type: 'text',
+        left: 'center',
+        top: 'center',
+        style: {
+          text: SNAPSHOT.length + '',
+          fontSize: 28,
+          fontWeight: 'bold',
+          fill: '#374151'
+        }
+      }],
+      series: [{
+        type: 'pie',
+        radius: ['45%', '70%'],
+        center: ['50%', '45%'],
+        avoidLabelOverlap: true,
+        label: { show: false },
+        emphasis: { label: { show: true, fontSize: 14, fontWeight: 'bold' } },
+        data: data
+      }]
+    });
+  }
+
+  // ---- 趋势折线图 ----
+  function renderTrendLine() {
+    const c = initChart('chart-trend');
+    if (!c) return;
+
+    // 按 scan_id 分组，计算每批次的平均分
+    const scanIds = (META.scan_ids || []).slice().sort();
+    const grouped = {};
+    HISTORY.forEach(r => {
+      if (!grouped[r.scan_id]) grouped[r.scan_id] = [];
+      grouped[r.scan_id].push(r);
+    });
+    // 也把当前 SNAPSHOT 作为最新批次加入
+    grouped[META.scan_id] = SNAPSHOT;
+
+    const claudeCov = [];
+    const archCov = [];
+    const xLabels = [];
+
+    scanIds.forEach(id => {
+      const batch = grouped[id] || [];
+      if (batch.length === 0) return;
+      xLabels.push(id);
+      claudeCov.push(parseFloat((coverage(batch, 'claude_md_exists') * 100).toFixed(1)));
+      archCov.push(parseFloat((coverage(batch, 'architecture_doc_exists') * 100).toFixed(1)));
+    });
+
+    c.setOption({
+      tooltip: { trigger: 'axis', formatter: function(ps) { return ps.map(p => p.seriesName + ': ' + p.value + '%').join('<br>'); } },
+      legend: { top: 0, data: ['CLAUDE.md 覆盖率', '架构文档覆盖率'] },
+      grid: { top: 40, left: 50, right: 20, bottom: 30 },
+      xAxis: { type: 'category', data: xLabels, boundaryGap: false },
+      yAxis: { type: 'value', min: 0, max: 100, axisLabel: { formatter: '{value}%' } },
+      series: [
+        { name: 'CLAUDE.md 覆盖率', type: 'line', data: claudeCov, smooth: true, lineStyle: { width: 2 }, itemStyle: { color: '#6366F1' }, areaStyle: { color: 'rgba(99,102,241,0.1)' } },
+        { name: '架构文档覆盖率',   type: 'line', data: archCov,   smooth: true, lineStyle: { width: 2 }, itemStyle: { color: '#10B981' }, areaStyle: { color: 'rgba(16,185,129,0.1)' } },
+      ]
+    });
+  }
+
+  // ---- 全仓库得分蜂群分布图 ----
+  function renderBeeswarm() {
+    const c = initChart('chart-beeswarm');
+    if (!c) return;
+
+    // 0 分仓库聚合为一个大点，其余正常散开
+    const zeroRepos = SNAPSHOT.filter(r => num(r.total_score) === 0);
+    const nonZero = SNAPSHOT.filter(r => num(r.total_score) > 0);
+
+    // 对非零仓库做蜂群布局
+    const sorted = [...nonZero].sort((a, b) => num(a.total_score) - num(b.total_score));
+    const binWidth = 0.2;
+    const bins = {};
+    sorted.forEach(r => {
+      const s = num(r.total_score);
+      const binKey = Math.round(s / binWidth);
+      if (!bins[binKey]) bins[binKey] = [];
+      bins[binKey].push(r);
+    });
+
+    const points = [];
+    Object.keys(bins).forEach(key => {
+      const arr = bins[key];
+      arr.forEach((r, i) => {
+        const layer = Math.floor((i + 1) / 2);
+        const side = (i % 2 === 0) ? 1 : -1;
+        const yOffset = i === 0 ? 0 : layer * side;
+        const s = num(r.total_score);
+        points.push({
+          value: [s, yOffset],
+          symbolSize: 6 + s * 3,
+          _repo: r
+        });
+      });
+    });
+
+    // 0 分聚合点
+    if (zeroRepos.length > 0) {
+      points.push({
+        value: [0, 0],
+        symbolSize: Math.min(40, 12 + zeroRepos.length * 0.4),
+        _repo: { repo_name: zeroRepos.length + ' 个仓库 (0 分)', grade: 'D', total_score: 0, code_score: 0, test_score: 0, context_score: 0 },
+        _isCluster: true,
+        _count: zeroRepos.length,
+        _children: zeroRepos
+      });
+    }
+
+    // 按等级分组
+    const seriesMap = { A: [], B: [], C: [], D: [] };
+    points.forEach(p => {
+      const g = p._repo.grade || 'D';
+      seriesMap[g].push(p);
+    });
+
+    const maxY = Math.max(...points.map(p => Math.abs(p.value[1])), 5);
+
+    c.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: function(p) {
+          const d = p.data;
+          if (d._isCluster) {
+            var names = d._children.slice(0, 8).map(function(r) { return r.repo_name; }).join('<br/>');
+            if (d._count > 8) names += '<br/>... 等共 ' + d._count + ' 个';
+            return '<b>0 分仓库 (' + d._count + ' 个)</b><br/>' + names;
+          }
+          const r = d._repo;
+          return '<b>' + (r.repo_name||'') + '</b> (' + (r.grade||'D') + ')<br/>' +
+            '总分: ' + num(r.total_score).toFixed(2) +
+            '<br/>代码: ' + num(r.code_score).toFixed(1) +
+            '  测试: ' + num(r.test_score).toFixed(1) +
+            '  上下文: ' + num(r.context_score).toFixed(1);
+        }
+      },
+      legend: { top: 0, data: ['A 级', 'B 级', 'C 级', 'D 级'], textStyle: { fontSize: 11 } },
+      grid: { left: 12, right: 20, top: 36, bottom: 40, containLabel: false },
+      xAxis: {
+        type: 'value', min: -0.3, max: 5.0, name: '总分', nameLocation: 'center', nameGap: 24,
+        nameTextStyle: { fontSize: 11 },
+        axisLabel: { fontSize: 10, formatter: function(v) { return v >= 0 && v <= 5 ? v.toFixed(0) : ''; } },
+        splitLine: { lineStyle: { color: '#f3f4f6' } }
+      },
+      yAxis: {
+        type: 'value', min: -maxY - 2, max: maxY + 2,
+        axisLabel: { show: false }, axisTick: { show: false },
+        axisLine: { show: false }, splitLine: { show: false }
+      },
+      series: ['A', 'B', 'C', 'D'].map((g, gi) => ({
+        name: g + ' 级',
+        type: 'scatter',
+        data: seriesMap[g],
+        symbolSize: function(val, p) { return p.data.symbolSize || 10; },
+        itemStyle: { color: GRADE_COLORS[g], opacity: 0.85, borderWidth: 1, borderColor: '#fff' },
+        emphasis: { itemStyle: { opacity: 1, shadowBlur: 8, shadowColor: 'rgba(0,0,0,0.3)' } },
+        markLine: gi === 0 ? {
+          silent: true, symbol: 'none',
+          lineStyle: { type: 'dashed', width: 1, opacity: 0.5 },
+          label: { fontSize: 10, position: 'insideEndTop', fontWeight: 'bold' },
+          data: [
+            { xAxis: 4.0, label: { formatter: 'A ≥ 4.0', color: '#10B981' }, lineStyle: { color: '#10B981' } },
+            { xAxis: 3.0, label: { formatter: 'B ≥ 3.0', color: '#3B82F6' }, lineStyle: { color: '#3B82F6' } },
+            { xAxis: 2.0, label: { formatter: 'C ≥ 2.0', color: '#F59E0B' }, lineStyle: { color: '#F59E0B' } }
+          ]
+        } : undefined
+      }))
+    });
+  }
+
+  // ---- 团队能力雷达图 ----
+  function renderRadar() {
+    const c = initChart('chart-radar');
+    if (!c) return;
+
+    const codeVal  = avg(SNAPSHOT, 'code_score') / 5 * 100;
+    const testVal  = avg(SNAPSHOT, 'test_score') / 5 * 100;
+    const ctxVal   = avg(SNAPSHOT, 'context_score') / 5 * 100;
+    const claudeVal = coverage(SNAPSHOT, 'claude_md_exists') * 100;
+    const archVal   = coverage(SNAPSHOT, 'architecture_doc_exists') * 100;
+
+    c.setOption({
+      tooltip: {},
+      radar: {
+        indicator: [
+          { name: '代码得分', max: 100 },
+          { name: '测试得分', max: 100 },
+          { name: '上下文得分', max: 100 },
+          { name: 'CLAUDE.md', max: 100 },
+          { name: '架构文档', max: 100 },
+        ],
+        center: ['50%', '55%'],
+        radius: '65%'
+      },
+      series: [{
+        type: 'radar',
+        data: [{
+          value: [
+            parseFloat(codeVal.toFixed(1)),
+            parseFloat(testVal.toFixed(1)),
+            parseFloat(ctxVal.toFixed(1)),
+            parseFloat(claudeVal.toFixed(1)),
+            parseFloat(archVal.toFixed(1)),
+          ],
+          name: '团队整体',
+          areaStyle: { color: 'rgba(99,102,241,0.25)' },
+          lineStyle: { color: '#6366F1', width: 2 },
+          itemStyle: { color: '#6366F1' }
+        }]
+      }]
+    });
+  }
+
+  // 初始化所有图表
+  renderGradeDonut();
+  renderTrendLine();
+  renderRadar();
+  renderBeeswarm();
+
+  // -------------------- 代码腐化监控 --------------------
+
+  /** 计算单个仓库的腐化指数 (0-100, 越低越好) */
+  function calcErosionIndex(r) {
+    return (num(r.erosion) * 40 + num(r.verbosity) * 30 + num(r.clone_ratio) * 30) * 100;
+  }
+
+  /** 腐化等级 */
+  function erosionLevel(idx) {
+    if (idx < 10) return { label: '健康', color: '#10B981' };
+    if (idx < 25) return { label: '轻度', color: '#3B82F6' };
+    if (idx < 45) return { label: '中度', color: '#F59E0B' };
+    return { label: '重度', color: '#EF4444' };
+  }
+
+
+  // -------------------- 仓库详情表格 --------------------
+
+  // 状态
+  let sortKey = 'total_score';
+  let sortDir = 'desc';
+  let expandedRepo = null;
+
+  /** 获取当前经过筛选 + 排序后的数据 */
+  function getFilteredData() {
+    const search = (document.getElementById('filter-search').value || '').toLowerCase().trim();
+    const grade  = document.getElementById('filter-grade').value;
+    const lang   = document.getElementById('filter-lang').value;
+    const claude = document.getElementById('filter-claude').value;
+
+    let data = SNAPSHOT.slice();
+
+    // 筛选
+    if (search) {
+      data = data.filter(r => (r.repo_name || '').toLowerCase().includes(search));
+    }
+    if (grade) {
+      data = data.filter(r => r.grade === grade);
+    }
+    if (lang) {
+      data = data.filter(r => (r.languages || '').includes(lang));
+    }
+    if (claude === '1') {
+      data = data.filter(r => r.claude_md_exists);
+    } else if (claude === '0') {
+      data = data.filter(r => !r.claude_md_exists);
+    }
+
+    // 排序
+    data.sort(function (a, b) {
+      let va, vb;
+      if (sortKey === '_change') {
+        va = repoChanges[a.repo_name];
+        vb = repoChanges[b.repo_name];
+        va = va === null || va === undefined ? -999 : va;
+        vb = vb === null || vb === undefined ? -999 : vb;
+      } else if (sortKey === 'grade') {
+        const order = { A: 1, B: 2, C: 3, D: 4 };
+        va = order[a.grade] || 5;
+        vb = order[b.grade] || 5;
+      } else if (sortKey === 'repo_name') {
+        va = (a.repo_name || '').toLowerCase();
+        vb = (b.repo_name || '').toLowerCase();
+      } else {
+        va = num(a[sortKey]);
+        vb = num(b[sortKey]);
+      }
+      if (va < vb) return sortDir === 'asc' ? -1 : 1;
+      if (va > vb) return sortDir === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    return data;
+  }
+
+  /** 渲染变化列 */
+  function changeHtml(repoName) {
+    const ch = repoChanges[repoName];
+    if (ch === null || ch === undefined) return '<span class="text-gray-400">—</span>';
+    if (Math.abs(ch) < 0.005) return '<span class="text-gray-400">—</span>';
+    if (ch > 0) return '<span class="text-green-500">↑' + ch.toFixed(1) + '</span>';
+    return '<span class="text-red-500">↓' + Math.abs(ch).toFixed(1) + '</span>';
+  }
+
+  /** 渲染表格 */
+  function renderTable() {
+    const tbody = document.getElementById('repo-tbody');
+    tbody.innerHTML = '';
+
+    // 清理之前的展开行图表
+    Object.keys(detailCharts).forEach(function (k) {
+      if (detailCharts[k]) { detailCharts[k].dispose(); delete detailCharts[k]; }
+    });
+
+    const data = getFilteredData();
+
+    data.forEach(function (r, idx) {
+      // 主行
+      const tr = document.createElement('tr');
+      tr.className = 'repo-row border-b border-gray-100 ' + (idx % 2 === 0 ? 'bg-white' : 'bg-gray-50/50');
+      tr.dataset.repo = r.repo_name;
+
+      tr.innerHTML =
+        '<td class="px-4 py-3"><a href="' + repoLink(r.repo_name) + '" target="_blank" rel="noopener" class="text-blue-600 hover:underline" onclick="event.stopPropagation();">' + (r.repo_name || '') + '</a></td>' +
+        '<td class="px-4 py-3"><span class="badge badge-' + (r.grade || 'D') + '">' + (r.grade || '?') + '</span></td>' +
+        '<td class="px-4 py-3 font-medium">' + fmt(r.total_score, 2) + '</td>' +
+        '<td class="px-4 py-3">' + fmt(r.code_score, 2) + '</td>' +
+        '<td class="px-4 py-3">' + fmt(r.test_score, 2) + '</td>' +
+        '<td class="px-4 py-3">' + fmt(r.context_score, 2) + '</td>' +
+        '<td class="px-4 py-3">' + (r.claude_md_exists ? '<span class="text-green-500 text-lg">&#10003;</span>' : '<span class="text-gray-300 text-lg">&#10007;</span>') + '</td>' +
+        '<td class="px-4 py-3">' + (r.architecture_doc_exists ? '<span class="text-green-500 text-lg">&#10003;</span>' : '<span class="text-gray-300 text-lg">&#10007;</span>') + '</td>' +
+        '<td class="px-4 py-3 text-gray-500">' + (r.languages || '') + '</td>' +
+        '<td class="px-4 py-3">' + changeHtml(r.repo_name) + '</td>';
+
+      tr.addEventListener('click', function () { toggleDetail(r); });
+      tbody.appendChild(tr);
+
+      // 展开详情行（默认隐藏）
+      const detailTr = document.createElement('tr');
+      detailTr.id = 'detail-' + r.repo_name.replace(/\//g, '_');
+      detailTr.style.display = 'none';
+      detailTr.innerHTML = '<td colspan="10" class="p-0"><div class="detail-panel" id="panel-' + r.repo_name.replace(/\//g, '_') + '"></div></td>';
+      tbody.appendChild(detailTr);
+    });
+
+    // 更新排序指示器
+    document.querySelectorAll('th.sortable').forEach(function (th) {
+      th.classList.remove('sort-asc', 'sort-desc');
+      if (th.dataset.key === sortKey) {
+        th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+      }
+    });
+  }
+
+  /** 展开/折叠详情面板 */
+  function toggleDetail(repo) {
+    const safeId = repo.repo_name.replace(/\//g, '_');
+    const detailTr = document.getElementById('detail-' + safeId);
+    const panel = document.getElementById('panel-' + safeId);
+    if (!detailTr || !panel) return;
+
+    const isOpen = detailTr.style.display !== 'none';
+
+    if (isOpen) {
+      // 折叠
+      panel.classList.remove('open');
+      setTimeout(function () { detailTr.style.display = 'none'; }, 300);
+      // 销毁图表
+      ['radar-' + safeId, 'history-' + safeId, 'health-' + safeId].forEach(function (k) {
+        if (detailCharts[k]) { detailCharts[k].dispose(); delete detailCharts[k]; }
+      });
+      if (expandedRepo === repo.repo_name) expandedRepo = null;
+    } else {
+      // 展开
+      detailTr.style.display = '';
+      panel.innerHTML = buildDetailHTML(repo, safeId);
+      requestAnimationFrame(function () {
+        panel.classList.add('open');
+        // 延迟创建图表，确保 DOM 已渲染
+        setTimeout(function () {
+          renderDetailRadar(repo, safeId);
+          renderDetailHistory(repo, safeId);
+          renderDetailHealthTrend(repo, safeId);
+        }, 50);
+      });
+      expandedRepo = repo.repo_name;
+    }
+  }
+
+  /** 构建展开面板的 HTML */
+  function buildDetailHTML(repo, safeId) {
+    // 格式化 overall_summary
+    let summary = (repo.overall_summary || '暂无说明').replace(/\n/g, '<br>');
+    summary = summary.replace(/(优势[:：])/g, '<strong class="text-green-600">$1</strong>');
+    summary = summary.replace(/(短板[:：])/g, '<strong class="text-amber-600">$1</strong>');
+    summary = summary.replace(/(建议[:：])/g, '<strong class="text-blue-600">$1</strong>');
+
+    // CLAUDE.md 质量
+    var claudeQ = repo.claude_md_quality || '';
+    var claudeQHtml = '';
+    if (claudeQ) {
+      var cqGrade = claudeQ.charAt(0);
+      var cqColor = cqGrade === 'A' ? 'green' : cqGrade === 'B' ? 'blue' : 'amber';
+      claudeQHtml = '<span class="inline-block px-1.5 py-0.5 rounded text-xs font-bold text-white bg-' + cqColor + '-500">' + cqGrade + '</span> ' +
+        '<span class="text-xs text-gray-500">' + claudeQ.substring(claudeQ.indexOf('|') + 1).trim() + '</span>';
+    } else {
+      claudeQHtml = '<span class="text-xs text-gray-400">未评估</span>';
+    }
+
+    // 架构文档质量
+    var archQ = repo.architecture_doc_quality || '';
+    var archQHtml = '';
+    if (archQ) {
+      var aqGrade = archQ.charAt(0);
+      var aqColor = aqGrade === 'A' ? 'green' : aqGrade === 'B' ? 'blue' : 'amber';
+      archQHtml = '<span class="inline-block px-1.5 py-0.5 rounded text-xs font-bold text-white bg-' + aqColor + '-500">' + aqGrade + '</span> ' +
+        '<span class="text-xs text-gray-500">' + archQ.substring(archQ.indexOf('|') + 1).trim() + '</span>';
+    } else {
+      archQHtml = '<span class="text-xs text-gray-400">未评估</span>';
+    }
+
+    // 代码健康度指标
+    var erosionIdx = (num(repo.erosion) * 40 + num(repo.verbosity) * 30 + num(repo.clone_ratio) * 30).toFixed(1);
+    var healthLabel = erosionIdx < 10 ? '健康' : erosionIdx < 25 ? '轻度腐化' : erosionIdx < 45 ? '中度腐化' : '重度腐化';
+    var healthColor = erosionIdx < 10 ? 'green' : erosionIdx < 25 ? 'blue' : erosionIdx < 45 ? 'amber' : 'red';
+
+    // 指标行辅助函数
+    function metricRow(label, value, unit) {
+      return '<div class="flex justify-between py-1 border-b border-gray-100">' +
+        '<span class="text-gray-500">' + label + '</span>' +
+        '<span class="font-medium">' + value + (unit || '') + '</span></div>';
+    }
+
+    return '<div class="grid grid-cols-1 md:grid-cols-12 gap-4 p-5 bg-gray-50 border-t border-gray-200">' +
+
+      // 第一列：整体说明 + 文档质量（5列宽）
+      '<div class="md:col-span-5 space-y-3">' +
+        '<div class="bg-white rounded-lg p-4 border-l-4 border-indigo-400">' +
+          '<h4 class="text-sm font-semibold text-gray-600 mb-2">整体说明</h4>' +
+          '<div class="text-sm text-gray-700 leading-relaxed">' + summary + '</div>' +
+        '</div>' +
+        '<div class="bg-white rounded-lg p-4 border-l-4 border-emerald-400">' +
+          '<h4 class="text-sm font-semibold text-gray-600 mb-2">文档质量评估</h4>' +
+          '<div class="mb-2">' +
+            '<div class="text-xs font-medium text-gray-500 mb-1">CLAUDE.md' +
+              (repo.claude_md_exists ? ' <span class="text-green-500">(' + (repo.claude_md_lines || 0) + ' 行)</span>' : ' <span class="text-red-400">不存在</span>') +
+              (num(repo.sub_claude_md_count) > 0 ? ' + ' + repo.sub_claude_md_count + ' 个子目录' : '') +
+            '</div>' +
+            '<div class="ml-2">' + claudeQHtml + '</div>' +
+          '</div>' +
+          '<div>' +
+            '<div class="text-xs font-medium text-gray-500 mb-1">架构文档' +
+              (repo.architecture_doc_exists ? ' <span class="text-green-500">(' + (repo.architecture_doc_source || '') + ', ' + (repo.architecture_doc_lines || 0) + ' 行)</span>' : ' <span class="text-red-400">不存在</span>') +
+            '</div>' +
+            '<div class="ml-2">' + archQHtml + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+
+      // 第二列：代码健康度 + 关键指标（3列宽）
+      '<div class="md:col-span-3 space-y-3">' +
+        '<div class="bg-white rounded-lg p-4 border-l-4 border-' + healthColor + '-400">' +
+          '<h4 class="text-sm font-semibold text-gray-600 mb-2">代码健康度' +
+            ' <span class="ml-1 px-1.5 py-0.5 rounded text-xs font-bold text-white bg-' + healthColor + '-500">' + healthLabel + '</span>' +
+          '</h4>' +
+          '<div class="text-xs space-y-0.5">' +
+            metricRow('腐化指数', erosionIdx, '/100') +
+            metricRow('结构侵蚀', (num(repo.erosion) * 100).toFixed(1), '%') +
+            metricRow('冗余度', (num(repo.verbosity) * 100).toFixed(1), '%') +
+            metricRow('代码克隆率', (num(repo.clone_ratio) * 100).toFixed(1), '%') +
+            metricRow('高复杂度函数', repo.high_cc_functions || 0, ' 个') +
+            metricRow('反模式数', repo.anti_pattern_count || 0, '') +
+          '</div>' +
+        '</div>' +
+        '<div class="bg-white rounded-lg p-4">' +
+          '<h4 class="text-sm font-semibold text-gray-600 mb-2">代码概况</h4>' +
+          '<div class="text-xs space-y-0.5">' +
+            metricRow('源文件数', repo.total_source_files || 0, '') +
+            metricRow('平均行数', num(repo.avg_file_lines).toFixed(0), ' 行') +
+            metricRow('超长文件', (repo.files_over_500 || 0) + ' 个', ' (' + (num(repo.files_over_500_ratio) * 100).toFixed(1) + '%)') +
+            metricRow('类型违规', repo.type_safety_violations || 0, ' 处') +
+            metricRow('测试文件', (repo.test_files_count || 0) + ' 个', ' (' + (num(repo.test_ratio) * 100).toFixed(1) + '%)') +
+            metricRow('CI 配置', repo.has_ci_config ? '✓' : '✗', '') +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+
+      // 第三列：雷达图 + 得分趋势 + 健康度趋势（4列宽）
+      '<div class="md:col-span-4 space-y-3">' +
+        '<div class="bg-white rounded-lg p-4">' +
+          '<h4 class="text-sm font-semibold text-gray-600 mb-2">维度雷达</h4>' +
+          '<div id="detail-radar-' + safeId + '" style="width:100%;height:180px;"></div>' +
+        '</div>' +
+        '<div class="bg-white rounded-lg p-4">' +
+          '<h4 class="text-sm font-semibold text-gray-600 mb-2">得分趋势</h4>' +
+          '<div id="detail-history-' + safeId + '" style="width:100%;height:160px;"></div>' +
+        '</div>' +
+        '<div class="bg-white rounded-lg p-4">' +
+          '<h4 class="text-sm font-semibold text-gray-600 mb-2">健康度趋势</h4>' +
+          '<div id="detail-health-' + safeId + '" style="width:100%;height:160px;"></div>' +
+        '</div>' +
+      '</div>' +
+
+    '</div>';
+  }
+
+  /** 渲染展开行的雷达图 */
+  function renderDetailRadar(repo, safeId) {
+    const dom = document.getElementById('detail-radar-' + safeId);
+    if (!dom) return;
+    const c = echarts.init(dom);
+    detailCharts['radar-' + safeId] = c;
+
+    const codeVal = num(repo.code_score);
+    const testVal = num(repo.test_score);
+    const ctxVal = num(repo.context_score);
+    const claudeVal = repo.claude_md_exists ? 5 : 0;
+    const archVal = repo.architecture_doc_exists ? 5 : 0;
+
+    c.setOption({
+      radar: {
+        indicator: [
+          { name: '代码得分', max: 5 },
+          { name: '测试得分', max: 5 },
+          { name: '上下文得分', max: 5 },
+          { name: 'CLAUDE.md', max: 5 },
+          { name: '架构文档', max: 5 },
+        ],
+        radius: '60%'
+      },
+      series: [{
+        type: 'radar',
+        data: [{
+          value: [
+            parseFloat(codeVal.toFixed(2)),
+            parseFloat(testVal.toFixed(2)),
+            parseFloat(ctxVal.toFixed(2)),
+            claudeVal,
+            archVal,
+          ],
+          areaStyle: { color: 'rgba(99,102,241,0.2)' },
+          lineStyle: { color: '#6366F1' },
+          itemStyle: { color: '#6366F1' }
+        }]
+      }]
+    });
+  }
+
+  /** 渲染展开行的历史趋势图 */
+  function renderDetailHistory(repo, safeId) {
+    const dom = document.getElementById('detail-history-' + safeId);
+    if (!dom) return;
+    const c = echarts.init(dom);
+    detailCharts['history-' + safeId] = c;
+
+    // 从 HISTORY 过滤出该仓库的记录
+    const repoHistory = HISTORY
+      .filter(r => r.repo_name === repo.repo_name)
+      .slice()
+      .sort((a, b) => (a.scan_id || '').localeCompare(b.scan_id || ''));
+
+    // 加入当前批次
+    const hasCurrentInHistory = repoHistory.some(r => r.scan_id === META.scan_id);
+    if (!hasCurrentInHistory) {
+      repoHistory.push({ scan_id: META.scan_id, total_score: repo.total_score });
+    }
+
+    const xLabels = repoHistory.map(r => r.scan_id);
+    const scores = repoHistory.map(r => parseFloat(num(r.total_score).toFixed(2)));
+
+    c.setOption({
+      tooltip: { trigger: 'axis' },
+      grid: { top: 10, left: 40, right: 10, bottom: 25 },
+      xAxis: { type: 'category', data: xLabels, axisLabel: { fontSize: 10 } },
+      yAxis: { type: 'value', min: 0, max: 5, axisLabel: { fontSize: 10 } },
+      series: [{
+        type: 'line',
+        data: scores,
+        smooth: true,
+        lineStyle: { color: '#6366F1', width: 2 },
+        itemStyle: { color: '#6366F1' },
+        areaStyle: { color: 'rgba(99,102,241,0.1)' }
+      }]
+    });
+  }
+
+  function renderDetailHealthTrend(repo, safeId) {
+    const dom = document.getElementById('detail-health-' + safeId);
+    if (!dom) return;
+    const c = echarts.init(dom);
+    detailCharts['health-' + safeId] = c;
+
+    const repoHistory = HISTORY
+      .filter(r => r.repo_name === repo.repo_name)
+      .slice()
+      .sort((a, b) => (a.scan_id || '').localeCompare(b.scan_id || ''));
+
+    const hasCurrentInHistory = repoHistory.some(r => r.scan_id === META.scan_id);
+    if (!hasCurrentInHistory) {
+      repoHistory.push({ scan_id: META.scan_id, erosion: repo.erosion, verbosity: repo.verbosity, clone_ratio: repo.clone_ratio });
+    }
+
+    const xLabels = repoHistory.map(r => r.scan_id);
+    const erosionData = repoHistory.map(r => parseFloat((num(r.erosion) * 100).toFixed(1)));
+    const verbosityData = repoHistory.map(r => parseFloat((num(r.verbosity) * 100).toFixed(1)));
+    const cloneData = repoHistory.map(r => parseFloat((num(r.clone_ratio) * 100).toFixed(1)));
+
+    c.setOption({
+      tooltip: { trigger: 'axis', formatter: function(params) {
+        var s = params[0].axisValue;
+        params.forEach(function(p) { s += '<br>' + p.marker + p.seriesName + ': ' + p.value + '%'; });
+        return s;
+      }},
+      legend: { data: ['结构侵蚀', '冗余度', '克隆率'], bottom: 0, textStyle: { fontSize: 10 } },
+      grid: { top: 10, left: 40, right: 10, bottom: 35 },
+      xAxis: { type: 'category', data: xLabels, axisLabel: { fontSize: 10 } },
+      yAxis: { type: 'value', axisLabel: { fontSize: 10, formatter: '{value}%' } },
+      series: [
+        { name: '结构侵蚀', type: 'line', data: erosionData, smooth: true, lineStyle: { width: 2 }, itemStyle: { color: '#EF4444' } },
+        { name: '冗余度', type: 'line', data: verbosityData, smooth: true, lineStyle: { width: 2 }, itemStyle: { color: '#F59E0B' } },
+        { name: '克隆率', type: 'line', data: cloneData, smooth: true, lineStyle: { width: 2 }, itemStyle: { color: '#8B5CF6' } }
+      ]
+    });
+  }
+
+  // -------------------- 语言筛选器初始化 --------------------
+  function initLangFilter() {
+    const langs = {};
+    SNAPSHOT.forEach(function (r) {
+      (r.languages || '').split(/[,;/|+\s]+/).forEach(function (l) {
+        l = l.trim();
+        if (l) langs[l] = (langs[l] || 0) + 1;
+      });
+    });
+    const sel = document.getElementById('filter-lang');
+    Object.keys(langs).sort().forEach(function (l) {
+      const opt = document.createElement('option');
+      opt.value = l;
+      opt.textContent = l + ' (' + langs[l] + ')';
+      sel.appendChild(opt);
+    });
+  }
+  initLangFilter();
+
+  // -------------------- 事件绑定 --------------------
+
+  // 排序
+  document.querySelectorAll('th.sortable').forEach(function (th) {
+    th.addEventListener('click', function () {
+      const key = th.dataset.key;
+      if (sortKey === key) {
+        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortKey = key;
+        sortDir = 'desc';
+      }
+      renderTable();
+    });
+  });
+
+  // 筛选（实时搜索 + 下拉变更）
+  document.getElementById('filter-search').addEventListener('input', renderTable);
+  document.getElementById('filter-grade').addEventListener('change', renderTable);
+  document.getElementById('filter-lang').addEventListener('change', renderTable);
+  document.getElementById('filter-claude').addEventListener('change', renderTable);
+
+  // 窗口 resize：调整所有可见图表
+  window.addEventListener('resize', function () {
+    Object.values(charts).forEach(function (c) { if (c && !c.isDisposed()) c.resize(); });
+    Object.values(detailCharts).forEach(function (c) { if (c && !c.isDisposed()) c.resize(); });
+  });
+
+  // -------------------- 页脚 --------------------
+  document.getElementById('footer').textContent = '报告生成时间: ' + new Date().toLocaleString('zh-CN') + ' | 共 ' + (META.total_repos || SNAPSHOT.length) + ' 个仓库';
+
+  // -------------------- 首次渲染表格 --------------------
+  renderTable();
+
+})();
+</script>
+</body>
+</html>

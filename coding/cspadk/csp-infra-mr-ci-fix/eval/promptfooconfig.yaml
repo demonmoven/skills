@@ -1,0 +1,41 @@
+description: "csp-infra-mr-ci-fix eval"
+
+providers:
+  - id: openai:chat:ep-20260408160450-47n2p
+    config:
+      apiBaseUrl: https://ark-cn-beijing.bytedance.net/api/v3
+      temperature: 0
+      max_tokens: 4096
+
+prompts:
+  - file://../SKILL.md
+
+tests:
+  - description: "Happy path — user asks to fix CI errors"
+    vars:
+      user_input: "My MR CI failed, can you fix it?"
+    assert:
+      - type: icontains
+        value: "bytedcli codebase checks mr"
+      - type: icontains
+        value: "MR Detection"
+      - type: icontains
+        value: "Error Diagnosis"
+
+  - description: "Guard — empty input should provide guidance"
+    vars:
+      user_input: ""
+    assert:
+      - type: icontains
+        value: "CI"
+      - type: icontains
+        value: "MR"
+
+  - description: "Specific check run ID provided"
+    vars:
+      user_input: "Check run 123456 failed, what's wrong?"
+    assert:
+      - type: icontains
+        value: "bytedcli codebase checks get"
+      - type: icontains
+        value: "check_run_id"

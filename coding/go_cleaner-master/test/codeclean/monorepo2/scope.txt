@@ -1,0 +1,3 @@
+test/codeclean/monorepo2/repo2
+test/codeclean/monorepo2/repo2/pkg1
+test/codeclean/monorepo2/repo2/pkg2

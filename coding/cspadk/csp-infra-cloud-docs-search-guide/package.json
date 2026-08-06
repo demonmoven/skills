@@ -1,0 +1,20 @@
+{
+  "name": "@i18n-cs/csp-infra-cloud-docs-search-guide",
+  "version": "1.0.0",
+  "description": "云平台文档搜索指南，提供字节云平台的关键词索引和搜索引导",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": [
+    "skill",
+    "csp-infra",
+    "cloud-docs",
+    "keyword-index"
+  ],
+  "author": "i18n-cs",
+  "license": "MIT",
+  "skillConfig": {
+    "skillPath": "SKILL.md"
+  }
+}

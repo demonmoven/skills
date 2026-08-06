@@ -1,0 +1,2 @@
+test/codeclean/monorepo1/cmds/cmd1/ipkg1
+test/codeclean/monorepo1/cmds/cmd1

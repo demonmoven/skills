@@ -1,0 +1,92 @@
+{
+    "LarkDataIntelligence/c360_permission": {
+        "go_version": "1.16",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "LarkDataIntelligence/stargate": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "apaas/datafactory": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "apaas/openplatform": {
+        "go_version": "1.15",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark/infra-sre-flycheck": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_search/broker_facade": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkarch/dts": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "people/okr_stream": {
+        "go_version": "1.15",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "spring/aily_model_proxy": {
+        "go_version": "1.19",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    }
+}

@@ -1,0 +1,14 @@
+go1.18	beops/sdp_kitex
+go1.18	ccm-platform/sre_service
+go1.18	ccm-platform/sre_service
+go1.17	lark/harbor-exec_core
+go1.17	lark/harbor-exec_core
+go1.18	larkarch/dts_api
+go1.18	larkvc/byteview-utils-watchdog
+go1.18	larkvc/byteview-utils-watchdog
+go1.16	lark/dconfig
+go1.16	lark/dconfig
+go1.20	lark_search/enterprise_qa
+go1.20	lark_search/enterprise_qa
+go1.14	larkdoc/server_template_file_api
+go1.14	larkdoc/server_template_file_api

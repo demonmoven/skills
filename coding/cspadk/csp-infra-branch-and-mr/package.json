@@ -1,0 +1,22 @@
+{
+  "name": "@i18n-cs/csp-infra-branch-and-mr",
+  "version": "1.0.0",
+  "description": "Create a new branch from main, commit all changes, push, and open a Codebase MR via bytedcli",
+  "private": false,
+  "keywords": [
+    "ai-skill",
+    "csp-infra"
+  ],
+  "skillConfig": {
+    "source": "codebase",
+    "owner": "i18n-cs",
+    "repo": "ai-infra-i18n",
+    "agentSupport": [
+      "claude-code",
+      "cursor"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://skills.bytedance.net/api/registry"
+  }
+}

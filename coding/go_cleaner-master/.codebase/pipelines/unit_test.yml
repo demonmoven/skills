@@ -1,0 +1,17 @@
+name: unit tests
+trigger:
+  change:
+    types: [ create, push ]
+    notification:
+      when: [success, failure]
+jobs:
+  run_tests:
+    image: hub.byted.org/codebase/ci_go_1_19:latest
+    runs-on:
+      cluster: 
+    steps:
+      - id: test
+        commands:
+          - pip3 install --user filecheck lit
+          - export PATH=$(go env GOPATH)/bin:$HOME/.local/bin:$PATH
+          - ./test/test.sh

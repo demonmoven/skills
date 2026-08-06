@@ -1,0 +1,42 @@
+[
+    {
+        "name": "200",
+        "go_version": "1.22",
+        "repo": "webcast/wallet_promotion_core",
+        "repo_commit_id": "e2228708db81c04f5de20f88fc7fd36f90f812ef",
+        "args": {
+            "cleaner_flag": "-f --before=0",
+            "endpoint": "UpdateCouponInfoByNo,UpdateCoupon,RefundCoupon,QueryPromotionDayBill,QueryMetaListByCursor,QueryCouponListByActID,QueryCoupon,QueryAgentToB,PreRollbackCoupon,PreRefundCoupon,MANotifyCallback,ChangeAgentStatus,ByteStateDo,BatchQueryMetaByMerchantNoList,BatchCreateAgent,BackBatchManageAgent"
+        }
+    },
+    {
+        "name": "39",
+        "go_version": "1.20",
+        "repo": "webcast/goods_base",
+        "repo_commit_id": "047ace49df22265a83f2ec9dc8aae192903facf4",
+        "args": {
+            "cleaner_flag": "-f --before=0",
+            "endpoint": "UpdateDiscountPlan,SyncGiftAndAsset,SetRoomSupportedFaceGifts,RejectDiscountPlan,GetSpeedyGift,GetHotPatch,GetGiftListTags,GetGiftAssetSyncMap,GetDiscountPlanList,GetDiscountPlan,ExpireDiscountPlan,ExecuteDiscountPlan,EditDiscountPlan,CreateDiscountPlan,CommitDiscountPlan,ClearDiscountPlanListCache,ClearDiscountPlanCache,CanSendFaceGift,AcceptDiscountPlan,AbandonDiscountPlan"
+        }
+    },
+    {
+        "name": "507",
+        "go_version": "1.18",
+        "repo": "webcast/wallet_content_trade_item",
+        "repo_commit_id": "97727a5ab9dd558229fb4aa2d8968bef29a78736",
+        "args": {
+            "cleaner_flag": "-f --before=0",
+            "endpoint": "SyncItemInfos,QueryItemListByTags,QueryItemListByChildItemId,QueryItemListAndStockByCondition,QueryItemDetailAndStock,QueryItemCategoryInfo,MoveItemCategory,ModifyItemCategory,DiffCallBack,DeleteItemTags,DeleteItem,CreateItemCategory,BindItemTags"
+        }
+    },
+    {
+        "name": "37",
+        "go_version": "1.18",
+        "repo": "webcast/sort_core",
+        "repo_commit_id": "ab1ca306e82bbd94f8e572d0f8ac1ea36231025f",
+        "args": {
+            "cleaner_flag": "-f --before=0",
+            "endpoint": "TicketSubmit,SendVCoinFromCompany,RechargeBonusInfo,NotifyZhimaAuthResult,IsFirstChargeUser,GetWishListGifts,GetRandomWishListGifts,ClearJuvenilesAuthStatus"
+        }
+    }
+]

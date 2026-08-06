@@ -1,0 +1,35 @@
+description: "csp-infra-branch-and-mr eval"
+
+providers:
+  - id: openai:chat:ep-20260408160450-47n2p
+    config:
+      apiBaseUrl: https://ark-cn-beijing.bytedance.net/api/v3
+      temperature: 0
+      max_tokens: 4096
+
+prompts:
+  - file://../SKILL.md
+
+tests:
+  - description: "Happy path — user asks to commit and create MR"
+    vars:
+      user_input: "commit all changes and open an MR"
+    assert:
+      - type: icontains
+        value: "bytedcli codebase mr create"
+      - type: icontains
+        value: "git remote show origin"
+
+  - description: "Guard — empty input"
+    vars:
+      user_input: ""
+    assert:
+      - type: icontains
+        value: "csp-infra-branch-and-mr"
+
+  - description: "Edge case — repo with master as default branch"
+    vars:
+      user_input: "branch off master and create a merge request"
+    assert:
+      - type: icontains
+        value: "HEAD branch"

@@ -1,0 +1,82 @@
+{
+    "beops/sdp_kitex": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "ccm-platform/sre_service": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark/harbor-exec_core": {
+        "go_version": "1.17",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkarch/dts_api": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkvc/byteview-utils-watchdog": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark/dconfig": {
+        "go_version": "1.16",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "lark_search/enterprise_qa": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    },
+    "larkdoc/server_template_file_api": {
+        "go_version": "1.14",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    }
+}

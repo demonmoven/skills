@@ -1,0 +1,26 @@
+{
+  "name": "@i18n-cs/cspadk-requirement-init",
+  "version": "1.4.2",
+  "description": "Initialize new requirements in the CSPADK repository with document fetching, status tracking, and branch management",
+  "private": false,
+  "keywords": [
+    "ai-skill",
+    "requirement",
+    "init",
+    "cspadk"
+  ],
+  "skillConfig": {
+    "source": "codebase",
+    "owner": "i18n-cs",
+    "repo": "ai-infra-i18n",
+    "agentSupport": [
+      "claude-code",
+      "trae",
+      "trae-cli",
+      "coco"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://skills.bytedance.net/api/registry"
+  }
+}

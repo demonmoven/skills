@@ -1,0 +1,283 @@
+{
+    "temai/alliance_proxy": {
+        "go_version": "1.12",
+        "goals": [
+            "compatibility"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "bytedance/notify_batch_worker": {
+        "go_version": "1.12",
+        "goals": [
+            "compatibility"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "developer/distribute_aweme_feed_manager": {
+        "go_version": "1.13",
+        "goals": [
+            "compatibility"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "toutiao-fe/comm_interface": {
+        "go_version": "1.13",
+        "goals": [
+            "compatibility"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "ttgame/union_review": {
+        "go_version": "1.14",
+        "goals": [
+            "compatibility"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "cg/fiji.go.consumer": {
+        "go_version": "1.15",
+        "goals": [
+            "compatibility"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "maya/xmoji_store": {
+        "go_version": "1.15",
+        "goals": [
+            "compatibility"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "aweme/open_op": {
+        "go_version": "1.16",
+        "goals": [
+            "compatibility"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "ad/game_center": {
+        "go_version": "1.16",
+        "goals": [
+            "compatibility"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "developer/content_security": {
+        "go_version": "1.17",
+        "goals": [
+            "compatibility"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "cg/fiji.go.user": {
+        "go_version": "1.17",
+        "goals": [
+            "compatibility"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "apaas/datax": {
+        "go_version": "1.18",
+        "goals": [
+            "Repository Package Contains Error Before the Analysis"
+        ],
+        "head": "2b328f1ba5bbaf99314470e733130d81af19c266",
+        "cleaner_flags": "--ignore_errors",
+        "build_flags": ""
+    },
+    "growth/taichi_adjust": {
+        "go_version": "1.18",
+        "goals": [
+            "Clean Code and Comments After Return"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "aweme/l_video_data": {
+        "go_version": "1.18",
+        "goals": [
+            "Undeclared Identifier"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "ttgame/union_usdk_server": {
+        "go_version": "1.18",
+        "goals": [
+            "compatibility'"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "developer/industry_shop_certification": {
+        "go_version": "1.18",
+        "goals": [
+            "compatibility'"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "developer/review_api": {
+        "go_version": "1.18",
+        "goals": [
+            "compatibility'"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "im_cloud/im_go_api": {
+        "go_version": "1.19",
+        "goals": [
+            "Circual Dependencies in Unit Tests Constains Error"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "ByteDaaS/daas_list": {
+        "go_version": "1.19",
+        "goals": [
+            "Clean Code and Comments After Panic"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "webcast/room_interaction": {
+        "go_version": "1.19",
+        "goals": [
+            "compatibility'"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    }, 
+    "video/core_packer": {
+        "go_version": "1.19",
+        "goals": [
+            "compatibility'"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "ad/go-union": {
+        "go_version": "1.20",
+        "goals": [
+            "Repository Package Contains Error Before the Analysis"
+        ],
+        "head": "8aa14e88e7feceda4badb2dc172b2c9bd394455d",
+        "cleaner_flags": "--ignore_errors",
+        "build_flags": ""
+    },
+    "webcast/room_api": {
+        "go_version": "1.20",
+        "goals": [
+            "Circual Dependencies in Unit Tests Constain Error"
+        ],
+        "head": "master",
+        "cleaner_flags": "--ignore_errors",
+        "build_flags": ""
+    },
+    "developer/microapp_binding": {
+        "go_version": "1.20",
+        "goals": [
+            "Unit Tests Constain Error in Many Packages"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "-mod=mod"
+    },
+    "webcast/creator_api": {
+        "go_version": "1.20",
+        "goals": [
+            "compatibility'"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "toutiao/ecom_biz": {
+        "go_version": "1.21",
+        "goals": [
+            "compatibility'"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "webcast/stability_api": {
+        "go_version": "1.21",
+        "goals": [
+            "compatibility'"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "reading/bookstore": {
+        "go_version": "1.22",
+        "goals": [
+            "Need Build Flags '-mod=mod'",
+            "Redeclared Main Function",
+            "Correctly Handle Monorepo"
+        ],
+        "head": "master",
+        "cleaner_flags": "--ignore_errors",
+        "build_flags": "-mod=mod"
+    },
+    "life_service/fulfilment_refund": {
+        "go_version": "1.22",
+        "goals": [
+            "compatibility'"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "webcast/wallet_promotion_core": {
+        "go_version": "1.22",
+        "goals": [
+            "compatibility'"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "bytecloud/meta": {
+        "go_version": "1.23",
+        "goals": [
+            "compatibility'"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    }
+}

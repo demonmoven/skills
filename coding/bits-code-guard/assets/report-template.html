@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代码评审报告 — __REPO_NAME__</title>
+  <style>
+    :root {
+      --color-p0: #dc2626;
+      --color-p0-bg: #fef2f2;
+      --color-p0-border: #fca5a5;
+      --color-p1: #d97706;
+      --color-p1-bg: #fffbeb;
+      --color-p1-border: #fcd34d;
+      --color-p2: #2563eb;
+      --color-p2-bg: #eff6ff;
+      --color-p2-border: #93c5fd;
+      --color-bg: #f8fafc;
+      --color-card: #ffffff;
+      --color-border: #e2e8f0;
+      --color-text: #1e293b;
+      --color-text-secondary: #64748b;
+      --color-code-bg: #f1f5f9;
+      --shadow-card: 0 14px 36px rgba(15, 23, 42, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* --- Header --- */
+    .report-header {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .report-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--color-text-secondary);
+    }
+
+    .meta-item .label { font-weight: 600; color: var(--color-text); }
+
+    .meta-item.range-item {
+      grid-column: 1 / -1;
+      align-items: flex-start;
+    }
+
+    .range-value {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .range-main {
+      font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+      font-weight: 600;
+      color: var(--color-text);
+      word-break: break-all;
+    }
+
+    .range-detail {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      word-break: break-all;
+    }
+
+    /* --- Decision Summary --- */
+    .decision-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .conclusion-card,
+    .severity-legend {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .conclusion-card {
+      border-left: 8px solid var(--color-text-secondary);
+    }
+
+    .conclusion-card.p0 {
+      border-color: var(--color-p0);
+      background: linear-gradient(135deg, #fff 0%, var(--color-p0-bg) 100%);
+    }
+
+    .conclusion-card.p1 {
+      border-color: var(--color-p1);
+      background: linear-gradient(135deg, #fff 0%, var(--color-p1-bg) 100%);
+    }
+
+    .conclusion-card.p2 {
+      border-color: var(--color-p2);
+      background: linear-gradient(135deg, #fff 0%, var(--color-p2-bg) 100%);
+    }
+
+    .conclusion-card.clean {
+      border-color: #16a34a;
+      background: linear-gradient(135deg, #fff 0%, #f0fdf4 100%);
+    }
+
+    .conclusion-eyebrow {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .conclusion-title {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .conclusion-text {
+      font-size: 15px;
+      color: var(--color-text);
+      margin-bottom: 8px;
+    }
+
+    .priority-summary {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+    }
+
+    .severity-legend-title {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .legend-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .legend-item {
+      display: grid;
+      grid-template-columns: 44px 52px 1fr;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .legend-item.severity-P0 { border-color: var(--color-p0-border); background: var(--color-p0-bg); }
+    .legend-item.severity-P1 { border-color: var(--color-p1-border); background: var(--color-p1-bg); }
+    .legend-item.severity-P2 { border-color: var(--color-p2-border); background: var(--color-p2-bg); }
+
+    .legend-key {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 26px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .legend-item.severity-P0 .legend-key { background: var(--color-p0); }
+    .legend-item.severity-P1 .legend-key { background: var(--color-p1); }
+    .legend-item.severity-P2 .legend-key { background: var(--color-p2); }
+
+    .legend-main {
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .legend-desc {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+
+    /* --- P0 Alert Banner --- */
+    .p0-alert {
+      background: var(--color-p0-bg);
+      border: 2px solid var(--color-p0-border);
+      border-left: 8px solid var(--color-p0);
+      border-radius: 14px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+      display: __P0_ALERT_DISPLAY__;
+      box-shadow: 0 16px 36px rgba(220, 38, 38, 0.12);
+    }
+
+    .p0-alert-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--color-p0);
+      margin-bottom: 8px;
+    }
+
+    .p0-alert-list {
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .p0-alert-list li {
+      padding: 2px 0;
+      color: var(--color-text);
+    }
+
+    /* --- Summary Bar --- */
+    .summary-bar {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .summary-chip {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-height: 112px;
+      padding: 18px 18px 16px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      background: var(--color-card);
+      border: 2px solid var(--color-border);
+      box-shadow: var(--shadow-card);
+    }
+
+    .summary-chip .count {
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .summary-chip .summary-label {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--color-text);
+    }
+
+    .summary-chip .summary-desc {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+
+    .summary-chip.p0 { border-color: var(--color-p0-border); background: var(--color-p0-bg); color: var(--color-p0); }
+    .summary-chip.p1 { border-color: var(--color-p1-border); background: var(--color-p1-bg); color: var(--color-p1); }
+    .summary-chip.p2 { border-color: var(--color-p2-border); background: var(--color-p2-bg); color: var(--color-p2); }
+    .summary-chip.total { border-color: var(--color-text); color: var(--color-text); }
+
+    /* --- Defect Cards --- */
+    .defect-list { display: flex; flex-direction: column; gap: 16px; }
+
+    .defect-card {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .defect-card.severity-P0 { border-left: 8px solid var(--color-p0); }
+    .defect-card.severity-P1 { border-left: 8px solid var(--color-p1); }
+    .defect-card.severity-P2 { border-left: 8px solid var(--color-p2); }
+
+    .defect-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .defect-card.severity-P0 .defect-header { background: var(--color-p0-bg); }
+    .defect-card.severity-P1 .defect-header { background: var(--color-p1-bg); }
+    .defect-card.severity-P2 .defect-header { background: var(--color-p2-bg); }
+
+    .defect-rank {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--color-text);
+      flex: 0 0 auto;
+    }
+
+    .defect-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .defect-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .severity-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .severity-badge.P0 { background: var(--color-p0); }
+    .severity-badge.P1 { background: var(--color-p1); }
+    .severity-badge.P2 { background: var(--color-p2); }
+
+    .category-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--color-text-secondary);
+    }
+
+    .defect-title {
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 800;
+      color: var(--color-text);
+    }
+
+    .confidence-tag {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .defect-body { padding: 20px; }
+
+    .defect-location {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      margin-bottom: 12px;
+      font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+    }
+
+    .defect-section { margin-bottom: 16px; }
+    .defect-section:last-child { margin-bottom: 0; }
+
+    .defect-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .defect-section p {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .code-block {
+      background: var(--color-code-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* --- Empty State --- */
+    .empty-state {
+      text-align: center;
+      padding: 64px 32px;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+    }
+
+    .empty-state h2 {
+      font-size: 18px;
+      color: #16a34a;
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+    }
+
+    /* --- Footer --- */
+    .report-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 640px) {
+      body { padding: 12px; }
+      .report-header { padding: 20px; }
+      .decision-panel { grid-template-columns: 1fr; }
+      .summary-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .defect-header { padding: 12px 16px; }
+      .defect-body { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ====== Header ====== -->
+    <div class="report-header">
+      <h1>代码评审报告</h1>
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span class="label">仓库：</span>
+          <span>__REPO_NAME__</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">检测模式：</span>
+          <span>__REVIEW_MODE__</span>
+        </div>
+        <div class="meta-item range-item">
+          <span class="label">检测范围：</span>
+          <span class="range-value">__DIFF_RANGE__</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">生成时间：</span>
+          <span>__GENERATED_AT__</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== Decision Summary ====== -->
+    <div class="decision-panel">
+      <div class="conclusion-card __CONCLUSION_CLASS__">
+        <div class="conclusion-eyebrow">Review Conclusion</div>
+        <div class="conclusion-title">__CONCLUSION_TITLE__</div>
+        <div class="conclusion-text">__CONCLUSION_TEXT__</div>
+        <div class="priority-summary">__PRIORITY_SUMMARY__</div>
+      </div>
+      <div class="severity-legend">
+        <div class="severity-legend-title">优先级说明</div>
+        <div class="legend-list">
+          __SEVERITY_LEGEND__
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== P0 Alert (hidden when no P0) ====== -->
+    <div class="p0-alert">
+      <div class="p0-alert-title">高优先级告警 — 发现 P0 级别缺陷，建议立即处理</div>
+      <ul class="p0-alert-list">
+        __P0_ALERT_ITEMS__
+      </ul>
+    </div>
+
+    <!-- ====== Summary ====== -->
+    <div class="summary-bar">
+      <div class="summary-chip total">
+        <span class="count">__COUNT_TOTAL__</span>
+        <span class="summary-label">缺陷总数</span>
+        <span class="summary-desc">本次最终召回的问题数量</span>
+      </div>
+      <div class="summary-chip p0">
+        <span class="count">__COUNT_P0__</span>
+        <span class="summary-label">P0 阻断</span>
+        <span class="summary-desc">必须优先处理</span>
+      </div>
+      <div class="summary-chip p1">
+        <span class="count">__COUNT_P1__</span>
+        <span class="summary-label">P1 严重</span>
+        <span class="summary-desc">建议本次迭代修复</span>
+      </div>
+      <div class="summary-chip p2">
+        <span class="count">__COUNT_P2__</span>
+        <span class="summary-label">P2 一般</span>
+        <span class="summary-desc">建议排期修复</span>
+      </div>
+    </div>
+
+    <!-- ====== Defect List ====== -->
+    <div class="defect-list">
+      __DEFECT_CARDS__
+    </div>
+
+    <!-- ====== Empty State (shown when no defects) ====== -->
+    <!-- __EMPTY_STATE_START__
+    <div class="empty-state">
+      <h2>未发现缺陷</h2>
+      <p>本次评审未发现 P0-P2 级别的缺陷。共检查 __FILE_COUNT__ 个文件，约 __LINE_COUNT__ 行变更。</p>
+    </div>
+    __EMPTY_STATE_END__ -->
+
+    <div class="report-footer">
+      bits-code-guard &middot; 由 AI 辅助生成 &middot; __GENERATED_AT__
+    </div>
+
+  </div>
+</body>
+</html>
+
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║                        占位符说明                           ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  --- 报告元信息 ---                                          ║
+║  __REPO_NAME__           仓库名称                            ║
+║  __REVIEW_MODE__         检测模式                            ║
+║  __DIFF_RANGE__          检测范围描述                         ║
+║  __GENERATED_AT__        报告生成时间 (YYYY-MM-DD HH:mm)     ║
+║                                                              ║
+║  --- 统计数据 ---                                            ║
+║  __COUNT_P0__            P0 缺陷数量                         ║
+║  __COUNT_P1__            P1 缺陷数量                         ║
+║  __COUNT_P2__            P2 缺陷数量                         ║
+║  __COUNT_TOTAL__         缺陷总数                            ║
+║                                                              ║
+║  --- P0 告警 ---                                             ║
+║  __P0_ALERT_DISPLAY__    有 P0 时为 "block"，无 P0 时为      ║
+║                          "none"                              ║
+║  __P0_ALERT_ITEMS__      P0 缺陷摘要列表，每项格式：         ║
+║    <li>[P0][类型] file:line | {title}</li>                   ║
+║                                                              ║
+║  --- 缺陷卡片 ---                                            ║
+║  __DEFECT_CARDS__        所有缺陷卡片的 HTML，单张卡片格式：  ║
+║                                                              ║
+║    <div class="defect-card severity-{severity}">             ║
+║      <div class="defect-header">                             ║
+║        <span class="severity-badge {severity}">              ║
+║          {severity}</span>                                   ║
+║        <span class="category-badge">                         ║
+║          {category_zh}</span>                                ║
+║        <span class="defect-title">                           ║
+║          {title}</span>                                       ║
+║        <span class="confidence-tag">                         ║
+║          置信度 {confidence}/10</span>                       ║
+║      </div>                                                  ║
+║      <div class="defect-body">                               ║
+║        <div class="defect-location">                         ║
+║          {file}:{start_line}-{end_line}</div>                ║
+║        <div class="defect-section">                          ║
+║          <div class="defect-section-title">                  ║
+║            问题描述</div>                                    ║
+║          <p>{rationale}</p>                                  ║
+║        </div>                                                ║
+║        <div class="defect-section">                          ║
+║          <div class="defect-section-title">                  ║
+║            问题代码</div>                                    ║
+║          <div class="code-block">                            ║
+║            {代码片段}</div>                                  ║
+║        </div>                                                ║
+║        <div class="defect-section">                          ║
+║          <div class="defect-section-title">                  ║
+║            修复建议</div>                                    ║
+║          <p>{suggestion}</p>                                 ║
+║        </div>                                                ║
+║      </div>                                                  ║
+║    </div>                                                    ║
+║                                                              ║
+║  --- 空状态 ---                                              ║
+║  无缺陷时：取消注释 __EMPTY_STATE_START__ 到                 ║
+║  __EMPTY_STATE_END__ 之间的内容，并删除 defect-list 区块      ║
+║  __FILE_COUNT__          检查的文件数                         ║
+║  __LINE_COUNT__          变更行数                            ║
+║                                                              ║
+║  --- category 中英文映射 ---                                  ║
+║  LOGIC       → 逻辑错误                                     ║
+║  BUSINESS_SEMANTICS → 业务语义问题                           ║
+║  SECURITY    → 安全漏洞                                      ║
+║  CONCURRENCY → 并发问题                                      ║
+║  ROBUSTNESS  → 健壮性问题                                    ║
+║  PERFORMANCE → 性能问题                                      ║
+║  QUALITY     → 代码质量问题                                  ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+-->

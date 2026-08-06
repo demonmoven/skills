@@ -1,0 +1,41 @@
+version: "2"
+
+linters:
+  default: none
+  enable:
+    - gosimple
+    - stylecheck
+    - ineffassign
+    - unused
+    - revive
+    - errcheck
+    - govet
+    - staticcheck
+    - gocyclo
+    - cyclop
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  uniq-by-line: true
+
+output:
+  path-mode: abs
+  sort-order:
+    - linter
+    - file
+  show-stats: false
+
+run:
+  relative-path-mode: gomod
+  modules-download-mode: readonly
+  tests: true
+
+linters-settings:
+  cyclop:
+    max-complexity: 20
+  gocyclo:
+    min-complexity: 20
+
+formatters:
+  enable: []

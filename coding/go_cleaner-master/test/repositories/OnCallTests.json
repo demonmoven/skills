@@ -1,0 +1,95 @@
+{
+    "life_service/fulfilment_fulfil": {
+        "go_version": "1.21",
+        "goals": [
+            "removing imported packages safely",
+            "removing function safely"
+        ],
+        "head": "81052be727fbea0667c0d8891d8dd00c0dfb496d",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "ttgame/knowledge_graph_data": {
+        "go_version": "1.18",
+        "goals": [
+            "removing const type safely"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "ad/go-union": {
+        "go_version": "1.21",
+        "goals": [
+            "removing code safely when source directories prefixed by underscore and dot"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "aweme/script_post_event_consumer": {
+        "go_version": "1.16",
+        "goals": [
+            "removing global initilization in init function"
+        ],
+        "head": "95e5daef25bf6d874ea9d4c43c6594073dfe742b",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "douyin/search_api": {
+        "go_version": "1.20",
+        "goals": [
+            "undefined proto_gen",
+            "incorrect short name of import"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "webcast/gameorg_platform": {
+        "go_version": "1.21",
+        "goals": [
+            "debugging compiler errors"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "aweme/comment_subsequent": {
+        "go_version": "1.18",
+        "goals": [
+            "dependency errors"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "aweme/faas_comment_keyword": {
+        "go_version": "1.15",
+        "goals": [
+            "dependency errors"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "temai/product_backend": {
+        "go_version": "1.18",
+        "goals": [
+            "X not declared by package Y",
+            "empty source files"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "webcast/room_action": {
+        "go_version": "1.13",
+        "goals": [
+            "empty files in /go/mod/pkg"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    }
+}

@@ -1,0 +1,17 @@
+.idea
+.cloudide/
+.venv
+**/Output
+**/.lit_*
+output/
+app/cleaner/api/output
+app/cleaner/api/web/build
+app/cleaner/api/web/node_modules
+localtest
+tmp*
+tttt.go
+.vscode/
+**/__pycache__/
+test/**/*Result*.json
+**/sopt_**
+app/cleaner/worker/v2.1/log/

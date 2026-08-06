@@ -1,0 +1,26 @@
+{
+  "name": "@i18n-cs/cspadk-continue",
+  "version": "1.2.1",
+  "description": "Auto-detect and resume CSPADK workflow from current phase",
+  "private": false,
+  "keywords": [
+    "ai-skill",
+    "continue",
+    "resume",
+    "cspadk"
+  ],
+  "skillConfig": {
+    "source": "codebase",
+    "owner": "i18n-cs",
+    "repo": "ai-infra-i18n",
+    "agentSupport": [
+      "claude-code",
+      "trae",
+      "trae-cli",
+      "coco"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://skills.bytedance.net/api/registry"
+  }
+}

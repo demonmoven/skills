@@ -1,0 +1,182 @@
+[
+  {
+    "id": "75483a343c217b742ae50ca714cc5cca",
+    "project_name": "common",
+    "content": "问题：协议文件过大 - 直接读取协议文件内容过多\n解决方案：基于 gomod 本地文件 grep 部分协议结构，避免协议文件过大的问题\n命令示例：grep -r 'struct.*Detail' ~/go/pkg/mod/code.byted.org/ies.kefu/conversation_log@*/",
+    "tags": "协议,Golang,开发技巧",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-03-17T12:51:03+08:00",
+    "updated_at": "2026-03-17T12:51:03+08:00"
+  },
+  {
+    "id": "748aa754986623936468e73baebea170",
+    "project_name": "common",
+    "content": "问题：TCC配置权限不足 - 查询TCC配置返回权限错误\n解决方案：需要在TCC平台申请相应命名空间的读取权限，申请后重新查询即可\n命令：bytedcli tcc get --psm \u003cpsm\u003e --key \u003ckey\u003e --namespace \u003cnamespace\u003e",
+    "tags": "TCC,权限,配置",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-03-17T12:51:09+08:00",
+    "updated_at": "2026-03-17T12:51:09+08:00"
+  },
+  {
+    "id": "9c3b9f0273377b14d347c0a11410f104",
+    "project_name": "coomon",
+    "content": "问题：PPE部署状态判断 - PPE部署成功时流水线可能还在运行\n解决方案：不能仅依赖流水线状态判断部署成功，最后一个节点是用户确认。需检查实际服务状态或 env 工单状态",
+    "tags": "PPE,部署,流水线",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-03-17T15:40:04+08:00",
+    "updated_at": "2026-03-17T15:40:04+08:00"
+  },
+  {
+    "id": "fcfe5d5e01cd80911e3852f6a3467b5f",
+    "project_name": "common",
+    "content": "问题：任务中间结果记录 - 任务执行过程中的关键信息记录\n解决方案：流水线 ID、测试用例、设计方案等关键信息记录到 todo-flow，通过链接关联文档",
+    "tags": "todo-flow,文档,任务管理",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-03-17T15:40:05+08:00",
+    "updated_at": "2026-03-17T15:40:05+08:00"
+  },
+  {
+    "id": "ac555273a0fe3a906c54d8ca5abdcb39",
+    "project_name": "common",
+    "content": "BITS任务操作（bytedcli方式）：\n1. 创建任务：NPM_CONFIG_REGISTRY=http://bnpm.byted.org npx -y @bytedance-dev/bytedcli@latest bits develop create --title \"\u003c标题\u003e\" --services \"\u003cpsm列表\u003e\" --lane \u003c泳道名\u003e --enable-lanes ppe --scm-mode branch --scm-branch \u003c分支\u003e --meego \"\u003cmeego链接\u003e\" --space-id \u003c空间ID\u003e\n2. 启动流水线：NPM_CONFIG_REGISTRY=http://bnpm.byted.org npx -y @bytedance-dev/bytedcli@latest bits develop quick-run --dev-id \u003c任务ID\u003e --stage DevDevelopStage --task DevDevelopStageSelfTestTask --control-planes CONTROL_PLANE_CN\n3. 任务链接：https://bits.bytedance.net/devops/\u003cspace_id\u003e/develop/detail/\u003cdev_task_id\u003e",
+    "tags": "BITS,bytedcli,任务管理",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-03-19T21:10:51+08:00",
+    "updated_at": "2026-03-19T21:10:51+08:00"
+  },
+  {
+    "id": "b634400bf1b36ee2bda5b60a606a1cfa",
+    "project_name": "flou",
+    "content": "流程概述：测试用例生成流程，基于需求挖掘测试用例，生成标准化测试报告。完整流程：需求分析→用户澄清→用例生成→用例审查→测试执行→报告生成→用户确认→归档。用例审查必须通过后才能执行测试。文件地址：${skills_dir}/flou/.flou/memory/flows/FLOW-test-case-generation.md",
+    "tags": "项目流程,测试用例",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-03-25T21:18:50+08:00",
+    "updated_at": "2026-03-25T21:18:50+08:00"
+  },
+  {
+    "id": "24734002847d9a5af9b160411f9f1ba2",
+    "project_name": "flou",
+    "content": "场景：从BITS任务链接获取前端项目project_unique_id。URL结构：https://bits.bytedance.net/devops/{space_id}/develop/detail/{dev_id}?... 命令：NPM_CONFIG_REGISTRY=http://bnpm.byted.org npx -y @bytedance-dev/bytedcli@latest --json bits develop get --dev-id {dev_id} --space-id {space_id} | jq -r \".data.project_list[] | select(.project_type==\\\"PROJECT_TYPE_WEB\\\") | .project_unique_id\"。说明：project_type=PROJECT_TYPE_WEB为前端项目(数字ID)，PROJECT_TYPE_TCE为后端服务(PSM)。",
+    "tags": "BITS,project_unique_id,前端项目",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-03-27T13:33:12+08:00",
+    "updated_at": "2026-03-27T13:33:12+08:00"
+  },
+  {
+    "id": "4ee591cedf46f4a017aa3e20a0b1f8fe",
+    "project_name": "flou",
+    "content": "BITS DevOps 查询部署状态命令路径：\n1. 创建 Session: gdpa-cli create-session\n2. 查询流水线列表: gdpa-cli run bits-devops --session-id \u003csession_id\u003e --input '{\"action\": \"get_dev_task_pipelines\", \"dev_task_id\": \u003ctask_id\u003e}'\n3. 查询流水线运行详情: gdpa-cli run bits-devops --session-id \u003csession_id\u003e --input '{\"action\": \"get_pipeline_run\", \"pipeline_run_id\": \u003cpipeline_run_id\u003e}'\n\n关键 Job 状态码：\n- job_status: 4 = 运行中/等待确认\n- job_status: 14 = 已完成\n- run_status: 3 = 运行中",
+    "tags": "bits,devops,deployment,workflow",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-03-18T15:12:51+08:00",
+    "updated_at": "2026-03-18T15:12:51+08:00"
+  },
+  {
+    "id": "8e08dfaf88df859958b5ae8f8de8644f",
+    "project_name": "flou",
+    "content": "问题：PPE RPC测试命令 - PPE环境接口测试方法\\n解决方案：使用 bytedcli bits rpc-call 测试，完整命令：NPM_CONFIG_REGISTRY=http://bnpm.byted.org npx -y @bytedance-dev/bytedcli@latest bits rpc-call --psm \u003cpsm\u003e --method \u003cmethod\u003e --region China-North --cluster ppe --input '\u003cjson-input\u003e'",
+    "tags": "PPE,测试,rpc-call",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-03-30T21:43:10+08:00",
+    "updated_at": "2026-03-30T21:43:10+08:00"
+  },
+   {
+    "id": "3624939f4819503aa8ff730cc0c17f8e",
+    "project_name": "flou-dev",
+    "content": "BITS任务监控命令速查：命令模板 flou-cli test wait \u003cwaitType\u003e \u003curl\u003e [--timeout 10m]。waitType枚举：前端(bits-ppe-goofy-deploy, bits-scm-compile-ppe-beta-goofy, bits-prod-goofy-deploy)，后端(bits-scm-compile-ppe, bits-env-deploy)。状态码：14-成功, 15-失败。文档：.flou/tasks/TASK-20260402-wait-command/docs/bits-monitor-quick-ref.md",
+    "tags": "BITS,监控,wait-command",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-04-02T09:51:55+08:00",
+    "updated_at": "2026-04-02T09:51:55+08:00"
+  },
+  {
+    "id": "5c4f594e9247a73233949936dfc21b93",
+    "project_name": "flou",
+    "content": "TCC操作常见问题排查与处理：\n\n问题1：boe/ppe 环境中 TCC 服务不存在\n解决方案：使用命令创建服务，确保服务在目标环境中可用后再进行配置操作。\n命令：gdpa-cli run env --input '{\"action\":\"dsl_deploy\",...}' --session-id \u003cid\u003e\n\n问题2：boe/ppe 环境中 TCC 配置文件不存在\n解决方案：禁止在 prod 环境中修改后再导入。正确做法是先将线上版本（prod）导入到 boe/ppe 环境，然后在目标环境中进行修改，避免误操作影响生产环境。\n命令：NPM_CONFIG_REGISTRY=http://bnpm.byted.org npx -y @bytedance-dev/bytedcli@latest tcc import-base-config \u003cnamespace\u003e --config-ids \u003cids\u003e --target-env \u003cenv\u003e",
+    "tags": "TCC,问题排查,环境,服务创建,配置导入",
+    "user": "huangxiuping",
+    "created_at": "2026-04-09T14:59:07+08:00",
+    "updated_at": "2026-04-09T14:59:07+08:00"
+  },
+  {
+    "id": "f13b804e9c9c38bdd27762341b361ba3",
+    "project_name": "flou",
+    "content": "bytedance-log 最佳实践：LogID 精确查日志用 bytedcli log get-logid-log，必须确认 logid、psm、vregion 非空；按 PSM 搜索日志用 bytedcli log search-psm-log，必须确认 psm、vregion，可补充 start/end、keyword、kv-filter。使用相对时间时先转 RFC3339；macOS 用 date -v-NM。环境前置设置 NPM_CONFIG_REGISTRY=http://bnpm.byted.org，通过 npx -y @bytedance-dev/bytedcli@latest 调用，推荐 BYTEDCLI_CLOUD_SITE=cn。结果为空时优先建议扩大时间范围或放宽过滤条件。",
+    "tags": "bytedance-log,日志查询",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-05-18T21:35:00+08:00",
+    "updated_at": "2026-05-18T21:35:00+08:00"
+  },
+  {
+    "id": "bc6e4cc667640f33167ecb233d471fff",
+    "project_name": "flou",
+    "content": "bytedance-env 最佳实践：TCC 升级用 bytedcli env service deploy-tcc，TCE 部署用 bytedcli env service deploy-tce，工单查询用 bytedcli env ticket get；服务列表用 bytedcli env service list；环境搜索用 bytedcli env search 或 search-service。执行前确认 site、vregion、env、psm、flow-base、service-types、keyword/service 等关键参数完整。环境前置设置 NPM_CONFIG_REGISTRY=http://bnpm.byted.org，并用 npx -y 加载 bytedcli。",
+    "tags": "bytedance-env,环境管理",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-05-18T21:35:00+08:00",
+    "updated_at": "2026-05-18T21:35:00+08:00"
+  },
+  {
+    "id": "ee3140dab49590d53c025a190a37eae2",
+    "project_name": "flou",
+    "content": "bam-api 最佳实践：HTTP 接口测试可使用 gdpa-cli run bam-query，执行前展示并确认 PSM、API、IDL Version、VRegion、Env、Cluster、Request Body 等关键参数；查询 API 列表使用 gdpa-cli run bam-api，通过 --input JSON 传参并携带 --session-id。环境前置确保 gdpa-cli 已安装、BAM 平台可访问、目标服务在指定环境中已部署。缺少 method、path 等必需参数时主动询问，禁止使用占位符；请求失败时给出错误诊断和恢复建议。",
+    "tags": "bam-api,BAM接口测试与查询",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-05-18T21:35:00+08:00",
+    "updated_at": "2026-05-18T21:35:00+08:00"
+  },
+  {
+    "id": "a2262d25199aa7dd2eb36235140b922e",
+    "project_name": "flou",
+    "content": "bam-query 最佳实践：HTTP/RPC 测试使用 gdpa-cli run bam-query，执行前必须展示红线参数并等待确认。HTTP 场景确认 PSM、API、IDL Version、VRegion、Env、Cluster、Request Body、Method、Query Params、Headers、Cookies；RPC 场景确认 PSM、API、IDL Version、VRegion、Env、Cluster、Request Body。环境前置确保 gdpa-cli 已安装且 BAM 平台可访问；缺少必需参数时主动询问，确认后再执行。",
+    "tags": "bam-query,BAM接口测试与查询",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-05-18T21:35:00+08:00",
+    "updated_at": "2026-05-18T21:35:00+08:00"
+  },
+  {
+    "id": "6cc7e1e4704460ecf046ce0fab34e60b",
+    "project_name": "flou",
+    "content": "bytedance-bam 最佳实践：HTTP/RPC 测试使用 bytedcli bam query；API 定义查询使用 bytedcli bam api get；API 列表查询使用 bytedcli bam api list。执行 HTTP 测试前确认 PSM、API、IDL Version、VRegion、Env、Cluster、Request Body、Method、Query Params、Headers、Cookies；RPC 测试前确认 PSM、API、IDL Version、VRegion、Env、Cluster、Request Body。环境前置设置 NPM_CONFIG_REGISTRY=http://bnpm.byted.org，并通过 npx -y @bytedance-dev/bytedcli@latest 调用。",
+    "tags": "bytedance-bam,BAM接口测试与查询",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-05-18T21:35:00+08:00",
+    "updated_at": "2026-05-18T21:35:00+08:00"
+  },
+  {
+    "id": "ee5490a90b20b74371bc3db6e47ef9b2",
+    "project_name": "flou",
+    "content": "bytedance-bits 最佳实践：创建研发任务使用 bytedcli bits develop create，按场景确认 --services 或 --change、--lane、--scm-branch/branch、--space-id、--meego 等参数；查询开发任务列表使用 bytedcli bits develop list，确认 --space-id、work item 或分页参数；运行自测流水线使用 bytedcli bits develop quick-run，确认 --dev-id、--stage、--task、--control-planes，必要时加 --wait。导入 TCC 配置使用 bytedcli bits develop import-tcc-configs。环境前置设置 NPM_CONFIG_REGISTRY=http://bnpm.byted.org，并通过 npx -y @bytedance-dev/bytedcli@latest 调用。",
+    "tags": "bytedance-bits,BITS研发流程",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-05-18T21:35:00+08:00",
+    "updated_at": "2026-05-18T21:35:00+08:00"
+  },
+  {
+    "id": "7a2895079aaaa1e99a5e9107b6f5dfe7",
+    "project_name": "flou",
+    "content": "bits-devops 最佳实践：通过 gdpa-cli run bits-devops 调用 action。创建开发任务使用 create_dev_task，必须确认 space_id、psm_list（或 psm）、branch、meego_url；TCC 项目可省略 branch/meego_url，并可设置 project_type=tcc。查询任务列表使用 get_opened_dev_task_list，必须确认 space_id；查询任务详情、代码变更、阶段、变量、流水线等使用 get_dev_task_basic_info / get_dev_task_changes / get_dev_task_stages / get_dev_task_pipelines，需确认 dev_task_id。运行流水线使用 run_pipeline，必须确认 space_id、dev_task_id 和目标流水线信息。缺少 space_id 时先 get_recent_spaces 让用户选择。",
+    "tags": "bits-devops,BITS研发流程",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-05-18T21:35:00+08:00",
+    "updated_at": "2026-05-18T21:35:00+08:00"
+  },
+  {
+    "id": "5bffbc69600f243e2c510737b4f35561",
+    "project_name": "flou",
+    "content": "flou-test 最佳实践：网页模块自动化测试通过 Agent Skill 加载 flou-test 后按场景路由执行，不把探索、执行、生成、RPC 测试理解为 flou-cli test 的直接子命令；元素探索走 references/explore.md，自动化测试走 references/test.md，请求录制走 references/record-req.md，RPC 测试走 references/rpc-test.md。flou-cli test 仅用于录制与等待等辅助能力，包括 record-req、stop-record、list-sessions、wait；RPC 接口测试按 flou-test 文档使用 gdpa-cli run bam-query。执行前确认目标 URL、测试目标、用例描述、录制范围或 PSM/方法名/请求参数；浏览器场景确保 Playwright 可用，RPC 场景确保 gdpa-cli 已登录且目标服务可达。",
+    "tags": "flou-test,测试自动化",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-05-18T21:35:00+08:00",
+    "updated_at": "2026-05-18T21:35:00+08:00"
+  },
+  {
+    "id": "0ad284b3a24c3eb99af001dd4ba53fc2",
+    "project_name": "flou",
+    "content": "bytedance-overpass 最佳实践：查询 repo 配置使用 bytedcli overpass get-repo-info；同步 IDL 使用 bytedcli overpass sync-idl-info；查询分支 IDL 使用 bytedcli overpass get-branch-idl；查询最新 IDL 使用 bytedcli overpass get-latest-idl；生成分支代码使用 bytedcli overpass generate-branch。执行前确认 psm；涉及分支时确认 branch；生成前确保 IDL 改动已 commit/push、sync-idl-info 成功且 get-branch-idl 可见。不要把 bytedance-overpass 的 bytedcli 命令集和另一个 overpass skill 的 gdpa-cli 动作集合混用。环境前置设置 NPM_CONFIG_REGISTRY=http://bnpm.byted.org，通过 npx -y @bytedance-dev/bytedcli@latest 调用，并确保 Node.js/npm 可用。",
+    "tags": "bytedance-overpass,IDL与代码生成",
+    "user": "fuyujie.daisy",
+    "created_at": "2026-05-18T21:35:00+08:00",
+    "updated_at": "2026-05-18T21:35:00+08:00"
+  }
+]

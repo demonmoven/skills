@@ -1,0 +1,26 @@
+{
+  "name": "@i18n-cs/cspadk-openspec-flow",
+  "version": "1.4.1",
+  "description": "Translate designs into structured OpenSpec changes with TDD-enforced task generation",
+  "private": false,
+  "keywords": [
+    "ai-skill",
+    "openspec",
+    "tdd",
+    "cspadk"
+  ],
+  "skillConfig": {
+    "source": "codebase",
+    "owner": "i18n-cs",
+    "repo": "ai-infra-i18n",
+    "agentSupport": [
+      "claude-code",
+      "trae",
+      "trae-cli",
+      "coco"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://skills.bytedance.net/api/registry"
+  }
+}

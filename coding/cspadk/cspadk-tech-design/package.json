@@ -1,0 +1,26 @@
+{
+  "name": "@i18n-cs/cspadk-tech-design",
+  "version": "1.6.0",
+  "description": "Generate professional Technical Design documents for Frontend and Backend from PRD, design specs, and codebase analysis. Supports English and Chinese output.",
+  "private": false,
+  "keywords": [
+    "ai-skill",
+    "frontend",
+    "backend",
+    "td",
+    "design-doc"
+  ],
+  "skillConfig": {
+    "source": "codebase",
+    "owner": "i18n-cs",
+    "repo": "ai-infra-i18n",
+    "agentSupport": [
+      "claude-code",
+      "cursor",
+      "trae"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://skills.bytedance.net/api/registry"
+  }
+}

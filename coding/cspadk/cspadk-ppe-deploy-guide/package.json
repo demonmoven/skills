@@ -1,0 +1,26 @@
+{
+  "name": "@i18n-cs/cspadk-ppe-deploy-guide",
+  "version": "1.0.0",
+  "description": "Guide PPE deployment preparation, rollout validation, and rollback planning for CSPADK changes",
+  "private": false,
+  "keywords": [
+    "ai-skill",
+    "ppe",
+    "deployment",
+    "verification"
+  ],
+  "skillConfig": {
+    "source": "codebase",
+    "owner": "i18n-cs",
+    "repo": "ai-infra-i18n",
+    "agentSupport": [
+      "claude-code",
+      "trae",
+      "trae-cli",
+      "coco"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://skills.bytedance.net/api/registry"
+  }
+}

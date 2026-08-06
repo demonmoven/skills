@@ -1,0 +1,11 @@
+{
+  "skills_dir": "",
+  "memory": {
+    "load_from_flou": false,
+    "load_projects": null
+  },
+  "log": {
+    "record_conversation": false,
+    "analyze": true
+  }
+}

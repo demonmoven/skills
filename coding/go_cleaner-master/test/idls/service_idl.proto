@@ -1,0 +1,39 @@
+syntax = "proto3";
+package cleaner.services;
+
+import "pkg/idl_cleaner/proto/plugin/byteapi.proto";
+import "test/idls/msg.proto";
+
+
+service proto_test_service1 {
+    rpc test_api1(msg.TestAPI1Request) returns (msg.TestAPI1Response) {
+        option (byteapi.get) = "/cleaner/test/api1/";
+        option (byteapi.serializer) = "json";
+    }
+
+    rpc test_api2(msg.TestAPI2Request) returns (msg.TestAPI2Response) {
+        option (byteapi.any) = "/cleaner/test/api2/";
+        option (byteapi.serializer) = "json";
+    }
+
+    rpc test_api3(msg.TestAPI3Request) returns (msg.TestAPI3Response) {
+        option (byteapi.post) = "/cleaner/test/api3/";
+        option (byteapi.serializer) = "json";
+    }
+
+    rpc test_api4(msg.TestAPI4Request) returns (msg.TestAPI4Response) {
+        option (byteapi.get) = "/cleaner/test/api4/";
+        option (byteapi.post) = "/cleaner/test/api4_post/";
+        option (byteapi.serializer) = "json";
+    }
+
+    rpc test_api5(msg.TestAPI5Request) returns (msg.TestAPI5Response) {
+        option (byteapi.get) = "/cleaner/test/api5/";
+        option (byteapi.serializer) = "json";
+    }
+
+    rpc test_api6(msg.TestAPI6Request) returns (msg.TestAPI6Response) {
+        option (byteapi.post) = "/cleaner/test/api6/";
+        option (byteapi.serializer) = "json";
+    }
+}

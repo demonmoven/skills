@@ -1,0 +1,20 @@
+{
+    "data_edc/goldrush_master_dispatcher": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix label xxx not declared"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    },
+    "temai/dialogue_center": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix label xxx not declared"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    }
+}

@@ -1,0 +1,10 @@
+[{
+    "name": "200",
+    "go_version": "1.22",
+    "repo": "webcast/wallet_promotion_core",
+    "repo_commit_id": "e2228708db81c04f5de20f88fc7fd36f90f812ef",
+    "args": {
+        "cleaner_flag": "-f --before=0",
+        "endpoint": "UpdateCouponInfoByNo,UpdateCoupon,RefundCoupon,QueryPromotionDayBill,QueryMetaListByCursor,QueryCouponListByActID,QueryCoupon,QueryAgentToB,PreRollbackCoupon,PreRefundCoupon,MANotifyCallback,ChangeAgentStatus,ByteStateDo,BatchQueryMetaByMerchantNoList,BatchCreateAgent,BackBatchManageAgent"
+    }
+}]

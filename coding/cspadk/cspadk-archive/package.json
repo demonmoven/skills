@@ -1,0 +1,26 @@
+{
+  "name": "@i18n-cs/cspadk-archive",
+  "version": "1.1.0",
+  "description": "Archive skill for CSPADK workflow - finalize and archive completed changes",
+  "private": false,
+  "keywords": [
+    "ai-skill",
+    "archive",
+    "cspadk",
+    "openspec"
+  ],
+  "skillConfig": {
+    "source": "codebase",
+    "owner": "i18n-cs",
+    "repo": "ai-infra-i18n",
+    "agentSupport": [
+      "claude-code",
+      "trae",
+      "trae-cli",
+      "coco"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://skills.bytedance.net/api/registry"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@i18n-cs/cspadk-requirement-breakdown",
+  "version": "1.3.1",
+  "description": "Split complex requirements into logical modules with zero overlap for parallel execution",
+  "private": false,
+  "keywords": [
+    "ai-skill",
+    "breakdown",
+    "modules",
+    "cspadk"
+  ],
+  "skillConfig": {
+    "source": "codebase",
+    "owner": "i18n-cs",
+    "repo": "ai-infra-i18n",
+    "agentSupport": [
+      "claude-code",
+      "trae",
+      "trae-cli",
+      "coco"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://skills.bytedance.net/api/registry"
+  }
+}

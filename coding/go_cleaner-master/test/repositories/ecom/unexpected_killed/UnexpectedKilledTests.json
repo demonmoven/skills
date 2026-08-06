@@ -1,0 +1,72 @@
+{
+    "temai/smart-shop": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "DianShang"
+    },
+    "ecom/shop_decoration": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "DianShang"
+    },
+    "ecom/marketing_express": {
+        "go_version": "1.21",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "DianShang"
+    },
+    "ecom/page_tag": {
+        "go_version": "1.21",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "DianShang"
+    },
+    "ecom/sophon_pack": {
+        "go_version": "1.20",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "DianShang"
+    },
+    "ecom/card_pack_platform": {
+        "go_version": "1.21",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "DianShang"
+    },
+    "ecom/sophon_mall": {
+        "go_version": "1.21",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "DianShang"
+    }
+}

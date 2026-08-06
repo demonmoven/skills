@@ -1,0 +1,25 @@
+package impl
+
+import (
+	"context"
+
+	specify_handler "code.byted.org/webcast/endpoint_kitex_specify_handler/kitex_gen/endpoint/kitex/specify_handler"
+)
+
+type MyServiceImpl struct{}
+
+func (s *MyServiceImpl) Hello(ctx context.Context, req *specify_handler.MyReq) (resp string, err error) {
+	return "Hello " + req.GetInput(), nil
+}
+
+func (s *MyServiceImpl) ToClean1(ctx context.Context, req *specify_handler.ToCleanReq) (resp *specify_handler.ToCleanResp, err error) {
+	resp = specify_handler.NewToCleanResp()
+	resp.Output = req.GetInput()
+	return
+}
+
+func (s *MyServiceImpl) ToClean2(ctx context.Context, req *specify_handler.ToCleanReq) (resp *specify_handler.ToCleanResp, err error) {
+	resp = specify_handler.NewToCleanResp()
+	resp.Output = req.GetInput()
+	return
+}

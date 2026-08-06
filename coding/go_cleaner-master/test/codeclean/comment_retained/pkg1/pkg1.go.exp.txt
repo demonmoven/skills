@@ -1,0 +1,29 @@
+package pkg1
+
+const (
+	// Marker Retained to Prevent Clearing
+	A, B	string	= "a", "b"	// retained
+
+	// Marker Retained to Prevent Clearing
+	D	= "string"	// retained
+)
+
+var (
+	// Marker Retained to Prevent Clearing
+	Var1, Var2	string
+
+	// Marker Retained to Prevent Clearing
+	Var3	= func() {
+		a := "a"
+		_ = a
+	}
+)
+
+// Marker Retained to Prevent Clearing
+func RetainedFn1() {
+
+}
+
+func UsedFn1() {
+
+}

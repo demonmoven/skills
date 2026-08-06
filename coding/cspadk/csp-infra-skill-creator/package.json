@@ -1,0 +1,25 @@
+{
+  "name": "@i18n-cs/csp-infra-skill-creator",
+  "version": "1.0.2",
+  "description": "Generate structured AI skill scaffolds from user requirements using 5 standard design patterns",
+  "private": false,
+  "keywords": [
+    "ai-skill",
+    "generator",
+    "scaffold",
+    "i18n"
+  ],
+  "skillConfig": {
+    "source": "codebase",
+    "owner": "i18n-cs",
+    "repo": "ai-infra-i18n",
+    "agentSupport": [
+      "claude-code",
+      "cursor",
+      "trae"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://skills.bytedance.net/api/registry"
+  }
+}

@@ -1,0 +1,8 @@
+go1.18	temai/smart-shop
+go1.20	ecom/shop_decoration
+go1.21	ecom/marketing_express
+go1.21	ecom/page_tag
+go1.20	ecom/sophon_pack
+go1.21	ecom/card_pack_platform
+go1.21	ecom/sophon_mall
+

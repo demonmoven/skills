@@ -1,0 +1,11 @@
+{
+    "bits/dispatcher": {
+        "go_version": "1.20",
+        "goals": [
+            "supporting monorepo"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": ""
+    }
+}

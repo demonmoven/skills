@@ -1,0 +1,26 @@
+{
+  "name": "@i18n-cs/cspadk-init-infra-ts",
+  "version": "1.1.2",
+  "description": "Initialize TypeScript and React project infrastructure with CSPADK engineering guardrails and validation",
+  "private": false,
+  "keywords": [
+    "ai-skill",
+    "typescript",
+    "infra-init",
+    "cspadk"
+  ],
+  "skillConfig": {
+    "source": "codebase",
+    "owner": "i18n-cs",
+    "repo": "ai-infra-i18n",
+    "agentSupport": [
+      "claude-code",
+      "trae",
+      "trae-cli",
+      "coco"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://skills.bytedance.net/api/registry"
+  }
+}

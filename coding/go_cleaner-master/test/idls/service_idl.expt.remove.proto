@@ -1,0 +1,22 @@
+syntax = "proto3";
+package cleaner.services;
+
+import "pkg/idl_cleaner/proto/plugin/byteapi.proto";
+import "test/idls/msg.proto";
+
+service proto_test_service1 {
+    rpc test_api1(msg.TestAPI1Request) returns (msg.TestAPI1Response) {
+        option (byteapi.get) = "/cleaner/test/api1/";
+        option (byteapi.serializer) = "json";
+    }
+
+    rpc test_api3(msg.TestAPI3Request) returns (msg.TestAPI3Response) {
+        option (byteapi.post) = "/cleaner/test/api3/";
+        option (byteapi.serializer) = "json";
+    }
+
+    rpc test_api6(msg.TestAPI6Request) returns (msg.TestAPI6Response) {
+        option (byteapi.post) = "/cleaner/test/api6/";
+        option (byteapi.serializer) = "json";
+    }
+}

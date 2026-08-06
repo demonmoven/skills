@@ -1,0 +1,12 @@
+{
+    "bitable/backend-core": {
+        "go_version": "1.18",
+        "goals": [
+            "Fix Crash"
+        ],
+        "head": "master",
+        "cleaner_flags": "",
+        "build_flags": "",
+        "business": "Lark"
+    }
+}
