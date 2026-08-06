@@ -1,0 +1,2339 @@
+{
+  "nav": {
+    "quests": "委托",
+    "inbox": "收件箱",
+    "automations": "自动化",
+    "knowledge": "知识",
+    "adventurers": "冒险者",
+    "skills": "技能",
+    "prompts": "提示词",
+    "resources": "资源",
+    "stats": "统计",
+    "settings": "设置",
+    "questDetail": "委托详情",
+    "questBoard": "委托看板",
+    "questList": "委托列表",
+    "workbench": "工作台",
+    "docs": "文档",
+    "version": "当前版本 v{{version}}"
+  },
+  "brand": {
+    "tagline": "Agent 转生成为冒险者，然后陷入循环"
+  },
+  "common": {
+    "action": {
+      "cancel": "取消",
+      "confirm": "确认",
+      "save": "保存",
+      "refresh": "刷新",
+      "search": "搜索",
+      "expand": "展开",
+      "collapse": "折叠",
+      "all": "全部",
+      "select": "选择"
+    },
+    "state": {
+      "loading": "加载中…",
+      "empty": "暂无数据",
+      "error": "加载失败",
+      "selectPlaceholder": "请选择",
+      "sending": "发送中…"
+    },
+    "advancedSettings": "高级设置"
+  },
+  "topbar": {
+    "menu": {
+      "open": "打开菜单",
+      "expandSidebar": "展开侧边栏",
+      "collapseSidebar": "折叠侧边栏"
+    },
+    "search": {
+      "placeholder": "搜索{{target}}…",
+      "quest": "搜索委托…",
+      "target": {
+        "inbox": "收件箱",
+        "automations": "自动化",
+        "adventurers": "冒险者",
+        "resources": "资源"
+      }
+    },
+    "action": {
+      "newAutomation": "新建自动化",
+      "recruitAdventurer": "招募冒险者",
+      "createQuest": "发起委托",
+      "saveSettings": "保存设置"
+    },
+    "stats": {
+      "rangeLabel": "统计时间范围",
+      "range": {
+        "today": "今日",
+        "7d": "7日",
+        "30d": "30日",
+        "all": "全部"
+      }
+    },
+    "view": {
+      "label": "视图",
+      "feed": "动态",
+      "board": "看板",
+      "list": "列表"
+    },
+    "tools": {
+      "group": "分组",
+      "fields": "字段",
+      "filter": "筛选",
+      "sort": "排序"
+    },
+    "stream": {
+      "label": "SSE {{state}}",
+      "reconnecting": "重连中…",
+      "connecting": "连接中…",
+      "disconnected": "连接断开"
+    }
+  },
+  "feed": {
+    "source": {
+      "automation": "自动化",
+      "automationPrefix": "自动化·{{name}}",
+      "parentSpawn": "委托派发"
+    },
+    "author": {
+      "you": "你",
+      "automation": "Automation",
+      "default": "Gloop"
+    },
+    "role": {
+      "humanLabel": "你",
+      "verifiedTitle": "Gloop 冒险者"
+    },
+    "avatar": {
+      "viewAdventurer": "查看冒险者",
+      "viewAdventurerName": "查看冒险者 {{name}}"
+    },
+    "reply": {
+      "contextLabel": "回复",
+      "threadUpdate": "thread update"
+    },
+    "expand": {
+      "collapse": "收起",
+      "expand": "展开",
+      "fanout": "展开 {{count}} 个分支",
+      "noMoreReplies": "暂无更多回复",
+      "loading": "加载中…",
+      "loadFailed": "加载失败，点击重试",
+      "expandReplies": "展开 {{count}} 条回复",
+      "viewThread": "查看完整 thread",
+      "collapseThread": "收起"
+    },
+    "impact": {
+      "changed": "变更",
+      "affected": "波及",
+      "untouched": "未动",
+      "risk": "风险"
+    },
+    "candidate": {
+      "tag": "候选·待确认",
+      "resolving": "处理中…",
+      "confirm": "确认",
+      "cancel": "取消"
+    },
+    "attention": {
+      "author": "需要你处理",
+      "label": "需处理",
+      "recommended": "建议动作",
+      "risk": "风险",
+      "confirm": "确认执行「{{action}}」？",
+      "action": {
+        "busy": "处理中…",
+        "continue": "继续",
+        "userReview": "转人工",
+        "cancel": "取消",
+        "answer": "回答",
+        "pass": "通过",
+        "requestChanges": "返工",
+        "reject": "拒绝",
+        "apply": "应用",
+        "discard": "丢弃"
+      }
+    },
+    "link": {
+      "derivedFrom": "派生自 #{{id}}",
+      "derivedFromTitle": "派生自方案委托 {{id}}",
+      "generated": "生成 #{{id}}",
+      "generatedTitle": "已生成执行委托 {{id}}"
+    },
+    "thread": {
+      "label": "thread",
+      "replyCount": "· {{count}} 回复"
+    },
+    "mention": {
+      "viewAdventurer": "查看冒险者 {{name}}"
+    },
+    "composer": {
+      "placeholder": "有什么要委托冒险者去做的？",
+      "submit": "发起委托"
+    },
+    "empty": {
+      "noActivity": "还没有动态，委托跑起来就会出现",
+      "noMatch": "没有匹配的动态",
+      "cta": "发起委托"
+    },
+    "speaker": {
+      "you": "你"
+    }
+  },
+  "world": {
+    "adventurer": "冒险者",
+    "warrior": "剑士",
+    "mage": "法师",
+    "quest": "委托",
+    "guild": "公会"
+  },
+  "term": {
+    "agent": "Agent",
+    "checker": "Checker",
+    "fanout": "Fanout",
+    "evidence": "Evidence",
+    "policy": "Policy",
+    "ledger": "Ledger",
+    "runtime": "Runtime",
+    "loop": "Loop",
+    "delegation": "Delegation",
+    "delivery": "Delivery",
+    "exception": "Exception",
+    "connector": "Connector",
+    "connectors": "Connectors",
+    "firstOutputCoverage": "First Output Coverage",
+    "makerReportCoverage": "MakerReport Coverage",
+    "reviewReportCoverage": "ReviewReport Coverage",
+    "evidenceBackedReview": "Evidence-backed Review",
+    "humanExceptions": "Human Exceptions",
+    "lateFailures": "Late Failures",
+    "noFindingRate": "No-finding Rate",
+    "tierCUsage": "Tier C Usage"
+  },
+  "quest": {
+    "create": {
+      "title": "发起委托",
+      "badge": "agent 社区",
+      "subtitle": "选择执行 Agent 和评审 Agent 发起委托。可选指定冒险者人设。低风险自动闭环，异常时你才介入。",
+      "field": {
+        "query": "委托内容",
+        "queryHint": "建议包含目标 / 约束 / 验收",
+        "queryPlaceholder": "例如：为认证模块补齐单元测试，覆盖登录失败、token 过期和权限不足场景；保持现有 API 行为不变。",
+        "flow": "委托模式",
+        "workDir": "基准工作目录",
+        "workDirPlaceholder": "留空使用设置里的默认工作目录",
+        "warrior": "剑士",
+        "mage": "法师",
+        "executeAgent": "执行 Agent",
+        "reviewAgent": "评审 Agent",
+        "executeAgentHint": "负责执行委托的 Agent（必填）",
+        "reviewAgentHint": "负责评审验收的 Agent（Checked/Goal 模式必填）",
+        "autoStart": "创建后立即启动",
+        "planOnly": "Plan only · 只出方案",
+        "connectors": "闭环后动作",
+        "artifact": "委托附件",
+        "artifactHint": "拖拽文件到此处，或在输入框粘贴截图",
+        "addFile": "添加文件",
+        "removeArtifact": "移除附件",
+        "adventurerName": "名称",
+        "modelPolicy": "模型策略",
+        "capabilityTier": "编排能力"
+      },
+      "flow": {
+        "direct": {
+          "label": "Direct",
+          "desc": "低风险自动闭环；外部写自动升档"
+        },
+        "checked": {
+          "label": "Checked",
+          "desc": "剑士执行 + 法师验证；fail 自动返工"
+        },
+        "goal": {
+          "label": "Goal",
+          "desc": "先方案审查，过审后自动执行"
+        }
+      },
+      "banner": {
+        "goal": "Goal 模式：先出方案文档，经审查后可按方案执行。讨论与决策记录在 thread ledger。Plan only 子模式：只出方案不执行。",
+        "direct": "Direct 模式：低风险自动闭环。涉及外部写操作自动升 Checked；不可逆 / 权限 / 业务责任才需你确认。"
+      },
+      "advanced": {
+        "workspace": "运行位置、Persona 冒险者和启动方式",
+        "workspaceTitle": "运行位置",
+        "workspaceHint": "基准目录用于准备本次委托的隔离工作区。",
+        "personaTitle": "Persona 冒险者（可选）",
+        "personaHint": "为剑士/法师指定冒险者人设，用于个性化 prompt 和成长追踪。不指定则直接使用 Agent。"
+      },
+      "autoStartHint": "默认行为；关闭后只创建 root post，稍后手动启动",
+      "planOnlyHint": "方案过审后不自动执行，由你决定何时启动施工",
+      "connectorsHint": "自主闭环后自动执行（仅推 quest 专属分支，不碰 base）",
+      "connectorGit": "提交到 gloop 分支",
+      "shortcutHint": "发起委托",
+      "submitting": "发起中…",
+      "error": {
+        "queryEmpty": "委托内容不能为空",
+        "needAdventurer": "没有可用的 Agent 或冒险者。请先在设置页启用至少一个 Agent，或创建剑士/法师冒险者。",
+        "needExecuteAgent": "请选择执行 Agent，或在设置页配置默认执行 Agent。",
+        "nameEmpty": "冒险者名字不能为空",
+        "selectAgent": "请选择已启用的非 Mock Agent，创建后才能直接接委托",
+        "createAdventurerFail": "创建冒险者失败",
+        "createQuestFail": "发起委托失败"
+      },
+      "quickSetup": {
+        "warriorTitle": "创建剑士",
+        "mageTitle": "创建法师",
+        "warriorRole": "负责执行委托",
+        "mageRole": "负责评审验收",
+        "selectAgentPlaceholder": "选择已启用 Agent",
+        "noAgentError": "没有已启用的非 Mock Agent。先去设置页启用或新增 Agent。",
+        "goEnableAgent": "去启用 Agent",
+        "creating": "创建中…",
+        "warriorDefaultName": "剑士·格雷",
+        "warriorDefaultDesc": "擅长写代码、改配置、跑命令的执行者。",
+        "mageDefaultName": "法师·莉莉丝",
+        "mageDefaultDesc": "擅长代码审查、方案设计、质量把控的评审者。"
+      },
+      "autoSelect": "自动选择",
+      "close": "关闭",
+      "setupMissing": "还没有可接委托的 Agent。请先在设置页启用或新增至少一个 Agent。"
+    },
+    "status": {
+      "pending": "待执行",
+      "running": "执行中",
+      "reviewing": "评审中",
+      "waiting_input": "等待输入",
+      "user_review": "用户审核",
+      "success": "已完成",
+      "failed": "失败",
+      "cancelled": "已取消",
+      "blocked": "已阻塞"
+    },
+    "type": {
+      "execute": "执行",
+      "design": "方案"
+    },
+    "filter": {
+      "time": "时间:",
+      "status": "状态:",
+      "type": "类型:",
+      "diagnosis": "诊断:",
+      "reset": "重置",
+      "questChip": "委托 {{id}}",
+      "projectChip": "项目 {{name}}",
+      "reasonChip": "原因 {{reason}}",
+      "categoryChip": "类别 {{category}}"
+    },
+    "board": {
+      "applyFailed": "应用失败",
+      "other": "其他",
+      "designPipeline": "设计流水线",
+      "questCount": "{{count}} 个委托",
+      "questCountHash": "{{count}} 个委托 · {{hash}}",
+      "legacyTitle": "旧数据 / 无阶段信息",
+      "legacyColumn": "阶段信息不可用",
+      "collapsedLowPriority": "折叠优先级低",
+      "needAttention": "需要你处理",
+      "attentionChip": "待你处理"
+    },
+    "focus": {
+      "create": "发起委托",
+      "applyFailed": "处理应用失败",
+      "blocked": "处理阻塞",
+      "failed": "处理失败",
+      "waitingInput": "查看提问",
+      "timeout": "处理超时",
+      "result": "查看结果",
+      "default": "去处理"
+    },
+    "attention": {
+      "userReview": {
+        "title": "需人工处理",
+        "desc": "返工耗尽或人工转入，需你决定方向"
+      },
+      "blocked": {
+        "title": "已阻塞",
+        "desc": "Human Exception：查看原因、建议动作和证据"
+      },
+      "applyFailed": {
+        "title": "应用失败",
+        "desc": "Human Exception：交付已完成，但应用到工作区失败"
+      },
+      "waitingInput": {
+        "title": "等待输入",
+        "desc": "Human Exception：回答问题后委托才能继续"
+      },
+      "protocolWarning": {
+        "title": "等待阶段信号",
+        "desc": "Runtime state：Agent 运行中，但阶段协议未闭合"
+      },
+      "idleWarning": {
+        "title": "运行空闲",
+        "desc": "Runtime state：会话存在但最近没有输出"
+      },
+      "stuck": {
+        "title": "执行超时",
+        "desc": "运行时长超出预期，可能卡住或循环"
+      }
+    },
+    "finalizedBy": {
+      "policy": "策略结案",
+      "user": "人工结案",
+      "automation": "自动结案"
+    },
+    "failure": {
+      "needHandle": "需要处理阻塞"
+    },
+    "progress": {
+      "applyFailed": "应用失败，等待处理",
+      "blocked": "任务已阻塞，等待处理",
+      "waitingInput": "等待你补充信息后继续",
+      "waitingReview": "等待你处理",
+      "mageReviewing": "法师正在评审当前结果",
+      "warriorRunningQuick": "剑士执行中（快速模式，无评审）",
+      "warriorRunning": "剑士正在执行",
+      "queuedPosition": "排队中，第 {{position}} 位",
+      "queued": "排队中，等待执行槽",
+      "starting": "正在启动",
+      "pending": "待启动",
+      "success": "已完成",
+      "failed": "执行失败",
+      "cancelled": "已取消"
+    },
+    "handler": {
+      "notConfigured": "未配置"
+    },
+    "conn": {
+      "connecting": "连接中",
+      "live": "实时同步中",
+      "reconnecting": "重连中",
+      "disconnected": "连接断开",
+      "stale": "数据可能非最新"
+    },
+    "runtime": {
+      "sessionCreated": "会话已创建",
+      "processStarted": "进程已启动",
+      "firstOutput": "已有输出",
+      "heartbeat": "输出活跃",
+      "signalSeen": "收到阶段信号",
+      "idleWarning": "运行空闲",
+      "protocolWarning": "等待阶段信号",
+      "processExited": "进程已退出",
+      "errorClassified": "错误已分类",
+      "noSession": "无活动会话",
+      "waitingSignal": "等待运行信号",
+      "errorCategory": "错误：{{category}}",
+      "processExitedClean": "进程正常退出",
+      "processExitedCode": "进程退出 {{code}}"
+    },
+    "phase": {
+      "notStarted": "尚未启动",
+      "unavailable": "阶段信息不可用",
+      "roleReview": "评审",
+      "roleExecute": "执行"
+    },
+    "meta": {
+      "status": "状态",
+      "phase": "阶段",
+      "handler": "处理者",
+      "connection": "连接",
+      "agentRuntime": "Agent 运行",
+      "updatedAt": "更新于 {{time}}"
+    },
+    "action": {
+      "viewTrace": "查看轨迹",
+      "viewEvidence": "查看证据"
+    },
+    "error": {
+      "loadDetail": "加载委托失败",
+      "loadBackup": "备份加载失败",
+      "operation": "操作失败",
+      "applyBlocked": "应用被安全检查拦截",
+      "applyFailed": "应用失败",
+      "sendComment": "发送失败",
+      "sendAnswer": "回答失败",
+      "loadDiff": "Diff 加载失败",
+      "loadTrace": "执行记录加载失败",
+      "loadBackupDetail": "备份详情加载失败",
+      "spawnExecute": "创建执行委托失败",
+      "copyQuery": "复制 Query 失败"
+    },
+    "diff": {
+      "none": "无 diff"
+    },
+    "blockedAction": {
+      "continue": "继续执行",
+      "continueDesc": "会解除 blocked 状态，并按当前追加预算重新启动委托循环。",
+      "userReview": "转人工审核",
+      "userReviewDesc": "会把当前 blocked 委托移入用户审核，由你在详情页做最终判断。",
+      "cancel": "取消委托",
+      "cancelDesc": "会将委托标记为取消。这个操作不会应用工作区改动。"
+    },
+    "waitingInput": {
+      "defaultQuestion": "Agent 正在等待你的回答",
+      "asking": "Agent 正在提问",
+      "alertTitle": "Agent 等待你的回答",
+      "answerPlaceholder": "输入回答，提交后委托会继续执行。Ctrl/⌘ + Enter 快速提交。",
+      "submit": "提交回答"
+    },
+    "detail": {
+      "loading": "加载委托详情...",
+      "mobileToggle": "详情",
+      "intensityQuick": "⚡ 快速 · 无评审",
+      "intensityDeep": "深入",
+      "intensityAdversarial": "严审",
+      "open_management": "打开管理面板"
+    },
+    "metaLabel": {
+      "created": "创建",
+      "baseDir": "基准目录",
+      "defaultWorkDir": "默认工作目录",
+      "workspace": "隔离工作区",
+      "createdAfterStart": "启动后创建",
+      "workspaceMode": "工作区模式",
+      "type": "类型",
+      "rework": "返工",
+      "score": "评分",
+      "changes": "变更",
+      "connectors": "闭环后动作",
+      "connectorGit": "提交到 gloop 分支",
+      "none": "无"
+    },
+    "section": {
+      "metadata": "元数据",
+      "adventurers": "冒险者",
+      "budget": "预算",
+      "backup": "备份",
+      "inputs": "委托附件",
+      "outputs": "交付产物",
+      "designDoc": "方案文档",
+      "goalRuntime": "方案运行",
+      "checks": "检查结果",
+      "trace": "Agent 对话记录",
+      "verdict": "评审结论"
+    },
+    "count": {
+      "files": "{{count}} 个文件",
+      "items": "{{count}} 项",
+      "events": "{{count}} 条",
+      "chars": "{{count}} 字"
+    },
+    "output": {
+      "external": "外部链接",
+      "summarySource": "结论来源",
+      "previewTitle": "预览（{{state}}）",
+      "previewLoading": "加载中",
+      "previewNoContent": "无内容",
+      "previewLoadingText": "加载预览...",
+      "previewUnreadable": "无法读取文本内容，点击卡片下载查看。",
+      "emptyText": "(空文本)"
+    },
+    "designDoc": {
+      "noSummary": "暂无方案摘要",
+      "goals": "目标",
+      "nonGoals": "非目标",
+      "steps": "实施步骤",
+      "risks": "风险",
+      "acceptance": "验收标准",
+      "executePrompt": "执行提示词"
+    },
+    "goalRuntime": {
+      "autoExecute": "自动执行",
+      "designDoc": "方案文档",
+      "ready": "已就绪",
+      "pending": "待生成",
+      "decisionRecord": "决策记录",
+      "recorded": "已记录",
+      "none": "尚无",
+      "executeQuest": "执行委托",
+      "steps": "实施步骤",
+      "spawnButton": "按此方案执行",
+      "openChild": "打开执行委托",
+      "spawnError": "自动创建执行委托失败：{{error}}",
+      "autoSpawnHint": "方案通过后会自动创建执行委托",
+      "viewDiscussion": "查看讨论与决策 →"
+    },
+    "sidePanel": {
+      "quickModeNoReview": "快速模式 · 无评审",
+      "jumpToMageReview": "跳转到法师评审",
+      "loading": "加载中...",
+      "filesChanged": "{{count}} 文件",
+      "beforeApply": "应用前",
+      "noBackup": "暂无备份"
+    },
+    "actionBar": {
+      "commentPlaceholder": "补充评论（可选）...",
+      "endedCommentPlaceholder": "补充评论...",
+      "sendComment": "发送评论",
+      "running": "执行中…",
+      "queued": "排队中",
+      "queuedPosition": "排队中 · 第 {{position}} 位",
+      "starting": "启动中…",
+      "upgradeTitle": "将 workflow mode 从 {{from}} 升级到 {{to}}",
+      "start": "启动",
+      "rework": "继续返工",
+      "discard": "放弃变更",
+      "passAndApply": "通过并应用",
+      "passNoApply": "通过但不应用",
+      "confirmPass": "确认通过",
+      "apply": "应用变更",
+      "executeByPlan": "按此方案执行",
+      "cancelExecute": "取消执行",
+      "questEnded": "此委托已结束",
+      "clone": "再来一次"
+    },
+    "blockedBar": {
+      "title": "任务已阻塞",
+      "addTurns": "追加轮次",
+      "addMinutes": "追加时长(分)",
+      "relayLogin": "Relay 登录并继续",
+      "traexCheck": "TraeX 检查并继续",
+      "continue": "继续",
+      "userReview": "转人工处理",
+      "cancel": "取消"
+    },
+    "timeline": {
+      "passed": "已通过",
+      "blocked": "已阻塞",
+      "phase": {
+        "execute": "执行",
+        "review": "评审",
+        "warriorExecute": "剑士执行",
+        "mageReview": "法师评审",
+        "warriorDesign": "方案设计",
+        "mageDesignReview": "设计评审",
+        "mageImplementationReview": "实现评审",
+        "userReview": "人工处理",
+        "numberedReview": "评审 {{idx}}",
+        "numberedExecute": "执行 {{idx}}",
+        "numbered": "阶段 {{idx}}"
+      },
+      "meta": {
+        "running": "进行中",
+        "done": "已完成",
+        "failed": "失败",
+        "pending": "等待启动"
+      },
+      "body": {
+        "starting": "委托正在启动，平台已占用执行槽并准备工作区。若长时间不推进，请查看日志或阻塞状态。",
+        "queued": "委托已进入执行队列{{position}}。有空闲执行槽后会自动启动。",
+        "queuedPosition": "，当前第 {{pos}} 位",
+        "pendingFirst": "委托尚未启动，启动后会按当前管道逐阶段推进。",
+        "runningReview": "当前阶段正在评审。",
+        "runningExecute": "当前阶段正在执行。",
+        "failed": "该阶段执行失败，需要查看执行轨迹或阻塞原因。",
+        "quickSkipMage": "快速模式已跳过法师评审，剑士交付直接进入用户终审。",
+        "noMage": "未配置法师，本阶段无独立评审输出。",
+        "pendingReview": "等待执行阶段完成后启动评审。",
+        "pending": "等待前序阶段完成后启动。"
+      },
+      "chip": {
+        "skipped": "已跳过",
+        "noMage": "未配置法师"
+      },
+      "event": {
+        "phaseReport": "{{phase}}汇报",
+        "mageReport": "法师汇报",
+        "warriorReport": "剑士汇报"
+      },
+      "note": "备注",
+      "commentYour": "你的评论",
+      "commentOther": "评论",
+      "commentInjected": "已注入",
+      "pendingAction": "待处理",
+      "needHandle": "需要处理",
+      "applyFailed": {
+        "title": "已通过，应用失败",
+        "body": "审核已通过，但工作区变更没有应用成功。处理冲突或安全拦截后可以重新应用。"
+      },
+      "success": {
+        "noChange": "已完成，无工作区变更",
+        "designPassed": "方案已通过",
+        "knowledgeUpdated": "知识已更新",
+        "externalDone": "外部操作已完成",
+        "applied": "已完成并已应用",
+        "waitingApply": "已完成，等待应用",
+        "bodyNoChange": "没有检测到待应用的工作区变更。",
+        "bodyDesign": "你可以基于此方案发起执行委托。",
+        "bodyKnowledge": "这类委托已通过受控工具更新 Gloop 知识上下文，不需要应用或放弃工作区变更。",
+        "bodyExternal": "这类委托的结果已作用于外部系统或平台侧，不需要应用或放弃工作区变更。",
+        "bodyApplyFailed": "处理冲突或安全拦截后，可以在下方重新应用；如不需要可丢弃工作区变更。",
+        "bodyCanApply": "你可以在下方应用本次变更；如不需要可丢弃。",
+        "metaRunning": "进行中"
+      },
+      "blockedNode": {
+        "title": "流程阻塞",
+        "body": "剑士 / 法师阶段遇到了无法自动继续的问题。"
+      }
+    },
+    "reviewCopy": {
+      "defaultTitle": "等待你的确认",
+      "defaultBody": "请阅读评审意见后选择下一步。",
+      "designPassedTitle": "设计评审通过",
+      "designPassedBody": "设计方案已经通过，流水线会继续进入执行阶段。",
+      "hasDiffBody": "实现评审已通过。请在底部操作条中选择：通过并应用、返工或拒绝。",
+      "knowledgeTitle": "等待你确认知识更新",
+      "noDiffBody": "评审已通过且没有待应用的工作区变更。请确认是否接受本次结果。",
+      "requestChangesTitle": "{{phase}}要求修改",
+      "requestChangesBody": "本轮交付没有通过评审。你可以按评审意见要求返工，也可以人工通过或拒绝。",
+      "rejectTitle": "{{phase}}拒绝交付",
+      "rejectBody": "评审认为本轮交付不应通过。你可以拒绝，也可以人工调整裁决。",
+      "submittedBody": "评审已提交结论。请阅读意见后在底部操作条中选择下一步。"
+    },
+    "reviewAction": {
+      "pass": "通过",
+      "passNoApply": "通过但不应用",
+      "passAndApply": "通过并应用",
+      "reject": "拒绝委托",
+      "requestChanges": "要求返工"
+    },
+    "statusBadge": {
+      "currentPhase": "当前阶段：{{phase}}"
+    },
+    "effect": {
+      "workspaceDiff": "有文件变更",
+      "external": "有外部副作用",
+      "contextStore": "有上下文存储"
+    },
+    "turnUsage": {
+      "scopeCurrent": "当前阶段",
+      "scopeTotal": "累计",
+      "label": "{{count}} 回合 · {{scope}}"
+    },
+    "policy": {
+      "trust": {
+        "tier_0": "T0 手动",
+        "tier_1": "T1 确认",
+        "tier_2": "T2 自动+审",
+        "tier_3": "T3 全自动"
+      },
+      "action": {
+        "auto_pass": "策略通过",
+        "auto_complete": "策略自动完成",
+        "require_user": "策略要求人工",
+        "retry": "策略重试",
+        "default": "策略决策"
+      },
+      "recovery": {
+        "waiting": "等待恢复",
+        "running": "恢复中",
+        "succeeded": "恢复成功",
+        "failed": "恢复失败",
+        "default": "恢复策略"
+      }
+    },
+    "diagnosis": {
+      "runtimeState": "Runtime state",
+      "humanException": "Human Exception",
+      "runtimeStuckState": "Runtime Stuck State",
+      "panelTitle": "Human Exception / Current Action",
+      "kind": {
+        "blocked": "已阻塞",
+        "waiting_input": "等待输入",
+        "apply_failed": "应用失败",
+        "idleWarning": "运行空闲",
+        "protocolWarning": "等待阶段信号"
+      },
+      "runtimeReason": {
+        "idleWarning": "Agent 会话还在，但最近没有输出。",
+        "protocolWarning": "Agent 有运行信号，但还没有提交当前阶段需要的协议信号。"
+      },
+      "runtimeAction": {
+        "idleWarning": "打开委托详情查看运行轨迹；必要时取消或恢复 Agent。",
+        "protocolWarning": "打开委托详情查看轨迹和当前阶段，确认是否需要补充指令或恢复执行。"
+      },
+      "fallbackAction": {
+        "blocked": "打开委托详情，选择恢复执行、转人工审核或取消。",
+        "waitingInput": "打开委托详情，回答 Agent 的问题后继续。",
+        "applyFailed": "打开委托详情查看应用错误，选择重试应用或放弃变更。",
+        "default": "打开委托详情查看当前状态和轨迹。"
+      }
+    },
+    "row": {
+      "reviewPass": "通过",
+      "reviewReject": "拒绝",
+      "reviewNeedChanges": "需修改",
+      "needHuman": "需人工处理",
+      "mageReviewing": "法师评审中",
+      "blockedFallback": "需要处理",
+      "running": "执行中",
+      "applied": "已应用",
+      "applyFailed": "应用失败",
+      "mageScore": "评分 {{score}}/10",
+      "warriorFallback": "剑士",
+      "rework": "返工 {{count}}",
+      "files": "{{count}} 文件"
+    },
+    "thread": {
+      "reply_placeholder": "在 thread 里回复…（支持 Markdown）",
+      "send": "发送",
+      "sending": "发送中…",
+      "cmd_enter_to_send": "⌘/Ctrl + Enter 发送",
+      "open_management": "管理面板",
+      "fanout_root": "Fanout Root · {count} 个分支",
+      "fanout_leaf": "Fanout Leaf",
+      "open_root": "打开 Root",
+      "replying_to": "回复 {{author}}",
+      "stream_live": "实时",
+      "stream_open": "实时",
+      "stream_connecting": "连接中…",
+      "stream_reconnecting": "重连中…",
+      "stream_disconnected": "已断开"
+    }
+  },
+  "inbox": {
+    "empty": {
+      "loading": "加载中…",
+      "title": "收件箱为空",
+      "desc": "需人工确认的自动化委托会先到这里；自动接受的委托不经过此处，直接自主执行。",
+      "noMatchTitle": "无匹配结果",
+      "noMatchDesc": "换个关键词试试，可以搜索委托内容、来源或类型。"
+    },
+    "humanException": {
+      "title": "人工异常",
+      "desc": "需要你处理：原因、建议动作和证据都来自后端投影。",
+      "evidence": "证据"
+    },
+    "automationCandidate": {
+      "title": "自动化候选",
+      "desc": "待确认自动化委托，和人工异常分开处理。",
+      "source": "自动化候选",
+      "from": "来自: {{source}}",
+      "holdReason": {
+        "candidate": "候选：需要确认后才会启动",
+        "direct": "直接运行策略创建"
+      }
+    },
+    "pendingDelegation": {
+      "title": "待确认委托",
+      "desc": "非自动化候选的待确认委托，和自动化候选分开处理。",
+      "source": "待确认委托",
+      "from": "来自: {{source}}",
+      "manualCreator": "手动创建"
+    },
+    "action": {
+      "accept": "接受",
+      "reject": "拒绝",
+      "edit": "编辑委托内容",
+      "saveChanges": "保存修改",
+      "saving": "保存中…",
+      "cancel": "取消",
+      "confirmReject": "确认拒绝"
+    },
+    "edit": {
+      "taskType": "任务类型",
+      "workDir": "工作目录",
+      "workDirPlaceholder": "留空使用默认工作目录"
+    },
+    "reject": {
+      "title": "拒绝委托",
+      "desc": "拒绝后这条委托将从收件箱移除。",
+      "reasonLabel": "拒绝理由（可选）",
+      "reasonPlaceholder": "简单说明为什么拒绝，帮助后续优化",
+      "close": "关闭",
+      "dialogLabel": "拒绝委托"
+    },
+    "error": {
+      "acceptFail": "接受失败",
+      "rejectFail": "拒绝失败",
+      "saveFail": "保存失败"
+    }
+  },
+  "agent": {
+    "label": {
+      "traex": "TraeX",
+      "relay": "Relay",
+      "codex": "Codex",
+      "claude": "Claude",
+      "claude-code": "Claude Code",
+      "omp": "OMP",
+      "pi": "Pi",
+      "aiden": "Aiden",
+      "aiden_x_claude": "Aiden X Claude",
+      "aiden_x_codex": "Aiden X Codex",
+      "mock": "Mock"
+    },
+    "modelPolicy": {
+      "selectFirst": "选择 Agent 后显示",
+      "userDefault": "用户指定默认模型：{{model}}",
+      "agentDefault": "使用 Agent/CLI 自身默认模型",
+      "adventurerOverride": "冒险者覆盖：{{model}}"
+    },
+    "capabilityTier": {
+      "tier_a": "Tier A · 原生可编排",
+      "tier_b": "Tier B · 流式可观测",
+      "tier_c": "Tier C · 低可观测",
+      "test_only": "测试专用",
+      "unknown": "能力层级待确认"
+    },
+    "capabilityTierAdvice": {
+      "tier_a": "原生可编排，适合高风险闭环。",
+      "tier_b": "流式可观测，适合标准执行。",
+      "tier_c": "低可观测，适合低风险或人工旁路任务。",
+      "test_only": "测试专用，不建议真实委托。",
+      "unknown": "能力层级未确认，建议先验证。"
+    }
+  },
+  "time": {
+    "justNow": "刚刚",
+    "minutesAgo": "{{count}}分钟前",
+    "hoursAgo": "{{count}}小时前",
+    "daysAgo": "{{count}}天前"
+  },
+  "blockedReason": {
+    "default": "流程已阻塞"
+  },
+  "automation": {
+    "policy": {
+      "triage": "分流策略（Triage）",
+      "trust": "信任等级（Trust）",
+      "autoApply": "自动应用（Auto apply）",
+      "agentTier": "Agent 等级（Agent tier）",
+      "connectors": "闭环动作（Connectors）",
+      "l2": "L2 外部副作用"
+    },
+    "value": {
+      "direct": "直接",
+      "candidate": "候选",
+      "directRun": "直接运行",
+      "candidateFirst": "候选优先",
+      "triageCandidate": "收件箱候选",
+      "on": "开启",
+      "off": "关闭",
+      "auto": "自动",
+      "none": "无",
+      "unset": "未设置",
+      "allowed": "允许",
+      "blocked": "阻止"
+    },
+    "warning": {
+      "connectorNotEnabled": "Connector 未全局启用：{{names}}",
+      "directTierC": "Direct 自动化正在使用 Tier C 低可观测 Agent",
+      "autoApplyL2Conflict": "auto_apply 与 L2 外部副作用不能同时放开"
+    },
+    "flow": {
+      "label": {
+        "direct": "Direct",
+        "checked": "Checked",
+        "goal": "Goal"
+      },
+      "desc": {
+        "direct": "低风险快速闭环，适合清楚的小改动",
+        "checked": "交付后评审，标准流程",
+        "goal": "先设计方案，过审后执行"
+      }
+    },
+    "create": {
+      "title": "新建自动化",
+      "badge": "草稿",
+      "subtitle": "定义触发条件和产出位置，让 Gloop 在固定节奏里替你发现、生成或启动委托。",
+      "aria": "新建自动化",
+      "name": "名称",
+      "namePlaceholder": "例如：每日 Lint",
+      "description": "简介",
+      "descPlaceholder": "一句话描述触发时会做什么",
+      "query": "委托内容 · Query",
+      "queryHint": "支持具体文件、范围和验收标准",
+      "queryPlaceholder": "把要执行的任务写清楚，例如：扫描项目中的 lint、潜在 bug 与代码质量问题，按严重度输出修复建议。",
+      "trigger": "触发方式",
+      "triggerManual": "手动触发",
+      "triggerManualDesc": "每次手动点击\"立即运行\"",
+      "triggerSchedule": "定时调度",
+      "triggerScheduleDesc": "按 Cron 表达式自动跑",
+      "flow": "委托流程",
+      "workingDir": "工作目录",
+      "workingDirPlaceholder": "留空=当前 Gloop 工作目录",
+      "advancedHint": "工作目录、工作区、产出位置和指定冒险者",
+      "triageCandidate": "收件箱候选",
+      "triageCandidateDesc": "先创建待确认委托，进入收件箱；确认后启动",
+      "triageDirect": "直接创建委托",
+      "triageDirectDesc": "触发后自动创建，并可立即启动执行",
+      "autoApply": "审查通过后自动应用改动",
+      "autoApplyDesc": "check/design 模式下，reviewer 通过后自动 apply",
+      "planOnly": "只出方案，不自动执行",
+      "planOnlyDesc": "Goal 模式下：勾选=只交付方案；不勾选=方案通过后自动 spawn 执行委托",
+      "allowL2": "允许 L2 外部副作用命令",
+      "allowL2Desc": "仅对显式标记 L2 的白名单命令生效，且不能与自动 apply 同时开启",
+      "warriorAuto": "自动分配最合适的剑士",
+      "mageAuto": "自动分配最合适的法师",
+      "warriorLabel": "剑士（空=自动选择）",
+      "mageLabel": "法师（空=自动选择）",
+      "connectorsLabel": "闭环后动作",
+      "connectorGit": "提交到 gloop 分支",
+      "connectorHint": "自主闭环后自动执行（仅推 quest 专属分支，不碰 base）",
+      "cancel": "取消",
+      "creating": "创建中…",
+      "submit": "创建自动化",
+      "errorRequired": "名称和委托内容必填",
+      "errorCreate": "创建自动化失败"
+    },
+    "edit": {
+      "query": "委托内容",
+      "queryPlaceholder": "自动化触发时交给冒险者的完整任务描述",
+      "flow": "委托流程",
+      "workingDir": "工作目录",
+      "warrior": "剑士",
+      "mage": "法师",
+      "autoAssign": "自动分配",
+      "triage": "分流策略（Triage）",
+      "triageCandidate": "收件箱候选",
+      "triageCandidateDescContext": "先等待确认，再刷新上下文摘要",
+      "triageCandidateDescKnowledge": "先等待确认，再整理知识包",
+      "triageCandidateDescDefault": "先排队等待您的审查",
+      "triageDirectContext": "刷新上下文",
+      "triageDirectKnowledge": "整理知识包",
+      "triageDirectDefault": "委托",
+      "triageDirectDescContext": "触发后自动生成 Gloop context 摘要",
+      "triageDirectDescKnowledge": "触发后整理 OKF-style knowledge bundle",
+      "triageDirectDescDefault": "自动开始执行",
+      "autoApply": "自动应用",
+      "autoApplyDescGuarded": "该系统自动化不允许自动应用工作区改动",
+      "autoApplyDesc": "法师通过后跳过人工终审并自动应用更改，请谨慎开启",
+      "autoApplyAria": "切换自动应用",
+      "planOnly": "只出方案，不自动执行",
+      "planOnlyDesc": "Goal 模式下：开启=只交付方案；关闭=方案通过后自动 spawn 执行委托",
+      "planOnlyAria": "切换只出方案模式",
+      "allowL2": "高危外部命令",
+      "allowL2Desc": "允许执行显式标记为 L2 的高风险命令；与自动应用互斥",
+      "allowL2Aria": "切换高危外部命令授权",
+      "trigger": "触发方式",
+      "triggerSchedule": "定时",
+      "triggerScheduleDesc": "按 Cron 计划运行",
+      "triggerManual": "手动",
+      "triggerManualDesc": "仅通过 API/CLI 触发",
+      "priority": "优先级",
+      "connectorsLabel": "闭环后动作",
+      "connectorsDesc": "自主闭环后把影响落到外部系统（仅推 quest 专属分支，不碰 base）",
+      "connectorGit": "提交到 gloop 分支",
+      "enable": "启用",
+      "enableDesc": "启用后，自动化将按计划运行",
+      "enableAria": "切换启用状态",
+      "officialGuarded": "这是官方系统自动化。允许启用/停用调度；任务内容和安全策略保持只读。",
+      "officialReadonly": "这是官方自动化。它保持只读；需要自定义时请先创建副本。",
+      "runNow": "立即运行",
+      "running": "运行中…",
+      "runTooltipKnowledge": "立即触发一次知识包整理委托",
+      "runTooltipOfficial": "官方自动化可直接运行",
+      "runTooltipContext": "立即触发一次上下文刷新",
+      "save": "保存",
+      "saving": "保存中…",
+      "createCopy": "创建副本",
+      "delete": "删除",
+      "deleteTooltip": "官方自动化不能删除"
+    },
+    "meta": {
+      "schedule": "定时",
+      "manual": "手动",
+      "enabled": "已启用",
+      "disabled": "已停用",
+      "context": "上下文",
+      "knowledge": "知识包",
+      "official": "官方",
+      "contextRefresh": "上下文刷新",
+      "runCount": "{{count}} 次"
+    },
+    "error": {
+      "update": "更新失败",
+      "run": "运行失败",
+      "delete": "删除失败",
+      "save": "保存失败"
+    },
+    "list": {
+      "empty": "暂无自动化，点击右上角新建",
+      "noMatch": "无匹配结果",
+      "selectOne": "选择一个自动化"
+    },
+    "delete": {
+      "aria": "删除自动化",
+      "title": "删除自动化",
+      "body": "删除后不会再出现在自动化列表，也不会继续触发调度。已创建的委托不会被删除。",
+      "cancel": "取消",
+      "deleting": "删除中…",
+      "confirm": "确认删除"
+    },
+    "cron": {
+      "rule": "定时规则",
+      "daily": "每天 00:00",
+      "daily9": "每天 09:00",
+      "weekday": "工作日 09:00",
+      "weekly": "每周一 00:00",
+      "custom": "自定义 Cron"
+    },
+    "discovery": {
+      "title": "Discovery Archive",
+      "count": "{{count}} no-finding",
+      "noFinding": "no finding",
+      "empty": "暂无 no-finding 归档。"
+    },
+    "batch": {
+      "enterSelect": "批量操作",
+      "exitSelect": "退出选择",
+      "selectAll": "全选可见",
+      "clear": "清除选择",
+      "selectedCount": "已选 {{count}} / {{total}}",
+      "enableSelected": "启用选中",
+      "disableSelected": "停用选中",
+      "actionEnable": "启用",
+      "actionDisable": "停用",
+      "running": "执行中…",
+      "resultAll": "已{{action}} {{count}} 个",
+      "resultPartial": "{{action}}成功 {{success}}，失败 {{failed}}"
+    }
+  },
+  "stats": {
+    "section": {
+      "loopHealth": "Loop 健康",
+      "loopHealthSubtitle": "v0.4 覆盖率",
+      "diagnosis": "诊断分布",
+      "bottleneck": "定位运行瓶颈",
+      "sampleCount": "{{count}} 次运行样本",
+      "statusDist": "状态分布",
+      "runCount": "{{count}} 次运行",
+      "phaseTime": "阶段耗时",
+      "cumulativeSec": "累计（秒）",
+      "failureReason": "失败原因",
+      "topReason": "Top reason",
+      "failureCategory": "失败类别",
+      "topCategory": "Top category",
+      "projectDist": "项目分布",
+      "byRepo": "按仓库",
+      "anomalyPriority": "异常优先级",
+      "signalCount": "{{count}} 个信号",
+      "noAnomaly": "无异常",
+      "blockedQuests": "阻塞委托",
+      "failedQuests": "失败委托",
+      "pendingReview": "待用户审核",
+      "topFailureReason": "主要失败原因",
+      "slowOps": "慢速操作",
+      "recentRuns": "最近运行",
+      "recentCount": "{{count}} 条"
+    },
+    "health": {
+      "eyebrow": "运行健康",
+      "needsAttention": "运行健康需要处理",
+      "needsConfirm": "运行健康有待确认",
+      "stable": "运行健康稳定",
+      "waiting": "等待统计数据",
+      "summaryEmpty": "当前范围内还没有可分析的委托运行。",
+      "summaryAttention": "当前范围有 {{count}} 个失败、阻塞或待审核信号，优先看右侧异常与明细。",
+      "summaryActive": "当前有 {{count}} 个运行中或待处理信号，整体成功率 {{rate}}%。",
+      "summaryStable": "当前范围内 {{count}} 个委托已形成稳定结果，成功率 {{rate}}%。"
+    },
+    "insight": {
+      "attention": "需关注",
+      "attentionCount": "{{count}} 个",
+      "active": "进行中",
+      "slowestP95": "最慢 P95"
+    },
+    "tile": {
+      "runs": "运行次数",
+      "avgTurns": "平均 {{avg}} 轮 / 委托",
+      "rangeLabel": "范围：{{range}}",
+      "successRate": "成功率",
+      "autoClose": "自主闭环率",
+      "autoClosedSub": "{{count}} / {{total}} 自主",
+      "p95": "P95 耗时",
+      "p50": "P50 {{val}}",
+      "p95Range": "范围 P95",
+      "tokens": "Token 用量",
+      "tokenInput": "≈ {{val}}K 输入",
+      "tokenTotal": "累计 tokens"
+    },
+    "empty": {
+      "loading": "统计数据加载中...",
+      "noStatus": "暂无状态数据",
+      "noPhaseTime": "暂无阶段耗时数据",
+      "noFailureReason": "暂无失败原因数据",
+      "noFailureCategory": "暂无失败类别数据",
+      "noProject": "暂无项目分布数据",
+      "noSlowOps": "暂无慢速操作数据",
+      "noRuns": "暂无运行记录"
+    },
+    "status": {
+      "success": "已完成",
+      "running": "执行中",
+      "reviewing": "评审中",
+      "userReview": "待审核",
+      "blocked": "阻塞",
+      "failed": "失败",
+      "cancelled": "已取消",
+      "pending": "待开始"
+    },
+    "phase": {
+      "warrior": "剑士执行",
+      "mage": "法师评审",
+      "userReview": "用户审核",
+      "apply": "应用变更",
+      "rework": "返工",
+      "unknown": "未知"
+    },
+    "range": {
+      "today": "今日",
+      "7d": "近 7 天",
+      "30d": "近 30 天",
+      "all": "全部"
+    },
+    "duration": {
+      "second": "{{val}} 秒",
+      "minSec": "{{min}}分 {{sec}}秒",
+      "min": "{{val}}分",
+      "hourMin": "{{hour}}小时 {{min}}分",
+      "hour": "{{val}}小时"
+    },
+    "relative": {
+      "justNow": "刚刚",
+      "minutesAgo": "{{val}} 分钟前",
+      "hoursAgo": "{{val}} 小时前",
+      "daysAgo": "{{val}} 天前"
+    },
+    "slowOps": {
+      "count": "{{val}} 次"
+    }
+  },
+  "aria": {
+    "agent": "Agent",
+    "questPhaseProgress": "Quest phase progress",
+    "humanExceptionQueue": "Human Exception Queue",
+    "automationPolicySummary": "Automation Policy Summary",
+    "type": "Type",
+    "logo": "Gloop",
+    "logoSlime": "Gloop slime",
+    "questCreate": "发起委托",
+    "close": "关闭",
+    "warrior": "剑士",
+    "mage": "法师",
+    "removeArtifact": "移除附件",
+    "currentWorkStatus": "当前工作情况",
+    "back": "返回",
+    "answerAgent": "回答 Agent 提问",
+    "clear": "清除"
+  },
+  "palette": {
+    "aria": "命令面板",
+    "placeholder": "输入命令或搜索…",
+    "noResults": "无匹配结果",
+    "section": {
+      "decide": "待决策",
+      "open": "打开",
+      "create": "新建",
+      "navigate": "导航",
+      "configure": "配置",
+      "inspect": "查看"
+    },
+    "hint": {
+      "navigate": "选择",
+      "select": "执行",
+      "close": "关闭"
+    },
+    "cmd": {
+      "openQuests": "打开委托",
+      "openInbox": "打开待处理决策",
+      "openAutomations": "打开自动化",
+      "openKnowledge": "打开知识库",
+      "openAdventurers": "打开冒险者",
+      "openResources": "打开资源",
+      "openStats": "打开统计",
+      "openSettings": "打开设置",
+      "createQuest": "新建委托",
+      "createAutomation": "新建自动化",
+      "recruitAdventurer": "招募冒险者",
+      "openDecision": "打开待处理决策：{{title}}",
+      "openInboxCandidate": "打开候选委托：{{title}}",
+      "openQuest": "打开委托：{{title}}",
+      "openAutomation": "打开自动化：{{name}}",
+      "openAdventurer": "打开冒险者：{{name}}",
+      "openSkill": "查看技能：{{name}}",
+      "openPrompt": "查看提示词：{{name}}"
+    },
+    "meta": {
+      "automationCandidate": "自动化候选",
+      "pendingDelegation": "待确认委托",
+      "enabled": "已启用",
+      "disabled": "已停用",
+      "decision": "待处理决策"
+    }
+  },
+  "knowledge": {
+    "kicker": "知识资源",
+    "desc": "管理 Gloop 跨委托上下文，并导出为目录化 Markdown 知识包。",
+    "formatLabel": "标准格式",
+    "formatValue": "Markdown + YAML frontmatter",
+    "formatNote": "人类可读 · Agent 可解析"
+  },
+  "adventurer": {
+    "empty": "还没有冒险者，点击右上角新增",
+    "noMatch": "无匹配结果",
+    "selectPrompt": "选择一个冒险者",
+    "error": {
+      "needAgent": "请选择已启用的非 Mock Agent",
+      "saveFail": "保存失败",
+      "activateFail": "激活失败",
+      "retireFail": "删除失败",
+      "setDefaultFail": "设置默认失败"
+    },
+    "success": {
+      "saved": "已保存",
+      "activated": "已激活",
+      "setDefaultWarrior": "已设为默认剑士",
+      "setDefaultMage": "已设为默认法师",
+      "unsetDefaultWarrior": "已取消默认剑士",
+      "unsetDefaultMage": "已取消默认法师"
+    },
+    "status": {
+      "active": "活跃",
+      "pending": "待配置",
+      "retired": "已删除",
+      "noAgent": "未设置 Agent"
+    },
+    "list": {
+      "defaultWarrior": "默认剑士",
+      "defaultMage": "默认法师"
+    },
+    "banner": {
+      "notActivated": "这个冒险者还未激活 - 至少配置 Agent 后点击保存即可生效。"
+    },
+    "field": {
+      "systemPrompt": "角色设定",
+      "systemPromptPlaceholder": "输入自定义 system prompt",
+      "systemPromptDefault": "偏好第一性原理思考。追求全局最优解。",
+      "capability": "能力层级",
+      "capabilityHint": "Tier C 为低可观测，适合低风险或人工旁路任务。",
+      "modelPolicy": "模型策略",
+      "modelPlaceholder": "留空则继承 Agent 默认模型",
+      "class": "职业",
+      "winRate": "胜率",
+      "exp": "经验",
+      "skills": "技能",
+      "created": "创建",
+      "updated": "更新",
+      "metadata": "元数据",
+      "capabilityMatrix": "Agent Capability Matrix",
+      "agentSelectPlaceholder": "选择可用 Agent"
+    },
+    "action": {
+      "save": "保存",
+      "saving": "保存中…",
+      "activate": "保存并激活",
+      "activating": "激活中…",
+      "setDefault": "设为默认",
+      "isDefault": "默认",
+      "settingDefault": "设置中…",
+      "retire": "删除冒险者",
+      "retiring": "删除中…",
+      "cancel": "取消",
+      "confirmRetire": "确认删除"
+    },
+    "recent": {
+      "title": "近况",
+      "empty": "还没有执行过委托",
+      "running": "正在执行",
+      "idle": "空闲",
+      "lastCompleted": "上次完成",
+      "recentCount": "最近 {{count}} 次",
+      "successRate": "{{success}}/{{total}} 成功"
+    },
+    "retireDialog": {
+      "title": "删除冒险者",
+      "body": "删除后这个冒险者不会再参与新委托分配。已有历史记录会保留。"
+    }
+  },
+  "context": {
+    "title": "用户上下文",
+    "error": {
+      "loadDimsFail": "加载上下文列表失败",
+      "loadDimFail": "读取维度失败",
+      "loadExportPreviewFail": "加载导出预览失败",
+      "refreshFail": "触发刷新失败",
+      "exportFail": "导出失败",
+      "importReadFail": "读取文件失败",
+      "importEmptyFail": "维度名和内容不能为空",
+      "importFail": "导入失败"
+    },
+    "time": {
+      "minutesAgo": "{{count}} 分钟前",
+      "hoursAgo": "{{count}} 小时前",
+      "daysAgo": "{{count}} 天前"
+    },
+    "action": {
+      "refresh": "刷新",
+      "import": "导入",
+      "exportOKF": "导出 OKF",
+      "refreshSummary": "刷新摘要",
+      "refreshGenerate": "刷新生成",
+      "recalculate": "重新计算",
+      "cancel": "取消",
+      "confirmImport": "确认导入",
+      "generate": "生成上下文",
+      "export": "导出",
+      "exportMd": "导出为 .md"
+    },
+    "overview": {
+      "title": "总览摘要",
+      "desc": "跨委托持久化背景，供 Agent 执行时按需查询。",
+      "loading": "加载中...",
+      "empty": "暂无总览摘要"
+    },
+    "metrics": {
+      "dims": "维度",
+      "size": "体积",
+      "lastUpdated": "最近更新"
+    },
+    "callout": {
+      "body": "刷新会创建后台上下文委托，只写入 Gloop context 摘要区，不会自动应用项目代码改动。",
+      "lastRefresh": "最近刷新委托："
+    },
+    "exportPreview": {
+      "title": "导出预览",
+      "format": "格式",
+      "files": "文件",
+      "totalSize": "总大小",
+      "lastExport": "最近导出",
+      "lastExportLine": "最近导出 {{filename}} · {{fileCount}} 文件 · {{size}}",
+      "calculating": "计算 knowledge bundle...",
+      "empty": "暂无可导出的文件"
+    },
+    "diff": {
+      "added": "新增",
+      "changed": "变化",
+      "removed": "移除",
+      "unchanged": "未变"
+    },
+    "importPanel": {
+      "title": "导入上下文维度",
+      "dimName": "维度名",
+      "dimNamePlaceholder": "如 workspace、custom_notes",
+      "contentPreview": "内容预览",
+      "selectFile": "选择文件后预览内容"
+    },
+    "dimList": {
+      "title": "维度",
+      "loading": "加载中",
+      "count": "{{count}} 项",
+      "loadingDots": "加载中...",
+      "emptyTitle": "还没有上下文维度",
+      "emptyDesc": "运行 gloop context refresh 或点击上方刷新生成。"
+    },
+    "detail": {
+      "title": "详情预览",
+      "loading": "加载中...",
+      "updatedAt": "更新于 {{time}}",
+      "emptyTitle": "选择左侧维度查看内容",
+      "emptyDesc": "上下文详情会在这里预览，避免把列表撑得很长。"
+    },
+    "hint": "上下文是跨委托持久化的全局背景知识，Agent 在执行任务时可按需查询。每天由 auto_context_refresh 自动化定时更新；可用 gloop context export --format okf --out <dir> 导出为 knowledge bundle。"
+  },
+  "questState": {
+    "loading": {
+      "title": "正在加载委托",
+      "desc": "同步任务列表、评审状态和最近活动。"
+    },
+    "noAgent": {
+      "title": "先配置 Agent",
+      "desc": "Agent 是底层执行器。配置并启用非 Mock Agent 后，才能招募可接委托的剑士和法师。",
+      "action": "去配置 Agent"
+    },
+    "noAdventurer": {
+      "title": "还缺少冒险者",
+      "desc": "发起委托需要一个剑士执行和一个法师评审。先招募缺少的角色。",
+      "action": "招募冒险者"
+    },
+    "empty": {
+      "title": "还没有委托",
+      "desc": "Agent 和冒险者已就绪，可以创建第一条委托。",
+      "action": "发起委托"
+    }
+  },
+  "questSummary": {
+    "untitled": "未命名委托",
+    "defaultTitle": "委托",
+    "lineCount": "{{count}} 行",
+    "copy": "复制委托",
+    "collapse": "收起",
+    "expand": "展开"
+  },
+  "questCard": {
+    "signal": {
+      "autoComplete": "策略自动完成",
+      "diffPending": "diff 待审核",
+      "autoPass": "策略建议通过",
+      "outputs": "{{count}} 个产物"
+    },
+    "review": {
+      "needChanges": "法师要求修改",
+      "rejected": "法师拒绝",
+      "passed": "法师通过",
+      "needHuman": "需人工处理"
+    },
+    "intensityQuick": "直接执行",
+    "reworkCount": "{{count}} 次返工",
+    "running": "执行中",
+    "waitingInputFallback": "等待你回答 Agent 的问题",
+    "blockedFallback": "需要处理阻塞",
+    "recoverable": "可恢复",
+    "needHumanJudgment": "需人工判断",
+    "applyFailedFallback": "应用失败，需要处理工作区冲突或安全拦截",
+    "applied": "已应用",
+    "mageScore": "评分",
+    "footReviewing": "法师评审中",
+    "footWarrior": "剑士",
+    "footWarriorFallback": "剑士",
+    "miniAction": {
+      "diagnosis": "诊断",
+      "handle": "处理",
+      "view": "查看"
+    }
+  },
+  "markdown": {
+    "copied": "已复制",
+    "copy": "复制",
+    "copyPath": "复制路径",
+    "copyCode": "复制代码",
+    "empty": "(空)"
+  },
+  "settings": {
+    "error": {
+      "loadFail": "加载设置失败",
+      "cleanupFail": "清理失败",
+      "exportFail": "导出配置包失败",
+      "parseFail": "配置包解析失败",
+      "readFail": "读取配置包失败",
+      "importFail": "导入配置包失败",
+      "toggleFail": "切换失败",
+      "agentNameEmpty": "Agent 名称不能为空",
+      "traexDisabled": "TraeX CLI Agent 已禁用；请把类型改为 ACP 后再保存",
+      "saveAgentFail": "保存 Agent 失败",
+      "deleteAgentFail": "删除 Agent 失败",
+      "commandJsonFail": "法师可执行命令列表 JSON 解析失败",
+      "saveFail": "保存失败",
+      "recommendFail": "推荐验证命令失败",
+      "addRecommendFail": "加入推荐命令失败"
+    },
+    "success": {
+      "saved": "设置已保存"
+    },
+    "health": {
+      "agentLabel": "Agent",
+      "agentLoading": "加载中",
+      "agentRatio": "{{enabled}}/{{total}}",
+      "agentDetail": "已启用 / 全部",
+      "agentEmpty": "尚未配置",
+      "concurrency": "并发",
+      "concurrencyDetail": "最大并发委托",
+      "workspace": "工作区",
+      "workspaceAuto": "自动",
+      "command": "命令白名单",
+      "commandError": "错误",
+      "commandJsonFix": "JSON 需要修正",
+      "commandDetail": "法师可用验证命令"
+    },
+    "overview": {
+      "aria": "设置概览",
+      "kickerSaving": "保存中",
+      "kickerLoading": "同步配置中",
+      "kickerReady": "配置工作台",
+      "title": "影响后续委托的全局行为",
+      "desc": "Agent、预算、工作区、命令白名单和上下文配置会在新任务中生效。",
+      "jumpAria": "设置分区快捷入口",
+      "jumpBudget": "预算",
+      "jumpWorkspace": "工作区",
+      "jumpPackage": "配置包"
+    },
+    "theme": {
+      "title": "主题"
+    },
+    "budget": {
+      "title": "预算与限制",
+      "hint": "采用 guardrail 预算模型：以<strong>时长</strong>、<strong>无进展轮数</strong>、<strong>连续错误数</strong>为主约束，最大轮次仅作为技术安全网。",
+      "maxDurationPhase": "单阶段最大时长（分钟）",
+      "maxDurationQuest": "单委托总时长（分钟）",
+      "maxNoProgress": "连续无进展轮数",
+      "idleWarning": "运行空闲提醒（秒）",
+      "maxConsecErrors": "最大连续 Agent 错误数",
+      "maxTurnsPhase": "单阶段最大轮次",
+      "safetyNet": "安全网",
+      "maxRework": "单委托最大返工次数",
+      "maxConcurrent": "最大并发委托数",
+      "maxReviewHints": "评审提示重试次数",
+      "maxExecHints": "执行提示重试次数",
+      "userConfirmTimeout": "用户确认超时（小时）",
+      "commandList": "法师可执行命令列表（JSON）"
+    },
+    "recommend": {
+      "title": "推荐验证命令",
+      "desc": "只扫描项目文件，不执行命令；加入后仍需保存设置才生效",
+      "scanning": "扫描中...",
+      "scanBtn": "扫描推荐",
+      "scanDir": "扫描目录",
+      "scanPlaceholder": "留空使用默认工作目录",
+      "projectHit": "项目特征命中",
+      "alreadyPresent": "已在白名单",
+      "add": "加入"
+    },
+    "workspace": {
+      "title": "工作区",
+      "defaultDir": "默认工作目录",
+      "dirPlaceholder": "留空=当前目录",
+      "defaultWarrior": "默认剑士",
+      "defaultMage": "默认法师",
+      "notSpecified": "不指定",
+      "hotlTitle": "HOTL 自主闭环",
+      "hotlDesc": "法师通过后自主 apply 并完成，只有异常才转人工处理；关闭则走 v0.1 模式等人终审",
+      "autoCleanupTitle": "自动清理失败的委托",
+      "autoCleanupDesc": "失败后按保留天数删除 workspace 目录",
+      "cleanupTitle": "清理已结束委托的工作区",
+      "cleanupDesc": "按保留天数扫描 success / cancelled，以及可选 failed 的 workspace 目录",
+      "preview": "预览",
+      "cleanup": "清理",
+      "includeFailed": "包含 failed / cancelled 委托",
+      "previewHit": "预览命中",
+      "processed": "已处理",
+      "workspaceCount": "{{count}} 个工作区",
+      "moreItems": "还有 {{count}} 项未展开",
+      "nothingToClean": "没有可清理的工作区（均已清理或未过保留期）"
+    },
+    "connectors": {
+      "title": "Connectors",
+      "hint": "委托自主闭环后把影响落到外部系统；默认全部关闭，启用后仅对声明了该 connector 的委托生效。",
+      "git": "Git",
+      "gitDesc": "quest 闭环后把工作区改动提交到 <code>gloop/&lt;shortid&gt;</code> 专属分支，永不推 base 分支。",
+      "gitToggleAria": "切换 Git connector",
+      "remote": "Remote",
+      "baseBranch": "Base 分支（只读参考）",
+      "authorName": "作者名",
+      "authorEmail": "作者邮箱",
+      "authorPlaceholder": "留空用仓库默认",
+      "pushRemote": "推送到 remote",
+      "pushDesc": "关闭则只本地 commit，不 push"
+    },
+    "package": {
+      "title": "配置包",
+      "import": "导入",
+      "export": "导出",
+      "migrateTitle": "迁移 Gloop 用户资产",
+      "migrateInclude": "包含全局设置、Agent、冒险者、自动化、提示词、用户技能和用户上下文。",
+      "migrateExclude": "不导出 token、委托运行态、workspace、日志、备份和统计。",
+      "migrateNote": "Agent 环境变量默认脱敏；导入同名项会覆盖。",
+      "importTitle": "导入配置包",
+      "cancel": "取消",
+      "selectFile": "选择 JSON 文件",
+      "selectHint": "选择配置包后会先预览影响范围",
+      "previewLine": "新增 {{creates}} · 覆盖 {{updates}} · 跳过 {{skips}}",
+      "importing": "导入中...",
+      "confirmImport": "确认导入"
+    },
+    "actions": {
+      "loading": "正在读取当前 Gloop 配置。",
+      "jsonBroken": "法师可执行命令列表 JSON 解析失败，修正后才能保存。",
+      "savedNote": "保存后会影响后续新委托，已运行任务不回写。",
+      "saving": "保存中...",
+      "saveBtn": "保存设置"
+    },
+    "deleteAgent": {
+      "aria": "删除 Agent",
+      "title": "删除 Agent",
+      "body": "删除后会移除对应配置和运行时执行器；正在被启用冒险者使用时，服务端会拒绝删除。",
+      "close": "关闭",
+      "cancel": "取消",
+      "deleting": "删除中...",
+      "confirm": "确认删除"
+    },
+    "agent": {
+      "section": {
+        "title": "Agent",
+        "add": "新增 Agent"
+      },
+      "empty": {
+        "loading": "加载中…",
+        "none": "还没有可用的 Agent"
+      },
+      "row": {
+        "newAgent": "新增 Agent",
+        "official": "官方",
+        "noCommand": "未配置命令"
+      },
+      "modelPolicy": {
+        "specified": "用户指定默认模型：{{model}}",
+        "default": "使用 Agent/CLI 自身默认模型"
+      },
+      "aria": {
+        "toggle": "切换 Agent 启用状态",
+        "removeDraft": "移除新增 Agent 草稿"
+      },
+      "action": {
+        "collapse": "收起",
+        "edit": "编辑",
+        "enable": "启用",
+        "saving": "保存中...",
+        "save": "保存 Agent",
+        "deleting": "删除中...",
+        "delete": "删除 Agent",
+        "deleteLockedTitle": "官方内置 Agent 不能删除；如不使用请禁用"
+      },
+      "lockNote": "官方 Agent 的名称和 {{type}} 类型由平台维护；禁用或调整本机命令参数即可。",
+      "field": {
+        "name": "名称",
+        "namePlaceholder": "例如 codex / relay / claude",
+        "nameHint": "官方内置 Agent 的名称固定，用于冒险者绑定和运行时路由。",
+        "type": "类型",
+        "typeHint": "官方内置 Agent 的 ACP/CLI 类型是适配器契约，不能在设置页改成其它类型。",
+        "command": "启动命令",
+        "commandPlaceholder": "relay / codex / pi / npx",
+        "defaultModel": "默认模型",
+        "modelPlaceholder": "留空则使用 Agent/CLI 默认",
+        "capability": "编排能力",
+        "capabilityHint": "用于 v0.4 Runtime Health、watchdog 和默认推荐策略。",
+        "args": "启动参数",
+        "argsPlaceholder": "每行一个参数，也支持逗号分隔",
+        "env": "环境变量",
+        "envPlaceholder": "KEY=value，每行一个"
+      }
+    }
+  },
+  "createAdv": {
+    "aria": "招募冒险者",
+    "title": "招募冒险者",
+    "subtitle": "为队伍配置一个可复用的 AI 角色，明确它的职业、Agent、人设和可使用工具。",
+    "close": "关闭",
+    "error": {
+      "nameEmpty": "冒险者名字不能为空",
+      "needAgent": "请选择已启用的非 Mock Agent，招募后才能直接接委托",
+      "recruitFail": "招募冒险者失败"
+    },
+    "field": {
+      "name": "名称",
+      "namePlaceholder": "例如：勇敢剑士",
+      "class": "职业",
+      "modelPolicy": "模型策略",
+      "modelPlaceholder": "留空则继承 Agent 默认模型",
+      "capability": "编排能力",
+      "capabilityHint": "Tier C 为低可观测，适合低风险或人工旁路任务。",
+      "desc": "简介",
+      "descPlaceholder": "一句话描述这个冒险者擅长什么",
+      "customPrompt": "自定义人设 · Custom Prompt",
+      "customPromptHint": "留空时使用职业默认人设",
+      "customPromptPlaceholder": "可留空。为空时使用系统内置的剑士/法师默认人设；填写后会覆盖默认值。",
+      "customPromptDefaultWarrior": "剑士偏执行",
+      "customPromptDefaultMage": "法师偏评审",
+      "tools": "工具白名单（逗号分隔，留空=全部）",
+      "toolsPlaceholder": "bash, filesystem, edit",
+      "level": "初始等级",
+      "levelHint": "新冒险者统一从 Lv.1 开始",
+      "customPromptDefaultPrefix": "默认值会根据职业自动切换："
+    },
+    "classOption": {
+      "warriorTitle": "剑士 Warrior",
+      "warriorDesc": "执行阶段动手做，适合代码修改、脚本运行和结果产出",
+      "mageTitle": "法师 Mage",
+      "mageDesc": "评审阶段把关验收，适合风险识别、方案判断和复核"
+    },
+    "agent": {
+      "noEnabled": "没有已启用的非 Mock Agent。",
+      "goEnable": "去启用 Agent"
+    },
+    "advancedHint": "简介、人设和工具白名单",
+    "defaultPrompt": {
+      "warrior": "你是一名谨慎的代码执行者。先理解上下文，再以最小变更完成任务；修改后尽量运行相关检查，并清晰说明结果与风险。",
+      "mage": "你是一名严格的评审者。优先识别正确性、边界条件、回归风险和缺失验证；给出可执行的修改建议，并保持结论清晰。"
+    },
+    "action": {
+      "cancel": "取消",
+      "recruiting": "招募中…",
+      "recruit": "招募冒险者"
+    }
+  },
+  "errorBoundary": {
+    "title": "出错了喵…",
+    "retry": "重试"
+  },
+  "upgradeBanner": {
+    "newVersion": "新版本",
+    "currentVersion": "当前版本",
+    "messagePrefix": "Gloop 有新版本可用：",
+    "upgradeLabel": "· 升级：",
+    "dismissAria": "本周不再提示",
+    "dismissTitle": "一周内不再提示此版本"
+  },
+  "prompts": {
+    "error": {
+      "fetchDetail": "读取模板详情失败"
+    },
+    "source": {
+      "builtin": "内置",
+      "user": "用户自定义"
+    },
+    "overridden": "· 已覆盖",
+    "overriddenDetail": "· 已被用户目录覆盖",
+    "emptyList": "没有匹配的模板",
+    "section": {
+      "overview": "概览",
+      "content": "内容",
+      "source": "来源"
+    },
+    "emptyTemplate": "(空模板)",
+    "emptyContent": "(空)",
+    "bytes": "字节",
+    "mode": {
+      "render": "渲染",
+      "raw": "源码"
+    },
+    "loadingContent": "加载模板内容…",
+    "loadingDetail": "加载模板详情…",
+    "selectOne": "选择一个模板",
+    "origin": {
+      "builtinTitle": "内置预设",
+      "userTitle": "用户自定义",
+      "builtinDesc": "平台内置 prompt 模板，随 gloop 版本更新",
+      "userDesc": "用户目录下的自定义模板",
+      "badgeBuiltin": "内置",
+      "badgeCustom": "自定义"
+    },
+    "chip": {
+      "overridden": "已覆盖"
+    }
+  },
+  "skills": {
+    "error": {
+      "fetchDetail": "读取技能详情失败"
+    },
+    "source": {
+      "builtin": "内置"
+    },
+    "class": {
+      "warrior": "剑士",
+      "mage": "法师",
+      "general": "通用"
+    },
+    "sourcePrefix": "内置 · ",
+    "emptyList": "没有匹配的技能",
+    "builtinPreset": "内置预设",
+    "section": {
+      "overview": "概览",
+      "files": "文件",
+      "source": "来源"
+    },
+    "noDescription": "暂无说明",
+    "mode": {
+      "render": "渲染",
+      "raw": "源码"
+    },
+    "loadingBody": "加载技能正文…",
+    "loadingDetail": "加载技能详情…",
+    "selectOne": "选择一个技能",
+    "empty": "(空)",
+    "origin": {
+      "builtinDesc": "平台内置技能，随 gloop 版本更新",
+      "badge": "内置"
+    },
+    "available": {
+      "warrior": "剑士可用",
+      "mage": "法师可用"
+    }
+  },
+  "fab": {
+    "quest": "发起委托",
+    "automation": "新建自动化",
+    "adventurer": "招募冒险者"
+  },
+  "app": {
+    "loading": "加载中...",
+    "copySuffix": "副本"
+  },
+  "sideDrawer": {
+    "ariaNav": "导航",
+    "tagline": "Agent 转生成为冒险者，然后陷入循环",
+    "closeAria": "关闭菜单",
+    "config": "配置与知识"
+  },
+  "changes": {
+    "title": {
+      "default": "变更差异",
+      "readonly": "工作区（只读）",
+      "context": "上下文 / 知识变更",
+      "external": "外部副作用",
+      "workspace": "工作区变更"
+    },
+    "subtitle": {
+      "contextWith": "检测到 {{count}} 份知识导出产物",
+      "contextDefault": "受控工具写入 Gloop 知识上下文",
+      "external": "对外部系统/平台产生的变更，无工作区差异",
+      "modePrefix": "模式 ",
+      "sourcePrefix": " · 来源 "
+    },
+    "fileCount": "共 {{count}} 文件",
+    "baseline": "基线 {{id}}",
+    "loading": "加载变更详情...",
+    "copyPath": "复制文件路径",
+    "path": "路径",
+    "emptyWorkspace": "没有检测到工作区差异。",
+    "regenerateHint": "如需排查，可以重新生成一次 diff。",
+    "readonlyTitle": "只读模式不会修改工作区。",
+    "readonlyBody1": "剑士/法师的写操作都在隔离沙盒里完成，",
+    "readonlyBody2": "不会",
+    "readonlyBody3": "落到当前工程目录。",
+    "readonlyBody4": "看实际产出：去",
+    "readonlyBody5": "找 `.patch`/报告；或翻",
+    "readonlyBody6": "里的工具调用。",
+    "artifactsBtn": "交付产物",
+    "traceBtn": "执行轨迹",
+    "stat": {
+      "file": "文件",
+      "dimension": "维度",
+      "size": "大小",
+      "diff": "diff",
+      "export": "导出"
+    },
+    "noMetadata": "未携带元数据。在下方「交付产物」里预览原始 JSON 获取细粒度信息。",
+    "viewArtifact": "查看产物",
+    "openKnowledge": "打开知识页",
+    "noKnowledgeArtifact": "没有独立的「知识导出产物」。",
+    "knowledgeHint1": "上下文变更通常直接通过受控工具写入，不会生成 artifact。去",
+    "knowledgeHint2": "页核对；或在",
+    "knowledgeHint3": "里搜 ",
+    "knowledgeHint4": " 相关工具。",
+    "knowledgeBtn": "知识",
+    "externalTitle": "变更发生在外部系统/平台侧，没有工作区差异。",
+    "externalHint1": "去",
+    "externalHint2": "里看「命令/写入」类工具调用；结论去",
+    "externalHint3": "。",
+    "conclusionBtn": "冒险者结论",
+    "unknown": "未检测到明确的变更类型。结合下方执行轨迹和交付产物综合判断即可。"
+  },
+  "fieldsPopover": {
+    "label": "显示字段",
+    "type": "类型",
+    "statusHint": "状态提示",
+    "time": "时间",
+    "mageScore": "法师评分",
+    "adventurer": "冒险者",
+    "reworkCount": "返工次数",
+    "diffStat": "变更统计",
+    "applied": "已应用"
+  },
+  "sortPopover": {
+    "createdAt": "创建时间",
+    "updatedAt": "更新时间",
+    "mageScore": "法师评分",
+    "direction": "方向",
+    "desc": "降序",
+    "asc": "升序"
+  },
+  "groupPopover": {
+    "status": "按状态",
+    "phase": "按阶段",
+    "type": "按类型",
+    "none": "无分组"
+  },
+  "execTrace": {
+    "phase": {
+      "warrior": "剑士",
+      "mage": "法师",
+      "default": "阶段"
+    },
+    "event": {
+      "questStarted": "委托已启动",
+      "questFailed": "执行失败",
+      "questCancelled": "已取消",
+      "phaseEntered": "进入{{phase}}阶段",
+      "phaseEnteredGeneric": "进入新阶段",
+      "phaseCompleted": "{{phase}}阶段完成",
+      "phaseCompletedGeneric": "阶段完成",
+      "mageVerdict": "法师评审结论",
+      "mageReview": "法师开始评审",
+      "warriorReport": "剑士汇报进展",
+      "failureAttributed": "失败归因",
+      "userReview": "转入用户审核",
+      "blocked": "流程阻塞"
+    },
+    "loading": "加载执行轨迹...",
+    "waiting": "等待执行轨迹",
+    "title": "执行轨迹",
+    "view": {
+      "summary": "摘要",
+      "full": "完整"
+    },
+    "filter": {
+      "all": "全部",
+      "tools": "工具",
+      "messages": "输出",
+      "comments": "评论注入",
+      "context": "上下文",
+      "decisions": "决策",
+      "errors": "异常"
+    },
+    "summaryHint": "摘要：最近 {{keyCount}} 个关键节点 + {{msgCount}} 条 agent 输出（共 {{total}} 条事件，工具与原始输出已折叠）。",
+    "viewFull": "查看完整轨迹",
+    "noKeyEvents": "暂无关键节点，",
+    "pinConclusion": "置顶结论",
+    "archived": "已归档为产物 {{name}}",
+    "archivedTitle": "已归档为产物 {{name}}",
+    "commentInjected": "评论注入",
+    "newComments": "{{count}} 条新用户评论已注入",
+    "phaseSuffix": "阶段",
+    "contextPack": "上下文",
+    "contextStart": "启动上下文",
+    "contextBlocks": "{{count}} 个上下文块",
+    "result": "结果"
+  },
+  "mageScoreChip": {
+    "unscored": "未评分",
+    "legacyTitle": "本条 review 的 reviewed_by 记录为字面量 \"mage\"（legacy 写法），建议升级为 adventurer_id 写法"
+  },
+  "finalVerdict": {
+    "verdict": {
+      "pass": "通过",
+      "requestChanges": "要求返工",
+      "reject": "否决",
+      "handled": "已处理"
+    },
+    "actor": {
+      "user": "用户终审",
+      "automation": "自动化规则",
+      "policyAuto": "策略自动 · ",
+      "policyDecision": "策略决策",
+      "source": "来源：{{source}}",
+      "terminal": "终态"
+    },
+    "title": "最终结论",
+    "userDone": "用户已完成终审；交付内容见「冒险者结论」。",
+    "noComment": "（无结论说明）"
+  },
+  "mageReview": {
+    "label": "法师评审",
+    "repairStats": "{{repaired}} / {{total}} 项修复",
+    "issueStats": "{{total}} 项问题",
+    "sourceIncomplete": "溯源信息不完整，建议升级到最新 agent",
+    "sourceIncompleteTitle": "本条 review 的 review_source 溯源字段不全（phase/session 可能不可靠）",
+    "commentRange": "下方评语 [{{start}}, {{end}}) 区间对应上方结构化项",
+    "noComment": "（法师未留下评语）",
+    "hintsSummary": "返工提示（rewrite_hints）",
+    "viewProcess": "查看法师过程"
+  },
+  "mageBanner": {
+    "reject": "法师否决，请复核",
+    "requestChanges": "法师要求返工",
+    "lowScore": "法师通过但评分偏低，请复核",
+    "conditional": "法师通过 · 带条件",
+    "passUnscored": "法师通过 · 未评分",
+    "reviewing": "法师暂未提交评审",
+    "noMage": "未配置法师 · 缺少抗偏差层",
+    "quickMode": "快速模式 · 无独立评审 · 仅用于确定性任务"
+  },
+  "verdict": {
+    "pass": "通过",
+    "requestChanges": "要求返工",
+    "reject": "否决"
+  },
+  "contextLabel": {
+    "phase_control_panel": "阶段控制面板",
+    "review_control_panel": "评审控制面板",
+    "latest_review_blockers": "最新阻断项",
+    "conflict_policy": "冲突裁决",
+    "original_task_boundary": "原始边界",
+    "completion_checklist": "完成检查",
+    "quest_user_intent": "委托需求",
+    "intensity_note": "强度规则",
+    "design_quest_note": "方案型规则",
+    "rework_hints": "返工指引",
+    "previous_round_summary": "上轮摘要",
+    "workspace_diff_snapshot": "工作区快照",
+    "rework_progress": "返工进度",
+    "acceptance_criteria": "验收标准",
+    "execution_instruction": "执行规则",
+    "warrior_artifact": "剑士交付",
+    "platform_tool_evidence": "自动验证证据",
+    "review_history": "评审历史",
+    "review_evidence_pack": "评审证据包",
+    "review_requirements": "评审要求",
+    "review_protocol": "评审协议",
+    "context_catalog": "上下文目录",
+    "context_files": "文件式上下文",
+    "platform_auto_evidence": "平台自动证据",
+    "platform_mechanisms": "平台机制",
+    "warrior_native_tool_calls": "工具调用证据",
+    "warrior_deliverables": "剑士交付物",
+    "warrior_summary": "剑士摘要",
+    "design_plan": "设计方案",
+    "design_review_requirements": "设计评审要求",
+    "design_evidence_pack": "设计评审证据包",
+    "design_alignment_review": "设计对齐评审",
+    "implementation_review_summary": "实现评审摘要"
+  },
+  "contextRole": {
+    "control": "控制",
+    "primary_input": "主输入",
+    "evidence": "证据",
+    "history": "历史",
+    "protocol": "协议",
+    "supporting": "补充",
+    "unclassified": "未分类"
+  },
+  "contextStaleness": {
+    "live": "实时",
+    "phase_snapshot": "阶段快照",
+    "previous_review": "上轮评审",
+    "previous_round": "上轮摘要",
+    "original": "原始输入",
+    "historical": "历史"
+  },
+  "contextHint": {
+    "phase_control_panel": "当前阶段目标、优先级和协议",
+    "review_control_panel": "法师评审目标、证据优先级和协议",
+    "conflict_policy": "多源冲突时的裁决规则",
+    "quest_user_intent": "用户输入的原始需求",
+    "acceptance_criteria": "明确的通过条件，缺失时法师难以准确评审",
+    "execution_instruction": "阶段交付协议和预算规则",
+    "review_protocol": "法师评审时的裁决标准"
+  },
+  "structuredReview": {
+    "dimension": {
+      "correctness": "正确性",
+      "completeness": "完整性",
+      "boundary": "边界",
+      "risk": "风险",
+      "validation": "验证",
+      "coherence": "一致性",
+      "scope": "范围",
+      "style": "规范",
+      "other": "其他"
+    },
+    "severity": {
+      "high": "高",
+      "med": "中",
+      "low": "低",
+      "info": "提示"
+    },
+    "evidenceKind": {
+      "warrior_message": "剑士消息",
+      "artifact": "产物",
+      "check": "检查项",
+      "diff_file": "diff 文件",
+      "workspace_effect": "工作区效果",
+      "policy_target": "策略目标",
+      "quest": "委托",
+      "design_doc": "设计文档",
+      "other": "其他"
+    },
+    "disagreement": "异议",
+    "endorsement": "亮点",
+    "risk": "额外风险",
+    "coverage": "覆盖",
+    "suggestion": "↪ 建议：",
+    "jumpToEvidence": "点击跳转到证据位置",
+    "snippet": "摘录",
+    "auditSource": "来源：法师 structured_review v1",
+    "auditTitle": "本条分类由法师 structured_review 协议提交，非平台推断",
+    "targetPrefix": "指向："
+  },
+  "traceModel": {
+    "resultLines": "{{count}} 行输出",
+    "tool": {
+      "cmd": "命令",
+      "read": "读取",
+      "write": "写入",
+      "search": "搜索",
+      "other": "工具"
+    },
+    "eventCat": {
+      "update": "汇报",
+      "phase": "阶段",
+      "decision": "评审",
+      "note": "备注",
+      "error": "异常",
+      "default": "事件"
+    },
+    "eventLabel": {
+      "agentUpdate": "进度汇报",
+      "phaseStarted": "阶段开始",
+      "phaseCompleted": "阶段完成",
+      "note": "备注",
+      "failureAttributed": "失败归因",
+      "review": "评审",
+      "blocked": "阻塞",
+      "verdict": "裁决"
+    }
+  },
+  "reviewSheet": {
+    "desc": {
+      "requestChanges": "这条意见会进入下一轮执行上下文。",
+      "passApply": "确认后会先通过终审，再立即应用工作区变更。",
+      "passOnly": "确认后只完成终审，不会应用工作区变更。",
+      "reject": "确认后会拒绝本次交付，且不会应用工作区变更。"
+    },
+    "field": {
+      "rework": "返工说明",
+      "supplement": "补充说明"
+    },
+    "placeholder": {
+      "rework": "写清楚需要返工的点...",
+      "optional": "可留空"
+    },
+    "confirm": {
+      "passApply": "确认通过并应用",
+      "pass": "确认{{label}}"
+    }
+  },
+  "blockedSheet": {
+    "extraTurns": "追加轮次",
+    "extraMinutes": "追加时长",
+    "minutes": "{{count}} 分",
+    "confirm": "确认{{label}}"
+  },
+  "applyWarning": {
+    "aria": "应用安全确认",
+    "title": {
+      "fromReview": "评审已通过，应用被安全检查拦截",
+      "plain": "应用被安全检查拦截"
+    },
+    "fromReviewHint": "终审已经通过；你可以确认风险后继续应用，也可以稍后在成功状态下手动处理。",
+    "confirm": "确认风险并强制应用"
+  },
+  "backupDetail": {
+    "aria": "备份详情",
+    "title": "备份详情",
+    "loading": "加载中...",
+    "mode": "模式",
+    "baseDir": "Base 目录",
+    "baseBranch": "Base 分支",
+    "filesChanged": "变更文件",
+    "createdAt": "创建时间"
+  },
+  "questDetail": {
+    "checkFallback": "检查项",
+    "source": {
+      "textArtifact": "文字产物 · {{name}}",
+      "executorConclusion": "执行者结论",
+      "warriorTurn": "剑士 · Turn {{turn}}",
+      "warriorDeliver": "剑士交付 · {{tool}}",
+      "designSummary": "方案摘要",
+      "warriorContext": "剑士交付 · 评审上下文"
+    },
+    "upgrade": {
+      "checked": "升级到 Checked",
+      "goal": "升级到 Goal"
+    },
+    "goal": {
+      "waitingDesign": "待方案通过",
+      "created": "已创建 #{{id}}",
+      "failed": "创建失败",
+      "ready": "可发起"
+    }
+  },
+  "contextPack": {
+    "empty": "暂无上下文数据",
+    "rawPrompt": "原始 Prompt",
+    "backToStructured": "返回结构化视图",
+    "noRawText": "(无原始文本)",
+    "title": "上下文注入",
+    "expandAll": "全部展开",
+    "collapseAll": "全部收起",
+    "viewRaw": "查看原始文本",
+    "stat": {
+      "blocks": "个上下文块",
+      "chars": "字符",
+      "truncated": "已截断"
+    },
+    "truncatedSuffix": " · 已截断",
+    "editableSuffix": " · 可编辑",
+    "noPreview": "(无预览)",
+    "noFullContent": "· 无完整内容",
+    "missing": {
+      "title": "缺失的关键上下文",
+      "suggest": "建议补充"
+    },
+    "trust": {
+      "platform": "平台",
+      "user": "用户",
+      "aiOutput": "AI产出",
+      "mixed": "混合",
+      "unknown": "未知"
+    },
+    "source": {
+      "prefix": "来源：",
+      "phase": " · 阶段：{{phase}}",
+      "role": " · 角色：{{role}}",
+      "staleness": " · 新鲜度：{{staleness}}"
+    }
+  },
+  "apiError": {
+    "responseParse": "响应解析失败 ({{status}})",
+    "requestFailed": "请求失败",
+    "downloadFailed": "下载失败",
+    "downloadReturnedHtml": "下载接口返回了页面 HTML，请重启 Gloop 后再试"
+  },
+  "theme": {
+    "desc": {
+      "obsidian": "暗黑，极客低调",
+      "bili": "B 站蓝，经典清爽",
+      "teal": "深青，沉稳专业",
+      "emerald": "翠绿，生机活力",
+      "violet": "深紫，魔法神秘",
+      "sakura": "樱花粉，温柔可爱"
+    }
+  },
+  "designPlan": {
+    "title": "设计方案",
+    "fallback": "设计方案",
+    "loading": "正在读取设计方案...",
+    "open": "打开方案",
+    "viewFull": "查看方案正文"
+  },
+  "fanout": {
+    "currentQuest": "当前委托",
+    "openLeaf": "打开这个 fanout leaf",
+    "current": "当前",
+    "open": "打开"
+  },
+  "eventTimeline": {
+    "recoverable": "可恢复",
+    "needHuman": "需人工判断",
+    "waitingSSE": "等待 SSE 事件"
+  },
+  "impact": {
+    "aria": "影响声明",
+    "title": "影响",
+    "subtitle": "agent 声明的波及范围，感知而非审批",
+    "noSummary": "无摘要",
+    "affectedCount": "· 波及 {{count}} 项",
+    "label": {
+      "what": "做了什么",
+      "affected": "波及",
+      "untouched": "没碰",
+      "caveats": "注意"
+    }
+  },
+  "makerReport": {
+    "fallback": "文字产物",
+    "viewArtifact": "查看产物",
+    "jumpToTrace": "跳转到执行轨迹",
+    "viewProcess": "查看过程",
+    "loading": "加载文字产物..."
+  },
+  "questSelectors": {
+    "trustTitle": "当前 automation 信任层级",
+    "safetyFloor": "安全底线"
+  },
+  "dashboard": {
+    "error": {
+      "loadQuests": "加载委托失败",
+      "loadInbox": "收件箱加载失败"
+    }
+  },
+  "settingsModel": {
+    "mageAllowlistMustBeArray": "mage_command_allowlist 必须是数组"
+  },
+  "questResource": {
+    "duration": "时长",
+    "consumption": "资源消耗",
+    "turns": "回合",
+    "safetyNet": "安全网",
+    "perPhaseLimit": "每阶段上限",
+    "noLimit": "未配置上限"
+  },
+  "phaseProgress": {
+    "rework": "返工 {{count}}"
+  },
+  "reviewReport": {
+    "viewProcess": "查看过程"
+  }
+}

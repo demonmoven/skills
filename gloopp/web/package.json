@@ -1,0 +1,44 @@
+{
+  "name": "gloop-web",
+  "private": true,
+  "version": "0.6.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test:mage-review": "tsx --conditions=development src/__tests__/mage-review.test.ts",
+    "test:quest-answer-api": "tsx --conditions=development src/__tests__/quest-answer-api.test.ts",
+    "test:streaming": "tsx --conditions=development src/__tests__/streaming.test.ts",
+    "test": "npm run test:mage-review && npm run test:quest-answer-api && npm run test:quest-display-semantics && npm run test:thread-view-display && npm run test:streaming && npm run test:i18n-smoke",
+    "test:quest-display-semantics": "tsx --conditions=development src/__tests__/quest-display-semantics.test.ts",
+    "test:thread-view-display": "tsx --conditions=development src/__tests__/thread-view-display.test.ts",
+    "test:i18n-smoke": "tsx --conditions=development src/__tests__/i18n-smoke.test.ts"
+  },
+  "dependencies": {
+    "github-slugger": "^2.0.0",
+    "i18next": "^26.3.4",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^17.0.8",
+    "react-markdown": "^10.1.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-pretty-code": "^0.14.3",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-slug": "^6.0.0",
+    "remark-breaks": "^4.0.0",
+    "remark-gfm": "^4.0.1",
+    "shiki": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/hast": "^3.0.4",
+    "@types/node": "^26.0.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tsx": "^4.22.4",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  }
+}

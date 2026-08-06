@@ -1,0 +1,64 @@
+version: 2
+
+before:
+  hooks:
+    - npm --prefix web install --registry https://bnpm.byted.org
+    - npm --prefix web run build
+
+builds:
+  - id: gloop
+    binary: gloop
+    main: ./cmd/gloop
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -X code.byted.org/lihuanyu.0w0/gloop/internal/version.Version={{ .Version }}
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+  # gloopd 仍构建到发行包中：兼容老脚本/用户 $PATH 直接调用。
+  # 行为是打印 deprecation 警告并转发给 gloop start --no-detach。
+  # npm bin 不再单独暴露 gloopd。
+  - id: gloopd
+    binary: gloopd
+    main: ./cmd/gloopd
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -X code.byted.org/lihuanyu.0w0/gloop/internal/version.Version={{ .Version }}
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - id: gloop
+    ids:
+      - gloop
+      - gloopd
+    name_template: "gloop-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - README.en.md
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"

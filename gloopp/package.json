@@ -1,0 +1,46 @@
+{
+  "name": "@bytedance-dev/gloop",
+  "version": "0.6.0",
+  "description": "Local-first loop engineering workbench with a Go daemon and embedded React dashboard.",
+  "private": false,
+  "license": "UNLICENSED",
+  "bin": {
+    "gloop": "scripts/npm-run-bin.js"
+  },
+  "files": [
+    "checksums.txt",
+    "dist/gloop-*.tar.gz",
+    "dist/gloop-*.zip",
+    "scripts/npm-install.js",
+    "scripts/npm-run-bin.js",
+    "scripts/release-bnpm.js",
+    "scripts/verify-npm-release.js"
+  ],
+  "scripts": {
+    "build:web": "npm --prefix web install --registry https://bnpm.byted.org && npm --prefix web run build",
+    "postinstall": "node scripts/npm-install.js",
+    "pack:dry": "npm pack --dry-run",
+    "prepublishOnly": "node scripts/verify-npm-release.js",
+    "release:bnpm": "node scripts/release-bnpm.js",
+    "release:bnpm:dry": "node scripts/release-bnpm.js --dry-run"
+  },
+  "dependencies": {
+    "update-notifier": "^6.0.2"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
+  "publishConfig": {
+    "registry": "https://bnpm.byted.org",
+    "access": "restricted"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
